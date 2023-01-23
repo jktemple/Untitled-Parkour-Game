@@ -49,7 +49,11 @@ public class PlayerMovement : MonoBehaviour
 
         MyInput();
         SpeedControl();
+        HandleDrag();
+        
+    }
 
+    private void HandleDrag(){
         // handle drag
         if (grounded)
         {
