@@ -6,9 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
-
+    public float wallRunSpeed;
     public float groundDrag;
-
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
@@ -30,7 +29,18 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody rb;
+    /* leaving this state stuff out for the moment
+    public MovementState state;
 
+    public enum MovementState
+    {
+        running,
+        wallrunning,
+        air
+    }
+    */
+
+    public bool wallrunning;
     // Start is called before the first frame update
     void Start()
     {
@@ -102,6 +112,11 @@ public class PlayerMovement : MonoBehaviour
         else if(!grounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
+
+        else if (wallrunning)
+        {
+            rb.AddForce(moveDirection.normalized * wallRunSpeed * 10f, ForceMode.Force);
         }
         
     }
