@@ -56,8 +56,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void stateHandler()
     {
+        //Mode Wallrunning
+        if (wallrunning)
+        {
+            state = MovementState.wallrunning;
+            moveSpeed = wallRunSpeed;
+        }
         //Mode Sliding
-        if (sliding)
+        else if (sliding)
         {
             state = MovementState.sliding;
         }

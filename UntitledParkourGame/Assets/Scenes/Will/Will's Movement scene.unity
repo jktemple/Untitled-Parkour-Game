@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 35183220}
   - component: {fileID: 35183219}
   - component: {fileID: 35183218}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 216525248}
   - component: {fileID: 216525247}
   - component: {fileID: 216525246}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -699,6 +699,7 @@ GameObject:
   - component: {fileID: 984507507}
   - component: {fileID: 984507506}
   - component: {fileID: 984507508}
+  - component: {fileID: 984507509}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -736,11 +737,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207beaf57405b424d8c58e86828c4514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 20
-  sprintSpeed: 60
-  wallRunSpeed: 0
+  runSpeed: 7
+  sprintSpeed: 10
+  wallRunSpeed: 8.5
   groundDrag: 3
-  jumpForce: 12
+  jumpForce: 24
   jumpCooldown: 0.25
   airMultiplier: 0.4
   jumpKey: 32
@@ -788,6 +789,30 @@ MonoBehaviour:
   slideForce: 200
   slideYScale: 0.5
   slideKey: 306
+--- !u!114 &984507509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984507504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f69fef5f155c44ca3e99914302e62f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 1024
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 1024
+  wallRunForce: 200
+  maxWallRunTime: 1
+  gravity: 0
+  wallCheckDistance: 0.7
+  minJumpHeight: 2
+  orientation: {fileID: 789841906}
 --- !u!1 &1642315033
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,7 +856,7 @@ GameObject:
   - component: {fileID: 1701006323}
   - component: {fileID: 1701006322}
   - component: {fileID: 1701006321}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

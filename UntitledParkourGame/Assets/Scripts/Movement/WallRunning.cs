@@ -1,5 +1,6 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class WallRunning : MonoBehaviour
@@ -7,8 +8,10 @@ public class WallRunning : MonoBehaviour
     [Header("Wallrunnig")]
     public LayerMask whatIsWall;
     public LayerMask whatIsGround;
+    public float wallRunForce;
     public float maxWallRunTime;
     private float wallRunTimer;
+    public bool gravity;
 
     [Header("Inputs")]
     private float horizontalInput;
@@ -40,6 +43,15 @@ public class WallRunning : MonoBehaviour
     void Update()
     {
         CheckForWall();
+        StateMachine();
+    }
+
+    private void FixedUpdate()
+    {
+        if (pm.wallrunning)
+        {
+            WallRunningMovement();
+        }
     }
 
     private void CheckForWall()
@@ -63,21 +75,45 @@ public class WallRunning : MonoBehaviour
         if ((wallLeft || wallRight) && verticalInput > 0 && AboveGround())
         {
              //Start Wallrun here
+             if(!pm.wallrunning)
+            {
+                StartWallRun();
+            }
+        }
+        //State 3 None
+        else
+        {
+            if (pm.wallrunning)
+            {
+                StopWallRun();
+            }
         }
     }
 
     private void StartWallRun()
     {
-
+        pm.wallrunning = true;
     }
 
     private void WallRunningMovement()
     {
+        rb.useGravity = gravity;
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        Vector3 wallNormal = wallRight ? rightWallHit.normal : leftWallHit.normal;
+
+        Vector3 wallForward = Vector3.Cross(wallNormal, transform.up);
+
+        if((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
+        {
+            wallForward = -wallForward;
+        }
+        //forward force
+        rb.AddForce(wallForward*wallRunForce, ForceMode.Force);
 
     }
 
     private void StopWallRun()
     {
-
+        pm.wallrunning = false;
     }
 }
