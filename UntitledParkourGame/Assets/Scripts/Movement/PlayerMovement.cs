@@ -9,8 +9,13 @@ public class PlayerMovement : MonoBehaviour
     private float moveSpeed;
     public float runSpeed;
     public float sprintSpeed;
+    //public float slidingSpeed;
     public float wallRunSpeed;
+    public float climbSpeed;
     public float groundDrag;
+
+    private float desiredMoveSpeed;
+    private float lastDesiredMoveSpeed;
 
     [Header("Jumping")]
     public float jumpForce;
@@ -25,13 +30,15 @@ public class PlayerMovement : MonoBehaviour
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGround;
-    bool grounded;
+    public bool grounded;
 
     [Header("Slope Handling")]
     public float maxSlopeAngle;
     private RaycastHit slopeHit;
     private bool exitingSlope;
 
+    [Header("References")]
+    public Climbing climpingScript;
     public Transform orientation;
 
     float horizontalInput;
@@ -49,37 +56,46 @@ public class PlayerMovement : MonoBehaviour
         sprinting,
         sliding,
         wallrunning,
+        climbing,
         air
     }
 
     public bool sliding;
+    public bool climbing;
 
     private void stateHandler()
     {
+        //Mode Climbing
+        if(climbing)
+        {
+            state = MovementState.climbing;
+            moveSpeed = climbSpeed;
+        }
         //Mode Wallrunning
-        if (wallrunning)
+        else if (wallrunning)
         {
             state = MovementState.wallrunning;
-            moveSpeed = wallRunSpeed;
+            desiredMoveSpeed = wallRunSpeed;
         }
         //Mode Sliding
         else if (sliding)
         {
             state = MovementState.sliding;
+            desiredMoveSpeed = sprintSpeed;
         }
         // Mode - sprinting
         if (grounded && Input.GetKey(sprintKey))
         {
             //Debug.Log("mode sprinting");
             state = MovementState.sprinting;
-            moveSpeed = sprintSpeed;
+            desiredMoveSpeed = sprintSpeed;
 
         }
         //Mode - Running
         else if (grounded)
         {
             state = MovementState.running;
-            moveSpeed = runSpeed;
+            desiredMoveSpeed = runSpeed;
         }
         //Mode Air
         else
@@ -87,6 +103,17 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.air;
 
         }
+        //check if desiredMoveSpeed has changed 
+        if(Mathf.Abs(desiredMoveSpeed-lastDesiredMoveSpeed)>4f && moveSpeed != 0)
+        {
+            StopAllCoroutines();
+            StartCoroutine(SmoothlyLerpMoveSpeed());
+        } else
+        {
+            moveSpeed = desiredMoveSpeed;
+        }
+
+        lastDesiredMoveSpeed = desiredMoveSpeed;
     }
     
 
@@ -150,6 +177,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
+        if(climpingScript.exitingWall) { return; }
         // calc movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
@@ -237,5 +265,21 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
         return Vector3.ProjectOnPlane(direction, slopeHit.normal);
+    }
+
+    private IEnumerator SmoothlyLerpMoveSpeed()
+    {
+        float time = 0;
+        float difference = Mathf.Abs(desiredMoveSpeed-moveSpeed);
+        float startValue = moveSpeed;
+
+        while(time < difference)
+        {
+            moveSpeed = Mathf.Lerp(startValue, desiredMoveSpeed, time / difference);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        moveSpeed = desiredMoveSpeed;
     }
 }

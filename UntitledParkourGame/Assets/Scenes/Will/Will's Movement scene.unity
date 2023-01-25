@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 35183220}
   - component: {fileID: 35183219}
   - component: {fileID: 35183218}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,7 +393,7 @@ GameObject:
   - component: {fileID: 216525248}
   - component: {fileID: 216525247}
   - component: {fileID: 216525246}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -472,7 +472,7 @@ Transform:
   m_GameObject: {fileID: 216525245}
   m_LocalRotation: {x: -0, y: 0.54621077, z: -0, w: 0.8376478}
   m_LocalPosition: {x: -3.96, y: 3.43, z: 15.76}
-  m_LocalScale: {x: 26.540936, y: 7.7282853, z: 1}
+  m_LocalScale: {x: 26.540936, y: 81.03107, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -519,7 +519,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401434436}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3fd2a3ce9adf5894babac4c0af979a47, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -756,6 +756,7 @@ GameObject:
   - component: {fileID: 984507506}
   - component: {fileID: 984507508}
   - component: {fileID: 984507509}
+  - component: {fileID: 984507510}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -796,20 +797,24 @@ MonoBehaviour:
   runSpeed: 7
   sprintSpeed: 10
   wallRunSpeed: 8.5
+  climbSpeed: 0.5
   groundDrag: 3
   jumpForce: 6
   jumpCooldown: 0.25
-  airMultiplier: 0.4
+  airMultiplier: 0.1
   jumpKey: 32
   sprintKey: 304
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1024
+  grounded: 0
   maxSlopeAngle: 40
+  climpingScript: {fileID: 984507510}
   orientation: {fileID: 789841906}
   state: 0
   sliding: 0
+  climbing: 0
   wallrunning: 0
 --- !u!54 &984507507
 Rigidbody:
@@ -859,7 +864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 2048
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1024
@@ -872,9 +877,40 @@ MonoBehaviour:
   minJumpHeight: 2
   exitWallTime: 0.2
   useGravity: 0
-  gravityCounterForce: 0
+  gravityCounterForce: 3.57
+  tiltValue: 7
   orientation: {fileID: 789841906}
-  cam: {fileID: 0}
+  cam: {fileID: 436123061}
+--- !u!114 &984507510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984507504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0afff5af1d43e5245adb1654aecfd8ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 789841906}
+  rb: {fileID: 984507507}
+  pm: {fileID: 984507506}
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 2048
+  climbSpeed: 6
+  maxClimbTime: 0.75
+  climbJumpUpForce: 6
+  climbJumpBackForce: 24
+  jumpKey: 32
+  climbJumps: 1
+  detectionLength: 0.7
+  sphereCastRadius: 0.25
+  maxWallLookAngle: 30
+  minWallNormalAngleChange: 0
+  exitingWall: 0
+  exitWallTime: 0.2
 --- !u!1 &1642315033
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,7 +954,7 @@ GameObject:
   - component: {fileID: 1701006323}
   - component: {fileID: 1701006322}
   - component: {fileID: 1701006321}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
