@@ -52,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
 
     public enum MovementState
     {
+        freeze,
+        unlimited,
         running,
         sprinting,
         sliding,
@@ -62,11 +64,28 @@ public class PlayerMovement : MonoBehaviour
 
     public bool sliding;
     public bool climbing;
+    public bool freeze;
+    public bool unlimited;
+
+    public bool restricted;
 
     private void stateHandler()
     {
+        //Mode Freeze
+        if (freeze)
+        {
+            state = MovementState.freeze;
+            rb.velocity= Vector3.zero;
+        } 
+        //mode unlimited
+        else if (unlimited)
+        {
+           state = MovementState.unlimited;
+            moveSpeed = 999f;
+            return;
+        } 
         //Mode Climbing
-        if(climbing)
+        else if(climbing)
         {
             state = MovementState.climbing;
             moveSpeed = climbSpeed;
@@ -177,6 +196,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
+        if (restricted) return;
+
         if(climpingScript.exitingWall) { return; }
         // calc movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;

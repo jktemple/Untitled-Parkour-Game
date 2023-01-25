@@ -8,6 +8,7 @@ public class Climbing : MonoBehaviour
     public Transform orientation;
     public Rigidbody rb;
     public PlayerMovement pm;
+    public LedgeGrabbing lg;
     public LayerMask whatIsWall;
 
     [Header("Climbing")]
@@ -47,7 +48,7 @@ public class Climbing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        lg = GetComponent<LedgeGrabbing>();
     }
 
     // Update is called once per frame
@@ -65,8 +66,14 @@ public class Climbing : MonoBehaviour
 
     private void StateMachine()
     {
+        //State  0 - ledge Grabbing
+        if (lg.holding)
+        {
+            if(climbing) StopClimbing();
+        }
+
         //state 1 - climbing
-        if (wallFront && Input.GetKey(KeyCode.W) && wallLookAngle < maxWallLookAngle && !exitingWall)
+        else if (wallFront && Input.GetKey(KeyCode.W) && wallLookAngle < maxWallLookAngle && !exitingWall)
         {
             if (!climbing && climbTimer > 0)
             {
@@ -135,6 +142,7 @@ public class Climbing : MonoBehaviour
 
     private void ClimbJump()
     {
+        if (pm.grounded || lg.holding || lg.exitingLedge) return;
         exitingWall = true;
         exitWallTimer = exitWallTime;
 
