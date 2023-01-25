@@ -70,7 +70,7 @@ public class Climbing : MonoBehaviour
         {
             if (!climbing && climbTimer > 0)
             {
-                Debug.Log("staring a climb");
+               // Debug.Log("staring a climb");
                 StartClimbing();
             }
 
@@ -130,7 +130,7 @@ public class Climbing : MonoBehaviour
         climbing = false;
         pm.climbing = false;
         //Debug.Log("stopping climbing"); 
-        //rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        if (!wallFront) { rb.velocity = new Vector3(rb.velocity.x, 0.1f, rb.velocity.z); }
     }
 
     private void ClimbJump()
@@ -142,6 +142,6 @@ public class Climbing : MonoBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(forceToApply,ForceMode.Impulse);
         climbJumpsLeft--;
-        Debug.Log("climb jump");
+        //Debug.Log("climb jump");
     }
 }
