@@ -117,18 +117,12 @@ public class LedgeGrabbing : MonoBehaviour
         RaycastHit targetPos;
       
 
-        if (Physics.Raycast(transform.position + (cam.forward*playerRadius) + (Vector3.up*heightOffset*playerHeight), Vector3.down, out targetPos, playerHeight)){
+        if (Physics.Raycast(transform.position + (ledgeHit.transform.forward * playerRadius/2) + (Vector3.up*heightOffset*playerHeight), Vector3.down, out targetPos, 4*playerHeight)){
             Debug.Log("Found place to land");
             StartCoroutine(LerpVault(targetPos.point + new Vector3(0f, playerHeight/2, 0f), getupTime));
         } 
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        //Gizmos.DrawSphere(ledgeHit.point, 0.3f);
-        //Gizmos.DrawRay(ledgeHit.point, ledgeHit.transform.forward);
-    }
 
 
 
