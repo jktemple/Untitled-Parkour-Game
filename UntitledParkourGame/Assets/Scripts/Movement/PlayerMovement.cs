@@ -68,10 +68,12 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.sliding;
         }
         // Mode - sprinting
-        if (grounded && Input.GetKeyDown(sprintKey))
+        if (grounded && Input.GetKey(sprintKey))
         {
+            //Debug.Log("mode sprinting");
             state = MovementState.sprinting;
             moveSpeed = sprintSpeed;
+
         }
         //Mode - Running
         else if (grounded)
@@ -179,7 +181,10 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(moveDirection.normalized * wallRunSpeed * 10f, ForceMode.Force);
         }
 
-        rb.useGravity = !OnSlope();
+        if (!wallrunning)
+        {
+            rb.useGravity = !OnSlope();
+        }
     }
 
     private void SpeedControl()

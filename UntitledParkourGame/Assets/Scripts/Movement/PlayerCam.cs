@@ -36,7 +36,7 @@ public class PlayerCam : MonoBehaviour
 
         xRotation -= mouseY;
         // can't look up or down more than 90 degrees
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        xRotation = Mathf.Clamp(xRotation, -90f, 55f);
 
         // rotate cam and orientation
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
