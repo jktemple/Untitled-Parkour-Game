@@ -39,8 +39,12 @@ public class WallRunning : MonoBehaviour
     public bool useGravity;
     public float gravityCounterForce;
 
+    [Header("Camera Effects")]
+    public float tiltValue;
+
     [Header("References")]
     public Transform orientation;
+    public PlayerCam cam;
     private PlayerMovement pm;
     private Rigidbody rb;
 
@@ -144,6 +148,11 @@ public class WallRunning : MonoBehaviour
         pm.wallrunning = true;
         wallRunTimer = maxWallRunTime;
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        //apply camera effects
+        cam.DoFov(90f);
+        if (wallLeft) cam.DoTilt(-tiltValue);
+        if(wallRight) cam.DoTilt(tiltValue);
     }
 
     private void WallRunningMovement()
@@ -172,6 +181,9 @@ public class WallRunning : MonoBehaviour
     private void StopWallRun()
     {
         pm.wallrunning = false;
+        //reset camera effects
+        cam.DoFov(80f);
+        cam.DoTilt(0f);
     }
 
     private void WallJump()
