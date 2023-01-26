@@ -7,38 +7,54 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     private float moveSpeed;
+    [Tooltip("The player’s default movement speed when not sprinting, sliding, etc. Higher number = faster movement")]
     public float runSpeed;
+    [Tooltip("the player’s movement speed when in the sprinting state. Higher number = faster movement")]
     public float sprintSpeed;
     //public float slidingSpeed;
+    [Tooltip("the player’s movement speed when in the sprinting state. Higher number = faster movement;")]
     public float wallRunSpeed;
+    [Tooltip("Value between 0 and 1. Determines how much control the player has over side to side movement while climbing walls.")]
     public float climbSpeed;
+    [Tooltip("How much the player decelerates on the ground when there are no movement inputs. Higher number = faster deceleration.")]
     public float groundDrag;
 
     private float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
 
     [Header("Jumping")]
+    [Tooltip("How much upwards force is applied to the player when they jump. Higher number = larger force and higher jumps")]
     public float jumpForce;
+    [Tooltip("How long the player must wait before jumping after landing from a jump. Higher number = longer cooldown\r\n")]
     public float jumpCooldown;
+    [Tooltip("Value between 0 and 1. Determines how much control the player has over their velocity while in the air. Higher number = more control\r\n")]
     public float airMultiplier;
     bool readyToJump;
 
     [Header("Keybinds")]
+    [Tooltip("The Key that triggers the jump action")]
     public KeyCode jumpKey = KeyCode.Space;
+    [Tooltip("The Key that triggers the spriting state")]
     public KeyCode sprintKey = KeyCode.LeftShift;
 
     [Header("Ground Check")]
+    [Tooltip("How tall is the player object?")]
     public float playerHeight;
+    [Tooltip("Layer that defines what the ground is")]
     public LayerMask whatIsGround;
+    [Tooltip("Boolean that stores if the player is on the ground")]
     public bool grounded;
 
     [Header("Slope Handling")]
+    [Tooltip("Defines the maximum angle of slope the player can move up")]
     public float maxSlopeAngle;
     private RaycastHit slopeHit;
     private bool exitingSlope;
 
     [Header("References")]
+    [Tooltip("A reference to the Climbing Script attached to the player")]
     public Climbing climpingScript;
+    [Tooltip("A reference to a GameObject that holds the player’s orientation")]
     public Transform orientation;
 
     float horizontalInput;
@@ -47,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody rb;
-    
+    [Tooltip("an Enum that holds the current state of the player")]
     public MovementState state;
 
     public enum MovementState

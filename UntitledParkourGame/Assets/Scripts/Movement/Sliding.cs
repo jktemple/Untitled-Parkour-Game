@@ -5,20 +5,25 @@ using UnityEngine;
 public class Sliding : MonoBehaviour
 {
     [Header("References")]
+    [Tooltip("A Reference to a GameObject that holds the player’s orientation")]
     public Transform orientation;
+    [Tooltip("A Reference to PlayerObj GameObject, used to scale the player down when sliding")]
     public Transform playerObj;
     private Rigidbody rb;
     private PlayerMovement pm;
 
     [Header("Sliding")]
+    [Tooltip("How long the player is able to slide in seconds")]
     public float maxSlideTime;
+    [Tooltip("How much force is applied to the player when they begin sliding")]
     public float slideForce;
     private float slideTimer;
-
+    [Tooltip("Value from 0 to 1, determines how much the player is scaled down when they slide")]
     public float slideYScale;
     private float startYScale;
 
     [Header("Inputs")]
+    [Tooltip("The Key that triggers the slide action")]
     public KeyCode slideKey = KeyCode.LeftControl;
     private float horizontalInput;
     private float verticalInput;

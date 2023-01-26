@@ -6,24 +6,33 @@ using UnityEngine;
 public class WallRunning : MonoBehaviour
 {
     [Header("Wallrunnig")]
+    [Tooltip("Layer that defines what Walls are")]
     public LayerMask whatIsWall;
+    [Tooltip("Layer that defines what the Ground is")]
     public LayerMask whatIsGround;
+    [Tooltip("How much force is applied to the player when wallrunning")]
     public float wallRunForce;
+    [Tooltip("How long the player can wall run for")]
     public float maxWallRunTime;
     private float wallRunTimer;
     
 
     [Header("Wall Jumping")]
+    [Tooltip("How much upwards force is applied to the player after jumping out of a wall run")]
     public float wallJumpUpForce;
+    [Tooltip("How much lateral force is applied to the player after jumping out of the wall")]
     public float wallJumpSideForce;
 
     [Header("Inputs")]
+    [Tooltip("The key that triggers the wall jump action")]
     public KeyCode jumpKey = KeyCode.Space;
     private float horizontalInput;
     private float verticalInput;
 
     [Header("Dection")]
+    [Tooltip("The how close to the wall does the player need to be to be able to wall run")]
     public float wallCheckDistance;
+    [Tooltip("How high off the ground must the player be to begin a wall run")]
     public float minJumpHeight;
     private RaycastHit leftWallHit;
     private RaycastHit rightWallHit;
@@ -31,19 +40,26 @@ public class WallRunning : MonoBehaviour
     private bool wallRight;
 
     [Header("Exiting")]
+    [Tooltip("Bool that indicates if the player is currently exiting a wall")]
     private bool exitingWall;
+    [Tooltip("How long the player must wait to begin a wall run after exiting a wall run")]
     public float exitWallTime;
     private float exitWallTimer;
 
     [Header("Gravity")]
+    [Tooltip("Is the player affected by gravity when wall running?")]
     public bool useGravity;
+    [Tooltip("If the player is affected by gravity, this determines the amount of force applied to counter gravity")]
     public float gravityCounterForce;
 
     [Header("Camera Effects")]
+    [Tooltip("How far the camera tilts while wall running")]
     public float tiltValue;
 
     [Header("References")]
+    [Tooltip("A reference to a GameObject that stores the player’s orientation")]
     public Transform orientation;
+    [Tooltip("A reference to the player camera")]
     public PlayerCam cam;
     private PlayerMovement pm;
     private Rigidbody rb;
