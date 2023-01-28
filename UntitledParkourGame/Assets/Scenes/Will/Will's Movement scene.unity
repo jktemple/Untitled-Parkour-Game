@@ -1592,6 +1592,7 @@ MonoBehaviour:
   jumpKey: 32
   wallCheckDistance: 0.7
   minJumpHeight: 2
+  exitingWall: 0
   exitWallTime: 0.2
   useGravity: 0
   gravityCounterForce: 3.57
@@ -1619,6 +1620,7 @@ MonoBehaviour:
     m_Bits: 2048
   climbSpeed: 6
   maxClimbTime: 0.75
+  minClimbTime: 0.15
   climbJumpUpForce: 6
   climbJumpBackForce: 24
   jumpKey: 32
@@ -1626,7 +1628,7 @@ MonoBehaviour:
   detectionLength: 0.7
   sphereCastRadius: 0.25
   maxWallLookAngle: 30
-  minWallNormalAngleChange: 0
+  minWallNormalAngleChange: 15
   exitingWall: 0
   exitWallTime: 0.2
 --- !u!114 &984507511

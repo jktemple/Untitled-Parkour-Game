@@ -16,6 +16,8 @@ public class Climbing : MonoBehaviour
     [Header("Climbing")]
     public float climbSpeed;
     public float maxClimbTime;
+    public float minClimbTime;
+    private float minClimbTimer;
     private float climbTimer;
 
     private bool climbing;
@@ -92,6 +94,10 @@ public class Climbing : MonoBehaviour
 
             if (climbTimer > 0) { climbTimer -= Time.deltaTime; }
             if (climbTimer < 0) { StopClimbing(); }
+            if (minClimbTimer > 0)
+            {
+                minClimbTimer -= Time.deltaTime;
+            }
         }
         //state 2 - exiting
         else if (exitingWall)
@@ -108,7 +114,7 @@ public class Climbing : MonoBehaviour
             if (climbing) { StopClimbing(); }
         }
         Debug.Log("Climb Jummp input =" + inputs.PlayerMovement.Jump.ReadValue<float>());
-        if(wallFront && inputs.PlayerMovement.Jump.ReadValue<float>() > 0.1f && climbJumpsLeft > 0 && !pm.wallrunning && !wr.exitingWall)
+        if(wallFront && inputs.PlayerMovement.Jump.ReadValue<float>() > 0.1f && climbJumpsLeft > 0 && !pm.wallrunning && !wr.exitingWall && minClimbTimer<=0)
         {
             ClimbJump();
         }
@@ -135,6 +141,7 @@ public class Climbing : MonoBehaviour
         pm.climbing = true;
         lastWall = frontWallHit.transform;
         lastWallNormal = frontWallHit.normal;
+        minClimbTimer = minClimbTime;
     }
 
     private void ClimbingMovement()
