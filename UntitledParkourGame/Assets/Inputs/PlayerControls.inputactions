@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Boost",
+                    "type": "Button",
+                    "id": "b6d1fad5-1701-441d-bdf7-71da75023233",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -309,6 +318,28 @@
                     "processors": "AxisDeadzone",
                     "groups": "Gamepad",
                     "action": "VerticalLook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cae80d77-45e4-4ac4-87a9-5c94e40b6207",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Boost",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "88fc3ffe-4a9d-4f27-8679-ca953f9c4a47",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Boost",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

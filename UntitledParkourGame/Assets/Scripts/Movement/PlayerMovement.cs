@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -76,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
         sliding,
         wallrunning,
         climbing,
+        boosting,
         air
     }
 
@@ -83,9 +85,11 @@ public class PlayerMovement : MonoBehaviour
     public bool climbing;
     public bool freeze;
     public bool unlimited;
+    public bool boosting;
 
     public bool restricted;
 
+    //public bool notControllable;
     private PlayerControls inputs;
     private void stateHandler()
     {
@@ -94,7 +98,11 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.freeze;
             rb.velocity= Vector3.zero;
-        } 
+        } else if (boosting)
+        {
+            state = MovementState.boosting;
+            rb.velocity= Vector3.zero;
+        }
         //mode unlimited
         else if (unlimited)
         {
@@ -156,12 +164,15 @@ public class PlayerMovement : MonoBehaviour
 
     public bool wallrunning;
     // Start is called before the first frame update
+
+    public bool boostTest;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
         inputs = new PlayerControls();
+        
         inputs.PlayerMovement.Enable();
         
         // top youtube comment sacred knowledge
@@ -201,6 +212,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void MyInput()
     {
+        if (boostTest)
+        {
+            return;
+        }
         horizontalInput = inputs.PlayerMovement.Movement.ReadValue<Vector2>().x; 
             //Input.GetAxisRaw("Horizontal");
         verticalInput = inputs.PlayerMovement.Movement.ReadValue<Vector2>().y;
@@ -220,6 +235,11 @@ public class PlayerMovement : MonoBehaviour
     private void MovePlayer()
     {
         if (restricted) return;
+
+        if (boostTest) { 
+            boosting = true;
+            return;
+        }
 
         if(climpingScript.exitingWall) { return; }
         // calc movement direction

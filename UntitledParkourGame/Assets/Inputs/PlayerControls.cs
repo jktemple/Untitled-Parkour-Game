@@ -89,6 +89,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Boost"",
+                    ""type"": ""Button"",
+                    ""id"": ""b6d1fad5-1701-441d-bdf7-71da75023233"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -333,6 +342,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""VerticalLook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cae80d77-45e4-4ac4-87a9-5c94e40b6207"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Boost"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""88fc3ffe-4a9d-4f27-8679-ca953f9c4a47"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Boost"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -376,6 +407,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerMovement_LedgeGetUp = m_PlayerMovement.FindAction("LedgeGetUp", throwIfNotFound: true);
         m_PlayerMovement_HorizontalLook = m_PlayerMovement.FindAction("HorizontalLook", throwIfNotFound: true);
         m_PlayerMovement_VerticalLook = m_PlayerMovement.FindAction("VerticalLook", throwIfNotFound: true);
+        m_PlayerMovement_Boost = m_PlayerMovement.FindAction("Boost", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -442,6 +474,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_LedgeGetUp;
     private readonly InputAction m_PlayerMovement_HorizontalLook;
     private readonly InputAction m_PlayerMovement_VerticalLook;
+    private readonly InputAction m_PlayerMovement_Boost;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -453,6 +486,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @LedgeGetUp => m_Wrapper.m_PlayerMovement_LedgeGetUp;
         public InputAction @HorizontalLook => m_Wrapper.m_PlayerMovement_HorizontalLook;
         public InputAction @VerticalLook => m_Wrapper.m_PlayerMovement_VerticalLook;
+        public InputAction @Boost => m_Wrapper.m_PlayerMovement_Boost;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -483,6 +517,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @VerticalLook.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnVerticalLook;
                 @VerticalLook.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnVerticalLook;
                 @VerticalLook.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnVerticalLook;
+                @Boost.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnBoost;
+                @Boost.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnBoost;
+                @Boost.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnBoost;
             }
             m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -508,6 +545,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @VerticalLook.started += instance.OnVerticalLook;
                 @VerticalLook.performed += instance.OnVerticalLook;
                 @VerticalLook.canceled += instance.OnVerticalLook;
+                @Boost.started += instance.OnBoost;
+                @Boost.performed += instance.OnBoost;
+                @Boost.canceled += instance.OnBoost;
             }
         }
     }
@@ -539,5 +579,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnLedgeGetUp(InputAction.CallbackContext context);
         void OnHorizontalLook(InputAction.CallbackContext context);
         void OnVerticalLook(InputAction.CallbackContext context);
+        void OnBoost(InputAction.CallbackContext context);
     }
 }

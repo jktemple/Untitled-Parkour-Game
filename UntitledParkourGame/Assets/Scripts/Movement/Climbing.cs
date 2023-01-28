@@ -113,7 +113,7 @@ public class Climbing : MonoBehaviour
         {
             if (climbing) { StopClimbing(); }
         }
-        Debug.Log("Climb Jummp input =" + inputs.PlayerMovement.Jump.ReadValue<float>());
+        //Debug.Log("Climb Jummp input =" + inputs.PlayerMovement.Jump.ReadValue<float>());
         if(wallFront && inputs.PlayerMovement.Jump.ReadValue<float>() > 0.1f && climbJumpsLeft > 0 && !pm.wallrunning && !wr.exitingWall && minClimbTimer<=0)
         {
             ClimbJump();
@@ -163,11 +163,11 @@ public class Climbing : MonoBehaviour
         if (pm.grounded || lg.holding || lg.exitingLedge) return;
         exitingWall = true;
         exitWallTimer = exitWallTime;
-
+        
         Vector3 forceToApply = transform.up*climbJumpUpForce + frontWallHit.normal*climbJumpBackForce;
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(forceToApply,ForceMode.Impulse);
         climbJumpsLeft--;
-        Debug.Log("climb jump");
+        //Debug.Log("climb jump");
     }
 }
