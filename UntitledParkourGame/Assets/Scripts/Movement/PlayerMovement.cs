@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -85,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool restricted;
 
+    private PlayerControls inputs;
     private void stateHandler()
     {
         //Mode Freeze
@@ -119,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
             desiredMoveSpeed = sprintSpeed;
         }
         // Mode - sprinting
-        if (grounded && Input.GetKey(sprintKey))
+        if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f))
         {
             //Debug.Log("mode sprinting");
             state = MovementState.sprinting;
@@ -158,6 +160,9 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+
+        inputs = new PlayerControls();
+        inputs.PlayerMovement.Enable();
         
         // top youtube comment sacred knowledge
         readyToJump = true;
@@ -196,11 +201,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void MyInput()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-
+        horizontalInput = inputs.PlayerMovement.Movement.ReadValue<Vector2>().x; 
+            //Input.GetAxisRaw("Horizontal");
+        verticalInput = inputs.PlayerMovement.Movement.ReadValue<Vector2>().y;
+        //Debug.Log("Horizontal Input = " + horizontalInput + " , Verticle Input = " + verticalInput);
         // when to jump
-        if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        bool jumpInput = inputs.PlayerMovement.Jump.ReadValue<float>() > 0.1f;
+        if(jumpInput && readyToJump && grounded)
         {
             readyToJump = false;
 

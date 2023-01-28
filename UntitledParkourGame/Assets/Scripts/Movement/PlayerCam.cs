@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.InputSystem;
 
 public class PlayerCam : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class PlayerCam : MonoBehaviour
     // player orientation
     public Transform orientation;
     public Transform camHolder;
+
+    private PlayerControls inputs;
 
     // camera rotation
     float xRotation;
@@ -24,14 +27,19 @@ public class PlayerCam : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         // curser invisible
         Cursor.visible = false;
+
+        inputs = new PlayerControls();
+        inputs.PlayerMovement.Enable();
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
         // get mouse input
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+        float mouseX = inputs.PlayerMovement.HorizontalLook.ReadValue<float>() * Time.deltaTime * sensX;
+        float mouseY = inputs.PlayerMovement.VerticalLook.ReadValue<float>() * Time.deltaTime * sensY;
 
         // updating the cam rotation idk whats rly happening here
         yRotation += mouseX;

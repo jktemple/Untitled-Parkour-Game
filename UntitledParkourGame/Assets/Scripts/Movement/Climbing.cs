@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Climbing : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Climbing : MonoBehaviour
     public Rigidbody rb;
     public PlayerMovement pm;
     public LedgeGrabbing lg;
+    private WallRunning wr;
     public LayerMask whatIsWall;
 
     [Header("Climbing")]
@@ -45,10 +47,15 @@ public class Climbing : MonoBehaviour
     public float exitWallTime;
     private float exitWallTimer;
 
+    private PlayerControls inputs;
+
     // Start is called before the first frame update
     void Start()
     {
+        inputs = new PlayerControls();
+        inputs.PlayerMovement.Enable();
         lg = GetComponent<LedgeGrabbing>();
+        wr = GetComponent<WallRunning>();
     }
 
     // Update is called once per frame
@@ -66,6 +73,8 @@ public class Climbing : MonoBehaviour
 
     private void StateMachine()
     {
+
+        //Debug.Log("Forward Input = " + inputs.PlayerMovement.Movement.ReadValue<Vector2>().y);
         //State  0 - ledge Grabbing
         if (lg.holding)
         {
@@ -73,7 +82,7 @@ public class Climbing : MonoBehaviour
         }
 
         //state 1 - climbing
-        else if (wallFront && Input.GetKey(KeyCode.W) && wallLookAngle < maxWallLookAngle && !exitingWall)
+        else if (wallFront && inputs.PlayerMovement.Movement.ReadValue<Vector2>().y > 0.5f && wallLookAngle < maxWallLookAngle && !exitingWall)
         {
             if (!climbing && climbTimer > 0)
             {
@@ -98,8 +107,8 @@ public class Climbing : MonoBehaviour
         {
             if (climbing) { StopClimbing(); }
         }
-
-        if(wallFront && Input.GetKeyDown(jumpKey)&& climbJumpsLeft > 0)
+        Debug.Log("Climb Jummp input =" + inputs.PlayerMovement.Jump.ReadValue<float>());
+        if(wallFront && inputs.PlayerMovement.Jump.ReadValue<float>() > 0.1f && climbJumpsLeft > 0 && !pm.wallrunning && !wr.exitingWall)
         {
             ClimbJump();
         }
@@ -121,6 +130,7 @@ public class Climbing : MonoBehaviour
 
     private void StartClimbing()
     {
+        //if(climbing) { return; }
         climbing = true;
         pm.climbing = true;
         lastWall = frontWallHit.transform;
@@ -142,6 +152,7 @@ public class Climbing : MonoBehaviour
 
     private void ClimbJump()
     {
+        if (exitingWall) return;
         if (pm.grounded || lg.holding || lg.exitingLedge) return;
         exitingWall = true;
         exitWallTimer = exitWallTime;
@@ -150,6 +161,6 @@ public class Climbing : MonoBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(forceToApply,ForceMode.Impulse);
         climbJumpsLeft--;
-        //Debug.Log("climb jump");
+        Debug.Log("climb jump");
     }
 }

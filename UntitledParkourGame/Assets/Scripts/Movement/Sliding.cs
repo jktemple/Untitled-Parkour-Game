@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Sliding : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class Sliding : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
 
+    private PlayerControls inputs;
+
     
 
 
@@ -38,20 +41,23 @@ public class Sliding : MonoBehaviour
         pm = GetComponent<PlayerMovement>();
 
         startYScale = playerObj.localScale.y;
+        inputs = new PlayerControls();
+        inputs.PlayerMovement.Enable();
     }
 
     // Update is called once per frame
     void Update()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-
-        if(Input.GetKeyDown(slideKey) && (horizontalInput !=0 || verticalInput != 0))
+        horizontalInput = inputs.PlayerMovement.Movement.ReadValue<Vector2>().x;
+        //Input.GetAxisRaw("Horizontal");
+        verticalInput = inputs.PlayerMovement.Movement.ReadValue<Vector2>().y;
+        //Debug.Log("Horizontal Input = " + horizontalInput + " , Verticle Input = " + verticalInput);
+        if (inputs.PlayerMovement.Slide.ReadValue<float>() > 0.1f && (horizontalInput !=0 || verticalInput != 0))
         {
             StartSlide();
         }
 
-        if (Input.GetKeyUp(slideKey) && pm.sliding)
+        if (inputs.PlayerMovement.Slide.ReadValue<float>() <= 0.1f && pm.sliding)
         {
             StopSlide();
         }
@@ -67,6 +73,7 @@ public class Sliding : MonoBehaviour
 
     private void StartSlide()
     {
+        if(pm.sliding) { return; }
         pm.sliding = true;
 
         playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);

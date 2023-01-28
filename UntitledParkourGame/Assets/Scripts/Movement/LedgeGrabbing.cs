@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LedgeGrabbing : MonoBehaviour
 {
@@ -49,11 +49,13 @@ public class LedgeGrabbing : MonoBehaviour
     public float exitLedgeTime;
     private float exitLedgeTimer;
 
+    private PlayerControls inputs;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        inputs = new PlayerControls();
+        inputs.PlayerMovement.Enable();
     }
 
     // Update is called once per frame
@@ -65,9 +67,10 @@ public class LedgeGrabbing : MonoBehaviour
 
     private void SubStateMachine()
     {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxisRaw("Vertical");
-        bool anyInputKeyPressed = horizontalInput != 0 || verticalInput !=0;
+        float horizontalInput = inputs.PlayerMovement.Movement.ReadValue<Vector2>().x;
+        //Input.GetAxisRaw("Horizontal");
+        float verticalInput = inputs.PlayerMovement.Movement.ReadValue<Vector2>().y;
+        bool anyInputKeyPressed = horizontalInput > 0.4f || verticalInput > 0.4f || horizontalInput <-0.4f || verticalInput < -0.4f;
 
         //substate 1 holding onto ledge
         if (holding)
@@ -75,14 +78,14 @@ public class LedgeGrabbing : MonoBehaviour
             FreezeRigidbodyOnLedge();
             timeOnLedge += Time.deltaTime;
 
-            if(timeOnLedge> minTimOnLedge && Input.GetKeyDown(ledgeGetupKey))
+            if(timeOnLedge> minTimOnLedge && inputs.PlayerMovement.LedgeGetUp.ReadValue<float>() > 0.5f)
             {
                 LedgeGetup();
             }
 
             if(timeOnLedge > minTimOnLedge && anyInputKeyPressed) { ExitLedgeHold(); }
 
-            if (Input.GetKeyDown(jumpKey)) LedgeJump();
+            if (inputs.PlayerMovement.Jump.ReadValue<float>() > 0.1f) LedgeJump();
         }
         //substate 2 exiting ledge
         else if(exitingLedge)
@@ -112,12 +115,13 @@ public class LedgeGrabbing : MonoBehaviour
 
     private void LedgeGetup()
     {
+        if(ledgeHit.transform == null) return;
         ExitLedgeHold();
         Debug.Log("Ledge Getup");
         RaycastHit targetPos;
-      
 
-        if (Physics.Raycast(transform.position + (ledgeHit.transform.forward * playerRadius/2) + (Vector3.up*heightOffset*playerHeight), Vector3.down, out targetPos, 4*playerHeight)){
+        Debug.Log(ledgeHit.transform);
+        if (Physics.Raycast(transform.position + (ledgeHit.transform.forward * playerRadius/2) + (Vector3.up*heightOffset*playerHeight), Vector3.down, out targetPos, 2*playerHeight)){
             Debug.Log("Found place to land");
             StartCoroutine(LerpVault(targetPos.point + new Vector3(0f, playerHeight/2, 0f), getupTime));
         } 
@@ -202,6 +206,7 @@ public class LedgeGrabbing : MonoBehaviour
         pm.freeze = false;
         timeOnLedge = 0f;
         rb.useGravity = true;
+        rb.velocity= Vector3.zero;
 
         Invoke(nameof(ResetLastLedge), 1f);
     }

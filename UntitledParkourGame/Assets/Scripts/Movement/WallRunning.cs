@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WallRunning : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public class WallRunning : MonoBehaviour
 
     [Header("Exiting")]
     [Tooltip("Bool that indicates if the player is currently exiting a wall")]
-    private bool exitingWall;
+    public bool exitingWall;
     [Tooltip("How long the player must wait to begin a wall run after exiting a wall run")]
     public float exitWallTime;
     private float exitWallTimer;
@@ -64,14 +65,16 @@ public class WallRunning : MonoBehaviour
     private PlayerMovement pm;
     private Rigidbody rb;
     private LedgeGrabbing lg;
-
+    private PlayerControls inputs;
 
     // Start is called before the first frame update
     void Start()
     {   
        rb = GetComponent<Rigidbody>();
        pm = GetComponent<PlayerMovement>();
-       lg = GetComponent<LedgeGrabbing>();
+        lg = GetComponent<LedgeGrabbing>();
+        inputs = new PlayerControls();
+        inputs.PlayerMovement.Enable();
 
     }
 
@@ -104,12 +107,14 @@ public class WallRunning : MonoBehaviour
     private void StateMachine()
     {
         //getting inputs
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+        horizontalInput = inputs.PlayerMovement.Movement.ReadValue<Vector2>().x; 
+            //Input.GetAxisRaw("Horizontal");
+        verticalInput = inputs.PlayerMovement.Movement.ReadValue<Vector2>().y;
 
         //State 1 - Wall Running
         if ((wallLeft || wallRight) && verticalInput > 0 && AboveGround() && !exitingWall)
         {
+            Debug.Log("Wall jump input = " + inputs.PlayerMovement.Jump.ReadValue<float>());
              //Start Wallrun here
              if(!pm.wallrunning)
             {
@@ -127,7 +132,7 @@ public class WallRunning : MonoBehaviour
                 exitWallTimer = exitWallTime;
             }
 
-            if (Input.GetKeyDown(jumpKey))
+            if (inputs.PlayerMovement.Jump.ReadValue<float>() > 0.1f)
             {
                 WallJump();
             }
@@ -206,6 +211,7 @@ public class WallRunning : MonoBehaviour
 
     private void WallJump()
     {
+        Debug.Log("Wall Jump");
         if (lg.holding || lg.exitingLedge) return;
         exitingWall = true;
         exitWallTimer = exitWallTime;
