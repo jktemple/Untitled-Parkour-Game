@@ -59,8 +59,11 @@ public class Sliding : MonoBehaviour
 
         if (inputs.PlayerMovement.Slide.ReadValue<float>() <= 0.1f && pm.sliding)
         {
+            Debug.Log("Stopping Slide because of Input");
             StopSlide();
         }
+
+        //Debug.Log(playerObj.localScale);
     }
 
     private void FixedUpdate()
@@ -74,6 +77,7 @@ public class Sliding : MonoBehaviour
     private void StartSlide()
     {
         if(pm.sliding) { return; }
+        //Debug.Log("Starting Slide " + Time.deltaTime);
         pm.sliding = true;
 
         playerObj.localScale = new Vector3(playerObj.localScale.x, slideYScale, playerObj.localScale.z);
@@ -84,6 +88,7 @@ public class Sliding : MonoBehaviour
 
     private void StopSlide()
     {
+        //Debug.Log("Stopping Slide " + Time.deltaTime);
         pm.sliding = false;
         playerObj.localScale = new Vector3(playerObj.localScale.x, startYScale, playerObj.localScale.z);
     }
@@ -109,6 +114,7 @@ public class Sliding : MonoBehaviour
 
         if(slideTimer <= 0)
         {
+            Debug.Log("Stopping Slide because of Timer");
             StopSlide();
         }
     }

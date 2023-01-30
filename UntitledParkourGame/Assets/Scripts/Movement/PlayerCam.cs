@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerCam : MonoBehaviour
 {
+
+    public GameObject thirdPersonMesh;
+    public LayerMask invisible;
     // camera sensitivity
     public float sensX;
     public float sensY;
@@ -20,6 +23,7 @@ public class PlayerCam : MonoBehaviour
     float xRotation;
     float yRotation;
 
+    int LayerInvisible;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,8 +34,30 @@ public class PlayerCam : MonoBehaviour
 
         inputs = new PlayerControls();
         inputs.PlayerMovement.Enable();
+         LayerInvisible = LayerMask.NameToLayer("invisible");
+        thirdPersonMesh.layer = LayerInvisible;
+        Debug.Log("Current layer: " + thirdPersonMesh.layer);
+        SetLayerRecursively(thirdPersonMesh, LayerInvisible);
 
+    }
 
+    void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        if (null == obj)
+        {
+            return;
+        }
+
+        obj.layer = newLayer;
+
+        foreach (Transform child in obj.transform)
+        {
+            if (null == child)
+            {
+                continue;
+            }
+            SetLayerRecursively(child.gameObject, newLayer);
+        }
     }
 
     // Update is called once per frame

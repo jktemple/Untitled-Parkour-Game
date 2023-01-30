@@ -64,7 +64,7 @@ public class Boosting : MonoBehaviour
                     Invoke(nameof(ResetBoostJump), boostJumpCooldown);
                 }
             }
-        } else
+        } else if(pm.boosting)
         {
             StopBoosting();
         }

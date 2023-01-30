@@ -129,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
             desiredMoveSpeed = sprintSpeed;
         }
         // Mode - sprinting
-        if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f))
+        else if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f))
         {
             //Debug.Log("mode sprinting");
             state = MovementState.sprinting;
