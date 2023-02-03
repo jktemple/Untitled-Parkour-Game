@@ -168,18 +168,23 @@ public class PlayerMovement : MonoBehaviour
     public bool wallrunning;
     // Start is called before the first frame update
 
+
+    void Awake(){
+        inputs = new PlayerControls();
+        
+        inputs.PlayerMovement.Enable();
+    }
+
     public bool boostTest;
     void Start()
     {
 
-        audiosource = GetComponent<AudioSource>();
-        audiosource.enabled = true;
+        //audiosource = GetComponent<AudioSource>();
+        //audiosource.enabled = true;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
-        inputs = new PlayerControls();
         
-        inputs.PlayerMovement.Enable();
         
         // top youtube comment sacred knowledge
         readyToJump = true;
