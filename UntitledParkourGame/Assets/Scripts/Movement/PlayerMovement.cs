@@ -9,12 +9,12 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     private float moveSpeed;
-    [Tooltip("The player’s default movement speed when not sprinting, sliding, etc. Higher number = faster movement")]
+    [Tooltip("The playerï¿½s default movement speed when not sprinting, sliding, etc. Higher number = faster movement")]
     public float runSpeed;
-    [Tooltip("the player’s movement speed when in the sprinting state. Higher number = faster movement")]
+    [Tooltip("the playerï¿½s movement speed when in the sprinting state. Higher number = faster movement")]
     public float sprintSpeed;
     //public float slidingSpeed;
-    [Tooltip("the player’s movement speed when in the sprinting state. Higher number = faster movement;")]
+    [Tooltip("the playerï¿½s movement speed when in the sprinting state. Higher number = faster movement;")]
     public float wallRunSpeed;
     [Tooltip("Value between 0 and 1. Determines how much control the player has over side to side movement while climbing walls.")]
     public float climbSpeed;
@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("References")]
     [Tooltip("A reference to the Climbing Script attached to the player")]
     public Climbing climpingScript;
-    [Tooltip("A reference to a GameObject that holds the player’s orientation")]
+    [Tooltip("A reference to a GameObject that holds the playerï¿½s orientation")]
     public Transform orientation;
 
     float horizontalInput;
@@ -88,6 +88,9 @@ public class PlayerMovement : MonoBehaviour
     public bool boosting;
 
     public bool restricted;
+
+    public AudioSource audiosource;
+    public AudioClip walk;
 
     //public bool notControllable;
     private PlayerControls inputs;
@@ -168,6 +171,9 @@ public class PlayerMovement : MonoBehaviour
     public bool boostTest;
     void Start()
     {
+
+        audiosource = GetComponent<AudioSource>();
+        audiosource.enabled = true;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
@@ -220,6 +226,15 @@ public class PlayerMovement : MonoBehaviour
             //Input.GetAxisRaw("Horizontal");
         verticalInput = inputs.PlayerMovement.Movement.ReadValue<Vector2>().y;
         //Debug.Log("Horizontal Input = " + horizontalInput + " , Verticle Input = " + verticalInput);
+
+        if(horizontalInput == 0 && verticalInput == 0){
+            audiosource.enabled = false;
+
+        }else{
+            audiosource.enabled = true;
+        }
+
+
         // when to jump
         bool jumpInput = inputs.PlayerMovement.Jump.ReadValue<float>() > 0.1f;
         if(jumpInput && readyToJump && grounded)
