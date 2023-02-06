@@ -12,8 +12,13 @@ public class ResetGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //var gamepad = Gamepad.current;
         if (Keyboard.current.f1Key.wasPressedThisFrame)
         {
+            restart();
+        } else if (Gamepad.current != null)
+        {
+            if(Gamepad.current.startButton.wasPressedThisFrame)
             restart();
         }
     }
