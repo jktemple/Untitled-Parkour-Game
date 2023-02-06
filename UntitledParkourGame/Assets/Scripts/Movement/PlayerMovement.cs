@@ -13,8 +13,10 @@ public class PlayerMovement : MonoBehaviour
     public float runSpeed;
     [Tooltip("the player’s movement speed when in the sprinting state. Higher number = faster movement")]
     public float sprintSpeed;
+    [Tooltip("The modifier applier the player when moving backwards. Between 0 and 1")]
+    public float backwardsModifier;
     //public float slidingSpeed;
-    [Tooltip("the player’s movement speed when in the sprinting state. Higher number = faster movement;")]
+    [Tooltip("the player’s movement speed when in the Wallrunning state. Higher number = faster movement;")]
     public float wallRunSpeed;
     [Tooltip("Value between 0 and 1. Determines how much control the player has over side to side movement while climbing walls.")]
     public float climbSpeed;
@@ -221,7 +223,7 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = inputs.PlayerMovement.Movement.ReadValue<Vector2>().y;
         //Debug.Log("Horizontal Input = " + horizontalInput + " , Verticle Input = " + verticalInput);
         // when to jump
-        bool jumpInput = inputs.PlayerMovement.Jump.ReadValue<float>() > 0.1f;
+        bool jumpInput = inputs.PlayerMovement.Jump.triggered;
         if(jumpInput && readyToJump && grounded)
         {
             readyToJump = false;
@@ -234,6 +236,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
+        
         if (restricted) return;
 
         if (boostTest) { 
@@ -244,11 +247,16 @@ public class PlayerMovement : MonoBehaviour
         if(climpingScript.exitingWall) { return; }
         // calc movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        float targetSpeed = moveSpeed;
+        if (verticalInput< 0)
+        {
+            targetSpeed *= backwardsModifier;
+        }
 
         //on slope
         if (OnSlope() && !exitingSlope)
         {
-            rb.AddForce(GetSlopeMoveDirection(moveDirection) * moveSpeed * 20f, ForceMode.Force);
+            rb.AddForce(GetSlopeMoveDirection(moveDirection) * targetSpeed * 20f, ForceMode.Force);
 
             if(rb.velocity.y > 0)
             {
@@ -259,7 +267,7 @@ public class PlayerMovement : MonoBehaviour
         // on ground
         if(grounded)
         {
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * targetSpeed * 10f, ForceMode.Force);
         }
 
         // in air

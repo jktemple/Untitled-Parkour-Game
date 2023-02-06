@@ -85,7 +85,7 @@ public class LedgeGrabbing : MonoBehaviour
 
             if(timeOnLedge > minTimOnLedge && anyInputKeyPressed) { ExitLedgeHold(); }
 
-            if (inputs.PlayerMovement.Jump.ReadValue<float>() > 0.1f) LedgeJump();
+            if (inputs.PlayerMovement.Jump.triggered) LedgeJump();
         }
         //substate 2 exiting ledge
         else if(exitingLedge)

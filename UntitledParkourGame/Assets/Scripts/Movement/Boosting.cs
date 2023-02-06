@@ -52,7 +52,7 @@ public class Boosting : MonoBehaviour
             Debug.Log("Starting Boost");
             StartBoosting();
         }
-        else if(!pm.grounded && inputs.PlayerMovement.Jump.ReadValue<float>() > 0.1f && readyToBoostJump)
+        else if(!pm.grounded && inputs.PlayerMovement.Jump.triggered && readyToBoostJump)
         {
             
             if (boostHit.transform != null)

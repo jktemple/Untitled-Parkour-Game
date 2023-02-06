@@ -10,8 +10,10 @@ public class PlayerCam : MonoBehaviour
     public GameObject thirdPersonMesh;
     public LayerMask invisible;
     // camera sensitivity
-    public float sensX;
-    public float sensY;
+    public float mouseSensX;
+    public float mouseSensY;
+    public float gamepadSensX;
+    public float gamepadSensY;
 
     // player orientation
     public Transform orientation;
@@ -36,8 +38,12 @@ public class PlayerCam : MonoBehaviour
         inputs.PlayerMovement.Enable();
          LayerInvisible = LayerMask.NameToLayer("invisible");
         thirdPersonMesh.layer = LayerInvisible;
-        Debug.Log("Current layer: " + thirdPersonMesh.layer);
+       
         SetLayerRecursively(thirdPersonMesh, LayerInvisible);
+        var gamepad = Gamepad.current;
+        var mouse = Mouse.current;
+        Debug.Log("current gamepad " + gamepad);
+        Debug.Log("current mouse " + mouse);
 
     }
 
@@ -47,7 +53,7 @@ public class PlayerCam : MonoBehaviour
         {
             return;
         }
-
+        Debug.Log("Current layer: " + obj.layer);
         obj.layer = newLayer;
 
         foreach (Transform child in obj.transform)
@@ -63,10 +69,21 @@ public class PlayerCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // get mouse input
-        float mouseX = inputs.PlayerMovement.HorizontalLook.ReadValue<float>() * Time.deltaTime * sensX;
-        float mouseY = inputs.PlayerMovement.VerticalLook.ReadValue<float>() * Time.deltaTime * sensY;
+        var gamepad = Gamepad.current;
 
+        // get mouse input
+
+        float mouseX;
+        float mouseY; 
+        if (null == gamepad)
+        {
+           mouseX = inputs.PlayerMovement.HorizontalLook.ReadValue<float>() * Time.deltaTime * mouseSensX;
+           mouseY = inputs.PlayerMovement.VerticalLook.ReadValue<float>() * Time.deltaTime * mouseSensY;
+        } else
+        {
+            mouseX = inputs.PlayerMovement.HorizontalLook.ReadValue<float>() * Time.deltaTime * gamepadSensX;
+            mouseY = inputs.PlayerMovement.VerticalLook.ReadValue<float>() * Time.deltaTime * gamepadSensY;
+        }
         // updating the cam rotation idk whats rly happening here
         yRotation += mouseX;
 

@@ -114,7 +114,7 @@ public class Climbing : MonoBehaviour
             if (climbing) { StopClimbing(); }
         }
         //Debug.Log("Climb Jummp input =" + inputs.PlayerMovement.Jump.ReadValue<float>());
-        if(wallFront && inputs.PlayerMovement.Jump.ReadValue<float>() > 0.1f && climbJumpsLeft > 0 && !pm.wallrunning && !wr.exitingWall && minClimbTimer<=0)
+        if(wallFront && inputs.PlayerMovement.Jump.triggered && climbJumpsLeft > 0 && !pm.wallrunning && !wr.exitingWall && minClimbTimer<=0)
         {
             ClimbJump();
         }

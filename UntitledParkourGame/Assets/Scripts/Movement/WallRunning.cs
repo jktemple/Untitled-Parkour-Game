@@ -132,7 +132,7 @@ public class WallRunning : MonoBehaviour
                 exitWallTimer = exitWallTime;
             }
 
-            if (inputs.PlayerMovement.Jump.ReadValue<float>() > 0.1f)
+            if (inputs.PlayerMovement.Jump.triggered)
             {
                 WallJump();
             }
