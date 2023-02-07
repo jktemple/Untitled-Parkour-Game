@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.InputSystem;
+using Unity.VisualScripting;
+using System.Xml;
 
 public class PlayerCam : MonoBehaviour
 {
@@ -28,6 +30,8 @@ public class PlayerCam : MonoBehaviour
     float yRotation;
 
     int LayerInvisible;
+
+    bool quickTurning = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -86,6 +90,8 @@ public class PlayerCam : MonoBehaviour
             mouseX = inputs.PlayerMovement.HorizontalLook.ReadValue<float>() * Time.deltaTime * gamepadSensX;
             mouseY = inputs.PlayerMovement.VerticalLook.ReadValue<float>() * Time.deltaTime * gamepadSensY;
         }
+        Debug.Log("Quick Turning = " + quickTurning);
+        Debug.Log("X input: " + inputs.PlayerMovement.HorizontalLook.ReadValue<float>() + " Y Input: " + inputs.PlayerMovement.VerticalLook.ReadValue<float>());
         // updating the cam rotation idk whats rly happening here
         yRotation += mouseX;
 
@@ -100,9 +106,10 @@ public class PlayerCam : MonoBehaviour
             if (inputs.PlayerMovement.HorizontalLook.ReadValue<float>() < 0f) DoQuickTurn(-180f);
             else DoQuickTurn(180f);
         }
-        else
+        else if (!quickTurning)
         {
             // rotate cam and orientation
+            
             camHolder.rotation = Quaternion.Euler(xRotation, yRotation, 0);
             orientation.rotation = Quaternion.Euler(0, yRotation, 0);
         }
@@ -127,6 +134,7 @@ public class PlayerCam : MonoBehaviour
     }
     IEnumerator Rotate(float duration, float rotation)
     {
+        quickTurning= true;
         float startRotation = camHolder.eulerAngles.y;
         float endRotation = startRotation + rotation;
         float t = 0.0f;
@@ -138,6 +146,7 @@ public class PlayerCam : MonoBehaviour
             orientation.eulerAngles = new Vector3(orientation.eulerAngles.x, yRotation, orientation.eulerAngles.z);
             yield return null;
         }
+        quickTurning= false;
     }
 
 
