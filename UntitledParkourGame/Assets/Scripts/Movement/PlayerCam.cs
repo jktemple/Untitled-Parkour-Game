@@ -15,6 +15,8 @@ public class PlayerCam : MonoBehaviour
     public float gamepadSensX;
     public float gamepadSensY;
 
+    public float quickTurnTime;
+
     // player orientation
     public Transform orientation;
     public Transform camHolder;
@@ -91,9 +93,21 @@ public class PlayerCam : MonoBehaviour
         // can't look up or down more than 90 degrees
         xRotation = Mathf.Clamp(xRotation, -90f, 55f);
 
-        // rotate cam and orientation
-        camHolder.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        if (inputs.PlayerMovement.QuickTurn.triggered)
+        {
+            yRotation += 180;
+            //Debug.Log(inputs.PlayerMovement.HorizontalLook.ReadValue<float>());
+            if (inputs.PlayerMovement.HorizontalLook.ReadValue<float>() < 0f) DoQuickTurn(-180f);
+            else DoQuickTurn(180f);
+        }
+        else
+        {
+            // rotate cam and orientation
+            camHolder.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+            orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        }
+
+        
     }
 
     public void DoFov(float endValue)
@@ -105,6 +119,28 @@ public class PlayerCam : MonoBehaviour
     {
         transform.DOLocalRotate(new Vector3(0, 0, zTilt), 0.25f);
     }
+
+    void DoQuickTurn(float rotation)
+    {
+        StopAllCoroutines();
+        StartCoroutine(Rotate(quickTurnTime, rotation));
+    }
+    IEnumerator Rotate(float duration, float rotation)
+    {
+        float startRotation = camHolder.eulerAngles.y;
+        float endRotation = startRotation + rotation;
+        float t = 0.0f;
+        while(t < duration)
+        {
+            t += Time.deltaTime;
+            float yRotation = Mathf.Lerp(startRotation, endRotation, t / duration) % 360.0f;
+            camHolder.eulerAngles = new Vector3(transform.eulerAngles.x, yRotation, camHolder.eulerAngles.z);
+            orientation.eulerAngles = new Vector3(orientation.eulerAngles.x, yRotation, orientation.eulerAngles.z);
+            yield return null;
+        }
+    }
+
+
 
 
 }

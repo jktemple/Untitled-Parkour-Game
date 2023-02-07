@@ -98,6 +98,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""QuickTurn"",
+                    ""type"": ""Button"",
+                    ""id"": ""9f35b343-00f9-4b99-983f-c68759c2da4f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -364,6 +373,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Boost"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""322dbf39-9a61-4fa9-9c2c-c58d10b3930e"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""QuickTurn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""daa83dc7-20a4-45bb-b09b-97c5e07822b5"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""QuickTurn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -408,6 +439,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerMovement_HorizontalLook = m_PlayerMovement.FindAction("HorizontalLook", throwIfNotFound: true);
         m_PlayerMovement_VerticalLook = m_PlayerMovement.FindAction("VerticalLook", throwIfNotFound: true);
         m_PlayerMovement_Boost = m_PlayerMovement.FindAction("Boost", throwIfNotFound: true);
+        m_PlayerMovement_QuickTurn = m_PlayerMovement.FindAction("QuickTurn", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -475,6 +507,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_HorizontalLook;
     private readonly InputAction m_PlayerMovement_VerticalLook;
     private readonly InputAction m_PlayerMovement_Boost;
+    private readonly InputAction m_PlayerMovement_QuickTurn;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -487,6 +520,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @HorizontalLook => m_Wrapper.m_PlayerMovement_HorizontalLook;
         public InputAction @VerticalLook => m_Wrapper.m_PlayerMovement_VerticalLook;
         public InputAction @Boost => m_Wrapper.m_PlayerMovement_Boost;
+        public InputAction @QuickTurn => m_Wrapper.m_PlayerMovement_QuickTurn;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -520,6 +554,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Boost.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnBoost;
                 @Boost.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnBoost;
                 @Boost.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnBoost;
+                @QuickTurn.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnQuickTurn;
+                @QuickTurn.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnQuickTurn;
+                @QuickTurn.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnQuickTurn;
             }
             m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -548,6 +585,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Boost.started += instance.OnBoost;
                 @Boost.performed += instance.OnBoost;
                 @Boost.canceled += instance.OnBoost;
+                @QuickTurn.started += instance.OnQuickTurn;
+                @QuickTurn.performed += instance.OnQuickTurn;
+                @QuickTurn.canceled += instance.OnQuickTurn;
             }
         }
     }
@@ -580,5 +620,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnHorizontalLook(InputAction.CallbackContext context);
         void OnVerticalLook(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
+        void OnQuickTurn(InputAction.CallbackContext context);
     }
 }
