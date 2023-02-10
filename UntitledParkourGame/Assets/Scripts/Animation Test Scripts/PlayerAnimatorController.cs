@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerAnimatorController : MonoBehaviour
+public class PlayerAnimatorController : NetworkBehaviour
 {
 
     [Header("References")]
@@ -26,6 +27,7 @@ public class PlayerAnimatorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!IsOwner) return;
         
         //Debug.Log("velocity.magnitude = " + rb.velocity.magnitude);
         animator.SetFloat(VelcotiyHash, rb.velocity.magnitude);
