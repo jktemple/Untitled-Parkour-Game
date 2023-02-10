@@ -38,7 +38,8 @@ public class Sliding : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         rb = GetComponent<Rigidbody>();
+        if (!IsOwner) return;
+        rb = GetComponent<Rigidbody>();
         pm = GetComponent<PlayerMovement>();
 
         startYScale = playerObj.localScale.y;
@@ -49,6 +50,7 @@ public class Sliding : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
         horizontalInput = inputs.PlayerMovement.Movement.ReadValue<Vector2>().x;
         //Input.GetAxisRaw("Horizontal");
         verticalInput = inputs.PlayerMovement.Movement.ReadValue<Vector2>().y;
@@ -69,6 +71,7 @@ public class Sliding : NetworkBehaviour
 
     private void FixedUpdate()
     {
+        if (!IsOwner) return;
         if (pm.sliding)
         {
             SlidingMovement();

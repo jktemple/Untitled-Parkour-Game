@@ -36,6 +36,7 @@ public class PlayerCam : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!IsOwner) return;
         // curser locked to center of screen
         Cursor.lockState = CursorLockMode.Locked;
         // curser invisible
@@ -92,8 +93,8 @@ public class PlayerCam : NetworkBehaviour
             mouseX = inputs.PlayerMovement.HorizontalLook.ReadValue<float>() * Time.deltaTime * gamepadSensX;
             mouseY = inputs.PlayerMovement.VerticalLook.ReadValue<float>() * Time.deltaTime * gamepadSensY;
         }
-        Debug.Log("Quick Turning = " + quickTurning);
-        Debug.Log("X input: " + inputs.PlayerMovement.HorizontalLook.ReadValue<float>() + " Y Input: " + inputs.PlayerMovement.VerticalLook.ReadValue<float>());
+        //Debug.Log("Quick Turning = " + quickTurning);
+        //Debug.Log("X input: " + inputs.PlayerMovement.HorizontalLook.ReadValue<float>() + " Y Input: " + inputs.PlayerMovement.VerticalLook.ReadValue<float>());
         // updating the cam rotation idk whats rly happening here
         yRotation += mouseX;
 

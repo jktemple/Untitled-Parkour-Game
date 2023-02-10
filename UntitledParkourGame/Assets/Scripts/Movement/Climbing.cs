@@ -55,6 +55,7 @@ public class Climbing : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!IsOwner) return;
         inputs = new PlayerControls();
         inputs.PlayerMovement.Enable();
         lg = GetComponent<LedgeGrabbing>();

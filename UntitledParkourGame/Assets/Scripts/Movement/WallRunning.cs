@@ -70,8 +70,9 @@ public class WallRunning : NetworkBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {   
-       rb = GetComponent<Rigidbody>();
+    {
+        if (!IsOwner) return;
+        rb = GetComponent<Rigidbody>();
        pm = GetComponent<PlayerMovement>();
         lg = GetComponent<LedgeGrabbing>();
         inputs = new PlayerControls();

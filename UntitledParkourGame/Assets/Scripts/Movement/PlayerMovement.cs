@@ -171,6 +171,7 @@ public class PlayerMovement : NetworkBehaviour
     public bool boostTest;
     void Start()
     {
+        if (!IsOwner) return;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 

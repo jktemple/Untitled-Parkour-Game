@@ -11,7 +11,9 @@ public class MoveCamera : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!IsOwner) return;
+        Debug.Log("isOwner " + IsOwner + "ID " + gameObject.GetInstanceID());
+        Debug.Log("isHost " + IsHost);
+        //if (!IsOwner) return;
         transform.position = cameraPosition.position;
     }
 }
