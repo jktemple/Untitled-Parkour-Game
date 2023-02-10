@@ -5,8 +5,9 @@ using DG.Tweening;
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
 using System.Xml;
+using Unity.Netcode;
 
-public class PlayerCam : MonoBehaviour
+public class PlayerCam : NetworkBehaviour
 {
 
     public GameObject thirdPersonMesh;
@@ -35,6 +36,7 @@ public class PlayerCam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!IsOwner) return;
         // curser locked to center of screen
         Cursor.lockState = CursorLockMode.Locked;
         // curser invisible
@@ -75,6 +77,7 @@ public class PlayerCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
         var gamepad = Gamepad.current;
 
         // get mouse input
@@ -90,8 +93,8 @@ public class PlayerCam : MonoBehaviour
             mouseX = inputs.PlayerMovement.HorizontalLook.ReadValue<float>() * Time.deltaTime * gamepadSensX;
             mouseY = inputs.PlayerMovement.VerticalLook.ReadValue<float>() * Time.deltaTime * gamepadSensY;
         }
-        Debug.Log("Quick Turning = " + quickTurning);
-        Debug.Log("X input: " + inputs.PlayerMovement.HorizontalLook.ReadValue<float>() + " Y Input: " + inputs.PlayerMovement.VerticalLook.ReadValue<float>());
+        //Debug.Log("Quick Turning = " + quickTurning);
+        //Debug.Log("X input: " + inputs.PlayerMovement.HorizontalLook.ReadValue<float>() + " Y Input: " + inputs.PlayerMovement.VerticalLook.ReadValue<float>());
         // updating the cam rotation idk whats rly happening here
         yRotation += mouseX;
 

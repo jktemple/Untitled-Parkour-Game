@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class LedgeGrabbing : MonoBehaviour
+public class LedgeGrabbing : NetworkBehaviour
 {
     [Header("References")]
     public PlayerMovement pm;
@@ -54,6 +55,7 @@ public class LedgeGrabbing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!IsOwner) return;
         inputs = new PlayerControls();
         inputs.PlayerMovement.Enable();
     }
@@ -61,6 +63,7 @@ public class LedgeGrabbing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
         LedgeDectection();
         SubStateMachine();
     }

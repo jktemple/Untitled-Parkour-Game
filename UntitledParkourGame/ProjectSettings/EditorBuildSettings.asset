@@ -11,8 +11,11 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Will/Will's Movement scene.unity
     guid: 18451523de295a74482ef202b24e7b0c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TutorialScene.unity
     guid: fffe2a9e671d982469584271e3197746
+  - enabled: 1
+    path: Assets/Scenes/NetworkMovement.unity
+    guid: bd1db0f9d9817c440b7df51597b9167f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 78ae546e284aa9a428c733d0f1647afd, type: 2}

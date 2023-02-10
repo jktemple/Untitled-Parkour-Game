@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Climbing : MonoBehaviour
+public class Climbing : NetworkBehaviour
 {
     [Header("References")]
     public Transform orientation;
@@ -54,6 +55,7 @@ public class Climbing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!IsOwner) return;
         inputs = new PlayerControls();
         inputs.PlayerMovement.Enable();
         lg = GetComponent<LedgeGrabbing>();
@@ -63,6 +65,7 @@ public class Climbing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
         WallCheck();
         StateMachine();
 
