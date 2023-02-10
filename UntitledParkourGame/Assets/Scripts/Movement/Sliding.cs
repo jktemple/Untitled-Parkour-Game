@@ -55,12 +55,12 @@ public class Sliding : NetworkBehaviour
         //Input.GetAxisRaw("Horizontal");
         verticalInput = inputs.PlayerMovement.Movement.ReadValue<Vector2>().y;
         //Debug.Log("Horizontal Input = " + horizontalInput + " , Verticle Input = " + verticalInput);
-        if (inputs.PlayerMovement.Slide.ReadValue<float>() > 0.1f && (horizontalInput !=0 || verticalInput != 0))
+        if (inputs.PlayerMovement.Slide.triggered && (horizontalInput !=0 || verticalInput != 0))
         {
             StartSlide();
         }
 
-        if (inputs.PlayerMovement.Slide.ReadValue<float>() <= 0.1f && pm.sliding)
+        if (inputs.PlayerMovement.Slide.WasReleasedThisFrame() && pm.sliding)
         {
             Debug.Log("Stopping Slide because of Input");
             StopSlide();
