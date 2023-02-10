@@ -60,14 +60,14 @@ public class Boosting : NetworkBehaviour
             
             if (boostHit.transform != null)
             {
-                if (boostHit.transform.GetComponent<PlayerMovement>().boosting)
+                if (boostHit.transform.GetComponent<PlayerMovement>().boosting.Value)
                 {
                     //Debug.Log("Boost Jump");
                     BoostJump();
                     Invoke(nameof(ResetBoostJump), boostJumpCooldown);
                 }
             }
-        } else if(pm.boosting)
+        } else if(pm.boosting.Value)
         {
             StopBoosting();
         }
@@ -76,7 +76,7 @@ public class Boosting : NetworkBehaviour
     void StartBoosting()
     {
         boosting = true;
-        pm.boosting = true;
+        pm.boosting.Value = true;
         rb.velocity = Vector3.zero;
         playerObj.localScale = new Vector3(playerObj.localScale.x, boostYScale, playerObj.localScale.z);
         rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
@@ -85,7 +85,7 @@ public class Boosting : NetworkBehaviour
     void StopBoosting()
     {
         boosting = false;
-        pm.boosting = false;
+        pm.boosting.Value = false;
         playerObj.localScale = new Vector3(playerObj.localScale.x, startYScale, playerObj.localScale.z);
     }
 

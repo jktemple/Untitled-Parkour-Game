@@ -88,7 +88,7 @@ public class PlayerMovement : NetworkBehaviour
     public bool climbing;
     public bool freeze;
     public bool unlimited;
-    public bool boosting;
+    public NetworkVariable<bool> boosting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     public bool restricted;
 
@@ -101,7 +101,7 @@ public class PlayerMovement : NetworkBehaviour
         {
             state = MovementState.freeze;
             rb.velocity= Vector3.zero;
-        } else if (boosting)
+        } else if (boosting.Value)
         {
             state = MovementState.boosting;
             rb.velocity= Vector3.zero;
@@ -243,7 +243,7 @@ public class PlayerMovement : NetworkBehaviour
         if (restricted) return;
 
         if (boostTest) { 
-            boosting = true;
+            boosting.Value = true;
             return;
         }
 

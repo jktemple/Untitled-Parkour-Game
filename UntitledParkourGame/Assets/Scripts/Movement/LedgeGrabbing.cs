@@ -209,7 +209,7 @@ public class LedgeGrabbing : NetworkBehaviour
         pm.freeze = false;
         timeOnLedge = 0f;
         rb.useGravity = true;
-        rb.velocity= Vector3.zero;
+        rb.velocity = Vector3.zero;
 
         Invoke(nameof(ResetLastLedge), 1f);
     }

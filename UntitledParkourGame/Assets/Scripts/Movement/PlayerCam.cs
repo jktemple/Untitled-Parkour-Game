@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using Unity.VisualScripting;
 using System.Xml;
 using Unity.Netcode;
+using Cinemachine;
 
 public class PlayerCam : NetworkBehaviour
 {
@@ -113,7 +114,7 @@ public class PlayerCam : NetworkBehaviour
         {
             // rotate cam and orientation
             
-            camHolder.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+            camHolder.rotation = Quaternion.Euler(xRotation, yRotation, camHolder.eulerAngles.z);
             orientation.rotation = Quaternion.Euler(0, yRotation, 0);
         }
 
@@ -122,12 +123,28 @@ public class PlayerCam : NetworkBehaviour
 
     public void DoFov(float endValue)
     {
-        GetComponent<Camera>().DOFieldOfView(endValue, 0.25f);
+        //Debug.Log(GameObject.Find("Main Camera").GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView);
+        StopCoroutine(nameof(FOVChange));
+        StartCoroutine(FOVChange(GameObject.Find("Main Camera").GetComponent<CinemachineVirtualCamera>(), endValue, 0.25f));
     }
 
-    public void DoTilt(float zTilt)
+    public void DoTilt(float endAngle)
     {
-        transform.DOLocalRotate(new Vector3(0, 0, zTilt), 0.25f);
+        StopCoroutine(nameof(CameraTilt));
+        StartCoroutine(CameraTilt(endAngle, 0.25f));  
+    }
+
+    IEnumerator CameraTilt(float endAngle, float time)
+    {
+        float startRotation = camHolder.eulerAngles.z;
+        float t = 0.0f;
+        while(t<time)
+        {
+            t += Time.deltaTime;
+            startRotation = Mathf.Lerp(startRotation, endAngle, t / time);
+            camHolder.eulerAngles = new Vector3(camHolder.eulerAngles.x, camHolder.eulerAngles.y, startRotation);
+            yield return null;
+        }
     }
 
     void DoQuickTurn(float rotation)
@@ -135,6 +152,21 @@ public class PlayerCam : NetworkBehaviour
         StopAllCoroutines();
         StartCoroutine(Rotate(quickTurnTime, rotation));
     }
+
+    IEnumerator FOVChange(CinemachineVirtualCamera cam, float endValue, float time)
+    {
+        float fov = cam.m_Lens.FieldOfView;
+        //float angle = Mathf.Abs((fov / 2) - fov);
+        float t = 0.0f;
+        while (t < time)
+        {
+            fov = Mathf.Lerp(fov, endValue, 20*Time.deltaTime);
+            cam.m_Lens.FieldOfView = fov;
+            t += Time.deltaTime;
+            yield return null;
+        }
+    }
+
     IEnumerator Rotate(float duration, float rotation)
     {
         quickTurning= true;

@@ -16,5 +16,10 @@ public class CameraPlayerFollow : Singleton<CameraPlayerFollow>
         _camera.Follow = target;
     }
 
+    private void Update()
+    {
+        //Debug.Log("Field of View = " + _camera.m_Lens.FieldOfView);
+    }
+
 }
 

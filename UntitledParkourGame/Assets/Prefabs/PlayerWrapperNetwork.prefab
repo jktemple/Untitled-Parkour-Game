@@ -282,8 +282,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207beaf57405b424d8c58e86828c4514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 5
-  sprintSpeed: 8
+  runSpeed: 7
+  sprintSpeed: 12
   backwardsModifier: 0.35
   wallRunSpeed: 13
   climbSpeed: 0.5
@@ -306,7 +306,8 @@ MonoBehaviour:
   climbing: 0
   freeze: 0
   unlimited: 0
-  boosting: 0
+  boosting:
+    m_InternalValue: 0
   restricted: 0
   wallrunning: 0
   boostTest: 0
@@ -357,7 +358,7 @@ MonoBehaviour:
   exitWallTime: 0.2
   useGravity: 0
   gravityCounterForce: 3.57
-  tiltValue: 5
+  tiltValue: 7
   orientation: {fileID: 4194629556480869669}
   cam: {fileID: 7304055498322609760}
 --- !u!114 &4194629557659296675
@@ -561,6 +562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8235ebba5cba61143af0683622b623f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 4194629557659296679}
 --- !u!114 &5605604880218592497
 MonoBehaviour:
   m_ObjectHideFlags: 0
