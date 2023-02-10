@@ -152,17 +152,10 @@ public class WallRunning : NetworkBehaviour
                 StopWallRun();
             }
 
-            float currExitTimer = exitWallTimer;
-
+     
             if (exitWallTimer > 0)
             {
-                //allows for player to wall jump while in wall exit time;
-                if (inputs.PlayerMovement.Jump.triggered)
-                {
-                    Debug.Log("Coyote Time Wall Jump");
-                    WallJump();
-                }
-                exitWallTimer = currExitTimer;
+                
                 exitWallTimer -= Time.deltaTime;
             }
 
