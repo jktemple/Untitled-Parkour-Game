@@ -84,6 +84,7 @@ public class WallRunning : NetworkBehaviour
     void Update()
     {
         if (!IsOwner) return;
+        Debug.Log("Wall Run Timer = " + wallRunTimer);
         CheckForWall();
         StateMachine();
     }
@@ -146,6 +147,7 @@ public class WallRunning : NetworkBehaviour
         {
             if (pm.wallrunning)
             {
+                Debug.Log("Stopping wall run from state 2 - exiting");
                 StopWallRun();
             }
 
@@ -165,6 +167,7 @@ public class WallRunning : NetworkBehaviour
         {
             if (pm.wallrunning)
             {
+                Debug.Log("Stopping wall run from state 3 - none");
                 StopWallRun();
             }
         }
@@ -172,12 +175,13 @@ public class WallRunning : NetworkBehaviour
 
     private void StartWallRun()
     {
+        Debug.Log("Start Wall Run");
         pm.wallrunning = true;
         wallRunTimer = maxWallRunTime;
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         //apply camera effects
-        cam.DoFov(90f);
+        cam.DoFov(55f);
         if (wallLeft) cam.DoTilt(-tiltValue);
         if(wallRight) cam.DoTilt(tiltValue);
     }
@@ -207,9 +211,11 @@ public class WallRunning : NetworkBehaviour
 
     private void StopWallRun()
     {
+        Debug.Log("Stop Wall Run");
+        //Debug.Break();
         pm.wallrunning = false;
         //reset camera effects
-        cam.DoFov(80f);
+        cam.DoFov(45f);
         cam.DoTilt(0f);
     }
 

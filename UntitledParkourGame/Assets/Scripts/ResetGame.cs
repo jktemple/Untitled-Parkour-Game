@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class ResetGame : NetworkBehaviour
 {
     // Start is called before the first frame update
-    
+    [SerializeField] Rigidbody rb;
 
     // Update is called once per frame
     void Update()
@@ -29,5 +29,6 @@ public class ResetGame : NetworkBehaviour
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         transform.position = GameObject.Find("Spawn Point").transform.position;
+        rb.velocity = Vector3.zero;
     }
 }

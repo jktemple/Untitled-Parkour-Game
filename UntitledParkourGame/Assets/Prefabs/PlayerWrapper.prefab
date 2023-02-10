@@ -336,7 +336,8 @@ MonoBehaviour:
   climbing: 0
   freeze: 0
   unlimited: 0
-  boosting: 0
+  boosting:
+    m_InternalValue: 0
   restricted: 0
   wallrunning: 0
   boostTest: 0
@@ -591,6 +592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8235ebba5cba61143af0683622b623f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 4194629557659296679}
 --- !u!114 &5605604880218592497
 MonoBehaviour:
   m_ObjectHideFlags: 0
