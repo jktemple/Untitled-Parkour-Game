@@ -1,10 +1,11 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Boosting : MonoBehaviour
+public class Boosting : NetworkBehaviour
 {
     [Header("Refrences")]
     public PlayerMovement pm;
@@ -40,6 +41,7 @@ public class Boosting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
         StateMachine();
     }
 

@@ -1,10 +1,11 @@
  using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class WallRunning : MonoBehaviour
+public class WallRunning : NetworkBehaviour
 {
     [Header("Wallrunnig")]
     [Tooltip("Layer that defines what Walls are")]
@@ -81,12 +82,14 @@ public class WallRunning : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
         CheckForWall();
         StateMachine();
     }
 
     private void FixedUpdate()
     {
+        if (!IsOwner) return;
         if (pm.wallrunning)
         {
             WallRunningMovement();

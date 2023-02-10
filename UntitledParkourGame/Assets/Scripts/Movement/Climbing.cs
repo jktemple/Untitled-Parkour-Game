@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Climbing : MonoBehaviour
+public class Climbing : NetworkBehaviour
 {
     [Header("References")]
     public Transform orientation;
@@ -63,6 +64,7 @@ public class Climbing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
         WallCheck();
         StateMachine();
 

@@ -5,8 +5,9 @@ using DG.Tweening;
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
 using System.Xml;
+using Unity.Netcode;
 
-public class PlayerCam : MonoBehaviour
+public class PlayerCam : NetworkBehaviour
 {
 
     public GameObject thirdPersonMesh;
@@ -75,6 +76,7 @@ public class PlayerCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
         var gamepad = Gamepad.current;
 
         // get mouse input

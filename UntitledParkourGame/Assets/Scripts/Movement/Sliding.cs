@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Sliding : MonoBehaviour
+public class Sliding : NetworkBehaviour
 {
     [Header("References")]
     [Tooltip("A Reference to a GameObject that holds the player’s orientation")]
