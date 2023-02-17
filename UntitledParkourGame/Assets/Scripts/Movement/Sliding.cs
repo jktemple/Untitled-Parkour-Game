@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Sliding : MonoBehaviour
+public class Sliding : NetworkBehaviour
 {
     [Header("References")]
     [Tooltip("A Reference to a GameObject that holds the player’s orientation")]
@@ -37,7 +38,8 @@ public class Sliding : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         rb = GetComponent<Rigidbody>();
+        if (!IsOwner) return;
+        rb = GetComponent<Rigidbody>();
         pm = GetComponent<PlayerMovement>();
 
         startYScale = playerObj.localScale.y;
@@ -48,16 +50,17 @@ public class Sliding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
         horizontalInput = inputs.PlayerMovement.Movement.ReadValue<Vector2>().x;
         //Input.GetAxisRaw("Horizontal");
         verticalInput = inputs.PlayerMovement.Movement.ReadValue<Vector2>().y;
         //Debug.Log("Horizontal Input = " + horizontalInput + " , Verticle Input = " + verticalInput);
-        if (inputs.PlayerMovement.Slide.ReadValue<float>() > 0.1f && (horizontalInput !=0 || verticalInput != 0))
+        if (inputs.PlayerMovement.Slide.triggered && (horizontalInput !=0 || verticalInput != 0))
         {
             StartSlide();
         }
 
-        if (inputs.PlayerMovement.Slide.ReadValue<float>() <= 0.1f && pm.sliding)
+        if (inputs.PlayerMovement.Slide.WasReleasedThisFrame() && pm.sliding)
         {
             Debug.Log("Stopping Slide because of Input");
             StopSlide();
@@ -68,6 +71,7 @@ public class Sliding : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!IsOwner) return;
         if (pm.sliding)
         {
             SlidingMovement();

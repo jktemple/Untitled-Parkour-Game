@@ -1,10 +1,11 @@
  using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class WallRunning : MonoBehaviour
+public class WallRunning : NetworkBehaviour
 {
     [Header("Wallrunnig")]
     [Tooltip("Layer that defines what Walls are")]
@@ -69,8 +70,9 @@ public class WallRunning : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {   
-       rb = GetComponent<Rigidbody>();
+    {
+        if (!IsOwner) return;
+        rb = GetComponent<Rigidbody>();
        pm = GetComponent<PlayerMovement>();
         lg = GetComponent<LedgeGrabbing>();
         inputs = new PlayerControls();
@@ -81,12 +83,15 @@ public class WallRunning : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
+        Debug.Log("Wall Run Timer = " + wallRunTimer);
         CheckForWall();
         StateMachine();
     }
 
     private void FixedUpdate()
     {
+        if (!IsOwner) return;
         if (pm.wallrunning)
         {
             WallRunningMovement();
@@ -142,6 +147,7 @@ public class WallRunning : MonoBehaviour
         {
             if (pm.wallrunning)
             {
+                Debug.Log("Stopping wall run from state 2 - exiting");
                 StopWallRun();
             }
 
@@ -161,6 +167,7 @@ public class WallRunning : MonoBehaviour
         {
             if (pm.wallrunning)
             {
+                Debug.Log("Stopping wall run from state 3 - none");
                 StopWallRun();
             }
         }
@@ -168,12 +175,13 @@ public class WallRunning : MonoBehaviour
 
     private void StartWallRun()
     {
+        Debug.Log("Start Wall Run");
         pm.wallrunning = true;
         wallRunTimer = maxWallRunTime;
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         //apply camera effects
-        cam.DoFov(90f);
+        cam.DoFov(55f);
         if (wallLeft) cam.DoTilt(-tiltValue);
         if(wallRight) cam.DoTilt(tiltValue);
     }
@@ -203,9 +211,11 @@ public class WallRunning : MonoBehaviour
 
     private void StopWallRun()
     {
+        Debug.Log("Stop Wall Run");
+        //Debug.Break();
         pm.wallrunning = false;
         //reset camera effects
-        cam.DoFov(80f);
+        cam.DoFov(45f);
         cam.DoTilt(0f);
     }
 

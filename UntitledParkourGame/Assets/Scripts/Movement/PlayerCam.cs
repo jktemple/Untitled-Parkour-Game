@@ -5,8 +5,10 @@ using DG.Tweening;
 using UnityEngine.InputSystem;
 using Unity.VisualScripting;
 using System.Xml;
+using Unity.Netcode;
+using Cinemachine;
 
-public class PlayerCam : MonoBehaviour
+public class PlayerCam : NetworkBehaviour
 {
 
     public GameObject thirdPersonMesh;
@@ -35,6 +37,7 @@ public class PlayerCam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!IsOwner) return;
         // curser locked to center of screen
         Cursor.lockState = CursorLockMode.Locked;
         // curser invisible
@@ -75,6 +78,7 @@ public class PlayerCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
         var gamepad = Gamepad.current;
 
         // get mouse input
@@ -90,8 +94,8 @@ public class PlayerCam : MonoBehaviour
             mouseX = inputs.PlayerMovement.HorizontalLook.ReadValue<float>() * Time.deltaTime * gamepadSensX;
             mouseY = inputs.PlayerMovement.VerticalLook.ReadValue<float>() * Time.deltaTime * gamepadSensY;
         }
-        Debug.Log("Quick Turning = " + quickTurning);
-        Debug.Log("X input: " + inputs.PlayerMovement.HorizontalLook.ReadValue<float>() + " Y Input: " + inputs.PlayerMovement.VerticalLook.ReadValue<float>());
+        //Debug.Log("Quick Turning = " + quickTurning);
+        //Debug.Log("X input: " + inputs.PlayerMovement.HorizontalLook.ReadValue<float>() + " Y Input: " + inputs.PlayerMovement.VerticalLook.ReadValue<float>());
         // updating the cam rotation idk whats rly happening here
         yRotation += mouseX;
 
@@ -110,7 +114,7 @@ public class PlayerCam : MonoBehaviour
         {
             // rotate cam and orientation
             
-            camHolder.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+            camHolder.rotation = Quaternion.Euler(xRotation, yRotation, camHolder.eulerAngles.z);
             orientation.rotation = Quaternion.Euler(0, yRotation, 0);
         }
 
@@ -119,12 +123,28 @@ public class PlayerCam : MonoBehaviour
 
     public void DoFov(float endValue)
     {
-        GetComponent<Camera>().DOFieldOfView(endValue, 0.25f);
+        //Debug.Log(GameObject.Find("Main Camera").GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView);
+        StopCoroutine(nameof(FOVChange));
+        StartCoroutine(FOVChange(GameObject.Find("Main Camera").GetComponent<CinemachineVirtualCamera>(), endValue, 0.25f));
     }
 
-    public void DoTilt(float zTilt)
+    public void DoTilt(float endAngle)
     {
-        transform.DOLocalRotate(new Vector3(0, 0, zTilt), 0.25f);
+        StopCoroutine(nameof(CameraTilt));
+        StartCoroutine(CameraTilt(endAngle, 0.25f));  
+    }
+
+    IEnumerator CameraTilt(float endAngle, float time)
+    {
+        float startRotation = camHolder.eulerAngles.z;
+        float t = 0.0f;
+        while(t<time)
+        {
+            t += Time.deltaTime;
+            startRotation = Mathf.Lerp(startRotation, endAngle, t / time);
+            camHolder.eulerAngles = new Vector3(camHolder.eulerAngles.x, camHolder.eulerAngles.y, startRotation);
+            yield return null;
+        }
     }
 
     void DoQuickTurn(float rotation)
@@ -132,6 +152,21 @@ public class PlayerCam : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(Rotate(quickTurnTime, rotation));
     }
+
+    IEnumerator FOVChange(CinemachineVirtualCamera cam, float endValue, float time)
+    {
+        float fov = cam.m_Lens.FieldOfView;
+        //float angle = Mathf.Abs((fov / 2) - fov);
+        float t = 0.0f;
+        while (t < time)
+        {
+            fov = Mathf.Lerp(fov, endValue, 20*Time.deltaTime);
+            cam.m_Lens.FieldOfView = fov;
+            t += Time.deltaTime;
+            yield return null;
+        }
+    }
+
     IEnumerator Rotate(float duration, float rotation)
     {
         quickTurning= true;

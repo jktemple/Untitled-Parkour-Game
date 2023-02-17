@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     [Header("Movement")]
     private float moveSpeed;
@@ -87,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
     public bool climbing;
     public bool freeze;
     public bool unlimited;
-    public bool boosting;
+    public NetworkVariable<bool> boosting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     public bool restricted;
 
@@ -100,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.freeze;
             rb.velocity= Vector3.zero;
-        } else if (boosting)
+        } else if (boosting.Value)
         {
             state = MovementState.boosting;
             rb.velocity= Vector3.zero;
@@ -170,6 +171,7 @@ public class PlayerMovement : MonoBehaviour
     public bool boostTest;
     void Start()
     {
+        if (!IsOwner) return;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
@@ -184,6 +186,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
@@ -207,8 +210,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void FixedUpdate()
-
     {
+        if (!IsOwner) return;
         MovePlayer();
     }
 
@@ -240,7 +243,7 @@ public class PlayerMovement : MonoBehaviour
         if (restricted) return;
 
         if (boostTest) { 
-            boosting = true;
+            boosting.Value = true;
             return;
         }
 

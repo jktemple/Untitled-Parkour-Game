@@ -1,10 +1,11 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Boosting : MonoBehaviour
+public class Boosting : NetworkBehaviour
 {
     [Header("Refrences")]
     public PlayerMovement pm;
@@ -31,6 +32,7 @@ public class Boosting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!IsOwner) return;
         inputs = new PlayerControls();
         inputs.PlayerMovement.Enable();
         startYScale = playerObj.localScale.y;
@@ -40,6 +42,7 @@ public class Boosting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
         StateMachine();
     }
 
@@ -57,14 +60,14 @@ public class Boosting : MonoBehaviour
             
             if (boostHit.transform != null)
             {
-                if (boostHit.transform.GetComponent<PlayerMovement>().boosting)
+                if (boostHit.transform.GetComponent<PlayerMovement>().boosting.Value)
                 {
                     //Debug.Log("Boost Jump");
                     BoostJump();
                     Invoke(nameof(ResetBoostJump), boostJumpCooldown);
                 }
             }
-        } else if(pm.boosting)
+        } else if(pm.boosting.Value)
         {
             StopBoosting();
         }
@@ -73,7 +76,7 @@ public class Boosting : MonoBehaviour
     void StartBoosting()
     {
         boosting = true;
-        pm.boosting = true;
+        pm.boosting.Value = true;
         rb.velocity = Vector3.zero;
         playerObj.localScale = new Vector3(playerObj.localScale.x, boostYScale, playerObj.localScale.z);
         rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
@@ -82,7 +85,7 @@ public class Boosting : MonoBehaviour
     void StopBoosting()
     {
         boosting = false;
-        pm.boosting = false;
+        pm.boosting.Value = false;
         playerObj.localScale = new Vector3(playerObj.localScale.x, startYScale, playerObj.localScale.z);
     }
 

@@ -3059,6 +3059,7 @@ GameObject:
   - component: {fileID: 607494382}
   - component: {fileID: 607494389}
   - component: {fileID: 607494390}
+  - component: {fileID: 607494391}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3263,7 +3264,8 @@ MonoBehaviour:
   climbing: 0
   freeze: 0
   unlimited: 0
-  boosting: 0
+  boosting:
+    m_InternalValue: 0
   restricted: 0
   wallrunning: 0
   boostTest: 0
@@ -3391,6 +3393,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8235ebba5cba61143af0683622b623f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+--- !u!114 &607494391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607494380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3287662787
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &623596878
 GameObject:
   m_ObjectHideFlags: 0

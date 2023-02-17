@@ -244,10 +244,10 @@ AnimatorStateMachine:
     m_Position: {x: 482.50464, y: 212.19516, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7054657181341853785}
-    m_Position: {x: 260, y: 300, z: 0}
+    m_Position: {x: 210, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8341856549803866619}
-    m_Position: {x: 230, y: 420, z: 0}
+    m_Position: {x: 220, y: 390, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2338951132222506595}
     m_Position: {x: 720, y: 280, z: 0}
@@ -259,7 +259,7 @@ AnimatorStateMachine:
     m_Position: {x: 840, y: 450, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6699184394471742994}
-    m_Position: {x: 470, y: 470, z: 0}
+    m_Position: {x: 450, y: 470, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5369032800348234038}
     m_Position: {x: 550, y: 740, z: 0}
@@ -369,25 +369,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Grounded
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 1
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: InAir
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Sliding
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
