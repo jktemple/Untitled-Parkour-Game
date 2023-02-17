@@ -130,6 +130,7 @@ public class PlayerCam : NetworkBehaviour
 
     public void DoTilt(float endAngle)
     {
+
         StopCoroutine(nameof(CameraTilt));
         StartCoroutine(CameraTilt(endAngle, 0.25f));  
     }
@@ -141,7 +142,7 @@ public class PlayerCam : NetworkBehaviour
         while(t<time)
         {
             t += Time.deltaTime;
-            startRotation = Mathf.Lerp(startRotation, endAngle, t / time);
+            startRotation = Mathf.LerpAngle(startRotation, endAngle, t / time);
             camHolder.eulerAngles = new Vector3(camHolder.eulerAngles.x, camHolder.eulerAngles.y, startRotation);
             yield return null;
         }
