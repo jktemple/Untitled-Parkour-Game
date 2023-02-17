@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207beaf57405b424d8c58e86828c4514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 7
+  runSpeed: 8
   sprintSpeed: 12
   backwardsModifier: 0.35
   wallRunSpeed: 13
@@ -383,8 +383,8 @@ MonoBehaviour:
   climbSpeed: 6
   maxClimbTime: 2.5
   minClimbTime: 0.15
-  climbJumpUpForce: 6
-  climbJumpBackForce: 24
+  climbJumpUpForce: 12
+  climbJumpBackForce: 18
   jumpKey: 32
   climbJumps: 1
   detectionLength: 0.7
