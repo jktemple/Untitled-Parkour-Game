@@ -84,7 +84,7 @@ public class WallRunning : NetworkBehaviour
     void Update()
     {
         if (!IsOwner) return;
-        Debug.Log("Wall Run Timer = " + wallRunTimer);
+        //Debug.Log("Wall Run Timer = " + wallRunTimer);
         CheckForWall();
         StateMachine();
     }
@@ -139,6 +139,7 @@ public class WallRunning : NetworkBehaviour
 
             if (inputs.PlayerMovement.Jump.triggered)
             {
+                Debug.Log("Normal Wall Jump");
                 WallJump();
             }
         }
@@ -147,12 +148,14 @@ public class WallRunning : NetworkBehaviour
         {
             if (pm.wallrunning)
             {
-                Debug.Log("Stopping wall run from state 2 - exiting");
+                //Debug.Log("Stopping wall run from state 2 - exiting");
                 StopWallRun();
             }
 
-            if(exitWallTimer > 0)
+     
+            if (exitWallTimer > 0)
             {
+                
                 exitWallTimer -= Time.deltaTime;
             }
 
@@ -167,7 +170,7 @@ public class WallRunning : NetworkBehaviour
         {
             if (pm.wallrunning)
             {
-                Debug.Log("Stopping wall run from state 3 - none");
+                //Debug.Log("Stopping wall run from state 3 - none");
                 StopWallRun();
             }
         }
@@ -211,7 +214,7 @@ public class WallRunning : NetworkBehaviour
 
     private void StopWallRun()
     {
-        Debug.Log("Stop Wall Run");
+        //Debug.Log("Stop Wall Run");
         //Debug.Break();
         pm.wallrunning = false;
         //reset camera effects
@@ -221,7 +224,7 @@ public class WallRunning : NetworkBehaviour
 
     private void WallJump()
     {
-        Debug.Log("Wall Jump");
+        //Debug.Log("Wall Jump");
         if (lg.holding || lg.exitingLedge) return;
         exitingWall = true;
         exitWallTimer = exitWallTime;
