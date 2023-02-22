@@ -73,7 +73,7 @@ public class Shoving : NetworkBehaviour
                     TargetClientIds = new ulong[] { hitID }
                 }
             };
-            Shoving s = GetComponentInParent<Shoving>();
+            Shoving s = hit.transform.GetComponentInParent<Shoving>();
             s.shoved.Value = true;
             s.shoveDir.Value = direction;
         }
