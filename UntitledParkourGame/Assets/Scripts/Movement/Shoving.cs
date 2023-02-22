@@ -19,6 +19,7 @@ public class Shoving : NetworkBehaviour
     private bool ableToShove;
     public NetworkVariable<bool> shoved = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public NetworkVariable<Vector3> shoveDir = new NetworkVariable<Vector3>();
+    private bool inShoveLag = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,11 +45,15 @@ public class Shoving : NetworkBehaviour
             ableToShove=false;
             Invoke(nameof(ResetShove), shoveCooldown);
         }
-        if(shoved.Value)
+        if(shoved.Value && !inShoveLag)
         {
             rb.AddForce(shoveDir.Value.normalized * shoveForce, ForceMode.Impulse);
-            //ResetShoveServerRPC();
+            ResetShoveServerRPC();
+            inShoveLag = true;
+            Invoke(nameof(ResetShoveLag), 0.5f);
         }
+       
+
     }
 
     [ServerRpc]
@@ -70,7 +75,7 @@ public class Shoving : NetworkBehaviour
             };
             Shoving s = GetComponentInParent<Shoving>();
             s.shoved.Value = true;
-            s.shoveDir.Value = position-direction;
+            s.shoveDir.Value = direction;
         }
 
         //shoot a sphere cast out from the center of the player object in the direction of orientation
@@ -88,5 +93,10 @@ public class Shoving : NetworkBehaviour
     private void ResetShove()
     {
         ableToShove = true;
+    }
+
+    private void ResetShoveLag()
+    {
+        inShoveLag = false;
     }
 }
