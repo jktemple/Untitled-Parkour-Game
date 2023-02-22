@@ -90,6 +90,7 @@ public class PlayerMovement : NetworkBehaviour
     public bool unlimited;
     public NetworkVariable<bool> boosting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+
     public bool restricted;
 
     //public bool notControllable;
@@ -356,5 +357,10 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         moveSpeed = desiredMoveSpeed;
+    }
+
+    public void GetShoved(Vector3 direction, float force)
+    {
+        rb.AddForce(direction * force, ForceMode.Impulse);
     }
 }
