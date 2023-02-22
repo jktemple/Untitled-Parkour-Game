@@ -17,19 +17,21 @@ public class Shoving : NetworkBehaviour
     public float shoveForce;
     public float shoveCooldown;
     private bool ableToShove;
-
+    public bool shoved;
+    private Vector3 shoveDir;
     // Start is called before the first frame update
     void Start()
     {
 
 
         pm = GetComponent<PlayerMovement>();
-        //rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         Debug.Log("shove RigidBody = " + rb);
         if (!IsOwner) return;
         inputs = new PlayerControls();
         inputs.PlayerMovement.Enable();
         ableToShove = true;
+        shoved = false;
     }
 
     // Update is called once per frame
@@ -41,6 +43,11 @@ public class Shoving : NetworkBehaviour
             ShoveServerRPC(playerObject.position, orientation.forward);
             ableToShove=false;
             Invoke(nameof(ResetShove), shoveCooldown);
+        }
+        if(shoved)
+        {
+            rb.AddForce(shoveDir * shoveForce, ForceMode.Impulse);
+            //shoved = false;
         }
     }
 
@@ -76,7 +83,8 @@ public class Shoving : NetworkBehaviour
     [ClientRpc]
     public void ShoveClientRPC(Vector3 direction, ClientRpcParams clientRpcParams)
     {
-        Debug.Log("Recvied Shove RPC, IsOwner = " + IsOwner);
+        shoved = true;
+        shoveDir = direction;
         
     }
 
