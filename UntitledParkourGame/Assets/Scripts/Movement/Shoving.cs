@@ -44,7 +44,7 @@ public class Shoving : NetworkBehaviour
         }
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     public void ShoveServerRPC(Vector3 position, Vector3 direction)
     {
         //if(!IsServer) return;
@@ -77,6 +77,7 @@ public class Shoving : NetworkBehaviour
     public void ShoveClientRPC(Vector3 direction, ClientRpcParams clientRpcParams)
     {
         Debug.Log("Recvied Shove RPC, IsOwner = " + IsOwner);
+        
     }
 
     private void ResetShove()
