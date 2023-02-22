@@ -17,7 +17,7 @@ public class Shoving : NetworkBehaviour
     public float shoveForce;
     public float shoveCooldown;
     private bool ableToShove;
-    public bool shoved;
+    public NetworkVariable<bool> shoved = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     private Vector3 shoveDir;
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,7 @@ public class Shoving : NetworkBehaviour
         inputs = new PlayerControls();
         inputs.PlayerMovement.Enable();
         ableToShove = true;
-        shoved = false;
+        shoved.Value = false;
     }
 
     // Update is called once per frame
@@ -44,10 +44,10 @@ public class Shoving : NetworkBehaviour
             ableToShove=false;
             Invoke(nameof(ResetShove), shoveCooldown);
         }
-        if(shoved)
+        if(shoved.Value)
         {
             rb.AddForce(shoveDir * shoveForce, ForceMode.Impulse);
-            //shoved = false;
+            ResetShoveServerRPC();
         }
     }
 
@@ -68,11 +68,7 @@ public class Shoving : NetworkBehaviour
                     TargetClientIds = new ulong[] { hitID }
                 }
             };
-            Debug.Log("OwnerClientId of the hit object " + hitID);
-            //var client = NetworkManager.ConnectedClients[hitID];
-            //client.PlayerObject.GetComponentInChildren<Rigidbody>().AddForce(orientation.forward * shoveForce, ForceMode.Impulse);
-            ShoveClientRPC(orientation.forward, clientRpcParams);
-            //hit.transform.GetComponentInParent<Rigidbody>().AddForce(orientation.forward * shoveForce, ForceMode.Impulse);
+            hit.transform.GetComponentInParent<Shoving>().shoved.Value = true;
         }
 
         //shoot a sphere cast out from the center of the player object in the direction of orientation
@@ -80,12 +76,10 @@ public class Shoving : NetworkBehaviour
 
     }
 
-    [ClientRpc]
-    public void ShoveClientRPC(Vector3 direction, ClientRpcParams clientRpcParams)
+    [ServerRpc]
+    public void ResetShoveServerRPC()
     {
-        shoved = true;
-        shoveDir = direction;
-        
+        shoved.Value = false;
     }
 
     private void ResetShove()
