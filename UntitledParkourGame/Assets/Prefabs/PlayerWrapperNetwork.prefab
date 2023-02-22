@@ -444,7 +444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pm: {fileID: 4194629557659296672}
   playerObj: {fileID: 4194629557247760180}
-  cam: {fileID: 0}
+  cam: {fileID: 1719467378662260150}
   rb: {fileID: 4194629557659296679}
   whatIsPlayer:
     serializedVersion: 2
@@ -651,6 +651,10 @@ MonoBehaviour:
   shoveSpherecastRadius: 0.25
   shoveForce: 50
   shoveCooldown: 1
+  shoved:
+    m_InternalValue: 0
+  shoveDir:
+    m_InternalValue: {x: 0, y: 0, z: 0}
 --- !u!1 &4194629557836493343
 GameObject:
   m_ObjectHideFlags: 0

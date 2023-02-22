@@ -10,7 +10,7 @@ public class Boosting : NetworkBehaviour
     [Header("Refrences")]
     public PlayerMovement pm;
     public Transform playerObj;
-    public PlayerCam cam;
+    public Transform cam;
     public Rigidbody rb;
     public LayerMask whatIsPlayer;
 
