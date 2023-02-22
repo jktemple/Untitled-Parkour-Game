@@ -5,19 +5,20 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using FMOD.Studio;
 
 public class PlayerMovement : NetworkBehaviour
 {
     [Header("Movement")]
     private float moveSpeed;
-    [Tooltip("The player’s default movement speed when not sprinting, sliding, etc. Higher number = faster movement")]
+    [Tooltip("The playerï¿½s default movement speed when not sprinting, sliding, etc. Higher number = faster movement")]
     public float runSpeed;
-    [Tooltip("the player’s movement speed when in the sprinting state. Higher number = faster movement")]
+    [Tooltip("the playerï¿½s movement speed when in the sprinting state. Higher number = faster movement")]
     public float sprintSpeed;
     [Tooltip("The modifier applier the player when moving backwards. Between 0 and 1")]
     public float backwardsModifier;
     //public float slidingSpeed;
-    [Tooltip("the player’s movement speed when in the Wallrunning state. Higher number = faster movement;")]
+    [Tooltip("the playerï¿½s movement speed when in the Wallrunning state. Higher number = faster movement;")]
     public float wallRunSpeed;
     [Tooltip("Value between 0 and 1. Determines how much control the player has over side to side movement while climbing walls.")]
     public float climbSpeed;
@@ -26,6 +27,8 @@ public class PlayerMovement : NetworkBehaviour
 
     private float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
+
+    private EventInstance playerFootsteps;
 
     [Header("Jumping")]
     [Tooltip("How much upwards force is applied to the player when they jump. Higher number = larger force and higher jumps")]
@@ -59,7 +62,7 @@ public class PlayerMovement : NetworkBehaviour
     [Header("References")]
     [Tooltip("A reference to the Climbing Script attached to the player")]
     public Climbing climpingScript;
-    [Tooltip("A reference to a GameObject that holds the player’s orientation")]
+    [Tooltip("A reference to a GameObject that holds the playerï¿½s orientation")]
     public Transform orientation;
 
     float horizontalInput;
@@ -181,6 +184,8 @@ public class PlayerMovement : NetworkBehaviour
         
         // top youtube comment sacred knowledge
         readyToJump = true;
+
+        playerFootsteps = AudioManager.instance.CreateInstance(FMODEvents.instance.playerFootsteps);
     }
 
     // Update is called once per frame
@@ -194,6 +199,7 @@ public class PlayerMovement : NetworkBehaviour
         SpeedControl();
         stateHandler();
         HandleDrag();
+        UpdateSound();
         
     }
 
@@ -356,5 +362,20 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         moveSpeed = desiredMoveSpeed;
+    }
+
+    private void UpdateSound(){
+        if (grounded){
+            PLAYBACK_STATE playbackState;
+            playerFootsteps.getPlaybackState (out playbackState);
+            
+            if(playbackState.Equals(PLAYBACK_STATE.STOPPED)){
+                playerFootsteps.start();
+            }
+        }
+        else{
+            playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+
+        }
     }
 }
