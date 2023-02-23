@@ -54,6 +54,11 @@ public class WallRunning : NetworkBehaviour
     [Tooltip("If the player is affected by gravity, this determines the amount of force applied to counter gravity")]
     public float gravityCounterForce;
 
+    [Header("Cotoye Time")]
+    public float coyoteTime;
+    private float coyoteTimer;
+    private bool coyoteJumpAvailable;
+
     [Header("Camera Effects")]
     [Tooltip("How far the camera tilts while wall running")]
     public float tiltValue;
@@ -68,6 +73,7 @@ public class WallRunning : NetworkBehaviour
     private LedgeGrabbing lg;
     private PlayerControls inputs;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,7 +83,6 @@ public class WallRunning : NetworkBehaviour
         lg = GetComponent<LedgeGrabbing>();
         inputs = new PlayerControls();
         inputs.PlayerMovement.Enable();
-
     }
 
     // Update is called once per frame
@@ -140,7 +145,7 @@ public class WallRunning : NetworkBehaviour
             if (inputs.PlayerMovement.Jump.triggered)
             {
                 Debug.Log("Normal Wall Jump");
-                WallJump();
+                WallJump(false);
             }
         }
         //State 2 - Exiting
@@ -164,7 +169,6 @@ public class WallRunning : NetworkBehaviour
                 exitingWall = false;
             }
         }
-
         //State 3 None
         else
         {
@@ -172,6 +176,17 @@ public class WallRunning : NetworkBehaviour
             {
                 //Debug.Log("Stopping wall run from state 3 - none");
                 StopWallRun();
+            }
+
+            if(coyoteTimer > 0)
+            {
+                coyoteTimer -= Time.deltaTime;
+            }
+
+            if(coyoteTimer > 0 && inputs.PlayerMovement.Jump.triggered && coyoteJumpAvailable)
+            {
+                Debug.Log("Coyote Time Wall Jump");
+                WallJump(true);
             }
         }
     }
@@ -182,7 +197,7 @@ public class WallRunning : NetworkBehaviour
         pm.wallrunning = true;
         wallRunTimer = maxWallRunTime;
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
+        coyoteJumpAvailable = true;
         //apply camera effects
         cam.DoFov(55f);
         if (wallLeft) cam.DoTilt(-tiltValue);
@@ -220,19 +235,22 @@ public class WallRunning : NetworkBehaviour
         //reset camera effects
         cam.DoFov(45f);
         cam.DoTilt(0f);
+        coyoteTimer = coyoteTime;
     }
 
-    private void WallJump()
+    private void WallJump(bool isCoyote)
     {
         //Debug.Log("Wall Jump");
         if (lg.holding || lg.exitingLedge) return;
         exitingWall = true;
-        exitWallTimer = exitWallTime;
+        if(!isCoyote) exitWallTimer = exitWallTime;
         Vector3 wallNormal = wallRight ? rightWallHit.normal: leftWallHit.normal;
 
         Vector3 forceToApply = transform.up * wallJumpUpForce + wallNormal*wallJumpSideForce;
         //add force
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(forceToApply, ForceMode.Impulse);
+
+        coyoteJumpAvailable = false;
     }
 }
