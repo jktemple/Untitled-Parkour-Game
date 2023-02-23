@@ -385,8 +385,8 @@ MonoBehaviour:
   climbSpeed: 6
   maxClimbTime: 2.5
   minClimbTime: 0.15
-  climbJumpUpForce: 12
-  climbJumpBackForce: 18
+  climbJumpUpForce: 6
+  climbJumpBackForce: 9
   jumpKey: 32
   climbJumps: 1
   detectionLength: 0.7
@@ -395,7 +395,6 @@ MonoBehaviour:
   minWallNormalAngleChange: 15
   exitingWall: 0
   exitWallTime: 1
-  coyoteTime: 0.4
 --- !u!114 &4194629557659296700
 MonoBehaviour:
   m_ObjectHideFlags: 0
