@@ -20,6 +20,7 @@ public class PlayerCam : NetworkBehaviour
     public float gamepadSensY;
 
     public float quickTurnTime;
+    public float fov;
 
     // player orientation
     public Transform orientation;

@@ -283,13 +283,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207beaf57405b424d8c58e86828c4514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 8
-  sprintSpeed: 12
+  runSpeed: 11
+  sprintSpeed: 14
   backwardsModifier: 0.35
-  wallRunSpeed: 13
+  wallRunSpeed: 0
   climbSpeed: 0.5
-  groundDrag: 5
-  jumpForce: 6
+  groundDrag: 6
+  jumpForce: 7
   jumpCooldown: 0.5
   airMultiplier: 0.1
   jumpKey: 32
@@ -327,7 +327,7 @@ MonoBehaviour:
   orientation: {fileID: 4194629556480869669}
   playerObj: {fileID: 4194629557247760180}
   maxSlideTime: 1
-  slideForce: 200
+  slideForce: 0
   slideYScale: 0.5
   slideKey: 306
 --- !u!114 &4194629557659296674
@@ -348,8 +348,8 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 3072
-  wallRunForce: 200
-  maxWallRunTime: 0.75
+  wallRunForce: 0
+  maxWallRunTime: 1
   wallJumpUpForce: 7
   wallJumpSideForce: 12
   jumpKey: 32
@@ -786,6 +786,7 @@ MonoBehaviour:
   gamepadSensX: 200
   gamepadSensY: 200
   quickTurnTime: 0.2
+  fov: 0
   orientation: {fileID: 4194629556480869669}
   camHolder: {fileID: 1719467378662260150}
 --- !u!1001 &4194629557624704211
