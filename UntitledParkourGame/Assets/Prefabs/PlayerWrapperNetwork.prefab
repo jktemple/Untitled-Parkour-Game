@@ -786,6 +786,7 @@ MonoBehaviour:
   gamepadSensX: 200
   gamepadSensY: 200
   quickTurnTime: 0.2
+  tiltTime: 0.35
   orientation: {fileID: 4194629556480869669}
   camHolder: {fileID: 1719467378662260150}
 --- !u!1001 &4194629557624704211

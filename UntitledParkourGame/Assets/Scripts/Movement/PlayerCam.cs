@@ -20,6 +20,7 @@ public class PlayerCam : NetworkBehaviour
     public float gamepadSensY;
 
     public float quickTurnTime;
+    public float tiltTime;
 
     // player orientation
     public Transform orientation;
@@ -132,7 +133,7 @@ public class PlayerCam : NetworkBehaviour
     {
 
         StopCoroutine(nameof(CameraTilt));
-        StartCoroutine(CameraTilt(endAngle, 0.25f));  
+        StartCoroutine(CameraTilt(endAngle, tiltTime));  
     }
 
     IEnumerator CameraTilt(float endAngle, float time)
