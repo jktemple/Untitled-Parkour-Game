@@ -365,9 +365,12 @@ public class PlayerMovement : NetworkBehaviour
     }
 
     private void UpdateSound(){
+
+        Debug.Log("yes1");
         if (grounded){
             PLAYBACK_STATE playbackState;
             playerFootsteps.getPlaybackState (out playbackState);
+            Debug.Log("yes");
             
             if(playbackState.Equals(PLAYBACK_STATE.STOPPED)){
                 playerFootsteps.start();
