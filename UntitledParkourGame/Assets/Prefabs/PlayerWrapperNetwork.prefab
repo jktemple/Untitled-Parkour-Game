@@ -284,14 +284,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runSpeed: 11
-  sprintSpeed: 14
-  backwardsModifier: 0.35
+  sprintSpeed: 15
+  backwardsModifier: 0.7
   wallRunSpeed: 0
-  climbSpeed: 0.5
+  climbSpeed: 0
   groundDrag: 6
-  jumpForce: 7
+  jumpForce: 9
   jumpCooldown: 0.5
-  airMultiplier: 0.1
+  airMultiplier: 0.35
   jumpKey: 32
   sprintKey: 304
   playerHeight: 2
@@ -359,7 +359,7 @@ MonoBehaviour:
   exitWallTime: 0.35
   useGravity: 0
   gravityCounterForce: 3.57
-  coyoteTime: 0.1
+  coyoteTime: 0.3
   tiltValue: 7
   orientation: {fileID: 4194629556480869669}
   cam: {fileID: 7304055498322609760}
@@ -382,8 +382,8 @@ MonoBehaviour:
   whatIsWall:
     serializedVersion: 2
     m_Bits: 2048
-  climbSpeed: 6
-  maxClimbTime: 2.5
+  climbSpeed: 8
+  maxClimbTime: 2.8
   minClimbTime: 0.15
   climbJumpUpForce: 6
   climbJumpBackForce: 9
@@ -781,8 +781,8 @@ MonoBehaviour:
   invisible:
     serializedVersion: 2
     m_Bits: 16384
-  mouseSensX: 15
-  mouseSensY: 15
+  mouseSensX: 11
+  mouseSensY: 11
   gamepadSensX: 200
   gamepadSensY: 200
   quickTurnTime: 0.2
