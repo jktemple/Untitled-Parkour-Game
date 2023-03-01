@@ -286,7 +286,7 @@ MonoBehaviour:
   runSpeed: 11
   sprintSpeed: 15
   backwardsModifier: 0.7
-  wallRunSpeed: 0
+  wallRunSpeed: 15
   climbSpeed: 0
   groundDrag: 6
   jumpForce: 9
@@ -348,7 +348,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 3072
-  wallRunForce: 0
+  wallRunForce: 100
   maxWallRunTime: 1
   wallJumpUpForce: 7
   wallJumpSideForce: 12
@@ -385,7 +385,7 @@ MonoBehaviour:
   climbSpeed: 8
   maxClimbTime: 2.8
   minClimbTime: 0.15
-  climbJumpUpForce: 6
+  climbJumpUpForce: 8
   climbJumpBackForce: 9
   jumpKey: 32
   climbJumps: 1
