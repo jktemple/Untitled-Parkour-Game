@@ -24,8 +24,22 @@ public class PlayerMovement : NetworkBehaviour
     [Tooltip("How much the player decelerates on the ground when there are no movement inputs. Higher number = faster deceleration.")]
     public float groundDrag;
 
+    [SerializeField]
+    [Tooltip("good at 2000")]
+    private float maxStamina;
+    [SerializeField]
+    [Tooltip("good at 10")]
+    private float staminaDrainRate;
+    [SerializeField]
+    [Tooltip("good at 5")]
+    private float staminaRechargeRate;
+
     private float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
+    private float currentStamina;
+    
+    //private float sprintDelayTime; // for if sprint delay is added
+    //private float delayTimeLeft; // for if sprint delay is added
 
     [Header("Jumping")]
     [Tooltip("How much upwards force is applied to the player when they jump. Higher number = larger force and higher jumps")]
@@ -133,12 +147,11 @@ public class PlayerMovement : NetworkBehaviour
             desiredMoveSpeed = sprintSpeed;
         }
         // Mode - sprinting
-        else if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f))
+        else if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f) && currentStamina > 0)
         {
             //Debug.Log("mode sprinting");
             state = MovementState.sprinting;
             desiredMoveSpeed = sprintSpeed;
-
         }
         //Mode - Running
         else if (grounded)
@@ -182,6 +195,10 @@ public class PlayerMovement : NetworkBehaviour
         
         // top youtube comment sacred knowledge
         readyToJump = true;
+
+        currentStamina = maxStamina;
+        // sprintDelayTime = 1; // in seconds // for if these are implemented later
+        // delayTimeLeft = sprintDelayTime; 
     }
 
     // Update is called once per frame
@@ -198,8 +215,8 @@ public class PlayerMovement : NetworkBehaviour
         
     }
 
-    private void HandleDrag(){
-        // handle drag
+    private void HandleDrag()
+    {
         if (grounded)
         {
             rb.drag = groundDrag;
@@ -214,6 +231,40 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!IsOwner) return;
         MovePlayer();
+
+        // vvv sprint stamina stuff, move into functions when done vvv
+
+        if (state == MovementState.sprinting)
+        {
+            if (currentStamina > 0)
+            {
+                if(currentStamina < staminaDrainRate)
+                {
+                    currentStamina = 0;
+                }
+                else
+                {
+                    currentStamina -= staminaDrainRate;
+                }
+            }
+            else
+            {
+                state = MovementState.running;
+                desiredMoveSpeed = runSpeed;
+            }
+        }
+        else if (state == MovementState.running)
+        {
+            if(currentStamina < maxStamina)
+            {
+                currentStamina += staminaRechargeRate;
+            }
+        }
+        else { }
+
+        // ^^^ sprint stamina stuff, move into functions when done ^^^
+
+
     }
 
     private void MyInput()
