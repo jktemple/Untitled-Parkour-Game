@@ -25,14 +25,17 @@ public class PlayerMovement : NetworkBehaviour
     public float groundDrag;
 
     [SerializeField]
-    [Tooltip("good at 2000")]
+    [Tooltip("fine at 100")]
     private float maxStamina;
     [SerializeField]
-    [Tooltip("good at 10")]
+    [Tooltip("fine at 25")]
     private float staminaDrainRate;
     [SerializeField]
-    [Tooltip("good at 5")]
+    [Tooltip("fine at 10")]
     private float staminaRechargeRate;
+    [SerializeField]
+    private float WallrunningStaminaRechargeRate;
+    [Tooltip("fine at 30")]
 
     private float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
@@ -139,6 +142,22 @@ public class PlayerMovement : NetworkBehaviour
         {
             state = MovementState.wallrunning;
             desiredMoveSpeed = wallRunSpeed;
+
+            // sprint stamina handling
+            if (currentStamina < maxStamina)
+            {
+                // wont go above max
+                if (currentStamina + staminaRechargeRate * Time.deltaTime > maxStamina)
+                {
+                    currentStamina = maxStamina;
+                }
+                else
+                {
+                    currentStamina += WallrunningStaminaRechargeRate * Time.deltaTime;
+                }
+
+                Debug.Log("Current Stamina wallrunning: " + currentStamina);
+            }
         }
         //Mode Sliding
         else if (sliding)
@@ -152,12 +171,40 @@ public class PlayerMovement : NetworkBehaviour
             //Debug.Log("mode sprinting");
             state = MovementState.sprinting;
             desiredMoveSpeed = sprintSpeed;
+
+            // sprint stamina handling
+            if (currentStamina < staminaDrainRate * Time.deltaTime)
+            {
+                currentStamina = 0;
+                Debug.Log("Current Stamina Sprinting depleted: " + currentStamina);
+            }
+            else
+            {
+                currentStamina -= staminaDrainRate * Time.deltaTime;
+                Debug.Log("Current Stamina Sprinting: " + currentStamina);
+            }
         }
         //Mode - Running
         else if (grounded)
         {
             state = MovementState.running;
             desiredMoveSpeed = runSpeed;
+
+            // sprint stamina handling
+            if (currentStamina < maxStamina)
+            {
+                // wont go above max
+                if(currentStamina + staminaRechargeRate * Time.deltaTime > maxStamina)
+                {
+                    currentStamina = maxStamina;
+                }
+                else
+                {
+                    currentStamina += staminaRechargeRate * Time.deltaTime;
+                }
+                
+                Debug.Log("Current Stamina running: " + currentStamina);
+            }
         }
         //Mode Air
         else
@@ -231,40 +278,6 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!IsOwner) return;
         MovePlayer();
-
-        // vvv sprint stamina stuff, move into functions when done vvv
-
-        if (state == MovementState.sprinting)
-        {
-            if (currentStamina > 0)
-            {
-                if(currentStamina < staminaDrainRate)
-                {
-                    currentStamina = 0;
-                }
-                else
-                {
-                    currentStamina -= staminaDrainRate;
-                }
-            }
-            else
-            {
-                state = MovementState.running;
-                desiredMoveSpeed = runSpeed;
-            }
-        }
-        else if (state == MovementState.running)
-        {
-            if(currentStamina < maxStamina)
-            {
-                currentStamina += staminaRechargeRate;
-            }
-        }
-        else { }
-
-        // ^^^ sprint stamina stuff, move into functions when done ^^^
-
-
     }
 
     private void MyInput()

@@ -289,9 +289,10 @@ MonoBehaviour:
   wallRunSpeed: 15
   climbSpeed: 0
   groundDrag: 6
-  maxStamina: 2000
-  staminaDrainRate: 10
-  staminaRechargeRate: 5
+  maxStamina: 100
+  staminaDrainRate: 25
+  staminaRechargeRate: 10
+  WallrunningStaminaRechargeRate: 30
   jumpForce: 9
   jumpCooldown: 0.5
   airMultiplier: 0.35

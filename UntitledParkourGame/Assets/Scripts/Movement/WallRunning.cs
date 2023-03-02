@@ -124,7 +124,7 @@ public class WallRunning : NetworkBehaviour
         //State 1 - Wall Running
         if ((wallLeft || wallRight) && verticalInput > 0 && AboveGround() && !exitingWall)
         {
-            Debug.Log("Wall jump input = " + inputs.PlayerMovement.Jump.ReadValue<float>());
+             //Debug.Log("Wall jump input = " + inputs.PlayerMovement.Jump.ReadValue<float>());
              //Start Wallrun here
              if(!pm.wallrunning)
             {
