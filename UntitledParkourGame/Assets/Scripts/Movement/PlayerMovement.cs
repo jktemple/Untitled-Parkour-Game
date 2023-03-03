@@ -10,14 +10,14 @@ public class PlayerMovement : NetworkBehaviour
 {
     [Header("Movement")]
     private float moveSpeed;
-    [Tooltip("The player’s default movement speed when not sprinting, sliding, etc. Higher number = faster movement")]
+    [Tooltip("The playerï¿½s default movement speed when not sprinting, sliding, etc. Higher number = faster movement")]
     public float runSpeed;
-    [Tooltip("the player’s movement speed when in the sprinting state. Higher number = faster movement")]
+    [Tooltip("the playerï¿½s movement speed when in the sprinting state. Higher number = faster movement")]
     public float sprintSpeed;
     [Tooltip("The modifier applier the player when moving backwards. Between 0 and 1")]
     public float backwardsModifier;
     //public float slidingSpeed;
-    [Tooltip("the player’s movement speed when in the Wallrunning state. Higher number = faster movement;")]
+    [Tooltip("the playerï¿½s movement speed when in the Wallrunning state. Higher number = faster movement;")]
     public float wallRunSpeed;
     [Tooltip("Value between 0 and 1. Determines how much control the player has over side to side movement while climbing walls.")]
     public float climbSpeed;
@@ -36,6 +36,8 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField]
     private float WallrunningStaminaRechargeRate;
     [Tooltip("fine at 30")]
+
+    
 
     private float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
@@ -76,7 +78,7 @@ public class PlayerMovement : NetworkBehaviour
     [Header("References")]
     [Tooltip("A reference to the Climbing Script attached to the player")]
     public Climbing climpingScript;
-    [Tooltip("A reference to a GameObject that holds the player’s orientation")]
+    [Tooltip("A reference to a GameObject that holds the playerï¿½s orientation")]
     public Transform orientation;
 
     float horizontalInput;
@@ -86,6 +88,8 @@ public class PlayerMovement : NetworkBehaviour
 
     Rigidbody rb;
     [Tooltip("an Enum that holds the current state of the player")]
+
+    public PlayerCam cam;
     public MovementState state;
 
     public enum MovementState
@@ -134,6 +138,7 @@ public class PlayerMovement : NetworkBehaviour
         //Mode Climbing
         else if(climbing)
         {
+            //cam.DoFov(40f);
             state = MovementState.climbing;
             moveSpeed = climbSpeed;
         }
@@ -162,12 +167,15 @@ public class PlayerMovement : NetworkBehaviour
         //Mode Sliding
         else if (sliding)
         {
+            //cam.DoFov(40f);
             state = MovementState.sliding;
             desiredMoveSpeed = sprintSpeed;
         }
         // Mode - sprinting
         else if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f) && currentStamina > 0)
         {
+            if(inputs.PlayerMovement.Sprint.triggered){cam.DoFov(45f); }
+            
             //Debug.Log("mode sprinting");
             state = MovementState.sprinting;
             desiredMoveSpeed = sprintSpeed;
@@ -223,6 +231,10 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         lastDesiredMoveSpeed = desiredMoveSpeed;
+
+        if(state != MovementState.sprinting && state != MovementState.wallrunning){
+            cam.DoFov(40f);
+        }
     }
     
 

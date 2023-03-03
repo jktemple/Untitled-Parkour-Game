@@ -293,6 +293,8 @@ MonoBehaviour:
   staminaDrainRate: 25
   staminaRechargeRate: 10
   WallrunningStaminaRechargeRate: 30
+  cam: {fileID: 7304055498322609760}
+  currentStamina: 0
   jumpForce: 9
   jumpCooldown: 0.5
   airMultiplier: 0.35

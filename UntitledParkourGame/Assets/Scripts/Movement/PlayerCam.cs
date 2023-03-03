@@ -163,7 +163,7 @@ public class PlayerCam : NetworkBehaviour
         float t = 0.0f;
         while (t < time)
         {
-            fov = Mathf.Lerp(fov, endValue, 20*Time.deltaTime);
+            fov = Mathf.LerpAngle(fov, endValue, 20*Time.deltaTime);
             cam.m_Lens.FieldOfView = fov;
             t += Time.deltaTime;
             yield return null;

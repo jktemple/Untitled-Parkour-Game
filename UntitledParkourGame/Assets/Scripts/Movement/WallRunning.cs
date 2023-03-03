@@ -64,7 +64,7 @@ public class WallRunning : NetworkBehaviour
     public float tiltValue;
 
     [Header("References")]
-    [Tooltip("A reference to a GameObject that stores the player’s orientation")]
+    [Tooltip("A reference to a GameObject that stores the playerï¿½s orientation")]
     public Transform orientation;
     [Tooltip("A reference to the player camera")]
     public PlayerCam cam;
@@ -199,7 +199,7 @@ public class WallRunning : NetworkBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         coyoteJumpAvailable = true;
         //apply camera effects
-        //cam.DoFov(55f);
+        cam.DoFov(45f);
         if (wallLeft) cam.DoTilt(-tiltValue);
         if(wallRight) cam.DoTilt(tiltValue);
     }
@@ -233,7 +233,7 @@ public class WallRunning : NetworkBehaviour
         //Debug.Break();
         pm.wallrunning = false;
         //reset camera effects
-        //cam.DoFov(45f);
+        cam.DoFov(40f);
         cam.DoTilt(0f);
         coyoteTimer = coyoteTime;
     }
