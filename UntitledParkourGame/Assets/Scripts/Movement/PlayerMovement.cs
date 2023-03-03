@@ -24,8 +24,25 @@ public class PlayerMovement : NetworkBehaviour
     [Tooltip("How much the player decelerates on the ground when there are no movement inputs. Higher number = faster deceleration.")]
     public float groundDrag;
 
+    [SerializeField]
+    [Tooltip("fine at 100")]
+    private float maxStamina;
+    [SerializeField]
+    [Tooltip("fine at 25")]
+    private float staminaDrainRate;
+    [SerializeField]
+    [Tooltip("fine at 10")]
+    private float staminaRechargeRate;
+    [SerializeField]
+    private float WallrunningStaminaRechargeRate;
+    [Tooltip("fine at 30")]
+
     private float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
+    private float currentStamina;
+    
+    //private float sprintDelayTime; // for if sprint delay is added
+    //private float delayTimeLeft; // for if sprint delay is added
 
     [Header("Jumping")]
     [Tooltip("How much upwards force is applied to the player when they jump. Higher number = larger force and higher jumps")]
@@ -90,6 +107,7 @@ public class PlayerMovement : NetworkBehaviour
     public bool unlimited;
     public NetworkVariable<bool> boosting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+
     public bool restricted;
 
     //public bool notControllable;
@@ -124,6 +142,22 @@ public class PlayerMovement : NetworkBehaviour
         {
             state = MovementState.wallrunning;
             desiredMoveSpeed = wallRunSpeed;
+
+            // sprint stamina handling
+            if (currentStamina < maxStamina)
+            {
+                // wont go above max
+                if (currentStamina + staminaRechargeRate * Time.deltaTime > maxStamina)
+                {
+                    currentStamina = maxStamina;
+                }
+                else
+                {
+                    currentStamina += WallrunningStaminaRechargeRate * Time.deltaTime;
+                }
+
+                Debug.Log("Current Stamina wallrunning: " + currentStamina);
+            }
         }
         //Mode Sliding
         else if (sliding)
@@ -132,18 +166,45 @@ public class PlayerMovement : NetworkBehaviour
             desiredMoveSpeed = sprintSpeed;
         }
         // Mode - sprinting
-        else if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f))
+        else if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f) && currentStamina > 0)
         {
             //Debug.Log("mode sprinting");
             state = MovementState.sprinting;
             desiredMoveSpeed = sprintSpeed;
 
+            // sprint stamina handling
+            if (currentStamina < staminaDrainRate * Time.deltaTime)
+            {
+                currentStamina = 0;
+                Debug.Log("Current Stamina Sprinting depleted: " + currentStamina);
+            }
+            else
+            {
+                currentStamina -= staminaDrainRate * Time.deltaTime;
+                Debug.Log("Current Stamina Sprinting: " + currentStamina);
+            }
         }
         //Mode - Running
         else if (grounded)
         {
             state = MovementState.running;
             desiredMoveSpeed = runSpeed;
+
+            // sprint stamina handling
+            if (currentStamina < maxStamina)
+            {
+                // wont go above max
+                if(currentStamina + staminaRechargeRate * Time.deltaTime > maxStamina)
+                {
+                    currentStamina = maxStamina;
+                }
+                else
+                {
+                    currentStamina += staminaRechargeRate * Time.deltaTime;
+                }
+                
+                Debug.Log("Current Stamina running: " + currentStamina);
+            }
         }
         //Mode Air
         else
@@ -181,6 +242,10 @@ public class PlayerMovement : NetworkBehaviour
         
         // top youtube comment sacred knowledge
         readyToJump = true;
+
+        currentStamina = maxStamina;
+        // sprintDelayTime = 1; // in seconds // for if these are implemented later
+        // delayTimeLeft = sprintDelayTime; 
     }
 
     // Update is called once per frame
@@ -197,8 +262,8 @@ public class PlayerMovement : NetworkBehaviour
         
     }
 
-    private void HandleDrag(){
-        // handle drag
+    private void HandleDrag()
+    {
         if (grounded)
         {
             rb.drag = groundDrag;
@@ -356,5 +421,10 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         moveSpeed = desiredMoveSpeed;
+    }
+
+    public void GetShoved(Vector3 direction, float force)
+    {
+        rb.AddForce(direction * force, ForceMode.Impulse);
     }
 }

@@ -107,6 +107,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shove"",
+                    ""type"": ""Button"",
+                    ""id"": ""d54c6cc5-1178-4401-b8f9-eb8bea33ab2a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -124,7 +133,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""07d98c49-b1be-408a-9ed6-b197f8d4189c"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6258328-3969-4c8b-bcb0-5f6af5424082"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -146,7 +166,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ec54499a-c103-4c09-9f35-8aa374e898a5"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -355,7 +375,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""cae80d77-45e4-4ac4-87a9-5c94e40b6207"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -366,7 +386,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""88fc3ffe-4a9d-4f27-8679-ca953f9c4a47"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -377,7 +397,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""322dbf39-9a61-4fa9-9c2c-c58d10b3930e"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -393,6 +413,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""QuickTurn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""69814975-e42b-45bd-b69e-139dac848a8e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Shove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""759ada76-9f71-48f7-981d-949fe898c8ed"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Shove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -440,6 +482,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerMovement_VerticalLook = m_PlayerMovement.FindAction("VerticalLook", throwIfNotFound: true);
         m_PlayerMovement_Boost = m_PlayerMovement.FindAction("Boost", throwIfNotFound: true);
         m_PlayerMovement_QuickTurn = m_PlayerMovement.FindAction("QuickTurn", throwIfNotFound: true);
+        m_PlayerMovement_Shove = m_PlayerMovement.FindAction("Shove", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -508,6 +551,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_VerticalLook;
     private readonly InputAction m_PlayerMovement_Boost;
     private readonly InputAction m_PlayerMovement_QuickTurn;
+    private readonly InputAction m_PlayerMovement_Shove;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -521,6 +565,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @VerticalLook => m_Wrapper.m_PlayerMovement_VerticalLook;
         public InputAction @Boost => m_Wrapper.m_PlayerMovement_Boost;
         public InputAction @QuickTurn => m_Wrapper.m_PlayerMovement_QuickTurn;
+        public InputAction @Shove => m_Wrapper.m_PlayerMovement_Shove;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -557,6 +602,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @QuickTurn.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnQuickTurn;
                 @QuickTurn.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnQuickTurn;
                 @QuickTurn.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnQuickTurn;
+                @Shove.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnShove;
+                @Shove.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnShove;
+                @Shove.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnShove;
             }
             m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -588,6 +636,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @QuickTurn.started += instance.OnQuickTurn;
                 @QuickTurn.performed += instance.OnQuickTurn;
                 @QuickTurn.canceled += instance.OnQuickTurn;
+                @Shove.started += instance.OnShove;
+                @Shove.performed += instance.OnShove;
+                @Shove.canceled += instance.OnShove;
             }
         }
     }
@@ -621,5 +672,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnVerticalLook(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
         void OnQuickTurn(InputAction.CallbackContext context);
+        void OnShove(InputAction.CallbackContext context);
     }
 }

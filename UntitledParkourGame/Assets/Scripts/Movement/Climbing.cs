@@ -30,8 +30,6 @@ public class Climbing : NetworkBehaviour
     public int climbJumps;
     private int climbJumpsLeft;
 
-   
-
     [Header("Detection")]
     public float detectionLength;
     public float sphereCastRadius;
@@ -40,6 +38,8 @@ public class Climbing : NetworkBehaviour
 
     private RaycastHit frontWallHit;
     private bool wallFront;
+    private RaycastHit backWallHit;
+    private bool wallBack;
 
     private Transform lastWall;
     private Vector3 lastWallNormal;
@@ -117,16 +117,28 @@ public class Climbing : NetworkBehaviour
             if (climbing) { StopClimbing(); }
         }
         //Debug.Log("Climb Jummp input =" + inputs.PlayerMovement.Jump.ReadValue<float>());
-        if(wallFront && inputs.PlayerMovement.Jump.triggered && climbJumpsLeft > 0 && !pm.wallrunning && !wr.exitingWall && minClimbTimer<=0)
+        if((wallFront||wallBack) && inputs.PlayerMovement.Jump.triggered && climbJumpsLeft > 0 && !pm.wallrunning && !wr.exitingWall && minClimbTimer<=0)
         {
-            ClimbJump();
+            Debug.Log("Normal Clmb Jump");
+            
+            ClimbJump(wallBack);
         }
+        /*
+        if (coyoteTimer > 0 && coyoteJumpAvailable && inputs.PlayerMovement.Jump.triggered && climbJumpsLeft > 0 && !pm.wallrunning)
+        {
+            Debug.Log("Coyote Time Climb Jump");
+            ClimbJump(true);
+        }
+        */
+
     }
 
     private void WallCheck()
     {
         wallFront = Physics.SphereCast(transform.position, sphereCastRadius, orientation.forward, out frontWallHit, detectionLength, whatIsWall);
+        wallBack = Physics.SphereCast(transform.position, sphereCastRadius, -orientation.forward, out backWallHit, detectionLength*0.5f, whatIsWall);
         wallLookAngle = Vector3.Angle(orientation.forward, -frontWallHit.normal);
+        if (wallBack) Debug.Log("wallBack = true");
 
         bool newWall = frontWallHit.transform != lastWall || Mathf.Abs(Vector3.Angle(lastWallNormal, frontWallHit.normal)) > minWallNormalAngleChange;
         
@@ -160,14 +172,22 @@ public class Climbing : NetworkBehaviour
         if (!wallFront) { rb.velocity = new Vector3(rb.velocity.x, 0.1f, rb.velocity.z); }
     }
 
-    private void ClimbJump()
+    private void ClimbJump(bool isBackwards)
     {
         if (exitingWall) return;
         if (pm.grounded || lg.holding || lg.exitingLedge) return;
         exitingWall = true;
-        exitWallTimer = exitWallTime;
-        
-        Vector3 forceToApply = transform.up*climbJumpUpForce + frontWallHit.normal*climbJumpBackForce;
+       exitWallTimer = exitWallTime;
+        Vector3 forceToApply;
+        if (isBackwards)
+        {
+            forceToApply = transform.up * climbJumpUpForce + backWallHit.normal * climbJumpBackForce;
+        } else
+        {
+            forceToApply = transform.up * climbJumpUpForce + frontWallHit.normal * climbJumpBackForce;
+        }
+
+
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(forceToApply,ForceMode.Impulse);
         climbJumpsLeft--;

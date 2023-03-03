@@ -10,7 +10,7 @@ public class Boosting : NetworkBehaviour
     [Header("Refrences")]
     public PlayerMovement pm;
     public Transform playerObj;
-    public PlayerCam cam;
+    public Transform cam;
     public Rigidbody rb;
     public LayerMask whatIsPlayer;
 
@@ -50,7 +50,7 @@ public class Boosting : NetworkBehaviour
     {
         Physics.SphereCast(transform.position, boostSphereCastRadius, Vector3.down, out boostHit, boostSphereCastDistance, whatIsPlayer);
         //Debug.Log(boostHit.transform);
-        if (pm.grounded && inputs.PlayerMovement.Boost.ReadValue<float>() > 0.1f )
+        if (pm.grounded && inputs.PlayerMovement.Boost.IsPressed() && !pm.sliding)
         {
             Debug.Log("Starting Boost");
             StartBoosting();
