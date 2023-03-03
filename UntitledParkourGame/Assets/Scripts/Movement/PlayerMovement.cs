@@ -39,7 +39,7 @@ public class PlayerMovement : NetworkBehaviour
 
     private float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
-    private float currentStamina;
+    public float currentStamina;
     
     //private float sprintDelayTime; // for if sprint delay is added
     //private float delayTimeLeft; // for if sprint delay is added
