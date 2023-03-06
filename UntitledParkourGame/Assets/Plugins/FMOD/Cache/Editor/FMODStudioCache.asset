@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: ../../../../FMOD/Audio#1/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638126231862338057
+  lastModified: 638136539002635549
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -89,10 +89,10 @@ MonoBehaviour:
   Path: ../../../../FMOD/Audio#1/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638126231862530631
+  lastModified: 638136539002839900
   FileSizes:
   - Name: Desktop
-    Value: 247392
+    Value: 258272
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -113,13 +113,41 @@ MonoBehaviour:
   EditorEvents:
   - {fileID: -5135346006621105682}
   - {fileID: -7394304512989830509}
+  - {fileID: 2002615230578374796}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7699997979630363981}
   StringsBanks:
   - {fileID: 7750652950202072413}
-  cacheTime: 638126231862530631
+  cacheTime: 638136539002839900
   cacheVersion: 131601
+--- !u!114 &2002615230578374796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Jumping
+  m_EditorClassIdentifier: 
+  Path: event:/Jumping
+  Guid:
+    Data1: 1282938628
+    Data2: 1297692072
+    Data3: -1078051154
+    Data4: -1997389005
+  Banks:
+  - {fileID: -2370048204120923414}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &7750652950202072413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,8 +163,8 @@ MonoBehaviour:
   Path: ../../../../FMOD/Audio#1/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638126231862348977
+  lastModified: 638136539002635549
   FileSizes:
   - Name: Desktop
-    Value: 856
+    Value: 894
   Exists: 1

@@ -325,6 +325,7 @@ public class PlayerMovement : NetworkBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Jumping", GetComponent<Transform>().position);
     }
 
     private void ResetJump()
