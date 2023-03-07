@@ -25,6 +25,9 @@ public class PlayerMovement : NetworkBehaviour
     [Tooltip("How much the player decelerates on the ground when there are no movement inputs. Higher number = faster deceleration.")]
     public float groundDrag;
 
+
+    // public string path;
+
     private float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
 
@@ -52,6 +55,7 @@ public class PlayerMovement : NetworkBehaviour
     public LayerMask whatIsGround;
     [Tooltip("Boolean that stores if the player is on the ground")]
     public bool grounded;
+    public bool moved;
 
     [Header("Slope Handling")]
     [Tooltip("Defines the maximum angle of slope the player can move up")]
@@ -199,6 +203,7 @@ public class PlayerMovement : NetworkBehaviour
         SpeedControl();
         stateHandler();
         HandleDrag();
+        // UpdateSound(path);
         UpdateSound();
         
     }
@@ -366,6 +371,13 @@ public class PlayerMovement : NetworkBehaviour
     }
 
     private void UpdateSound(){
+        // string path = ("event:/WalkingV2");
+        // FMOD.Studio.EventInstance Footsteps = FMODUnity.RuntimeManager.CreateInstance(path);
+
+        // Footsteps.start();
+        // FMODUnity.RuntimeManager.AttachInstanceToGameObject(Footsteps, GetComponent<Transform>(), GetComponent<Rigidbody>());
+        // Footsteps.stop(STOP_MODE.ALLOWFADEOUT);
+        // Footsteps.release();
 
         Debug.Log("yes1");
         if (grounded){
@@ -374,12 +386,18 @@ public class PlayerMovement : NetworkBehaviour
             Debug.Log("yes");
             
             if(playbackState.Equals(PLAYBACK_STATE.STOPPED)){
+                Debug.Log("yes2");
                 playerFootsteps.start();
             }
+            Debug.Log("yes4");
+            // playerFootsteps.start();
         }
         else{
+            Debug.Log("yes3");
             playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
 
         }
+
+
     }
 }
