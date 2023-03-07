@@ -379,21 +379,21 @@ public class PlayerMovement : NetworkBehaviour
         // Footsteps.stop(STOP_MODE.ALLOWFADEOUT);
         // Footsteps.release();
 
-        Debug.Log("yes1");
-        if (grounded){
+        // Debug.Log("yes1");
+        if (rb.velocity.x != 0 && grounded){
             PLAYBACK_STATE playbackState;
             playerFootsteps.getPlaybackState (out playbackState);
             Debug.Log("yes");
             
             if(playbackState.Equals(PLAYBACK_STATE.STOPPED)){
-                Debug.Log("yes2");
+                // Debug.Log("yes2");
                 playerFootsteps.start();
             }
-            Debug.Log("yes4");
+            // Debug.Log("yes4");
             // playerFootsteps.start();
         }
         else{
-            Debug.Log("yes3");
+            // Debug.Log("yes3");
             playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
 
         }
