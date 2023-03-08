@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2316,7 +2316,7 @@ GameObject:
   - component: {fileID: 487396572}
   - component: {fileID: 487396571}
   m_Layer: 5
-  m_Name: Canvas (1)
+  m_Name: Menu Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3719,7 +3719,7 @@ MonoBehaviour:
   codeField: {fileID: 484684870}
   hostButton: {fileID: 1237830833}
   clientButton: {fileID: 1242263899}
-  numConnections: 4
+  numConnections: 6
   menu: {fileID: 487396570}
 --- !u!1 &671363215
 GameObject:
@@ -9046,7 +9046,7 @@ GameObject:
   - component: {fileID: 1532577943}
   - component: {fileID: 1532577942}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Hud Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
