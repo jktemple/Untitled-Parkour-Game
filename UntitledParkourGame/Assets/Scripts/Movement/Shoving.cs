@@ -21,6 +21,9 @@ public class Shoving : NetworkBehaviour
     public NetworkVariable<Vector3> shoveDir = new NetworkVariable<Vector3>();
     public NetworkVariable<bool> infected = new NetworkVariable<bool>();
     private bool inShoveLag = false;
+
+    public Animator animator;
+    private int taggedHash;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +37,7 @@ public class Shoving : NetworkBehaviour
         inputs.PlayerMovement.Enable();
         ableToShove = true;
         shoved.Value = false;
+        taggedHash = Animator.StringToHash("Tagged");
     }
 
     // Update is called once per frame
@@ -53,7 +57,7 @@ public class Shoving : NetworkBehaviour
             inShoveLag = true;
             Invoke(nameof(ResetShoveLag), 0.5f);
         }
-       
+        animator.SetBool(taggedHash, !infected.Value);
 
     }
 

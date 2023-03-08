@@ -25,7 +25,9 @@ public class VirusTagGameModeManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Keyboard.current.f5Key.wasPressedThisFrame)
+        if (!IsServer) return;
+
+        if(Keyboard.current.f5Key.wasPressedThisFrame && !roundOngoing)
         {
             StartRound();
         }
