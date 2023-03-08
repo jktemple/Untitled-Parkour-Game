@@ -10,16 +10,18 @@ public class VirusTagGameModeManager : NetworkBehaviour
     public float roundLength;
     private float roundLengthTimer;
     private bool roundOngoing;
+
+    public NetworkVariable<float> currentTime = new NetworkVariable<float>();
     [SerializeField] private Button startRoundButton;
 
     public GameObject[] spawnPoints;
-   
+    Shoving[] shoveList;
     // Start is called before the first frame update
     void Start()
     {
         //spawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
 
-        startRoundButton.onClick.AddListener(() => { StartRound(); });
+        startRoundButton.onClick.AddListener(() => { if(!roundOngoing) StartRound(); });
     }
 
     // Update is called once per frame
@@ -32,13 +34,29 @@ public class VirusTagGameModeManager : NetworkBehaviour
             StartRound();
         }
 
-        if (roundLengthTimer > 0)
+        if (roundLengthTimer > 0 && roundOngoing)
         {
             roundLengthTimer -= Time.deltaTime;
+            if (allInfected())
+            {
+                EndRound();
+            }
         } else if(roundOngoing && roundLengthTimer < 0)
         {
             EndRound();
         }
+        currentTime.Value = roundLengthTimer;
+        
+    }
+
+    private bool allInfected()
+    {
+        foreach(Shoving s in shoveList)
+        {
+            if(!s.infected.Value)
+                return false;
+        }
+        return true;
     }
 
     public void MovePlayersToSpawnPoints()
@@ -67,6 +85,7 @@ public class VirusTagGameModeManager : NetworkBehaviour
         MovePlayersToSpawnPoints();
         roundLengthTimer = roundLength;  
         roundOngoing = true;
+        shoveList = FindObjectsOfType<Shoving>();
     }
 
     public void EndRound()
@@ -74,6 +93,7 @@ public class VirusTagGameModeManager : NetworkBehaviour
         //do something'
         roundOngoing= false;
         MovePlayersToSpawnPoints();
+        currentTime.Value = 0;
     }
 
     public void AssignInfectedPlayer()
@@ -87,6 +107,6 @@ public class VirusTagGameModeManager : NetworkBehaviour
             sho.infected.Value = false;
         }
         int randIndex = Random.Range(0, playerList.Length);
-        playerList[randIndex].infected.Value= true;
+        playerList[randIndex].infected.Value = true;
     }
 }

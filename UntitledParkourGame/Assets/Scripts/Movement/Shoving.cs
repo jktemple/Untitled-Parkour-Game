@@ -57,7 +57,7 @@ public class Shoving : NetworkBehaviour
             inShoveLag = true;
             Invoke(nameof(ResetShoveLag), 0.5f);
         }
-        animator.SetBool(taggedHash, !infected.Value);
+        animator.SetBool(taggedHash, infected.Value);
 
     }
 

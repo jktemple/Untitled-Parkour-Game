@@ -12,10 +12,10 @@ public class MoveToSpawn : NetworkBehaviour
     private bool ableToMove;
     void Start()
     {
-        /*
+        
         if(!IsOwner) return;
         transform.position = GameObject.Find("Spawn Point").transform.position;
-        */
+        
         //spawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
         ableToMove = true;
     }
