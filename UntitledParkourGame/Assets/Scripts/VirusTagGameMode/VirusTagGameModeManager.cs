@@ -63,6 +63,7 @@ public class VirusTagGameModeManager : NetworkBehaviour
     {
         if (!IsServer) { return; }
         MoveToSpawn[] moveList = FindObjectsOfType<MoveToSpawn>();
+        Shuffle(moveList);
         for (int i = 0; i < moveList.Length; i++)
         {
             if (i < spawnPoints.Length) 
@@ -75,6 +76,17 @@ public class VirusTagGameModeManager : NetworkBehaviour
             }
             moveList[i].moveToSpawn.Value = true;
         }
+    }
+
+    public void Shuffle(MoveToSpawn[] moveList) 
+    {
+          for (int i = 0; i < moveList.Length - 1; i++) 
+          {
+              int rnd = Random.Range(i,  moveList.Length);
+              MoveToSpawn tempGO = moveList[rnd];
+              moveList[rnd] = moveList[i];
+              moveList[i] = tempGO;
+          }
     }
     
 
