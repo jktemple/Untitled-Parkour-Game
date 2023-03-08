@@ -621,6 +621,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f57dd5a3f71764f9f1a4a4cd2faa79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPointTransfrom:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  moveToSpawn:
+    m_InternalValue: 0
 --- !u!114 &8831393922231827525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,6 +666,9 @@ MonoBehaviour:
     m_InternalValue: 0
   shoveDir:
     m_InternalValue: {x: 0, y: 0, z: 0}
+  infected:
+    m_InternalValue: 0
+  animator: {fileID: 8288836907950098484}
 --- !u!1 &4194629557836493343
 GameObject:
   m_ObjectHideFlags: 0
