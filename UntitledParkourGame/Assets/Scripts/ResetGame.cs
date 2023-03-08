@@ -28,7 +28,7 @@ public class ResetGame : NetworkBehaviour
     public void restart()
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        transform.position = GameObject.Find("Spawn Point").transform.position;
+        GetComponent<MoveToSpawn>().MovetoSpawnPoint();
         rb.velocity = Vector3.zero;
     }
 }
