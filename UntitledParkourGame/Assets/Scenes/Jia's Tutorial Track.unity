@@ -2040,11 +2040,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <playerFootsteps>k__BackingField:
     Guid:
-      Data1: 231951918
-      Data2: 1127217703
-      Data3: -1020901461
-      Data4: 2098527360
-    Path: event:/WalkingV2
+      Data1: -1469094421
+      Data2: 1246359713
+      Data3: 1839137688
+      Data4: 137656414
+    Path: event:/WalkingV3
 --- !u!1 &524729901
 GameObject:
   m_ObjectHideFlags: 0
