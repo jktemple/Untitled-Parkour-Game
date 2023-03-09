@@ -19,7 +19,11 @@ public class Shoving : NetworkBehaviour
     private bool ableToShove;
     public NetworkVariable<bool> shoved = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public NetworkVariable<Vector3> shoveDir = new NetworkVariable<Vector3>();
+    public NetworkVariable<bool> infected = new NetworkVariable<bool>();
     private bool inShoveLag = false;
+
+    public Animator animator;
+    private int taggedHash;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +37,7 @@ public class Shoving : NetworkBehaviour
         inputs.PlayerMovement.Enable();
         ableToShove = true;
         shoved.Value = false;
+        taggedHash = Animator.StringToHash("Tagged");
     }
 
     // Update is called once per frame
@@ -41,7 +46,7 @@ public class Shoving : NetworkBehaviour
         if (!IsOwner) return;
         if (ableToShove && inputs.PlayerMovement.Shove.triggered)
         {
-            ShoveServerRPC(playerObject.position, orientation.forward);
+            ShoveServerRPC(playerObject.position, orientation.forward, infected.Value);
             ableToShove=false;
             Invoke(nameof(ResetShove), shoveCooldown);
         }
@@ -52,12 +57,12 @@ public class Shoving : NetworkBehaviour
             inShoveLag = true;
             Invoke(nameof(ResetShoveLag), 0.5f);
         }
-       
+        animator.SetBool(taggedHash, infected.Value);
 
     }
 
     [ServerRpc]
-    public void ShoveServerRPC(Vector3 position, Vector3 direction)
+    public void ShoveServerRPC(Vector3 position, Vector3 direction, bool infected)
     {
         //if(!IsServer) return;
         Debug.Log("Shove Executing");
@@ -65,17 +70,13 @@ public class Shoving : NetworkBehaviour
         if (Physics.SphereCast(position, shoveSpherecastRadius, direction, out hit, shoveDistance, playersMask))
         {
             Debug.Log("Shove Hit");
-           ulong hitID = hit.transform.GetComponentInParent<NetworkObject>().OwnerClientId;
-            ClientRpcParams clientRpcParams = new ClientRpcParams
-            {
-                Send = new ClientRpcSendParams
-                {
-                    TargetClientIds = new ulong[] { hitID }
-                }
-            };
             Shoving s = hit.transform.GetComponentInParent<Shoving>();
             s.shoved.Value = true;
             s.shoveDir.Value = direction;
+            if(infected)
+            {
+                s.infected.Value = true;
+            }
         }
 
         //shoot a sphere cast out from the center of the player object in the direction of orientation
