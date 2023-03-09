@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using FMOD.Studio;
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -46,6 +47,8 @@ public class PlayerMovement : NetworkBehaviour
     //private float sprintDelayTime; // for if sprint delay is added
     //private float delayTimeLeft; // for if sprint delay is added
 
+    private EventInstance playerFootsteps;
+
     [Header("Jumping")]
     [Tooltip("How much upwards force is applied to the player when they jump. Higher number = larger force and higher jumps")]
     public float jumpForce;
@@ -68,6 +71,7 @@ public class PlayerMovement : NetworkBehaviour
     public LayerMask whatIsGround;
     [Tooltip("Boolean that stores if the player is on the ground")]
     public bool grounded;
+    public bool moved;
 
     [Header("Slope Handling")]
     [Tooltip("Defines the maximum angle of slope the player can move up")]
@@ -258,6 +262,8 @@ public class PlayerMovement : NetworkBehaviour
         currentStamina = maxStamina;
         // sprintDelayTime = 1; // in seconds // for if these are implemented later
         // delayTimeLeft = sprintDelayTime; 
+
+        playerFootsteps = AudioManager.instance.CreateInstance(FMODEvents.instance.playerFootsteps);
     }
 
     // Update is called once per frame
@@ -271,6 +277,7 @@ public class PlayerMovement : NetworkBehaviour
         SpeedControl();
         stateHandler();
         HandleDrag();
+        UpdateSound();
         
     }
 
@@ -396,6 +403,7 @@ public class PlayerMovement : NetworkBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Jumping", GetComponent<Transform>().position);
     }
 
     private void ResetJump()
@@ -438,5 +446,22 @@ public class PlayerMovement : NetworkBehaviour
     public void GetShoved(Vector3 direction, float force)
     {
         rb.AddForce(direction * force, ForceMode.Impulse);
+    }
+
+
+
+    private void UpdateSound(){
+    
+        if (rb.velocity.x != 0 && grounded){
+            PLAYBACK_STATE playbackState;
+            playerFootsteps.getPlaybackState (out playbackState);
+         
+            if(playbackState.Equals(PLAYBACK_STATE.STOPPED)){
+                playerFootsteps.start();
+            }
+        }
+        else{
+            playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+        }
     }
 }
