@@ -25,11 +25,27 @@ public class PlayerMovement : NetworkBehaviour
     [Tooltip("How much the player decelerates on the ground when there are no movement inputs. Higher number = faster deceleration.")]
     public float groundDrag;
 
+    [SerializeField]
+    [Tooltip("fine at 100")]
+    private float maxStamina;
+    [SerializeField]
+    [Tooltip("fine at 25")]
+    private float staminaDrainRate;
+    [SerializeField]
+    [Tooltip("fine at 10")]
+    private float staminaRechargeRate;
+    [SerializeField]
+    private float WallrunningStaminaRechargeRate;
+    [Tooltip("fine at 30")]
 
-    // public string path;
+    
 
     private float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
+    public float currentStamina;
+    
+    //private float sprintDelayTime; // for if sprint delay is added
+    //private float delayTimeLeft; // for if sprint delay is added
 
     private EventInstance playerFootsteps;
 
@@ -76,6 +92,8 @@ public class PlayerMovement : NetworkBehaviour
 
     Rigidbody rb;
     [Tooltip("an Enum that holds the current state of the player")]
+
+    public PlayerCam cam;
     public MovementState state;
 
     public enum MovementState
@@ -96,6 +114,7 @@ public class PlayerMovement : NetworkBehaviour
     public bool freeze;
     public bool unlimited;
     public NetworkVariable<bool> boosting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
 
     public bool restricted;
 
@@ -123,6 +142,7 @@ public class PlayerMovement : NetworkBehaviour
         //Mode Climbing
         else if(climbing)
         {
+            //cam.DoFov(40f);
             state = MovementState.climbing;
             moveSpeed = climbSpeed;
         }
@@ -131,26 +151,72 @@ public class PlayerMovement : NetworkBehaviour
         {
             state = MovementState.wallrunning;
             desiredMoveSpeed = wallRunSpeed;
+
+            // sprint stamina handling
+            if (currentStamina < maxStamina)
+            {
+                // wont go above max
+                if (currentStamina + staminaRechargeRate * Time.deltaTime > maxStamina)
+                {
+                    currentStamina = maxStamina;
+                }
+                else
+                {
+                    currentStamina += WallrunningStaminaRechargeRate * Time.deltaTime;
+                }
+
+                Debug.Log("Current Stamina wallrunning: " + currentStamina);
+            }
         }
         //Mode Sliding
         else if (sliding)
         {
+            //cam.DoFov(40f);
             state = MovementState.sliding;
             desiredMoveSpeed = sprintSpeed;
         }
         // Mode - sprinting
-        else if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f))
+        else if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f) && currentStamina > 0)
         {
+            if(inputs.PlayerMovement.Sprint.triggered){cam.DoFov(45f); }
+            
             //Debug.Log("mode sprinting");
             state = MovementState.sprinting;
             desiredMoveSpeed = sprintSpeed;
 
+            // sprint stamina handling
+            if (currentStamina < staminaDrainRate * Time.deltaTime)
+            {
+                currentStamina = 0;
+                Debug.Log("Current Stamina Sprinting depleted: " + currentStamina);
+            }
+            else
+            {
+                currentStamina -= staminaDrainRate * Time.deltaTime;
+                Debug.Log("Current Stamina Sprinting: " + currentStamina);
+            }
         }
         //Mode - Running
         else if (grounded)
         {
             state = MovementState.running;
             desiredMoveSpeed = runSpeed;
+
+            // sprint stamina handling
+            if (currentStamina < maxStamina)
+            {
+                // wont go above max
+                if(currentStamina + staminaRechargeRate * Time.deltaTime > maxStamina)
+                {
+                    currentStamina = maxStamina;
+                }
+                else
+                {
+                    currentStamina += staminaRechargeRate * Time.deltaTime;
+                }
+                
+                Debug.Log("Current Stamina running: " + currentStamina);
+            }
         }
         //Mode Air
         else
@@ -169,6 +235,10 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         lastDesiredMoveSpeed = desiredMoveSpeed;
+
+        if(state != MovementState.sprinting && state != MovementState.wallrunning){
+            cam.DoFov(40f);
+        }
     }
     
 
@@ -189,6 +259,10 @@ public class PlayerMovement : NetworkBehaviour
         // top youtube comment sacred knowledge
         readyToJump = true;
 
+        currentStamina = maxStamina;
+        // sprintDelayTime = 1; // in seconds // for if these are implemented later
+        // delayTimeLeft = sprintDelayTime; 
+
         playerFootsteps = AudioManager.instance.CreateInstance(FMODEvents.instance.playerFootsteps);
     }
 
@@ -203,13 +277,12 @@ public class PlayerMovement : NetworkBehaviour
         SpeedControl();
         stateHandler();
         HandleDrag();
-        // UpdateSound(path);
         UpdateSound();
         
     }
 
-    private void HandleDrag(){
-        // handle drag
+    private void HandleDrag()
+    {
         if (grounded)
         {
             rb.drag = groundDrag;
@@ -370,34 +443,25 @@ public class PlayerMovement : NetworkBehaviour
         moveSpeed = desiredMoveSpeed;
     }
 
+    public void GetShoved(Vector3 direction, float force)
+    {
+        rb.AddForce(direction * force, ForceMode.Impulse);
+    }
+
+
+
     private void UpdateSound(){
-        // string path = ("event:/WalkingV2");
-        // FMOD.Studio.EventInstance Footsteps = FMODUnity.RuntimeManager.CreateInstance(path);
-
-        // Footsteps.start();
-        // FMODUnity.RuntimeManager.AttachInstanceToGameObject(Footsteps, GetComponent<Transform>(), GetComponent<Rigidbody>());
-        // Footsteps.stop(STOP_MODE.ALLOWFADEOUT);
-        // Footsteps.release();
-
-        // Debug.Log("yes1");
+    
         if (rb.velocity.x != 0 && grounded){
             PLAYBACK_STATE playbackState;
             playerFootsteps.getPlaybackState (out playbackState);
-            Debug.Log("yes");
-            
+         
             if(playbackState.Equals(PLAYBACK_STATE.STOPPED)){
-                // Debug.Log("yes2");
                 playerFootsteps.start();
             }
-            // Debug.Log("yes4");
-            // playerFootsteps.start();
         }
         else{
-            // Debug.Log("yes3");
             playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
-
         }
-
-
     }
 }

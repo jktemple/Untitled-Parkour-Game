@@ -18,17 +18,17 @@ public class ResetGame : NetworkBehaviour
         if (Keyboard.current.f1Key.wasPressedThisFrame)
         {
             restart();
-        } else if (Gamepad.current != null)
+        }/* else if (Gamepad.current != null)
         {
             if(Gamepad.current.startButton.wasPressedThisFrame)
             restart();
-        }
+        }*/
     }
 
     public void restart()
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        transform.position = GameObject.Find("Spawn Point").transform.position;
+        GetComponent<MoveToSpawn>().MovetoSpawnPoint();
         rb.velocity = Vector3.zero;
     }
 }

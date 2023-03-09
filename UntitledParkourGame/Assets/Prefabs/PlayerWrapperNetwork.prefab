@@ -228,6 +228,8 @@ GameObject:
   - component: {fileID: 6450978126278892030}
   - component: {fileID: 5583335556705067011}
   - component: {fileID: 8831393922231827525}
+  - component: {fileID: 3333380843094471661}
+  - component: {fileID: 7834839762717679324}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -281,15 +283,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207beaf57405b424d8c58e86828c4514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 8
-  sprintSpeed: 12
-  backwardsModifier: 0.35
-  wallRunSpeed: 13
-  climbSpeed: 0.5
-  groundDrag: 5
-  jumpForce: 6
+  runSpeed: 11
+  sprintSpeed: 15
+  backwardsModifier: 0.7
+  wallRunSpeed: 15
+  climbSpeed: 0
+  groundDrag: 6
+  maxStamina: 100
+  staminaDrainRate: 25
+  staminaRechargeRate: 10
+  WallrunningStaminaRechargeRate: 30
+  currentStamina: 0
+  jumpForce: 9
   jumpCooldown: 0.5
-  airMultiplier: 0.1
+  airMultiplier: 0.35
   jumpKey: 32
   sprintKey: 304
   playerHeight: 2
@@ -300,6 +307,7 @@ MonoBehaviour:
   maxSlopeAngle: 40
   climpingScript: {fileID: 4194629557659296675}
   orientation: {fileID: 4194629556480869669}
+  cam: {fileID: 7304055498322609760}
   state: 0
   sliding: 0
   climbing: 0
@@ -325,7 +333,7 @@ MonoBehaviour:
   orientation: {fileID: 4194629556480869669}
   playerObj: {fileID: 4194629557247760180}
   maxSlideTime: 1
-  slideForce: 200
+  slideForce: 0
   slideYScale: 0.5
   slideKey: 306
 --- !u!114 &4194629557659296674
@@ -346,8 +354,8 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 3072
-  wallRunForce: 200
-  maxWallRunTime: 0.75
+  wallRunForce: 100
+  maxWallRunTime: 1
   wallJumpUpForce: 7
   wallJumpSideForce: 12
   jumpKey: 32
@@ -357,6 +365,7 @@ MonoBehaviour:
   exitWallTime: 0.35
   useGravity: 0
   gravityCounterForce: 3.57
+  coyoteTime: 0.3
   tiltValue: 7
   orientation: {fileID: 4194629556480869669}
   cam: {fileID: 7304055498322609760}
@@ -379,11 +388,11 @@ MonoBehaviour:
   whatIsWall:
     serializedVersion: 2
     m_Bits: 2048
-  climbSpeed: 6
-  maxClimbTime: 2.5
+  climbSpeed: 8
+  maxClimbTime: 2.8
   minClimbTime: 0.15
-  climbJumpUpForce: 12
-  climbJumpBackForce: 18
+  climbJumpUpForce: 8
+  climbJumpBackForce: 9
   jumpKey: 32
   climbJumps: 1
   detectionLength: 0.7
@@ -442,7 +451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pm: {fileID: 4194629557659296672}
   playerObj: {fileID: 4194629557247760180}
-  cam: {fileID: 0}
+  cam: {fileID: 1719467378662260150}
   rb: {fileID: 4194629557659296679}
   whatIsPlayer:
     serializedVersion: 2
@@ -516,6 +525,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f57dd5a3f71764f9f1a4a4cd2faa79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPointTransfrom:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  moveToSpawn:
+    m_InternalValue: 0
 --- !u!114 &8831393922231827525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,6 +544,48 @@ MonoBehaviour:
   rb: {fileID: 4194629557659296679}
   animator: {fileID: 8288836907950098484}
   pm: {fileID: 4194629557659296672}
+--- !u!114 &3333380843094471661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4194629557659296703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeb6f90e72eb52b40bf7336e9d87bc87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playersMask:
+    serializedVersion: 2
+    m_Bits: 64
+  orientation: {fileID: 4194629556480869669}
+  playerObject: {fileID: 4194629557247760180}
+  rb: {fileID: 4194629557659296679}
+  shoveDistance: 1.75
+  shoveSpherecastRadius: 0.6
+  shoveForce: 50
+  shoveCooldown: 0.25
+  shoved:
+    m_InternalValue: 0
+  shoveDir:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  infected:
+    m_InternalValue: 0
+  animator: {fileID: 8288836907950098484}
+--- !u!114 &7834839762717679324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4194629557659296703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5405b7eaa893f2d408a1b15ba4a502d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStamina: 0
 --- !u!1 &4194629557836493343
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,11 +711,13 @@ MonoBehaviour:
   invisible:
     serializedVersion: 2
     m_Bits: 16384
-  mouseSensX: 15
-  mouseSensY: 15
+  mouseSensX: 11
+  mouseSensY: 11
   gamepadSensX: 200
   gamepadSensY: 200
   quickTurnTime: 0.2
+  fov: 0
+  tiltTime: 0.35
   orientation: {fileID: 4194629556480869669}
   camHolder: {fileID: 1719467378662260150}
 --- !u!1001 &4194629557624704211
