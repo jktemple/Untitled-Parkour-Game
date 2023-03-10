@@ -32,7 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Virus Tag Multiplayer Map.unity
     guid: a0e7d00b052af784c9b5125251ffa9ba
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/3.8.2023 Virus Tag.unity
     guid: 032c23709fb1b4f45be2f42046b2bf0d
   m_configObjects:

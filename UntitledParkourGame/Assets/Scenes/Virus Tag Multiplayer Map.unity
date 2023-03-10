@@ -1850,6 +1850,7 @@ GameObject:
   - component: {fileID: 594935705}
   - component: {fileID: 594935704}
   - component: {fileID: 594935710}
+  - component: {fileID: 594935711}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -2041,6 +2042,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6653cdd3bd9aae349aff74ebbf353668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &594935711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594935702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1001 &611563989
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5200,7 +5214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8acc898228667c34cbbabb0633f47d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundLength: 45
+  roundLength: 120
   currentTime:
     m_InternalValue: 0
   startRoundButton: {fileID: 1635539942}
