@@ -23,7 +23,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Jia's Tutorial Track.unity
     guid: 8973aedfcec1ec84d814993f18ece769
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/2.23.2023 Playtest Scene.unity
     guid: b060461cd47164f4bb75edf0b455e6fd
   - enabled: 0
