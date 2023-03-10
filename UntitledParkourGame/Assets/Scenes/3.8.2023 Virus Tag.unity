@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -562,6 +562,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1474519657}
   m_RootOrder: 52
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &216660167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 216660169}
+  - component: {fileID: 216660168}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &216660168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216660167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f94b4603dee6247b7a3325e11b2a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &216660169
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216660167}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 566.5, y: 480, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 813198810}
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &217669699
 GameObject:
@@ -4303,6 +4348,57 @@ Transform:
   m_Father: {fileID: 1474519657}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &813198809
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 813198810}
+  - component: {fileID: 813198811}
+  m_Layer: 0
+  m_Name: FMODEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &813198810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813198809}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 216660169}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &813198811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813198809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba136ff2aaa0f4046b89a3c45da098d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <playerFootsteps>k__BackingField:
+    Guid:
+      Data1: -1469094421
+      Data2: 1246359713
+      Data3: 1839137688
+      Data4: 137656414
+    Path: event:/WalkingV3
 --- !u!1 &848970123
 GameObject:
   m_ObjectHideFlags: 0
@@ -6858,6 +6954,7 @@ GameObject:
   - component: {fileID: 1232952990}
   - component: {fileID: 1232952989}
   - component: {fileID: 1232952988}
+  - component: {fileID: 1232952991}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
@@ -6942,6 +7039,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1232952991}
+        m_TargetAssemblyTypeName: ButtonAudio, Assembly-CSharp
+        m_MethodName: PlayOneShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1232952989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6980,6 +7089,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1232952986}
   m_CullTransparentMesh: 1
+--- !u!114 &1232952991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232952986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27312d801572ddc48bbfb68f9dd07296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <fEvent>k__BackingField:
+    Guid:
+      Data1: 1282387075
+      Data2: 1125749048
+      Data3: -807104625
+      Data4: -736885102
+    Path: event:/UISelect
+  PlayonAwake: 0
 --- !u!1 &1236914884
 GameObject:
   m_ObjectHideFlags: 0
@@ -7089,6 +7218,7 @@ GameObject:
   - component: {fileID: 1237830835}
   - component: {fileID: 1237830834}
   - component: {fileID: 1237830833}
+  - component: {fileID: 1237830837}
   m_Layer: 5
   m_Name: HostButton
   m_TagString: Untagged
@@ -7139,7 +7269,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1237830834}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1237830837}
+        m_TargetAssemblyTypeName: ButtonAudio, Assembly-CSharp
+        m_MethodName: PlayOneShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1237830834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7199,6 +7341,26 @@ RectTransform:
   m_AnchoredPosition: {x: -959.35, y: -170}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1237830837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237830832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27312d801572ddc48bbfb68f9dd07296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <fEvent>k__BackingField:
+    Guid:
+      Data1: 1282387075
+      Data2: 1125749048
+      Data3: -807104625
+      Data4: -736885102
+    Path: event:/UISelect
+  PlayonAwake: 0
 --- !u!1 &1242263898
 GameObject:
   m_ObjectHideFlags: 0
@@ -7211,6 +7373,7 @@ GameObject:
   - component: {fileID: 1242263901}
   - component: {fileID: 1242263900}
   - component: {fileID: 1242263899}
+  - component: {fileID: 1242263903}
   m_Layer: 5
   m_Name: ClientButton
   m_TagString: Untagged
@@ -7261,7 +7424,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1242263900}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1242263903}
+        m_TargetAssemblyTypeName: ButtonAudio, Assembly-CSharp
+        m_MethodName: PlayOneShot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1242263900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7321,6 +7496,26 @@ RectTransform:
   m_AnchoredPosition: {x: -951, y: -651}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1242263903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242263898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27312d801572ddc48bbfb68f9dd07296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <fEvent>k__BackingField:
+    Guid:
+      Data1: 1282387075
+      Data2: 1125749048
+      Data3: -807104625
+      Data4: -736885102
+    Path: event:/UISelect
+  PlayonAwake: 0
 --- !u!1 &1248301175
 GameObject:
   m_ObjectHideFlags: 0
@@ -8050,7 +8245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 507600966
+  GlobalObjectIdHash: 2183886548
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
@@ -9575,6 +9770,7 @@ GameObject:
   - component: {fileID: 1635539945}
   - component: {fileID: 1635539943}
   - component: {fileID: 1635539942}
+  - component: {fileID: 1635539946}
   m_Layer: 5
   m_Name: Start Round Button
   m_TagString: Untagged
@@ -9626,9 +9822,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 473141557}
-        m_TargetAssemblyTypeName: InGameMenuBehaviors, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1635539946}
+        m_TargetAssemblyTypeName: ButtonAudio, Assembly-CSharp
+        m_MethodName: PlayOneShot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9697,6 +9893,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635539941}
   m_CullTransparentMesh: 1
+--- !u!114 &1635539946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635539941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27312d801572ddc48bbfb68f9dd07296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <fEvent>k__BackingField:
+    Guid:
+      Data1: 1282387075
+      Data2: 1125749048
+      Data3: -807104625
+      Data4: -736885102
+    Path: event:/UISelect
+  PlayonAwake: 0
 --- !u!1 &1642893522
 GameObject:
   m_ObjectHideFlags: 0
