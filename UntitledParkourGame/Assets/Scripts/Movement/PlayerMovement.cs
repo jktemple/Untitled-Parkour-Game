@@ -48,6 +48,8 @@ public class PlayerMovement : NetworkBehaviour
     //private float delayTimeLeft; // for if sprint delay is added
 
     private EventInstance playerFootsteps;
+    private EventInstance playerSlidingsfx;
+    private EventInstance playerWallrunningsfx;
 
     [Header("Jumping")]
     [Tooltip("How much upwards force is applied to the player when they jump. Higher number = larger force and higher jumps")]
@@ -264,6 +266,9 @@ public class PlayerMovement : NetworkBehaviour
         // delayTimeLeft = sprintDelayTime; 
 
         playerFootsteps = AudioManager.instance.CreateInstance(FMODEvents.instance.playerFootsteps);
+        playerSlidingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerSlidingsfx);
+        playerWallrunningsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerWallrunningsfx);
+
     }
 
     // Update is called once per frame
@@ -462,6 +467,32 @@ public class PlayerMovement : NetworkBehaviour
         }
         else{
             playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+        }
+
+
+        if(sliding){
+            PLAYBACK_STATE slidingplaybackState;
+            playerSlidingsfx.getPlaybackState (out slidingplaybackState);
+         
+            if(slidingplaybackState.Equals(PLAYBACK_STATE.STOPPED)){
+                playerSlidingsfx.start();
+            }
+        }
+        else{
+            playerSlidingsfx.stop(STOP_MODE.ALLOWFADEOUT);
+        }
+
+        
+        if(wallrunning){
+            PLAYBACK_STATE wallrunningplaybackState;
+            playerWallrunningsfx.getPlaybackState (out wallrunningplaybackState);
+         
+            if(wallrunningplaybackState.Equals(PLAYBACK_STATE.STOPPED)){
+                playerWallrunningsfx.start();
+            }
+        }
+        else{
+            playerWallrunningsfx.stop(STOP_MODE.ALLOWFADEOUT);
         }
     }
 }

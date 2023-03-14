@@ -4399,6 +4399,20 @@ MonoBehaviour:
       Data3: 1839137688
       Data4: 137656414
     Path: event:/WalkingV3
+  <playerSlidingsfx>k__BackingField:
+    Guid:
+      Data1: 1421281157
+      Data2: 1075080530
+      Data3: -377851505
+      Data4: -1583922881
+    Path: event:/SlidingV1
+  <playerWallrunningsfx>k__BackingField:
+    Guid:
+      Data1: 1421281157
+      Data2: 1075080530
+      Data3: -377851505
+      Data4: -1583922881
+    Path: event:/SlidingV1
 --- !u!1 &848970123
 GameObject:
   m_ObjectHideFlags: 0
