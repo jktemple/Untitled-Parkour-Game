@@ -50,6 +50,8 @@ public class PlayerMovement : NetworkBehaviour
     private EventInstance playerFootsteps;
     private EventInstance playerSlidingsfx;
     private EventInstance playerWallrunningsfx;
+    private EventInstance playerWallclimbingsfx;
+    private EventInstance playerBoostingsfx;
 
     [Header("Jumping")]
     [Tooltip("How much upwards force is applied to the player when they jump. Higher number = larger force and higher jumps")]
@@ -268,6 +270,8 @@ public class PlayerMovement : NetworkBehaviour
         playerFootsteps = AudioManager.instance.CreateInstance(FMODEvents.instance.playerFootsteps);
         playerSlidingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerSlidingsfx);
         playerWallrunningsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerWallrunningsfx);
+        playerWallclimbingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerWallclimbingsfx);
+        playerBoostingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerBoostingsfx);
 
     }
 
@@ -494,5 +498,31 @@ public class PlayerMovement : NetworkBehaviour
         else{
             playerWallrunningsfx.stop(STOP_MODE.ALLOWFADEOUT);
         }
+
+
+        if(climbing){
+            PLAYBACK_STATE climbingplaybackState;
+            playerWallclimbingsfx.getPlaybackState (out climbingplaybackState);
+         
+            if(climbingplaybackState.Equals(PLAYBACK_STATE.STOPPED)){
+                playerWallclimbingsfx.start();
+            }
+        }
+        else{
+            playerWallclimbingsfx.stop(STOP_MODE.ALLOWFADEOUT);
+        }
+
+        if(boosting.Value == true){
+            PLAYBACK_STATE boostingplaybackstate;
+            playerBoostingsfx.getPlaybackState (out boostingplaybackstate);
+         
+            if(boostingplaybackstate.Equals(PLAYBACK_STATE.STOPPED)){
+                playerBoostingsfx.start();
+            }
+        }
+        else{
+            playerBoostingsfx.stop(STOP_MODE.ALLOWFADEOUT);
+        }
+
     }
 }
