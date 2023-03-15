@@ -52,6 +52,7 @@ public class PlayerMovement : NetworkBehaviour
     private EventInstance playerWallrunningsfx;
     private EventInstance playerWallclimbingsfx;
     private EventInstance playerBoostingsfx;
+    private EventInstance playerJumpingsfx;
 
     [Header("Jumping")]
     [Tooltip("How much upwards force is applied to the player when they jump. Higher number = larger force and higher jumps")]
@@ -272,6 +273,7 @@ public class PlayerMovement : NetworkBehaviour
         playerWallrunningsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerWallrunningsfx);
         playerWallclimbingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerWallclimbingsfx);
         playerBoostingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerBoostingsfx);
+        playerJumpingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerJumpingsfx);
 
     }
 
@@ -324,9 +326,18 @@ public class PlayerMovement : NetworkBehaviour
         {
             readyToJump = false;
 
+            PLAYBACK_STATE jumpingplaybackState;
+            playerJumpingsfx.getPlaybackState (out jumpingplaybackState);
+         
+            if(jumpingplaybackState.Equals(PLAYBACK_STATE.STOPPED)){
+                playerJumpingsfx.start();
+            }
+
             Jump();
 
             Invoke(nameof(ResetJump), jumpCooldown);
+
+            playerJumpingsfx.stop(STOP_MODE.ALLOWFADEOUT);
         }
     }
 
@@ -412,7 +423,7 @@ public class PlayerMovement : NetworkBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Jumping", GetComponent<Transform>().position);
+        // FMODUnity.RuntimeManager.PlayOneShot("event:/Jumping", GetComponent<Transform>().position);
     }
 
     private void ResetJump()

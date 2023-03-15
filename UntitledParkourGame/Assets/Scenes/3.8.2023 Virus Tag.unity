@@ -4394,11 +4394,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <playerFootsteps>k__BackingField:
     Guid:
-      Data1: -1469094421
-      Data2: 1246359713
-      Data3: 1839137688
-      Data4: 137656414
-    Path: event:/WalkingV3
+      Data1: 98278837
+      Data2: 1129284030
+      Data3: -1112494941
+      Data4: 460133661
+    Path: event:/FootstepV4
   <playerSlidingsfx>k__BackingField:
     Guid:
       Data1: 1421281157
@@ -4421,6 +4421,13 @@ MonoBehaviour:
       Data4: -385006151
     Path: event:/WallclimbingV1
   <playerBoostingsfx>k__BackingField:
+    Guid:
+      Data1: -594772484
+      Data2: 1274357222
+      Data3: 1963701409
+      Data4: 576034364
+    Path: event:/BoostingV1
+  <playerJumpingsfx>k__BackingField:
     Guid:
       Data1: -594772484
       Data2: 1274357222
