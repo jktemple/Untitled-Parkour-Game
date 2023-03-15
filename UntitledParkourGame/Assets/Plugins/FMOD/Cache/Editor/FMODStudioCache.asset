@@ -89,10 +89,10 @@ MonoBehaviour:
   Path: ../FMOD/Audio#1/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638137416216350218
+  lastModified: 638144338822995204
   FileSizes:
   - Name: Desktop
-    Value: 890
+    Value: 984
   Exists: 1
 --- !u!114 &-2370048204120923414
 MonoBehaviour:
@@ -159,15 +159,17 @@ MonoBehaviour:
   - {fileID: 5176510252032385863}
   EditorEvents:
   - {fileID: 168568941167664}
-  - {fileID: 2501013870609181781}
   - {fileID: -244835363494195562}
-  - {fileID: 8711613086797886202}
+  - {fileID: 7777307734673996456}
+  - {fileID: 8856671268373055980}
+  - {fileID: 8399971952768992661}
+  - {fileID: 3577601610410160703}
   EditorParameters: []
   MasterBanks:
   - {fileID: 5198120020711271293}
   StringsBanks:
   - {fileID: -3235552297381639776}
-  cacheTime: 638137416216562336
+  cacheTime: 638144338823200756
   cacheVersion: 131601
 --- !u!114 &168568941167664
 MonoBehaviour:
@@ -223,7 +225,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &2501013870609181781
+--- !u!114 &3577601610410160703
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -233,23 +235,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/WalkingV2
+  m_Name: event:/FootstepV4
   m_EditorClassIdentifier: 
-  Path: event:/WalkingV2
+  Path: event:/FootstepV4
   Guid:
-    Data1: 231951918
-    Data2: 1127217703
-    Data3: -1020901461
-    Data4: 2098527360
+    Data1: 98278837
+    Data2: 1129284030
+    Data3: -1112494941
+    Data4: 460133661
   Banks:
   - {fileID: 5176510252032385863}
-  IsStream: 1
-  Is3D: 1
+  IsStream: 0
+  Is3D: 0
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 67500
+  Length: 2220
 --- !u!114 &5176510252032385863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,10 +267,10 @@ MonoBehaviour:
   Path: ../FMOD/Audio#1/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638137416216562336
+  lastModified: 638144338823200756
   FileSizes:
   - Name: Desktop
-    Value: 271712
+    Value: 326240
   Exists: 1
 --- !u!114 &5198120020711271293
 MonoBehaviour:
@@ -285,7 +287,7 @@ MonoBehaviour:
   Path: ../FMOD/Audio#1/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638137416216335038
+  lastModified: 638144338822985204
   FileSizes:
   - Name: Desktop
     Value: 670
@@ -310,7 +312,7 @@ MonoBehaviour:
   - Name: Desktop
     Value: 894
   Exists: 1
---- !u!114 &8711613086797886202
+--- !u!114 &7777307734673996456
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -320,14 +322,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/WalkingV3
+  m_Name: event:/WallrunningV1
   m_EditorClassIdentifier: 
-  Path: event:/WalkingV3
+  Path: event:/WallrunningV1
   Guid:
-    Data1: -1469094421
-    Data2: 1246359713
-    Data3: 1839137688
-    Data4: 137656414
+    Data1: 1421281157
+    Data2: 1075080530
+    Data3: -377851505
+    Data4: -1583922881
   Banks:
   - {fileID: 5176510252032385863}
   IsStream: 0
@@ -336,4 +338,58 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 540
+  Length: 5590
+--- !u!114 &8399971952768992661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BoostingV1
+  m_EditorClassIdentifier: 
+  Path: event:/BoostingV1
+  Guid:
+    Data1: -594772484
+    Data2: 1274357222
+    Data3: 1963701409
+    Data4: 576034364
+  Banks:
+  - {fileID: 5176510252032385863}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 966
+--- !u!114 &8856671268373055980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/WallclimbingV1
+  m_EditorClassIdentifier: 
+  Path: event:/WallclimbingV1
+  Guid:
+    Data1: -1756345146
+    Data2: 1332463483
+    Data3: -1847950938
+    Data4: -385006151
+  Banks:
+  - {fileID: 5176510252032385863}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7000
