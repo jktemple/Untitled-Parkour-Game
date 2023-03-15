@@ -165,7 +165,7 @@ public class PlayerMovement : NetworkBehaviour
                     currentStamina += WallrunningStaminaRechargeRate * Time.deltaTime;
                 }
 
-                Debug.Log("Current Stamina wallrunning: " + currentStamina);
+                //  Debug.Log("Current Stamina wallrunning: " + currentStamina);
             }
         }
         //Mode Sliding
@@ -188,12 +188,12 @@ public class PlayerMovement : NetworkBehaviour
             if (currentStamina < staminaDrainRate * Time.deltaTime)
             {
                 currentStamina = 0;
-                Debug.Log("Current Stamina Sprinting depleted: " + currentStamina);
+                // Debug.Log("Current Stamina Sprinting depleted: " + currentStamina);
             }
             else
             {
                 currentStamina -= staminaDrainRate * Time.deltaTime;
-                Debug.Log("Current Stamina Sprinting: " + currentStamina);
+                // Debug.Log("Current Stamina Sprinting: " + currentStamina);
             }
         }
         //Mode - Running
@@ -215,7 +215,7 @@ public class PlayerMovement : NetworkBehaviour
                     currentStamina += staminaRechargeRate * Time.deltaTime;
                 }
                 
-                Debug.Log("Current Stamina running: " + currentStamina);
+                // Debug.Log("Current Stamina running: " + currentStamina);
             }
         }
         //Mode Air

@@ -35,5 +35,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/3.8.2023 Virus Tag.unity
     guid: 032c23709fb1b4f45be2f42046b2bf0d
+  - enabled: 1
+    path: Assets/Scenes/Will/Wills Virus Tag Multiplayer Map.unity
+    guid: e4de123c3a2245749b5252ba5d81a876
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 78ae546e284aa9a428c733d0f1647afd, type: 2}
