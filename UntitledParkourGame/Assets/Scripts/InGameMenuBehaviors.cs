@@ -6,10 +6,13 @@ using UnityEngine.InputSystem;
 public class InGameMenuBehaviors : MonoBehaviour
 {
     public GameObject theMenu;
+    public GameObject scoreBoard;
     public static bool isPaused;
+    private bool showingScore;
     void Start()
     {
-        theMenu.SetActive(true);   
+        theMenu.SetActive(true);
+        scoreBoard.SetActive(false);
     }
     void Update()
     {
@@ -25,6 +28,29 @@ public class InGameMenuBehaviors : MonoBehaviour
                 PauseGame();
             }
         }
+
+        if(Keyboard.current.tabKey.wasPressedThisFrame)
+        {
+            if(showingScore)
+            {
+                HideScore();
+            } else
+            {
+                ShowScore();
+            }
+        }
+    }
+
+    void ShowScore()
+    {
+        scoreBoard.SetActive(true);
+        showingScore= true;
+    }
+
+    void HideScore()
+    {
+        scoreBoard.SetActive(false);
+        showingScore = false;
     }
 
     public void PauseGame()

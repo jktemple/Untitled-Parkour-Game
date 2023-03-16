@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{44c2d5f4-eb8a-4a44-ada4-8e0bd9b5a368}">
+		<property name="assetPath">
+			<value>WallClimbing#1.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>6.896326530612245</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{49b71043-b28b-47b4-a144-0fd6df5599fb}</destination>
+		</relationship>
+	</object>
+</objects>
