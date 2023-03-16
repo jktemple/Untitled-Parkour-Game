@@ -150,6 +150,22 @@ public class PlayerMovement : NetworkBehaviour
             //cam.DoFov(40f);
             state = MovementState.climbing;
             moveSpeed = climbSpeed;
+
+            // sprint stamina handling
+            if (currentStamina < maxStamina)
+            {
+                // wont go above max
+                if (currentStamina + staminaRechargeRate * Time.deltaTime > maxStamina)
+                {
+                    currentStamina = maxStamina;
+                }
+                else
+                {
+                    currentStamina += WallrunningStaminaRechargeRate * Time.deltaTime;
+                }
+
+                //  Debug.Log("Current Stamina wallrunning: " + currentStamina);
+            }
         }
         //Mode Wallrunning
         else if (wallrunning)
@@ -170,7 +186,7 @@ public class PlayerMovement : NetworkBehaviour
                     currentStamina += WallrunningStaminaRechargeRate * Time.deltaTime;
                 }
 
-                Debug.Log("Current Stamina wallrunning: " + currentStamina);
+                //  Debug.Log("Current Stamina wallrunning: " + currentStamina);
             }
         }
         //Mode Sliding
@@ -183,7 +199,7 @@ public class PlayerMovement : NetworkBehaviour
         // Mode - sprinting
         else if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f) && currentStamina > 0)
         {
-            if(inputs.PlayerMovement.Sprint.triggered){cam.DoFov(45f); }
+            if(inputs.PlayerMovement.Sprint.triggered){cam.AddToFov(5f); }
             
             //Debug.Log("mode sprinting");
             state = MovementState.sprinting;
@@ -193,12 +209,12 @@ public class PlayerMovement : NetworkBehaviour
             if (currentStamina < staminaDrainRate * Time.deltaTime)
             {
                 currentStamina = 0;
-                Debug.Log("Current Stamina Sprinting depleted: " + currentStamina);
+                // Debug.Log("Current Stamina Sprinting depleted: " + currentStamina);
             }
             else
             {
                 currentStamina -= staminaDrainRate * Time.deltaTime;
-                Debug.Log("Current Stamina Sprinting: " + currentStamina);
+                // Debug.Log("Current Stamina Sprinting: " + currentStamina);
             }
         }
         //Mode - Running
@@ -220,7 +236,7 @@ public class PlayerMovement : NetworkBehaviour
                     currentStamina += staminaRechargeRate * Time.deltaTime;
                 }
                 
-                Debug.Log("Current Stamina running: " + currentStamina);
+                // Debug.Log("Current Stamina running: " + currentStamina);
             }
         }
         //Mode Air
@@ -242,7 +258,7 @@ public class PlayerMovement : NetworkBehaviour
         lastDesiredMoveSpeed = desiredMoveSpeed;
 
         if(state != MovementState.sprinting && state != MovementState.wallrunning){
-            cam.DoFov(40f);
+            cam.ResetFov();
         }
     }
     
