@@ -130,6 +130,19 @@ public class PlayerCam : NetworkBehaviour
         StartCoroutine(FOVChange(GameObject.Find("Main Camera").GetComponent<CinemachineVirtualCamera>(), endValue, 0.25f));
     }
 
+    public void AddToFov(float valueAdded)
+    {
+        StopCoroutine(nameof(FOVChange));
+        StartCoroutine(FOVChange(GameObject.Find("Main Camera").GetComponent<CinemachineVirtualCamera>(), fov + valueAdded, 0.25f));
+    }
+
+    public void ResetFov()
+    {
+        //Debug.Log(GameObject.Find("Main Camera").GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView);
+        StopCoroutine(nameof(FOVChange));
+        StartCoroutine(FOVChange(GameObject.Find("Main Camera").GetComponent<CinemachineVirtualCamera>(), fov, 0.25f));
+    }
+
     public void DoTilt(float endAngle)
     {
 
@@ -158,6 +171,7 @@ public class PlayerCam : NetworkBehaviour
 
     IEnumerator FOVChange(CinemachineVirtualCamera cam, float endValue, float time)
     {
+        // to access the class field 'fov' use 'this.fov'
         float fov = cam.m_Lens.FieldOfView;
         //float angle = Mathf.Abs((fov / 2) - fov);
         float t = 0.0f;

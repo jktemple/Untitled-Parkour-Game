@@ -199,7 +199,7 @@ public class WallRunning : NetworkBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         coyoteJumpAvailable = true;
         //apply camera effects
-        cam.DoFov(45f);
+        cam.AddToFov(5f);
         if (wallLeft) cam.DoTilt(-tiltValue);
         if(wallRight) cam.DoTilt(tiltValue);
     }
@@ -233,7 +233,7 @@ public class WallRunning : NetworkBehaviour
         //Debug.Break();
         pm.wallrunning = false;
         //reset camera effects
-        cam.DoFov(40f);
+        cam.ResetFov();
         cam.DoTilt(0f);
         coyoteTimer = coyoteTime;
     }

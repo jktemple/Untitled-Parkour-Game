@@ -178,7 +178,7 @@ public class PlayerMovement : NetworkBehaviour
         // Mode - sprinting
         else if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f) && currentStamina > 0)
         {
-            if(inputs.PlayerMovement.Sprint.triggered){cam.DoFov(45f); }
+            if(inputs.PlayerMovement.Sprint.triggered){cam.AddToFov(5f); }
             
             //Debug.Log("mode sprinting");
             state = MovementState.sprinting;
@@ -237,7 +237,7 @@ public class PlayerMovement : NetworkBehaviour
         lastDesiredMoveSpeed = desiredMoveSpeed;
 
         if(state != MovementState.sprinting && state != MovementState.wallrunning){
-            cam.DoFov(40f);
+            cam.ResetFov();
         }
     }
     
