@@ -12,6 +12,7 @@ public class InGameMenuBehaviors : MonoBehaviour
     void Start()
     {
         theMenu.SetActive(true);
+        if(scoreBoard!=null)
         scoreBoard.SetActive(false);
     }
     void Update()
@@ -43,12 +44,14 @@ public class InGameMenuBehaviors : MonoBehaviour
 
     void ShowScore()
     {
+        if(scoreBoard==null) return;
         scoreBoard.SetActive(true);
         showingScore= true;
     }
 
     void HideScore()
     {
+        if(scoreBoard==null) return;
         scoreBoard.SetActive(false);
         showingScore = false;
     }
