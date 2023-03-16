@@ -128,7 +128,10 @@ public class WallRunning : NetworkBehaviour
              //Start Wallrun here
              if(!pm.wallrunning)
             {
-                StartWallRun();
+                if(!cam.isQuickTurning())
+                {
+                    StartWallRun();
+                }
             }
 
              if(wallRunTimer > 0)

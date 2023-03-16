@@ -145,6 +145,22 @@ public class PlayerMovement : NetworkBehaviour
             //cam.DoFov(40f);
             state = MovementState.climbing;
             moveSpeed = climbSpeed;
+
+            // sprint stamina handling
+            if (currentStamina < maxStamina)
+            {
+                // wont go above max
+                if (currentStamina + staminaRechargeRate * Time.deltaTime > maxStamina)
+                {
+                    currentStamina = maxStamina;
+                }
+                else
+                {
+                    currentStamina += WallrunningStaminaRechargeRate * Time.deltaTime;
+                }
+
+                //  Debug.Log("Current Stamina wallrunning: " + currentStamina);
+            }
         }
         //Mode Wallrunning
         else if (wallrunning)

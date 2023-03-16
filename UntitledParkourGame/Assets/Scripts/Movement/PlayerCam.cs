@@ -10,7 +10,6 @@ using Cinemachine;
 
 public class PlayerCam : NetworkBehaviour
 {
-
     public GameObject thirdPersonMesh;
     public LayerMask invisible;
     // camera sensitivity
@@ -187,6 +186,7 @@ public class PlayerCam : NetworkBehaviour
     IEnumerator Rotate(float duration, float rotation)
     {
         quickTurning= true;
+        inputs.PlayerMovement.Disable();
         float startRotation = camHolder.eulerAngles.y;
         float endRotation = startRotation + rotation;
         float t = 0.0f;
@@ -198,7 +198,13 @@ public class PlayerCam : NetworkBehaviour
             orientation.eulerAngles = new Vector3(orientation.eulerAngles.x, yRotation, orientation.eulerAngles.z);
             yield return null;
         }
-        quickTurning= false;
+        inputs.PlayerMovement.Enable();
+        quickTurning = false;
+    }
+
+    public bool isQuickTurning()
+    {
+        return quickTurning;
     }
 
 
