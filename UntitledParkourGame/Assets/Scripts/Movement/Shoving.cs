@@ -16,13 +16,12 @@ public class Shoving : NetworkBehaviour
     public float shoveSpherecastRadius;
     public float shoveForce;
     public float shoveCooldown;
-    public int shoveScoreValue;
     private bool ableToShove;
     public NetworkVariable<bool> shoved = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public NetworkVariable<Vector3> shoveDir = new NetworkVariable<Vector3>();
     public NetworkVariable<bool> infected = new NetworkVariable<bool>();
     public NetworkVariable<int> score = new NetworkVariable<int>();
-    public NetworkVariable<string> playerName = new NetworkVariable<string>("Player ", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<int> playerNumber = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private bool inShoveLag = false;
 
     public Animator animator;
@@ -30,6 +29,8 @@ public class Shoving : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+
         pm = GetComponent<PlayerMovement>();
         rb = GetComponent<Rigidbody>();
         Debug.Log("shove RigidBody = " + rb);
@@ -39,7 +40,7 @@ public class Shoving : NetworkBehaviour
         ableToShove = true;
         shoved.Value = false;
         taggedHash = Animator.StringToHash("Tagged");
-        playerName.Value += FindObjectsOfType<Shoving>().Length;
+        playerNumber.Value = FindObjectsOfType<Shoving>().Length;
 
     }
 
@@ -78,10 +79,6 @@ public class Shoving : NetworkBehaviour
             s.shoveDir.Value = direction;
             if(infected)
             {
-                if (!s.infected.Value)
-                {
-                    score.Value += shoveScoreValue;
-                }
                 s.infected.Value = true;
             }
         }

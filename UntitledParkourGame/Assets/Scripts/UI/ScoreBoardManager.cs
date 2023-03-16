@@ -32,7 +32,7 @@ public class ScoreBoardManager : MonoBehaviour
         string s = "";
         foreach(Shoving shove in playerList)
         {
-            s += shove.playerName.Value + ": " + shove.score.Value + "\n";
+            s += "Player " + shove.playerNumber.Value + ": " + shove.score.Value + "\n";
         }
         t.SetText(s);
     }
