@@ -77,8 +77,8 @@ public class InGameMenuBehaviors : MonoBehaviour
 
     public void QuitGame()
     {
-        SceneManager.LoadScene("Main Menu");
         NetworkManager.Singleton.Shutdown();
+        SceneManager.LoadScene("Main Menu");
         Debug.Log("Quit");
     }
 }
