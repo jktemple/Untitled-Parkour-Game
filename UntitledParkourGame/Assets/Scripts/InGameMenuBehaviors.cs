@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -77,6 +78,7 @@ public class InGameMenuBehaviors : MonoBehaviour
     public void QuitGame()
     {
         SceneManager.LoadScene("Main Menu");
+        NetworkManager.Singleton.Shutdown();
         Debug.Log("Quit");
     }
 }
