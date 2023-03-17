@@ -89,7 +89,11 @@ MonoBehaviour:
   Path: ../FMOD/Audio#1/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638146004005703499
+<<<<<<< Updated upstream
+  lastModified: 638144342963174473
+=======
+  lastModified: 638140488934652415
+>>>>>>> Stashed changes
   FileSizes:
   - Name: Desktop
     Value: 984
@@ -169,7 +173,11 @@ MonoBehaviour:
   - {fileID: 5198120020711271293}
   StringsBanks:
   - {fileID: -3235552297381639776}
-  cacheTime: 638146004005723496
+<<<<<<< Updated upstream
+  cacheTime: 638144342963199577
+=======
+  cacheTime: 638140488934672432
+>>>>>>> Stashed changes
   cacheVersion: 131601
 --- !u!114 &168568941167664
 MonoBehaviour:
@@ -267,7 +275,11 @@ MonoBehaviour:
   Path: ../FMOD/Audio#1/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638146004005723496
+<<<<<<< Updated upstream
+  lastModified: 638144342963199577
+=======
+  lastModified: 638140488934672432
+>>>>>>> Stashed changes
   FileSizes:
   - Name: Desktop
     Value: 326240
@@ -287,7 +299,11 @@ MonoBehaviour:
   Path: ../FMOD/Audio#1/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638140491752261921
+<<<<<<< Updated upstream
+  lastModified: 638144338822985204
+=======
+  lastModified: 638140488934642407
+>>>>>>> Stashed changes
   FileSizes:
   - Name: Desktop
     Value: 670
