@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18154658, g: 0.22718708, b: 0.30740505, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154685, g: 0.22718762, b: 0.3074059, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7728,46 +7728,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <playerFootsteps>k__BackingField:
     Guid:
-      Data1: -1469094421
-      Data2: 1246359713
-      Data3: 1839137688
-      Data4: 137656414
-    Path: event:/WalkingV3
+      Data1: 98278837
+      Data2: 1129284030
+      Data3: -1112494941
+      Data4: 460133661
+    Path: event:/FootstepV4
   <playerSlidingsfx>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 1421281157
+      Data2: 1075080530
+      Data3: -377851505
+      Data4: -1583922881
+    Path: event:/WallrunningV1
   <playerWallrunningsfx>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 1421281157
+      Data2: 1075080530
+      Data3: -377851505
+      Data4: -1583922881
+    Path: event:/WallrunningV1
   <playerWallclimbingsfx>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -1756345146
+      Data2: 1332463483
+      Data3: -1847950938
+      Data4: -385006151
+    Path: event:/WallclimbingV1
   <playerBoostingsfx>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -594772484
+      Data2: 1274357222
+      Data3: 1963701409
+      Data4: 576034364
+    Path: event:/BoostingV1
   <playerJumpingsfx>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -594772484
+      Data2: 1274357222
+      Data3: 1963701409
+      Data4: 576034364
+    Path: event:/BoostingV1
 --- !u!1001 &1714036851
 PrefabInstance:
   m_ObjectHideFlags: 0
