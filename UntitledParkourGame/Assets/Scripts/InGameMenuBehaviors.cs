@@ -56,7 +56,7 @@ public class InGameMenuBehaviors : MonoBehaviour
     public void PauseGame()
     {
         theMenu.SetActive(true);
-        //Time.timeScale = 0f;
+        Time.timeScale = 0f;
         isPaused = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -64,7 +64,7 @@ public class InGameMenuBehaviors : MonoBehaviour
 
     public void ResumeGame() {
         theMenu.SetActive(false);
-        //Time.timeScale = 1f;
+        Time.timeScale = 1f;
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

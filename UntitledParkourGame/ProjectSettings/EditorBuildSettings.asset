@@ -8,35 +8,20 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: 5f30708bcab53664bbe17f5bb3a95e77
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
-    path: Assets/Scenes/Will/Will's Movement scene.unity
-    guid: 18451523de295a74482ef202b24e7b0c
-  - enabled: 0
-    path: Assets/Scenes/TutorialScene.unity
-    guid: fffe2a9e671d982469584271e3197746
-  - enabled: 0
-    path: Assets/Scenes/NetworkMovement.unity
-    guid: bd1db0f9d9817c440b7df51597b9167f
-  - enabled: 0
-    path: Assets/Scenes/Jia's Tutorial Track.unity
-    guid: 8973aedfcec1ec84d814993f18ece769
-  - enabled: 0
-    path: Assets/Scenes/2.23.2023 Playtest Scene.unity
-    guid: b060461cd47164f4bb75edf0b455e6fd
-  - enabled: 0
-    path: Assets/Scenes/VirusTagGameModeTesting.unity
-    guid: c1c0778d0a048784d98a3ca5fd349d31
   - enabled: 1
-    path: Assets/Scenes/Virus Tag Multiplayer Map.unity
-    guid: a0e7d00b052af784c9b5125251ffa9ba
-  - enabled: 0
+    path: Assets/Scenes/Credits.unity
+    guid: 5ba00b3752431024089bdc622f6024aa
+  - enabled: 1
+    path: Assets/Scenes/Settings.unity
+    guid: d12f4152fa59f3d46bfcbd34686fe1d8
+  - enabled: 1
+    path: Assets/Scenes/Level Select.unity
+    guid: 90d1e60cfc856e848baa8d08055a495d
+  - enabled: 1
     path: Assets/Scenes/3.8.2023 Virus Tag.unity
     guid: 032c23709fb1b4f45be2f42046b2bf0d
   - enabled: 1
-    path: Assets/Scenes/Will/Wills Virus Tag Multiplayer Map.unity
-    guid: e4de123c3a2245749b5252ba5d81a876
+    path: Assets/Scenes/Virus Tag Multiplayer Map.unity
+    guid: a0e7d00b052af784c9b5125251ffa9ba
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 78ae546e284aa9a428c733d0f1647afd, type: 2}
