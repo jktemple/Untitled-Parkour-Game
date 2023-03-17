@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -19,9 +20,9 @@ public class VirusTagGameModeManager : NetworkBehaviour
 
     public GameObject[] spawnPoints;
     Shoving[] shoveList;
-    Queue<Shoving> scoreQueue;
+    Queue<Shoving> scoreQueue = new Queue<Shoving>();
     Stack<Shoving> orderStack;
-   
+    public TextMeshProUGUI buttonText;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,7 +57,10 @@ public class VirusTagGameModeManager : NetworkBehaviour
             EndRound();
         }
         currentTime.Value = roundLengthTimer;
-        
+
+        if (!gameOngoing && buttonText!=null) buttonText.SetText("Start Game");
+        else if (!roundOngoing && buttonText != null) buttonText.SetText("Start Round");
+        else if(buttonText != null) buttonText.SetText("Round Ongoing");
     }
 
 
