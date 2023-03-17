@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class InGameMenuBehaviors : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class InGameMenuBehaviors : MonoBehaviour
     void Start()
     {
         theMenu.SetActive(true);
+        if(scoreBoard!=null)
         scoreBoard.SetActive(false);
     }
     void Update()
@@ -43,12 +45,14 @@ public class InGameMenuBehaviors : MonoBehaviour
 
     void ShowScore()
     {
+        if(scoreBoard==null) return;
         scoreBoard.SetActive(true);
         showingScore= true;
     }
 
     void HideScore()
     {
+        if(scoreBoard==null) return;
         scoreBoard.SetActive(false);
         showingScore = false;
     }
@@ -72,7 +76,7 @@ public class InGameMenuBehaviors : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+        SceneManager.LoadScene("Main Menu");
         Debug.Log("Quit");
     }
 }

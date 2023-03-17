@@ -13,7 +13,7 @@ public class NetworkManagerUI : MonoBehaviour
     private void Awake()
     {
         // lambda expressions , details in codemonkey's "what are delegates"
-        
+        if(serverButton!=null)
         serverButton.onClick.AddListener(() => {
             NetworkManager.Singleton.StartServer();
         });
@@ -21,7 +21,7 @@ public class NetworkManagerUI : MonoBehaviour
         hostButton.onClick.AddListener(() => {
             NetworkManager.Singleton.StartHost();
         });
-
+        if(clientButton!=null)
         clientButton.onClick.AddListener(() => {
             NetworkManager.Singleton.StartClient();
         });

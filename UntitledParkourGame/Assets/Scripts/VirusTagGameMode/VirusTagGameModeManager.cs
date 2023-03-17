@@ -26,7 +26,7 @@ public class VirusTagGameModeManager : NetworkBehaviour
     void Start()
     {
         //spawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
-
+        if(startRoundButton!=null)
         startRoundButton.onClick.AddListener(() => {
             if (!gameOngoing) StartGame();
             else if (!roundOngoing) StartRound();
