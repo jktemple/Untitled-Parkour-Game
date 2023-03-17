@@ -6,9 +6,10 @@ using FMODUnity;
 
 public class InGameMenu : MonoBehaviour
 {
-    public void PlayGame()
+    //load specific scene
+    public void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(sceneName);
     }
 
     public void QuitGame()
@@ -16,4 +17,5 @@ public class InGameMenu : MonoBehaviour
         Application.Quit();
         Debug.Log("Quit Worked");
     }
+
 }
