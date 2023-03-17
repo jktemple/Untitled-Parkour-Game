@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class InGameMenuBehaviors : MonoBehaviour
 {
@@ -75,7 +76,7 @@ public class InGameMenuBehaviors : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+        SceneManager.LoadScene("Main Menu");
         Debug.Log("Quit");
     }
 }
