@@ -6,10 +6,10 @@ using FMODUnity;
 
 public class InGameMenu : MonoBehaviour
 {
-    public void LoadScene(int number)
+    //load specific scene
+    public void LoadScene(string sceneName)
     {
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        SceneManager.LoadScene(number);
+        SceneManager.LoadScene(sceneName);
     }
 
     public void QuitGame()

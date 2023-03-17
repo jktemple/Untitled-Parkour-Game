@@ -18,21 +18,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Level Select.unity
     guid: 90d1e60cfc856e848baa8d08055a495d
   - enabled: 1
-    path: Assets/Scenes/3.8.2023 Virus Tag.unity
-    guid: 032c23709fb1b4f45be2f42046b2bf0d
-  - enabled: 1
-<<<<<<< HEAD
-    path: Assets/Scenes/Virus Tag Multiplayer Map.unity
-    guid: a0e7d00b052af784c9b5125251ffa9ba
-=======
-    path: Assets/Scenes/Will/Wills Virus Tag Multiplayer Map.unity
-    guid: e4de123c3a2245749b5252ba5d81a876
+    path: Assets/Scenes/Offline Scenes/Tutorial Scene Offline.unity
+    guid: d6452b161f5adee41b0ce26da42e1494
   - enabled: 1
     path: Assets/Scenes/Offline Scenes/Virus Tag Multiplayer Map Offline.unity
     guid: 6b7aa585c66a84344bcd591297591fd0
   - enabled: 1
-    path: Assets/Scenes/Offline Scenes/Tutorial Scene Offline.unity
-    guid: d6452b161f5adee41b0ce26da42e1494
->>>>>>> main
-  m_configObjects:
-    com.unity.input.settings: {fileID: 11400000, guid: 78ae546e284aa9a428c733d0f1647afd, type: 2}
+    path: Assets/Scenes/Virus Tag Multiplayer Map.unity
+    guid: a0e7d00b052af784c9b5125251ffa9ba
+  m_configObjects: {}
