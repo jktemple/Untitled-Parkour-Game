@@ -197,7 +197,8 @@ public class PlayerMovement : NetworkBehaviour
             desiredMoveSpeed = sprintSpeed;
         }
         // Mode - sprinting
-        else if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f) && currentStamina > 0)
+        // else if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f) && currentStamina > 0)
+        else if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f) && ((inputs.PlayerMovement.Movement.ReadValue<Vector2>().x != 0) || (inputs.PlayerMovement.Movement.ReadValue<Vector2>().y != 0)) && currentStamina > 0)
         {
             if(inputs.PlayerMovement.Sprint.triggered){cam.AddToFov(5f); }
             
