@@ -76,7 +76,7 @@ public class PlayerMovement : NetworkBehaviour
     public LayerMask whatIsGround;
     [Tooltip("Boolean that stores if the player is on the ground")]
     public bool grounded;
-    public bool moved;
+    private bool unpaused;
 
     [Header("Slope Handling")]
     [Tooltip("Defines the maximum angle of slope the player can move up")]
@@ -292,6 +292,8 @@ public class PlayerMovement : NetworkBehaviour
         playerBoostingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerBoostingsfx);
         playerJumpingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerJumpingsfx);
 
+        unpaused = true;
+
     }
 
     // Update is called once per frame
@@ -488,8 +490,16 @@ public class PlayerMovement : NetworkBehaviour
 
 
     private void UpdateSound(){
-    
-        if (rb.velocity.x != 0 && grounded){
+        if(Keyboard.current.escapeKey.wasPressedThisFrame || Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame || Keyboard.current.tabKey.wasPressedThisFrame){
+            if (unpaused == true){
+                unpaused = false;
+            }
+            else{
+                unpaused = true;
+            }
+        }
+
+        if ((rb.velocity.x != 0 || rb.velocity.y != 0) && grounded && unpaused){
             PLAYBACK_STATE playbackState;
             playerFootsteps.getPlaybackState (out playbackState);
          
