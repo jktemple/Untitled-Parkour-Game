@@ -7860,6 +7860,13 @@ MonoBehaviour:
       Data3: 1963701409
       Data4: 576034364
     Path: event:/BoostingV1
+  <BackgroundMusic>k__BackingField:
+    Guid:
+      Data1: 943134391
+      Data2: 1287528226
+      Data3: 1041060521
+      Data4: 2151314
+    Path: event:/BGM
 --- !u!1001 &1714036851
 PrefabInstance:
   m_ObjectHideFlags: 0
