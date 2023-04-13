@@ -69,7 +69,7 @@ MonoBehaviour:
   Path: ../FMOD/Audio#1/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638148685400152960
+  lastModified: 638170002834138247
   FileSizes:
   - Name: Desktop
     Value: 670
@@ -89,11 +89,38 @@ MonoBehaviour:
   Path: ../FMOD/Audio#1/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638148685402797156
+  lastModified: 638170002834313559
   FileSizes:
   - Name: Desktop
     Value: 803232
   Exists: 1
+--- !u!114 &-4662247952508666960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/FootstepV5
+  m_EditorClassIdentifier: 
+  Path: event:/FootstepV5
+  Guid:
+    Data1: 1905533879
+    Data2: 1174152603
+    Data3: -932905307
+    Data4: -1337652830
+  Banks:
+  - {fileID: 8631169011809319237}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1000
 --- !u!114 &-3899778856860331707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,10 +136,10 @@ MonoBehaviour:
   Path: ../FMOD/Audio#1/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638148685400152960
+  lastModified: 638170002834148292
   FileSizes:
   - Name: Desktop
-    Value: 1038
+    Value: 1082
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -138,12 +165,13 @@ MonoBehaviour:
   - {fileID: 8342953487041021285}
   - {fileID: 3969824276390240407}
   - {fileID: -8883427194918728522}
+  - {fileID: -4662247952508666960}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7502535042534277674}
   StringsBanks:
   - {fileID: -3899778856860331707}
-  cacheTime: 638148685402797156
+  cacheTime: 638170002834493890
   cacheVersion: 131601
 --- !u!114 &175148200014546022
 MonoBehaviour:
@@ -268,8 +296,8 @@ MonoBehaviour:
   Path: ../FMOD/Audio#1/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638148685402615926
+  lastModified: 638170002834493890
   FileSizes:
   - Name: Desktop
-    Value: 315232
+    Value: 335936
   Exists: 1

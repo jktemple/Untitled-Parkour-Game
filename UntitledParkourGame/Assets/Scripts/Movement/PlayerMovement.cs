@@ -54,7 +54,6 @@ public class PlayerMovement : NetworkBehaviour
     private EventInstance playerBoostingsfx;
     private EventInstance playerJumpingsfx;
 
-    // private EventInstance BackgroundMusic;
 
     [Header("Jumping")]
     [Tooltip("How much upwards force is applied to the player when they jump. Higher number = larger force and higher jumps")]
@@ -130,7 +129,7 @@ public class PlayerMovement : NetworkBehaviour
     private void stateHandler()
     {
         //Mode Freeze
-        if (freeze)
+        if (fre eze)
         {
             state = MovementState.freeze;
             rb.velocity= Vector3.zero;
@@ -294,7 +293,6 @@ public class PlayerMovement : NetworkBehaviour
         playerBoostingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerBoostingsfx);
         playerJumpingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerJumpingsfx);
 
-        // BackgroundMusic = AudioManager.instance.CreateInstance(FMODEvents.instance.BackgroundMusic);
 
         unpaused = true;
 
@@ -512,7 +510,7 @@ public class PlayerMovement : NetworkBehaviour
             }
         }
         else{
-            playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+            playerFootsteps.stop(STOP_MODE.IMMEDIATE);
         }
 
 
@@ -567,16 +565,5 @@ public class PlayerMovement : NetworkBehaviour
         }
 
 
-        // if(unpaused){
-        //     PLAYBACK_STATE playbackState;
-        //     playerFootsteps.getPlaybackState (out playbackState);
-         
-        //     if(playbackState.Equals(PLAYBACK_STATE.STOPPED)){
-        //         playerFootsteps.start();
-        //     }
-        //     else{
-        //         playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
-        //     }
-        // }
     }
 }
