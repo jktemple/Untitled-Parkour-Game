@@ -19,6 +19,7 @@ public class InGameMenu : MonoBehaviour
 
     void Start ()
     {
+        if (resolutionDropdown == null) return;
         resolutions = Screen.resolutions;
 
         resolutionDropdown.ClearOptions();

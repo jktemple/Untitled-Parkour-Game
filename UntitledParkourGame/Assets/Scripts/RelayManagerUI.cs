@@ -19,18 +19,21 @@ public class RelayManagerUI : MonoBehaviour
     [SerializeField] private Button hostButton;
     [SerializeField] private Button clientButton;
     [SerializeField] private int numConnections;
-    public GameObject menu;
+    InGameMenuBehaviors menu;
+
     private void Awake()
     {
         // lambda expressions , details in codemonkey's "what are delegates"
         hostButton.onClick.AddListener(() => {
             CreateRelay();
-            menu.SetActive(false);
+            menu = FindObjectOfType<InGameMenuBehaviors>();
+            menu.ResumeGame();
         });
 
         clientButton.onClick.AddListener(() => {
             JoinRelay(codeField.text);
-            menu.SetActive(false);
+            menu = FindObjectOfType<InGameMenuBehaviors>();
+            menu.ResumeGame();
         });
     }
 

@@ -60,6 +60,7 @@ public class InGameMenuBehaviors : MonoBehaviour
 
     public void PauseGame()
     {
+        if(isPaused) { return; }
         theMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
@@ -68,6 +69,7 @@ public class InGameMenuBehaviors : MonoBehaviour
     }
 
     public void ResumeGame() {
+        if(!isPaused) { return; }
         theMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
