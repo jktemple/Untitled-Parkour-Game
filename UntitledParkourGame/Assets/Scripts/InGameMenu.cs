@@ -11,6 +11,8 @@ public class InGameMenu : MonoBehaviour
 
     Resolution[] resolutions;
 
+
+    
     //load specific scene
     public void LoadScene(string sceneName)
     {
@@ -19,6 +21,8 @@ public class InGameMenu : MonoBehaviour
 
     void Start ()
     {
+        Application.targetFrameRate = 120;
+
         if (resolutionDropdown == null) return;
         resolutions = Screen.resolutions;
 
