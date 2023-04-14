@@ -129,7 +129,7 @@ public class PlayerMovement : NetworkBehaviour
     private void stateHandler()
     {
         //Mode Freeze
-        if (fre eze)
+        if (freeze)
         {
             state = MovementState.freeze;
             rb.velocity= Vector3.zero;
