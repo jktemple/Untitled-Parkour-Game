@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2227,6 +2227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 309fe0cccc5bc624eae181c6790f0229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resolutionDropdown: {fileID: 0}
 --- !u!114 &774558249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2496,6 +2497,13 @@ MonoBehaviour:
       Data3: 1963701409
       Data4: 576034364
     Path: event:/BoostingV1
+  <BackgroundMusic>k__BackingField:
+    Guid:
+      Data1: 943134391
+      Data2: 1287528226
+      Data3: 1041060521
+      Data4: 2151314
+    Path: event:/BGM
 --- !u!1 &830923054
 GameObject:
   m_ObjectHideFlags: 0
@@ -4350,6 +4358,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  buttonText: {fileID: 0}
 --- !u!4 &1435378258
 Transform:
   m_ObjectHideFlags: 0

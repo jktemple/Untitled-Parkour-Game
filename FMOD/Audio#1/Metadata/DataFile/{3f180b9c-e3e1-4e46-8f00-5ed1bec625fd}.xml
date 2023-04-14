@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="DataFile" id="{3f180b9c-e3e1-4e46-8f00-5ed1bec625fd}">
+		<property name="assetPath">
+			<value>BGM/UPG_BGM1.rpp-bak</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{49b71043-b28b-47b4-a144-0fd6df5599fb}</destination>
+		</relationship>
+	</object>
+</objects>
