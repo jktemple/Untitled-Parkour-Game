@@ -7889,25 +7889,25 @@ MonoBehaviour:
     Path: event:/FootstepV5
   <playerSlidingsfx>k__BackingField:
     Guid:
-      Data1: 1421281157
-      Data2: 1075080530
-      Data3: -377851505
-      Data4: -1583922881
-    Path: event:/WallrunningV1
-  <playerWallrunningsfx>k__BackingField:
-    Guid:
-      Data1: 1421281157
-      Data2: 1075080530
-      Data3: -377851505
-      Data4: -1583922881
-    Path: event:/WallrunningV1
-  <playerWallclimbingsfx>k__BackingField:
-    Guid:
       Data1: -1756345146
       Data2: 1332463483
       Data3: -1847950938
       Data4: -385006151
     Path: event:/WallclimbingV1
+  <playerWallrunningsfx>k__BackingField:
+    Guid:
+      Data1: -174659108
+      Data2: 1161800977
+      Data3: -813922114
+      Data4: -890521013
+    Path: event:/JumpingV5
+  <playerWallclimbingsfx>k__BackingField:
+    Guid:
+      Data1: -174659108
+      Data2: 1161800977
+      Data3: -813922114
+      Data4: -890521013
+    Path: event:/JumpingV5
   <playerBoostingsfx>k__BackingField:
     Guid:
       Data1: -594772484
@@ -7917,11 +7917,11 @@ MonoBehaviour:
     Path: event:/BoostingV1
   <playerJumpingsfx>k__BackingField:
     Guid:
-      Data1: -594772484
-      Data2: 1274357222
-      Data3: 1963701409
-      Data4: 576034364
-    Path: event:/BoostingV1
+      Data1: -174659108
+      Data2: 1161800977
+      Data3: -813922114
+      Data4: -890521013
+    Path: event:/JumpingV5
 --- !u!1001 &1714036851
 PrefabInstance:
   m_ObjectHideFlags: 0
