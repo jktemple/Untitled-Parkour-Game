@@ -2972,7 +2972,6 @@ MonoBehaviour:
   hostButton: {fileID: 1237830833}
   clientButton: {fileID: 1242263899}
   numConnections: 6
-  menu: {fileID: 487396570}
 --- !u!1 &652920741 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c0c6a34226d62db4e91e13b773f8d17c, type: 3}
@@ -7889,11 +7888,11 @@ MonoBehaviour:
     Path: event:/FootstepV5
   <playerSlidingsfx>k__BackingField:
     Guid:
-      Data1: -1756345146
-      Data2: 1332463483
-      Data3: -1847950938
-      Data4: -385006151
-    Path: event:/WallclimbingV1
+      Data1: -174659108
+      Data2: 1161800977
+      Data3: -813922114
+      Data4: -890521013
+    Path: event:/JumpingV5
   <playerWallrunningsfx>k__BackingField:
     Guid:
       Data1: -174659108
