@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Virus Tag Multiplayer Map.unity
     guid: a0e7d00b052af784c9b5125251ffa9ba
+  - enabled: 1
+    path: Assets/Scenes/NewMapTest.unity
+    guid: 57242215ea2e71c49a543e9be5c8e0b1
   m_configObjects: {}
