@@ -304,7 +304,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3072
   grounded: 0
-  moved: 0
   maxSlopeAngle: 40
   climpingScript: {fileID: 4194629557659296675}
   orientation: {fileID: 4194629556480869669}
@@ -573,7 +572,12 @@ MonoBehaviour:
     m_InternalValue: {x: 0, y: 0, z: 0}
   infected:
     m_InternalValue: 0
+  score:
+    m_InternalValue: 0
+  playerNumber:
+    m_InternalValue: 0
   animator: {fileID: 8288836907950098484}
+  sphereCastVisual: {fileID: 1622880343235674311, guid: ed55b521e17e71b4cbed7952c4449721, type: 3}
 --- !u!114 &7834839762717679324
 MonoBehaviour:
   m_ObjectHideFlags: 0

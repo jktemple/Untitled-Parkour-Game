@@ -26,6 +26,7 @@ public class Shoving : NetworkBehaviour
 
     public Animator animator;
     private int taggedHash;
+    public SphereCastVisual sphereCastVisual;
     // Start is called before the first frame update
     void Start()
     {
@@ -82,7 +83,16 @@ public class Shoving : NetworkBehaviour
                 s.infected.Value = true;
             }
         }
-
+        float diam = shoveSpherecastRadius * 2;
+        SphereCastVisual st = Instantiate<SphereCastVisual>(sphereCastVisual);
+        st.transform.position = position;
+        st.diameter = diam;
+        SphereCastVisual m = Instantiate<SphereCastVisual>(sphereCastVisual);
+        m.transform.position = position + direction.normalized * (shoveDistance / 2);
+        m.diameter = diam;
+        SphereCastVisual l = Instantiate<SphereCastVisual>(sphereCastVisual);
+        l.transform.position = position + direction.normalized * shoveDistance;
+        l.diameter = diam;
         //shoot a sphere cast out from the center of the player object in the direction of orientation
         //if it hits call the client rpc to the owner of that player object
 
