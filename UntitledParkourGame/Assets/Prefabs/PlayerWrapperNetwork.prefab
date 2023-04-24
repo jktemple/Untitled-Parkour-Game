@@ -578,6 +578,7 @@ MonoBehaviour:
     m_InternalValue: 0
   animator: {fileID: 8288836907950098484}
   sphereCastVisual: {fileID: 1622880343235674311, guid: ed55b521e17e71b4cbed7952c4449721, type: 3}
+  hitBoxVisuals: 0
 --- !u!114 &7834839762717679324
 MonoBehaviour:
   m_ObjectHideFlags: 0
