@@ -16,6 +16,8 @@ public class InGameMenuBehaviors : MonoBehaviour
         theMenu.SetActive(true);
         if(scoreBoard!=null)
         scoreBoard.SetActive(false);
+
+        Application.targetFrameRate = 120;
     }
     void Update()
     {
