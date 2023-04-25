@@ -562,9 +562,9 @@ MonoBehaviour:
   orientation: {fileID: 4194629556480869669}
   playerObject: {fileID: 4194629557247760180}
   rb: {fileID: 4194629557659296679}
-  shoveDistance: 1.75
+  shoveDistance: 3
   shoveSpherecastRadius: 0.6
-  shoveForce: 50
+  shoveForce: 200
   shoveCooldown: 0.25
   shoved:
     m_InternalValue: 0
@@ -578,7 +578,7 @@ MonoBehaviour:
     m_InternalValue: 0
   animator: {fileID: 8288836907950098484}
   sphereCastVisual: {fileID: 1622880343235674311, guid: ed55b521e17e71b4cbed7952c4449721, type: 3}
-  hitBoxVisuals: 0
+  hitBoxVisuals: 1
 --- !u!114 &7834839762717679324
 MonoBehaviour:
   m_ObjectHideFlags: 0
