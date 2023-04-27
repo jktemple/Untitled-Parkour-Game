@@ -333,3 +333,24 @@
 [LOG] SoundI::release                          : UPG_BGM1 (000001B8856F39C8)
 [LOG] SoundI::release                          :     UPG_BGM1 (000001B95D1C7678)
 [LOG] SoundI::release                          :     UPG_BGM1 (000001B8C7FA97B8)
+[LOG] SoundI::release                          : UPG_BGM1 (000001B95F454AC8)
+[LOG] SoundI::release                          :     UPG_BGM1 (000001B8B9E9F388)
+[LOG] SoundI::release                          :     UPG_BGM1 (000001B886A73738)
+[LOG] SoundI::release                          :  (000001B87C133E28)
+[LOG] SoundI::release                          :     Jumping#9 (000001B8B9D4BD48)
+[LOG] SoundI::release                          :  (000001B87C133CA8)
+[LOG] SoundI::release                          :     Sliding#2 (000001B985ECF2F8)
+[LOG] SoundI::release                          :  (000001B87C133228)
+[LOG] SoundI::release                          :     Footstep#10 (000001B8B9D4BB98)
+[LOG] SoundI::release                          :  (000001B87C133828)
+[LOG] SoundI::release                          :     Boosting#2 (000001B8B9D4B838)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
