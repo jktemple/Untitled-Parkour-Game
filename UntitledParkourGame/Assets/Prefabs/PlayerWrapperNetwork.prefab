@@ -563,7 +563,7 @@ MonoBehaviour:
   playerObject: {fileID: 4194629557247760180}
   rb: {fileID: 4194629557659296679}
   shoveDistance: 3
-  shoveSpherecastRadius: 0.6
+  shoveSpherecastRadius: 2
   shoveForce: 200
   shoveCooldown: 0.25
   shoved:

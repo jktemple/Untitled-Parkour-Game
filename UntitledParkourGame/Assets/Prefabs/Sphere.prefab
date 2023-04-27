@@ -154,5 +154,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a45bb57abc1db14d811e15d63a25011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  presistTimer: 5
+  presistTimer: 1
   diameter: 0
