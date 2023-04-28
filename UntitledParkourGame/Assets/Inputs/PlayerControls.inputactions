@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "WallGrab",
+                    "type": "Button",
+                    "id": "9d9bb7d7-78a0-4342-a5f1-b88c54229d3d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -375,7 +384,7 @@
                 {
                     "name": "",
                     "id": "322dbf39-9a61-4fa9-9c2c-c58d10b3930e",
-                    "path": "<Gamepad>/leftTrigger",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -413,6 +422,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Shove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f50f30b4-7e99-4625-bc29-b1e781202d17",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "WallGrab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3d8e797a-3d57-40a6-871b-f235becc2561",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "WallGrab",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

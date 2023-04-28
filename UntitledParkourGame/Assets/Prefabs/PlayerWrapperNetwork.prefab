@@ -230,6 +230,8 @@ GameObject:
   - component: {fileID: 8831393922231827525}
   - component: {fileID: 3333380843094471661}
   - component: {fileID: 7834839762717679324}
+  - component: {fileID: 3909188716020916071}
+  - component: {fileID: 3495815631204614950}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -563,7 +565,7 @@ MonoBehaviour:
   playerObject: {fileID: 4194629557247760180}
   rb: {fileID: 4194629557659296679}
   shoveDistance: 3
-  shoveSpherecastRadius: 0.6
+  shoveSpherecastRadius: 2
   shoveForce: 200
   shoveCooldown: 0.25
   shoved:
@@ -592,6 +594,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentStamina: 0
+--- !u!114 &3909188716020916071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4194629557659296703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5699b4d58c9e9b4195a48d76ccd24a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 2048
+--- !u!135 &3495815631204614950
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4194629557659296703}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.7
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4194629557836493343
 GameObject:
   m_ObjectHideFlags: 0

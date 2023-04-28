@@ -116,6 +116,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WallGrab"",
+                    ""type"": ""Button"",
+                    ""id"": ""9d9bb7d7-78a0-4342-a5f1-b88c54229d3d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -397,7 +406,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""322dbf39-9a61-4fa9-9c2c-c58d10b3930e"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -435,6 +444,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Shove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f50f30b4-7e99-4625-bc29-b1e781202d17"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""WallGrab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d8e797a-3d57-40a6-871b-f235becc2561"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""WallGrab"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -483,6 +514,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerMovement_Boost = m_PlayerMovement.FindAction("Boost", throwIfNotFound: true);
         m_PlayerMovement_QuickTurn = m_PlayerMovement.FindAction("QuickTurn", throwIfNotFound: true);
         m_PlayerMovement_Shove = m_PlayerMovement.FindAction("Shove", throwIfNotFound: true);
+        m_PlayerMovement_WallGrab = m_PlayerMovement.FindAction("WallGrab", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -552,6 +584,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_Boost;
     private readonly InputAction m_PlayerMovement_QuickTurn;
     private readonly InputAction m_PlayerMovement_Shove;
+    private readonly InputAction m_PlayerMovement_WallGrab;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -566,6 +599,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Boost => m_Wrapper.m_PlayerMovement_Boost;
         public InputAction @QuickTurn => m_Wrapper.m_PlayerMovement_QuickTurn;
         public InputAction @Shove => m_Wrapper.m_PlayerMovement_Shove;
+        public InputAction @WallGrab => m_Wrapper.m_PlayerMovement_WallGrab;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -605,6 +639,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Shove.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnShove;
                 @Shove.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnShove;
                 @Shove.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnShove;
+                @WallGrab.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnWallGrab;
+                @WallGrab.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnWallGrab;
+                @WallGrab.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnWallGrab;
             }
             m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -639,6 +676,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Shove.started += instance.OnShove;
                 @Shove.performed += instance.OnShove;
                 @Shove.canceled += instance.OnShove;
+                @WallGrab.started += instance.OnWallGrab;
+                @WallGrab.performed += instance.OnWallGrab;
+                @WallGrab.canceled += instance.OnWallGrab;
             }
         }
     }
@@ -673,5 +713,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnBoost(InputAction.CallbackContext context);
         void OnQuickTurn(InputAction.CallbackContext context);
         void OnShove(InputAction.CallbackContext context);
+        void OnWallGrab(InputAction.CallbackContext context);
     }
 }
