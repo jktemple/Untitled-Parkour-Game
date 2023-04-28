@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18154658, g: 0.22718708, b: 0.30740505, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154685, g: 0.22718762, b: 0.3074059, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5824,11 +5824,11 @@ MonoBehaviour:
     Path: event:/FootstepV4
   <playerSlidingsfx>k__BackingField:
     Guid:
-      Data1: 1421281157
-      Data2: 1075080530
-      Data3: -377851505
-      Data4: -1583922881
-    Path: event:/WallrunningV1
+      Data1: 53178743
+      Data2: 1259208122
+      Data3: -1426245959
+      Data4: -1897982819
+    Path: event:/SlidingV2
   <playerWallrunningsfx>k__BackingField:
     Guid:
       Data1: 1421281157
@@ -5857,6 +5857,13 @@ MonoBehaviour:
       Data3: 1963701409
       Data4: 576034364
     Path: event:/BoostingV1
+  <playerShovingsfx>k__BackingField:
+    Guid:
+      Data1: 1596703088
+      Data2: 1191669603
+      Data3: 2004206734
+      Data4: 1497414605
+    Path: event:/TaggingV1
 --- !u!1001 &1714036851
 PrefabInstance:
   m_ObjectHideFlags: 0
