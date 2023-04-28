@@ -304,7 +304,7 @@ MonoBehaviour:
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 3072
+    m_Bits: 199680
   grounded: 0
   maxSlopeAngle: 40
   climpingScript: {fileID: 4194629557659296675}
@@ -353,10 +353,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 67584
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 3072
+    m_Bits: 199680
   wallRunForce: 100
   maxWallRunTime: 1
   wallJumpUpForce: 7
@@ -390,7 +390,7 @@ MonoBehaviour:
   lg: {fileID: 4194629557659296700}
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 133120
   climbSpeed: 8
   maxClimbTime: 2.8
   minClimbTime: 0.15

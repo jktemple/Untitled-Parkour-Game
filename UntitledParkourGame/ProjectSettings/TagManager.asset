@@ -21,8 +21,8 @@ TagManager:
   - 
   - invisible
   - 
-  - 
-  - 
+  - WallRunnable
+  - WallClimbable
   - 
   - 
   - 
