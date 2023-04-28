@@ -9070,6 +9070,13 @@ MonoBehaviour:
       Data3: -813922114
       Data4: -890521013
     Path: event:/JumpingV5
+  <playerShovingsfx>k__BackingField:
+    Guid:
+      Data1: 1596703088
+      Data2: 1191669603
+      Data3: 2004206734
+      Data4: 1497414605
+    Path: event:/TaggingV1
 --- !u!1 &1714622140
 GameObject:
   m_ObjectHideFlags: 0
