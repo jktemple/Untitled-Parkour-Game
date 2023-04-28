@@ -112,6 +112,7 @@ public class PlayerMovement : NetworkBehaviour
         wallrunning,
         climbing,
         boosting,
+        wallGrabbing,
         air
     }
 
@@ -119,6 +120,7 @@ public class PlayerMovement : NetworkBehaviour
     public bool climbing;
     public bool freeze;
     public bool unlimited;
+    public bool wallGrabbing;
     public NetworkVariable<bool> boosting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
@@ -240,6 +242,11 @@ public class PlayerMovement : NetworkBehaviour
                 
                 // Debug.Log("Current Stamina running: " + currentStamina);
             }
+        }
+        else if (wallGrabbing)
+        {
+            state = MovementState.wallGrabbing;
+            rb.velocity = Vector3.zero;
         }
         //Mode Air
         else
