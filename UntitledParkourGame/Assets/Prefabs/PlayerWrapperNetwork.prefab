@@ -315,6 +315,7 @@ MonoBehaviour:
   climbing: 0
   freeze: 0
   unlimited: 0
+  wallGrabbing: 0
   boosting:
     m_InternalValue: 0
   restricted: 0
@@ -606,9 +607,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5699b4d58c9e9b4195a48d76ccd24a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whatIsWall:
-    serializedVersion: 2
-    m_Bits: 2048
+  cam: {fileID: 1762469498428457210}
+  orientation: {fileID: 4194629556480869669}
+  ForwardForce: 14
+  UpwardForce: 5
 --- !u!135 &3495815631204614950
 SphereCollider:
   m_ObjectHideFlags: 0

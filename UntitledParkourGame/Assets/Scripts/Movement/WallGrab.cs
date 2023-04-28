@@ -6,6 +6,14 @@ using UnityEngine.InputSystem;
 
 public class WallGrab : NetworkBehaviour
 {
+    [Header("Refrences")]
+    public Transform cam;
+    public Transform orientation;
+
+    [Header("Jump forces")]
+    public float ForwardForce;
+    public float UpwardForce;
+
     private Rigidbody rb;
     private PlayerMovement pm;
     private PlayerControls inputs;
@@ -19,6 +27,15 @@ public class WallGrab : NetworkBehaviour
         pm = GetComponent<PlayerMovement>();
         inputs = new PlayerControls();
         inputs.PlayerMovement.Enable();
+    }
+
+    private void Update()
+    {
+        if(pm.wallGrabbing && inputs.PlayerMovement.Jump.IsPressed())
+        {
+            pm.wallGrabbing = false;
+            Debug.Log("got here");
+        }
     }
 
     private void OnTriggerStay(Collider other)
