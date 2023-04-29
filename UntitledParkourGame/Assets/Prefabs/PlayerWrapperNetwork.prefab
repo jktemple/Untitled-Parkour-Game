@@ -460,7 +460,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   boostSphereCastDistance: 3
-  boostSphereCastRadius: 0.5
+  boostSphereCastRadius: 2
   boostYScale: 0.5
   boostForwardForce: 20
   boostUpwardForce: 20
