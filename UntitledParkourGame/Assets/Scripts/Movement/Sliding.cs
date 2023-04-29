@@ -11,6 +11,9 @@ public class Sliding : NetworkBehaviour
     public Transform orientation;
     [Tooltip("A Reference to PlayerObj GameObject, used to scale the player down when sliding")]
     public Transform playerObj;
+    public Transform cam;
+    public float ForwardForce;
+    public float UpwardForce;
     private Rigidbody rb;
     private PlayerMovement pm;
 
@@ -63,6 +66,9 @@ public class Sliding : NetworkBehaviour
         if (inputs.PlayerMovement.Slide.WasReleasedThisFrame() && pm.sliding)
         {
             Debug.Log("Stopping Slide because of Input");
+            Vector3 forceToApply = (cam.forward * ForwardForce) + (orientation.up * UpwardForce);
+            rb.velocity = Vector3.zero;
+            rb.AddForce(forceToApply, ForceMode.Impulse);
             StopSlide();
         }
 
