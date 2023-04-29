@@ -14,6 +14,13 @@ public class WallGrab : NetworkBehaviour
     public float ForwardForce;
     public float UpwardForce;
 
+    [Header("Exiting")]
+    [Tooltip("Bool that indicates if the player is currently exiting a wall")]
+    public bool exitingWall;
+    private float exitWallTime;
+    private float exitWallTimer;
+
+
     private Rigidbody rb;
     private PlayerMovement pm;
     private PlayerControls inputs;
@@ -27,6 +34,9 @@ public class WallGrab : NetworkBehaviour
         pm = GetComponent<PlayerMovement>();
         inputs = new PlayerControls();
         inputs.PlayerMovement.Enable();
+        exitingWall = false;
+        exitWallTime = 0.35f;
+        exitWallTimer = exitWallTime;
     }
 
     private void Update()
@@ -34,7 +44,22 @@ public class WallGrab : NetworkBehaviour
         if(pm.wallGrabbing && inputs.PlayerMovement.Jump.IsPressed())
         {
             pm.wallGrabbing = false;
-            Debug.Log("got here");
+            exitingWall = true;
+        }
+        if(exitingWall)
+        {
+            if (exitWallTimer > 0)
+            {
+
+                exitWallTimer -= Time.deltaTime;
+            }
+
+            if (exitWallTimer <= 0)
+            {
+                Debug.Log("got here");
+                exitingWall = false;
+                exitWallTimer = exitWallTime;
+            }
         }
     }
 
@@ -42,7 +67,7 @@ public class WallGrab : NetworkBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("whatIsWall"))
         {
-            if (inputs.PlayerMovement.WallGrab.IsInProgress())
+            if (inputs.PlayerMovement.WallGrab.IsInProgress() && !exitingWall)
             {
                 pm.wallGrabbing = true;
             }

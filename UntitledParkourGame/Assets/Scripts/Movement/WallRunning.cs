@@ -243,6 +243,8 @@ public class WallRunning : NetworkBehaviour
 
     private void WallJump(bool isCoyote)
     {
+        //to prevent during wallGrab jump
+        if (pm.wallGrabbing) return;
         //Debug.Log("Wall Jump");
         if (lg.holding || lg.exitingLedge) return;
         exitingWall = true;
