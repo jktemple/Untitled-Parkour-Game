@@ -196,6 +196,7 @@ public class WallRunning : NetworkBehaviour
 
     private void StartWallRun()
     {
+        if (pm.wallGrabbing) return;
         Debug.Log("Start Wall Run");
         pm.wallrunning = true;
         wallRunTimer = maxWallRunTime;

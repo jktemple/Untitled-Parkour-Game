@@ -152,6 +152,7 @@ public class Climbing : NetworkBehaviour
     private void StartClimbing()
     {
         //if(climbing) { return; }
+        if (pm.wallGrabbing) return;
         climbing = true;
         pm.climbing = true;
         lastWall = frontWallHit.transform;

@@ -9,17 +9,16 @@ public class WallGrab : NetworkBehaviour
     [Header("Refrences")]
     public Transform cam;
     public Transform orientation;
-
-    [Header("Jump forces")]
+    
+    [Header("Jump parameters")]
+    public float jumps;
     public float ForwardForce;
     public float UpwardForce;
 
-    [Header("Exiting")]
-    [Tooltip("Bool that indicates if the player is currently exiting a wall")]
-    public bool exitingWall;
+    private bool exitingWall;
     private float exitWallTime;
     private float exitWallTimer;
-
+    private float jumpsLeft;
 
     private Rigidbody rb;
     private PlayerMovement pm;
@@ -37,14 +36,24 @@ public class WallGrab : NetworkBehaviour
         exitingWall = false;
         exitWallTime = 0.35f;
         exitWallTimer = exitWallTime;
+        jumps = 1;
+        jumpsLeft = jumps;
     }
 
     private void Update()
     {
-        if(pm.wallGrabbing && inputs.PlayerMovement.Jump.IsPressed())
+        if(pm.grounded)
+        {
+            jumpsLeft = jumps;
+        }
+        if(pm.wallGrabbing && inputs.PlayerMovement.Jump.IsPressed() && jumpsLeft > 0)
         {
             pm.wallGrabbing = false;
             exitingWall = true;
+            jumpsLeft--;
+            Vector3 forceToApply = (cam.forward * ForwardForce) + (orientation.up * UpwardForce);
+            rb.velocity = Vector3.zero;
+            rb.AddForce(forceToApply, ForceMode.Impulse);
         }
         if(exitingWall)
         {
