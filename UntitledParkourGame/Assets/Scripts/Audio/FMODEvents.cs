@@ -22,6 +22,9 @@ public class FMODEvents : MonoBehaviour
 
     [field: Header("Jumping Sfx")]
     [field: SerializeField] public EventReference playerJumpingsfx { get; private set; }
+   
+    [field: Header("Shoving/Tagging Sfx")]
+    [field: SerializeField] public EventReference playerShovingsfx { get; private set; }
 
     public static FMODEvents instance{ get; private set; }
 
