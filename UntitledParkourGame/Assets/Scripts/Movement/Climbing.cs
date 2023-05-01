@@ -117,7 +117,7 @@ public class Climbing : NetworkBehaviour
             if (climbing) { StopClimbing(); }
         }
         //Debug.Log("Climb Jummp input =" + inputs.PlayerMovement.Jump.ReadValue<float>());
-        if((wallFront||wallBack) && inputs.PlayerMovement.Jump.triggered && climbJumpsLeft > 0 && !pm.wallrunning && !wr.exitingWall && minClimbTimer<=0)
+        if(((wallFront||wallBack) && inputs.PlayerMovement.Jump.triggered && climbJumpsLeft > 0 && !pm.wallrunning && !wr.exitingWall && minClimbTimer<=0) && !pm.wallGrabbing)
         {
             Debug.Log("Normal Clmb Jump");
             
@@ -152,6 +152,7 @@ public class Climbing : NetworkBehaviour
     private void StartClimbing()
     {
         //if(climbing) { return; }
+        if (pm.wallGrabbing) return;
         climbing = true;
         pm.climbing = true;
         lastWall = frontWallHit.transform;
@@ -174,7 +175,7 @@ public class Climbing : NetworkBehaviour
 
     private void ClimbJump(bool isBackwards)
     {
-        if (exitingWall) return;
+        if (exitingWall || pm.wallGrabbing) return;
         if (pm.grounded || lg.holding || lg.exitingLedge) return;
         exitingWall = true;
        exitWallTimer = exitWallTime;

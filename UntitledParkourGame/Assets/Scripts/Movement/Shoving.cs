@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+// using FMOD.Studio;
 
 public class Shoving : NetworkBehaviour
 {
@@ -27,6 +28,10 @@ public class Shoving : NetworkBehaviour
     public Animator animator;
     private int taggedHash;
     public SphereCastVisual sphereCastVisual;
+
+    public bool hitBoxVisuals;
+
+    // private EventInstance playerShovingsfx;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +68,7 @@ public class Shoving : NetworkBehaviour
             Invoke(nameof(ResetShoveLag), 0.5f);
         }
         animator.SetBool(taggedHash, infected.Value);
+        // updateSound();
 
     }
 
@@ -83,16 +89,22 @@ public class Shoving : NetworkBehaviour
                 s.infected.Value = true;
             }
         }
-        float diam = shoveSpherecastRadius * 2;
-        SphereCastVisual st = Instantiate<SphereCastVisual>(sphereCastVisual);
-        st.transform.position = position;
-        st.diameter = diam;
-        SphereCastVisual m = Instantiate<SphereCastVisual>(sphereCastVisual);
-        m.transform.position = position + direction.normalized * (shoveDistance / 2);
-        m.diameter = diam;
-        SphereCastVisual l = Instantiate<SphereCastVisual>(sphereCastVisual);
-        l.transform.position = position + direction.normalized * shoveDistance;
-        l.diameter = diam;
+        if (hitBoxVisuals)
+        {
+            float diam = shoveSpherecastRadius * 2;
+            SphereCastVisual st = Instantiate<SphereCastVisual>(sphereCastVisual);
+            st.transform.position = position;
+            st.diameter = diam;
+            SphereCastVisual m = Instantiate<SphereCastVisual>(sphereCastVisual);
+            m.transform.position = position + direction.normalized * (shoveDistance / 2);
+            m.diameter = diam;
+            SphereCastVisual l = Instantiate<SphereCastVisual>(sphereCastVisual);
+            l.transform.position = position + direction.normalized * shoveDistance;
+            l.diameter = diam;
+            st.GetComponent<NetworkObject>().Spawn();
+            m.GetComponent<NetworkObject>().Spawn();
+            l.GetComponent<NetworkObject>().Spawn();
+        }
         //shoot a sphere cast out from the center of the player object in the direction of orientation
         //if it hits call the client rpc to the owner of that player object
 
@@ -114,4 +126,20 @@ public class Shoving : NetworkBehaviour
     {
         inShoveLag = false;
     }
+
+    // audio sfx for after tag the player
+    // save for later implement
+    // private void updateSound(){
+    //     if(infected.Value == true){
+    //         PLAYBACK_STATE shovingplaybackState;
+    //         playerShovingsfx.getPlaybackState (out shovingplaybackState);
+         
+    //         if(shovingplaybackState.Equals(PLAYBACK_STATE.STOPPED)){
+    //             playerShovingsfx.start();
+    //         }
+    //     }
+    //     else{
+    //         playerShovingsfx.stop(STOP_MODE.ALLOWFADEOUT);
+    //     }
+    // }
 }

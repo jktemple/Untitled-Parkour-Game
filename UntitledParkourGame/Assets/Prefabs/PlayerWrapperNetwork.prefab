@@ -230,6 +230,8 @@ GameObject:
   - component: {fileID: 8831393922231827525}
   - component: {fileID: 3333380843094471661}
   - component: {fileID: 7834839762717679324}
+  - component: {fileID: 3909188716020916071}
+  - component: {fileID: 3495815631204614950}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -302,7 +304,7 @@ MonoBehaviour:
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 3072
+    m_Bits: 199680
   grounded: 0
   maxSlopeAngle: 40
   climpingScript: {fileID: 4194629557659296675}
@@ -313,6 +315,7 @@ MonoBehaviour:
   climbing: 0
   freeze: 0
   unlimited: 0
+  wallGrabbing: 0
   boosting:
     m_InternalValue: 0
   restricted: 0
@@ -350,10 +353,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 67584
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 3072
+    m_Bits: 199680
   wallRunForce: 100
   maxWallRunTime: 1
   wallJumpUpForce: 7
@@ -387,7 +390,7 @@ MonoBehaviour:
   lg: {fileID: 4194629557659296700}
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 133120
   climbSpeed: 8
   maxClimbTime: 2.8
   minClimbTime: 0.15
@@ -457,7 +460,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   boostSphereCastDistance: 3
-  boostSphereCastRadius: 0.5
+  boostSphereCastRadius: 2
   boostYScale: 0.5
   boostForwardForce: 20
   boostUpwardForce: 20
@@ -562,9 +565,9 @@ MonoBehaviour:
   orientation: {fileID: 4194629556480869669}
   playerObject: {fileID: 4194629557247760180}
   rb: {fileID: 4194629557659296679}
-  shoveDistance: 1.75
-  shoveSpherecastRadius: 0.6
-  shoveForce: 50
+  shoveDistance: 3
+  shoveSpherecastRadius: 2
+  shoveForce: 200
   shoveCooldown: 0.25
   shoved:
     m_InternalValue: 0
@@ -578,6 +581,7 @@ MonoBehaviour:
     m_InternalValue: 0
   animator: {fileID: 8288836907950098484}
   sphereCastVisual: {fileID: 1622880343235674311, guid: ed55b521e17e71b4cbed7952c4449721, type: 3}
+  hitBoxVisuals: 1
 --- !u!114 &7834839762717679324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -591,6 +595,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentStamina: 0
+--- !u!114 &3909188716020916071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4194629557659296703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5699b4d58c9e9b4195a48d76ccd24a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 1762469498428457210}
+  orientation: {fileID: 4194629556480869669}
+  jumps: 1
+  ForwardForce: 14
+  UpwardForce: 5
+--- !u!135 &3495815631204614950
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4194629557659296703}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.7
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4194629557836493343
 GameObject:
   m_ObjectHideFlags: 0
