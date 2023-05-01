@@ -127,16 +127,16 @@ public class PlayerCam : NetworkBehaviour
         {
             yRotation += 180;
             //Debug.Log(inputs.PlayerMovement.HorizontalLook.ReadValue<float>());
-            if (inputs.PlayerMovement.HorizontalLook.ReadValue<float>() < 0f) DoQuickTurn(-180f);
-            else DoQuickTurn(180f);
+            if (inputs.PlayerMovement.HorizontalLook.ReadValue<float>() < 0f) DoQuickTurn(quickTurnTime,-180f);
+            else DoQuickTurn(quickTurnTime, 180f);
         } else if (pm.wallrunning && wr.wallRight)
         {
-            yRotation += 90f;
-            DoQuickTurn(90f);
+            yRotation -= 90f;
+            DoQuickTurn(quickTurnTime*0.75f, -90f);
         } else if(pm.wallrunning && wr.wallLeft)
         {
-            yRotation -= 90f;
-            DoQuickTurn(-90f);
+            yRotation += 90f;
+            DoQuickTurn(quickTurnTime*0.75f, 90f);
         }
         
     }
@@ -181,10 +181,10 @@ public class PlayerCam : NetworkBehaviour
         }
     }
 
-    void DoQuickTurn(float rotation)
+    void DoQuickTurn(float time, float rotation)
     {
         StopCoroutine("Rotate");
-        StartCoroutine(Rotate(quickTurnTime, rotation));
+        StartCoroutine(Rotate(time, rotation));
     }
 
     IEnumerator FOVChange(CinemachineVirtualCamera cam, float endValue, float time)
@@ -212,7 +212,7 @@ public class PlayerCam : NetworkBehaviour
         while(t < duration)
         {
             t += Time.deltaTime;
-            float yRotation = Mathf.Lerp(startRotation, endRotation, t / duration) % 360.0f;
+            float yRotation = Mathf.LerpAngle(startRotation, endRotation, t / duration) % 360.0f;
             camHolder.eulerAngles = new Vector3(transform.eulerAngles.x, yRotation, camHolder.eulerAngles.z);
             orientation.eulerAngles = new Vector3(orientation.eulerAngles.x, yRotation, orientation.eulerAngles.z);
             yield return null;

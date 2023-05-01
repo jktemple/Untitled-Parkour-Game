@@ -364,6 +364,8 @@ MonoBehaviour:
   jumpKey: 32
   wallCheckDistance: 0.7
   minJumpHeight: 1.3
+  wallLeft: 0
+  wallRight: 0
   exitingWall: 0
   exitWallTime: 0.35
   useGravity: 0
@@ -747,6 +749,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thirdPersonMesh: {fileID: 3363099548092123380}
+  wr: {fileID: 4194629557659296674}
+  pm: {fileID: 4194629557659296672}
   invisible:
     serializedVersion: 2
     m_Bits: 16384
