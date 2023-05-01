@@ -38,8 +38,8 @@ public class WallRunning : NetworkBehaviour
     public float minJumpHeight;
     private RaycastHit leftWallHit;
     private RaycastHit rightWallHit;
-    private bool wallLeft;
-    private bool wallRight;
+    public bool wallLeft;
+    public bool wallRight;
 
     [Header("Exiting")]
     [Tooltip("Bool that indicates if the player is currently exiting a wall")]
