@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+// using FMOD.Studio;
 
 public class Shoving : NetworkBehaviour
 {
@@ -29,6 +30,8 @@ public class Shoving : NetworkBehaviour
     public SphereCastVisual sphereCastVisual;
 
     public bool hitBoxVisuals;
+
+    // private EventInstance playerShovingsfx;
     // Start is called before the first frame update
     void Start()
     {
@@ -65,6 +68,7 @@ public class Shoving : NetworkBehaviour
             Invoke(nameof(ResetShoveLag), 0.5f);
         }
         animator.SetBool(taggedHash, infected.Value);
+        // updateSound();
 
     }
 
@@ -122,4 +126,20 @@ public class Shoving : NetworkBehaviour
     {
         inShoveLag = false;
     }
+
+    // audio sfx for after tag the player
+    // save for later implement
+    // private void updateSound(){
+    //     if(infected.Value == true){
+    //         PLAYBACK_STATE shovingplaybackState;
+    //         playerShovingsfx.getPlaybackState (out shovingplaybackState);
+         
+    //         if(shovingplaybackState.Equals(PLAYBACK_STATE.STOPPED)){
+    //             playerShovingsfx.start();
+    //         }
+    //     }
+    //     else{
+    //         playerShovingsfx.stop(STOP_MODE.ALLOWFADEOUT);
+    //     }
+    // }
 }
