@@ -21,7 +21,7 @@ public class WallGrab : NetworkBehaviour
     private float jumpsLeft;
 
     private Rigidbody rb;
-    private PlayerMovement pm;
+    public PlayerMovement pm;
     private PlayerControls inputs;
     
 
@@ -30,7 +30,7 @@ public class WallGrab : NetworkBehaviour
     {
         if (!IsOwner) return;
         rb = GetComponent<Rigidbody>();
-        pm = GetComponent<PlayerMovement>();
+        //pm = GetComponent<PlayerMovement>();
         inputs = new PlayerControls();
         inputs.PlayerMovement.Enable();
         exitingWall = false;
