@@ -5,15 +5,15 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PushObject : NetworkBehaviour
+public class FakePushObject : MonoBehaviour
 {
     // Start is called before the first frame update
     //public NetworkVariable<Vector3> direction = new NetworkVariable<Vector3>(Vector3.zero, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     //public NetworkVariable<float> distance = new NetworkVariable<float>();
     public float distance;
     //public NetworkVariable<bool> isActive = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-    public NetworkVariable<bool> isInfected = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-    public NetworkVariable<ulong> id = new NetworkVariable<ulong>();
+    //public NetworkVariable<bool> isInfected = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    //public NetworkVariable<ulong> id = new NetworkVariable<ulong>();
     //public float persistTime;
     //public float hitboxActiveTime;
     public float speed;
@@ -26,7 +26,7 @@ public class PushObject : NetworkBehaviour
     //private float startTime;
     //private float journeyLength;
     Rigidbody rb;
-    public override void OnNetworkSpawn()
+    void Start()
     {
 
         //activeTimer = 0; 
@@ -73,13 +73,7 @@ public class PushObject : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        NetworkObject no = other.gameObject.GetComponent<NetworkObject>();
-        if (no != null && OwnerClientId != no.OwnerClientId)
-        {
-            Debug.Log("Destroyed via collision");
-            rb.velocity = Vector3.zero;
-            Destroy(gameObject);
-        }
+        
         
     }
     

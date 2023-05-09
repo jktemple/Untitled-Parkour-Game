@@ -585,6 +585,8 @@ MonoBehaviour:
   animator: {fileID: 8288836907950098484}
   sphereCastVisual: {fileID: 1622880343235674311, guid: ed55b521e17e71b4cbed7952c4449721, type: 3}
   pushObjectPrefab: {fileID: 2727992841750279774, guid: 5fcb1b511344e2746a0f6088f192d94a, type: 3}
+  fakePush: {fileID: 5431790117921327270, guid: 26f478227f7086e4d885be9f15cd7ef0, type: 3}
+  camOffset: 1
   hitBoxVisuals: 0
   sphereCast: 0
 --- !u!114 &7834839762717679324

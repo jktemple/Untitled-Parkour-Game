@@ -35,7 +35,10 @@ public class Shoving : NetworkBehaviour
     private int taggedHash;
     public SphereCastVisual sphereCastVisual;
     public PushObject pushObjectPrefab;
+    public FakePushObject fakePush;
 
+
+    public float camOffset;
     public bool hitBoxVisuals;
     public bool sphereCast;
 
@@ -71,8 +74,11 @@ public class Shoving : NetworkBehaviour
                 Invoke(nameof(ResetShove), shoveCooldown);
             } else
             {
-                SpawnPushObjectServerRPC(playerObject.position + orientation.forward * 0.7f, orientation.forward, infected.Value);
-                
+                Instantiate<FakePushObject>(fakePush, playerObject.position + orientation.forward*camOffset, Quaternion.LookRotation(orientation.forward));
+                SpawnPushObjectServerRPC(playerObject.position + orientation.forward*0.7f, orientation.forward, infected.Value);
+                ableToShove = false;
+                Invoke(nameof(ResetShove), shoveCooldown);
+
             }
         }
         if(shoved.Value && !inShoveLag)
@@ -91,10 +97,11 @@ public class Shoving : NetworkBehaviour
     void SpawnPushObjectServerRPC(Vector3 position, Vector3 direction, bool i, ServerRpcParams serverRpcParams = default)
     {
         //Debug.Log("Spawning Object Position = " + position + " Direction = " + direction);
-        PushObject p = Instantiate<PushObject>(pushObjectPrefab, position, Quaternion.LookRotation(direction));
+        
+        PushObject p = Instantiate<PushObject>(pushObjectPrefab, position + direction, Quaternion.LookRotation(direction));
         var clientId = serverRpcParams.Receive.SenderClientId;
-        p.GetComponent<NetworkObject>().SpawnWithOwnership(clientId);
-        //p.direction.Value = direction;
+        p.GetComponent<NetworkObject>().Spawn();
+        p.id.Value = clientId;
         //p.distance.Value = shoveDistance;
         p.isInfected.Value = i;
         
@@ -168,15 +175,23 @@ public class Shoving : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!IsServer)
+        {
+            return;
+        }
+
         if (other.CompareTag("PushObject"))
         {
             PushObject p = other.gameObject.GetComponent<PushObject>();
-            if ( OwnerClientId != p.OwnerClientId && !inShoveLag)
+            if (p == null) { return; }
+            if (this.OwnerClientId != p.id.Value)
             {
-                rb.AddForce(p.transform.forward * shoveForce, ForceMode.Impulse);
-                inShoveLag = true;
-                Invoke(nameof(ResetShoveLag), 0.5f);
-                makeInfectedServerRPC(p.isInfected.Value);
+                shoved.Value = true;
+                shoveDir.Value = p.transform.forward;
+                if (p.isInfected.Value)
+                {
+                    infected.Value = true;
+                }
             }
         }
     }
