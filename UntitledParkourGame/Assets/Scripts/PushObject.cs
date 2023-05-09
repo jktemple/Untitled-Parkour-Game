@@ -18,7 +18,8 @@ public class PushObject : NetworkBehaviour
     //public float hitboxActiveTime;
     public float speed;
 
-    
+    public LayerMask collisionMask;
+
     //private float activeTimer;
     //private float persistTimer;
     private Vector3 startMarker;
@@ -73,14 +74,13 @@ public class PushObject : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        NetworkObject no = other.gameObject.GetComponent<NetworkObject>();
-        if (no != null && OwnerClientId != no.OwnerClientId)
+        GameObject go = other.gameObject;
+        if (collisionMask == (collisionMask | (1 << go.layer)))
         {
-            Debug.Log("Destroyed via collision");
+            //Debug.Log("Destroying");
             rb.velocity = Vector3.zero;
-            Destroy(gameObject);
+            Destroy(gameObject); 
         }
-        
     }
     
     /*

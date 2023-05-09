@@ -18,6 +18,7 @@ public class FakePushObject : MonoBehaviour
     //public float hitboxActiveTime;
     public float speed;
 
+    public LayerMask collisionMask;
     
     //private float activeTimer;
     //private float persistTimer;
@@ -73,7 +74,14 @@ public class FakePushObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        //Debug.Log("OnTriggerEnter");
+        GameObject go = other.gameObject;   
+        if(collisionMask == (collisionMask | (1 << go.layer)))
+        {
+            //Debug.Log("Destroying");
+            rb.velocity = Vector3.zero;
+            Destroy(gameObject);
+        }
         
     }
     

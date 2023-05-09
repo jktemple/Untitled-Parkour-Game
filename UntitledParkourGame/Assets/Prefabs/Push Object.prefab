@@ -120,6 +120,9 @@ MonoBehaviour:
   id:
     m_InternalValue: 0
   speed: 50
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 198656
 --- !u!114 &2727992841750279843
 MonoBehaviour:
   m_ObjectHideFlags: 0

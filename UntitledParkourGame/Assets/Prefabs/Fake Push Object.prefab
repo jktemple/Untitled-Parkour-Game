@@ -129,3 +129,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distance: 4.825
   speed: 50
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 198656

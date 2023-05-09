@@ -193,6 +193,7 @@ public class Shoving : NetworkBehaviour
                     infected.Value = true;
                 }
             }
+            Destroy(other.gameObject);
         }
     }
     
