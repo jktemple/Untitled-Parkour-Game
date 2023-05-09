@@ -197,7 +197,7 @@ public class PlayerMovement : NetworkBehaviour
         {
             //cam.DoFov(40f);
             state = MovementState.sliding;
-            desiredMoveSpeed = sprintSpeed;
+            desiredMoveSpeed = runSpeed;
         }
         // Mode - sprinting
         // else if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f) && currentStamina > 0)
@@ -353,6 +353,14 @@ public class PlayerMovement : NetworkBehaviour
         if(jumpInput && readyToJump && grounded)
         {
             readyToJump = false;
+            if(currentStamina >= 10)
+            {
+                currentStamina -= 10;
+            }
+            else
+            {
+                currentStamina = 0;
+            }
 
             PLAYBACK_STATE jumpingplaybackState;
             playerJumpingsfx.getPlaybackState (out jumpingplaybackState);
