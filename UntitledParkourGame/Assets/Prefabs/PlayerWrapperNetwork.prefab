@@ -321,6 +321,7 @@ MonoBehaviour:
   restricted: 0
   wallrunning: 0
   boostTest: 0
+  groundCoyoteTime: 0.2
 --- !u!114 &4194629557659296673
 MonoBehaviour:
   m_ObjectHideFlags: 0
