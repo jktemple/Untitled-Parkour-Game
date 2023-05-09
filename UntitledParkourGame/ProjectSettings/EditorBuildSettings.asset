@@ -5,22 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Main Menu.unity
     guid: 5f30708bcab53664bbe17f5bb3a95e77
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Credits.unity
     guid: 5ba00b3752431024089bdc622f6024aa
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Settings.unity
     guid: d12f4152fa59f3d46bfcbd34686fe1d8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level Select.unity
     guid: 90d1e60cfc856e848baa8d08055a495d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Offline Scenes/Tutorial Scene Offline.unity
     guid: d6452b161f5adee41b0ce26da42e1494
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Offline Scenes/Virus Tag Multiplayer Map Offline.unity
     guid: 6b7aa585c66a84344bcd591297591fd0
   - enabled: 0

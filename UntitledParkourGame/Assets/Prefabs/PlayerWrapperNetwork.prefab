@@ -567,12 +567,12 @@ MonoBehaviour:
   playersMask:
     serializedVersion: 2
     m_Bits: 64
-  orientation: {fileID: 4194629556480869669}
+  orientation: {fileID: 1762469498428457210}
   playerObject: {fileID: 4194629557247760180}
   rb: {fileID: 4194629557659296679}
   shoveDistance: 3
   shoveSpherecastRadius: 2
-  shoveForce: 200
+  shoveForce: 50
   shoveCooldown: 0.25
   shoved:
     m_InternalValue: 0
@@ -584,9 +584,14 @@ MonoBehaviour:
     m_InternalValue: 0
   playerNumber:
     m_InternalValue: 0
+  pushObject: 1
   animator: {fileID: 8288836907950098484}
   sphereCastVisual: {fileID: 1622880343235674311, guid: ed55b521e17e71b4cbed7952c4449721, type: 3}
-  hitBoxVisuals: 1
+  pushObjectPrefab: {fileID: 2727992841750279774, guid: 5fcb1b511344e2746a0f6088f192d94a, type: 3}
+  fakePush: {fileID: 5431790117921327270, guid: 26f478227f7086e4d885be9f15cd7ef0, type: 3}
+  camOffset: 1
+  hitBoxVisuals: 0
+  sphereCast: 0
 --- !u!114 &7834839762717679324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,6 +622,7 @@ MonoBehaviour:
   jumps: 1
   ForwardForce: 14
   UpwardForce: 5
+  pm: {fileID: 4194629557659296672}
 --- !u!135 &3495815631204614950
 SphereCollider:
   m_ObjectHideFlags: 0
