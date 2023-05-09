@@ -11,6 +11,11 @@ public class Sliding : NetworkBehaviour
     public Transform orientation;
     [Tooltip("A Reference to PlayerObj GameObject, used to scale the player down when sliding")]
     public Transform playerObj;
+    public Transform cam;
+    //*** these don't have a satisfying effect so they're set to 0
+    public float ForwardForce;
+    public float UpwardForce;
+    //*** 
     private Rigidbody rb;
     private PlayerMovement pm;
 
@@ -18,6 +23,7 @@ public class Sliding : NetworkBehaviour
     [Tooltip("How long the player is able to slide in seconds")]
     public float maxSlideTime;
     [Tooltip("How much force is applied to the player when they begin sliding")]
+    //this doesn't have a satisfying effect so it's set to 0;
     public float slideForce;
     private float slideTimer;
     [Tooltip("Value from 0 to 1, determines how much the player is scaled down when they slide")]
@@ -63,6 +69,11 @@ public class Sliding : NetworkBehaviour
         if (inputs.PlayerMovement.Slide.WasReleasedThisFrame() && pm.sliding)
         {
             Debug.Log("Stopping Slide because of Input");
+            //*** this doesn't have a satisfying effect so the revelant inspect values are set to 0;
+            Vector3 forceToApply = (cam.forward * ForwardForce) + (orientation.up * UpwardForce);
+            rb.velocity = Vector3.zero;
+            rb.AddForce(forceToApply, ForceMode.Impulse);
+            //***
             StopSlide();
         }
 
@@ -104,12 +115,14 @@ public class Sliding : NetworkBehaviour
         //sliding noramally
         if (!pm.OnSlope() || rb.velocity.y > -0.1f)
         {
+            //does nothing bc slide force is 0
             rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Force);
             slideTimer -= Time.deltaTime;
         }
         //sliding downward
         else
         {
+            //does nothing bc slide force is 0
             rb.AddForce(pm.GetSlopeMoveDirection(inputDirection) * slideForce, ForceMode.Force);
         }
 

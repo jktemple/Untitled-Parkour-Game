@@ -197,7 +197,7 @@ public class PlayerMovement : NetworkBehaviour
         {
             //cam.DoFov(40f);
             state = MovementState.sliding;
-            desiredMoveSpeed = sprintSpeed;
+            desiredMoveSpeed = runSpeed;
         }
         // Mode - sprinting
         // else if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f) && currentStamina > 0)
@@ -302,16 +302,25 @@ public class PlayerMovement : NetworkBehaviour
 
 
         unpaused = true;
-
+        groundCoyoteTimer = groundCoyoteTime;
     }
 
+
+    public float groundCoyoteTime;
+    private float groundCoyoteTimer;
     // Update is called once per frame
     void Update()
     {
         if (!IsOwner) return;
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-
+        if (!grounded && groundCoyoteTimer > 0)
+        {
+            groundCoyoteTimer -= Time.deltaTime;
+        } else if(grounded)
+        {
+            groundCoyoteTimer = groundCoyoteTime;
+        }
         MyInput();
         SpeedControl();
         stateHandler();
@@ -350,9 +359,22 @@ public class PlayerMovement : NetworkBehaviour
         //Debug.Log("Horizontal Input = " + horizontalInput + " , Verticle Input = " + verticalInput);
         // when to jump
         bool jumpInput = inputs.PlayerMovement.Jump.triggered;
-        if(jumpInput && readyToJump && grounded)
+        if(jumpInput && readyToJump && (grounded || groundCoyoteTimer > 0))
         {
+            if (!grounded)
+            {
+                Debug.Log("Coyote Time Jump");
+            }
+
             readyToJump = false;
+            if(currentStamina >= 10)
+            {
+                currentStamina -= 10;
+            }
+            else
+            {
+                currentStamina = 0;
+            }
 
             PLAYBACK_STATE jumpingplaybackState;
             playerJumpingsfx.getPlaybackState (out jumpingplaybackState);

@@ -38,8 +38,8 @@ public class WallRunning : NetworkBehaviour
     public float minJumpHeight;
     private RaycastHit leftWallHit;
     private RaycastHit rightWallHit;
-    private bool wallLeft;
-    private bool wallRight;
+    public bool wallLeft;
+    public bool wallRight;
 
     [Header("Exiting")]
     [Tooltip("Bool that indicates if the player is currently exiting a wall")]
@@ -196,6 +196,7 @@ public class WallRunning : NetworkBehaviour
 
     private void StartWallRun()
     {
+        if (pm.wallGrabbing) return;
         Debug.Log("Start Wall Run");
         pm.wallrunning = true;
         wallRunTimer = maxWallRunTime;
@@ -243,6 +244,8 @@ public class WallRunning : NetworkBehaviour
 
     private void WallJump(bool isCoyote)
     {
+        //to prevent during wallGrab jump
+        if (pm.wallGrabbing) return;
         //Debug.Log("Wall Jump");
         if (lg.holding || lg.exitingLedge) return;
         exitingWall = true;

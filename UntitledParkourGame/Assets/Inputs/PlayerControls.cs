@@ -153,7 +153,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b6258328-3969-4c8b-bcb0-5f6af5424082"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -197,7 +197,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""6a81bde7-95ad-4ec2-ac84-b41d74eb5d92"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a235ec7f-dc20-4889-bdf0-8b6343c1d522"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -427,6 +438,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""72c25f63-3b2e-4c4f-9a1c-234e0d94da4f"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""QuickTurn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""69814975-e42b-45bd-b69e-139dac848a8e"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -439,7 +461,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""759ada76-9f71-48f7-981d-949fe898c8ed"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Shove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""818e40c8-e4fb-4242-8551-74c70c01d183"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
