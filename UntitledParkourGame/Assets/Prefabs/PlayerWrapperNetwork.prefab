@@ -465,7 +465,7 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
-  adjustAmount: 0
+  adjustAmount: -1
   boostSphereCastDistance: 3
   boostSphereCastRadius: 2
   boostYScale: 0.5
