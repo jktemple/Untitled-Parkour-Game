@@ -92,7 +92,7 @@ public class LobbyCreateUI : MonoBehaviour
 
         lobbyName = "MyLobby";
         isPrivate = false;
-        maxPlayers = 4;
+        maxPlayers = 6;
 
         UpdateText();
     }

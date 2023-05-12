@@ -150,6 +150,7 @@ public class LobbyManager : MonoBehaviour
                     OnKickedFromLobby?.Invoke(this, new LobbyEventArgs { lobby = joinedLobby });
 
                     joinedLobby = null;
+                    return;
                 }
 
                 if (joinedLobby.Data[KEY_START_GAME].Value!= "0")
