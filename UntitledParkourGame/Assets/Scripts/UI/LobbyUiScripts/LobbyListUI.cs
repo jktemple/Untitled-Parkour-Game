@@ -35,8 +35,14 @@ public class LobbyListUI : MonoBehaviour
         LobbyManager.Instance.OnJoinedLobby += LobbyManager_OnJoinedLobby;
         LobbyManager.Instance.OnLeftLobby += LobbyManager_OnLeftLobby;
         LobbyManager.Instance.OnKickedFromLobby += LobbyManager_OnKickedFromLobby;
+        LobbyManager.Instance.OnGameStarted += LobbyManager_OnGameStarted;
+        LobbyManager.Instance.OnAuthenticated += LobbyManager_OnAuthentication;
+        Hide();
     }
-
+    private void LobbyManager_OnAuthentication(object sender, System.EventArgs e)
+    {
+        Show();
+    }
     private void LobbyManager_OnKickedFromLobby(object sender, LobbyManager.LobbyEventArgs e)
     {
         Show();
@@ -48,6 +54,11 @@ public class LobbyListUI : MonoBehaviour
     }
 
     private void LobbyManager_OnJoinedLobby(object sender, LobbyManager.LobbyEventArgs e)
+    {
+        Hide();
+    }
+
+    private void LobbyManager_OnGameStarted(object sender, EventArgs e)
     {
         Hide();
     }

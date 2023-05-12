@@ -46,8 +46,12 @@ public class EditPlayerName : MonoBehaviour
     void Start()
     {
         OnNameChanged += EditPlayerName_OnNameChanged;
+        LobbyManager.Instance.OnGameStarted += LobbyManager_OnGameStarted;
     }
-
+    private void LobbyManager_OnGameStarted(object sender, System.EventArgs e)
+    {
+        Hide();
+    }
     private void EditPlayerName_OnNameChanged(object sender, EventArgs e)
     {
         LobbyManager.Instance.UpdatePlayerName(GetPlayerName());
@@ -56,6 +60,16 @@ public class EditPlayerName : MonoBehaviour
     public string GetPlayerName()
     {
         return playerName;
+    }
+
+    private void Hide()
+    {
+        gameObject.SetActive(false);
+    }
+
+    private void Show()
+    {
+        gameObject.SetActive(true);
     }
     // Update is called once per frame
     void Update()

@@ -24,6 +24,7 @@ public class LobbyManager : MonoBehaviour
     public const string KEY_PLAYER_NAME = "PlayerName";
     public const string KEY_PLAYER_CHARACTER = "Character";
     public const string KEY_GAME_MODE = "GameMode";
+    public const string KEY_START_GAME = "GameStart";
 
 
 
@@ -32,6 +33,8 @@ public class LobbyManager : MonoBehaviour
     public event EventHandler<LobbyEventArgs> OnJoinedLobby;
     public event EventHandler<LobbyEventArgs> OnJoinedLobbyUpdate;
     public event EventHandler<LobbyEventArgs> OnKickedFromLobby;
+    public event EventHandler<EventArgs> OnGameStarted;
+    public event EventHandler<EventArgs> OnAuthenticated;
     //public event EventHandler<LobbyEventArgs> OnLobbyGameModeChanged;
     public class LobbyEventArgs : EventArgs
     {
@@ -90,6 +93,8 @@ public class LobbyManager : MonoBehaviour
         };
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
+
+        OnAuthenticated?.Invoke(this, EventArgs.Empty);
     }
 
     private void HandleRefreshLobbyList()
@@ -145,6 +150,19 @@ public class LobbyManager : MonoBehaviour
                     OnKickedFromLobby?.Invoke(this, new LobbyEventArgs { lobby = joinedLobby });
 
                     joinedLobby = null;
+                }
+
+                if (joinedLobby.Data[KEY_START_GAME].Value!= "0")
+                {
+                    //Start Game
+                    if (!IsLobbyHost())
+                    {
+                        RelayManagerLobby.Instance.JoinRelay(joinedLobby.Data[KEY_START_GAME].Value);
+                    }
+
+                    joinedLobby = null;
+
+                    OnGameStarted?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
@@ -215,7 +233,8 @@ public class LobbyManager : MonoBehaviour
             Player = player,
             IsPrivate = isPrivate,
             Data = new Dictionary<string, DataObject> {
-                { KEY_GAME_MODE, new DataObject(DataObject.VisibilityOptions.Public) }
+                { KEY_GAME_MODE, new DataObject(DataObject.VisibilityOptions.Public) },
+                { KEY_START_GAME, new DataObject(DataObject.VisibilityOptions.Member, "0") }
             }
         };
 
@@ -398,6 +417,30 @@ public class LobbyManager : MonoBehaviour
             catch (LobbyServiceException e)
             {
                 Debug.Log(e);
+            }
+        }
+    }
+
+    public async void StartGame()
+    {
+        if (IsLobbyHost())
+        {
+            try
+            {
+                Debug.Log("StartGame");
+                string relayCode = await RelayManagerLobby.Instance.CreateRelay(joinedLobby.MaxPlayers);
+
+                Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
+                {
+                    Data = new Dictionary<string, DataObject>
+                    {
+                        { KEY_START_GAME, new DataObject(DataObject.VisibilityOptions.Member, relayCode) }
+                    }
+                });
+                joinedLobby = lobby;
+            } catch (LobbyServiceException e)
+            {
+                Debug.Log(e.ToString());
             }
         }
     }

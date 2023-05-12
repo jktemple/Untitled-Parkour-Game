@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -26,6 +27,7 @@ public class Shoving : NetworkBehaviour
     public NetworkVariable<bool> infected = new NetworkVariable<bool>();
     public NetworkVariable<int> score = new NetworkVariable<int>();
     public NetworkVariable<int> playerNumber = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<string> playerName = new NetworkVariable<string>("Player", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private bool inShoveLag = false;
 
 
@@ -37,6 +39,7 @@ public class Shoving : NetworkBehaviour
     public PushObject pushObjectPrefab;
     public FakePushObject fakePush;
 
+    private GameObject nameText;
 
     public float camOffset;
     public bool hitBoxVisuals;
@@ -59,6 +62,8 @@ public class Shoving : NetworkBehaviour
         taggedHash = Animator.StringToHash("Tagged");
         playerNumber.Value = FindObjectsOfType<Shoving>().Length;
 
+        nameText = GameObject.Find("PlayerNameText");
+        SetName(nameText.GetComponent<TextMeshProUGUI>().text);
     }
 
     // Update is called once per frame
@@ -107,7 +112,10 @@ public class Shoving : NetworkBehaviour
         
     }
     
-
+    void SetName(string name)
+    {
+        playerName.Value = name;
+    }
 
     [ServerRpc]
     public void ShoveServerRPC(Vector3 position, Vector3 direction, bool infected)

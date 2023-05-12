@@ -13,7 +13,7 @@ public class InGameMenuBehaviors : MonoBehaviour
     private bool showingScore;
     void Start()
     {
-        theMenu.SetActive(true);
+        theMenu.SetActive(false);
         if(scoreBoard!=null)
         scoreBoard.SetActive(false);
 
