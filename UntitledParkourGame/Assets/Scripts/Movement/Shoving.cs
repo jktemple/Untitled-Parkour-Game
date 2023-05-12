@@ -71,16 +71,13 @@ public class Shoving : NetworkBehaviour
         if (!IsOwner) return;
         if (ableToShove && inputs.PlayerMovement.Shove.triggered)
         {
-            // Debug.Log("test");
             if (!pushObject)
             {
-                // Debug.Log("test1");
                 ShoveServerRPC(playerObject.position + orientation.forward * 0.7f, orientation.forward, infected.Value);
                 ableToShove = false;
                 Invoke(nameof(ResetShove), shoveCooldown);
             } else
             {
-                Debug.Log("test2");
                 Instantiate<FakePushObject>(fakePush, playerObject.position + orientation.forward*camOffset, Quaternion.LookRotation(orientation.forward));
                 SpawnPushObjectServerRPC(playerObject.position + orientation.forward*0.7f, orientation.forward, infected.Value);
                 updateFailedSound();
@@ -89,9 +86,9 @@ public class Shoving : NetworkBehaviour
 
             }
         }
+        
         if(shoved.Value && !inShoveLag)
         {
-            Debug.Log("test3");
             rb.AddForce(shoveDir.Value.normalized * shoveForce, ForceMode.Impulse);
             ResetShoveServerRPC();
             inShoveLag = true;
