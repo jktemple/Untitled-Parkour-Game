@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18154658, g: 0.22718708, b: 0.30740505, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154685, g: 0.22718762, b: 0.3074059, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2176,6 +2176,68 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a76c401b6f43e9445b8b248471fa43cc, type: 3}
+--- !u!1 &756607005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 756607007}
+  - component: {fileID: 756607006}
+  m_Layer: 0
+  m_Name: BackgroundMusic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &756607006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756607005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 943134391
+      Data2: 1287528226
+      Data3: 1041060521
+      Data4: 2151314
+    Path: event:/BGM
+  Event: 
+  PlayEvent: 1
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!4 &756607007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756607005}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 825.4111, y: 791.8325, z: -642.55347}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &777285062 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: eceeb512833263545be55f19d038bcb2, type: 3}
@@ -5817,32 +5879,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <playerFootsteps>k__BackingField:
     Guid:
-      Data1: 98278837
-      Data2: 1129284030
-      Data3: -1112494941
-      Data4: 460133661
-    Path: event:/FootstepV4
+      Data1: 1905533879
+      Data2: 1174152603
+      Data3: -932905307
+      Data4: -1337652830
+    Path: event:/FootstepV5
   <playerSlidingsfx>k__BackingField:
     Guid:
-      Data1: 1421281157
-      Data2: 1075080530
-      Data3: -377851505
-      Data4: -1583922881
-    Path: event:/WallrunningV1
+      Data1: 53178743
+      Data2: 1259208122
+      Data3: -1426245959
+      Data4: -1897982819
+    Path: event:/SlidingV2
   <playerWallrunningsfx>k__BackingField:
     Guid:
-      Data1: 1421281157
-      Data2: 1075080530
-      Data3: -377851505
-      Data4: -1583922881
-    Path: event:/WallrunningV1
+      Data1: -174659108
+      Data2: 1161800977
+      Data3: -813922114
+      Data4: -890521013
+    Path: event:/JumpingV5
   <playerWallclimbingsfx>k__BackingField:
     Guid:
-      Data1: -1756345146
-      Data2: 1332463483
-      Data3: -1847950938
-      Data4: -385006151
-    Path: event:/WallclimbingV1
+      Data1: -174659108
+      Data2: 1161800977
+      Data3: -813922114
+      Data4: -890521013
+    Path: event:/JumpingV5
   <playerBoostingsfx>k__BackingField:
     Guid:
       Data1: -594772484
@@ -5852,11 +5914,18 @@ MonoBehaviour:
     Path: event:/BoostingV1
   <playerJumpingsfx>k__BackingField:
     Guid:
-      Data1: -594772484
-      Data2: 1274357222
-      Data3: 1963701409
-      Data4: 576034364
-    Path: event:/BoostingV1
+      Data1: -174659108
+      Data2: 1161800977
+      Data3: -813922114
+      Data4: -890521013
+    Path: event:/JumpingV5
+  <playerShovingsfx>k__BackingField:
+    Guid:
+      Data1: 1596703088
+      Data2: 1191669603
+      Data3: 2004206734
+      Data4: 1497414605
+    Path: event:/TaggingV1
 --- !u!1001 &1714036851
 PrefabInstance:
   m_ObjectHideFlags: 0

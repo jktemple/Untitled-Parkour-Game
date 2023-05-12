@@ -14,6 +14,8 @@ public class Boosting : NetworkBehaviour
     public Rigidbody rb;
     public LayerMask whatIsPlayer;
 
+    public float adjustAmount;
+
     [Header("Boosting")]
     public float boostSphereCastDistance;
     public float boostSphereCastRadius;
@@ -48,7 +50,9 @@ public class Boosting : NetworkBehaviour
 
     void StateMachine()
     {
-        Physics.SphereCast(transform.position, boostSphereCastRadius, Vector3.down, out boostHit, boostSphereCastDistance, whatIsPlayer);
+        Vector3 adjustment = transform.position;
+        adjustment.y += adjustAmount;
+        Physics.SphereCast(adjustment, boostSphereCastRadius, Vector3.down, out boostHit, boostSphereCastDistance, whatIsPlayer);
         //Debug.Log(boostHit.transform);
         if (pm.grounded && inputs.PlayerMovement.Boost.IsPressed() && !pm.sliding)
         {

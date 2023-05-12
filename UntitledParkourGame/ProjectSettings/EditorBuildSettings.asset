@@ -5,28 +5,29 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Main Menu.unity
     guid: 5f30708bcab53664bbe17f5bb3a95e77
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Credits.unity
     guid: 5ba00b3752431024089bdc622f6024aa
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Settings.unity
     guid: d12f4152fa59f3d46bfcbd34686fe1d8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level Select.unity
     guid: 90d1e60cfc856e848baa8d08055a495d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Offline Scenes/Tutorial Scene Offline.unity
     guid: d6452b161f5adee41b0ce26da42e1494
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Offline Scenes/Virus Tag Multiplayer Map Offline.unity
     guid: 6b7aa585c66a84344bcd591297591fd0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Virus Tag Multiplayer Map.unity
     guid: a0e7d00b052af784c9b5125251ffa9ba
   - enabled: 1
     path: Assets/Scenes/NewMapTest.unity
     guid: 57242215ea2e71c49a543e9be5c8e0b1
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 78ae546e284aa9a428c733d0f1647afd, type: 2}
