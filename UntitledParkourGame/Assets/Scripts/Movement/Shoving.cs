@@ -62,7 +62,6 @@ public class Shoving : NetworkBehaviour
 
         playerShovingFailedsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerShovingFailedsfx);
         playerShovingSuccesssfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerShovingSuccesssfx);
-
     }
 
     // Update is called once per frame
@@ -86,7 +85,7 @@ public class Shoving : NetworkBehaviour
 
             }
         }
-        
+
         if(shoved.Value && !inShoveLag)
         {
             rb.AddForce(shoveDir.Value.normalized * shoveForce, ForceMode.Impulse);
@@ -132,7 +131,6 @@ public class Shoving : NetworkBehaviour
             if(infected)
             {
                 s.infected.Value = true;
-                updateSound();
             }
         }
         if (hitBoxVisuals)
@@ -200,6 +198,7 @@ public class Shoving : NetworkBehaviour
                 if (p.isInfected.Value)
                 {
                     infected.Value = true;
+                    updateSound();
                 }
             }
             Destroy(other.gameObject);

@@ -44,15 +44,18 @@ public class PushObject : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("test");
         if ((transform.position-startMarker).magnitude >= distance)
         {
             Invoke(nameof(DestroyHelper), 0.2f);
             rb.velocity = Vector3.zero;
+            Debug.Log("test magnitude");
         }
 
         if(rb.velocity == Vector3.zero)
         {
             Invoke(nameof(DestroyHelper), 0.2f);
+            Debug.Log("test velocity");
         }
         /*
         if(activeTimer < hitboxActiveTime)
@@ -77,7 +80,7 @@ public class PushObject : NetworkBehaviour
         GameObject go = other.gameObject;
         if (collisionMask == (collisionMask | (1 << go.layer)))
         {
-            //Debug.Log("Destroying");
+            Debug.Log("Destroying");
             rb.velocity = Vector3.zero;
             Destroy(gameObject); 
         }
