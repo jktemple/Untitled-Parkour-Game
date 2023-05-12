@@ -2301,7 +2301,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 41.466, z: 0}
 --- !u!1 &327785621
 GameObject:
@@ -2557,7 +2557,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &364930781
 GameObject:
@@ -5730,7 +5730,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &746993981
 GameObject:
@@ -6021,7 +6021,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: -25.289, z: 0}
 --- !u!1 &780340803
 GameObject:
@@ -6171,7 +6171,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &816534440
 GameObject:
@@ -9822,7 +9822,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1420636843
 GameObject:
@@ -10367,7 +10367,7 @@ RectTransform:
   m_Children:
   - {fileID: 32380287}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -12539,7 +12539,21 @@ MonoBehaviour:
       Data3: -813922114
       Data4: -890521013
     Path: event:/JumpingV5
-  <playerShovingsfx>k__BackingField:
+  <playerShovingSuccesssfx>k__BackingField:
+    Guid:
+      Data1: 1709803502
+      Data2: 1136925223
+      Data3: 1819956353
+      Data4: -1124573742
+    Path: event:/ShovingSuccessV1
+  <playerShovingFailedsfx>k__BackingField:
+    Guid:
+      Data1: -886783712
+      Data2: 1241674537
+      Data3: -1133081215
+      Data4: 468285493
+    Path: event:/ShovingFailedV1
+  <playerGetShovedsfx>k__BackingField:
     Guid:
       Data1: 1596703088
       Data2: 1191669603
@@ -13644,7 +13658,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1855826174
 GameObject:

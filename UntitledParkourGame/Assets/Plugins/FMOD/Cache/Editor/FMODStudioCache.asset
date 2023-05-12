@@ -26,7 +26,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 1500
+  Length: 1100
 --- !u!114 &-8883427194918728522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,6 +81,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 230
+--- !u!114 &-8187804342526593702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ShovingFailedV1
+  m_EditorClassIdentifier: 
+  Path: event:/ShovingFailedV1
+  Guid:
+    Data1: -886783712
+    Data2: 1241674537
+    Data3: -1133081215
+    Data4: 468285493
+  Banks:
+  - {fileID: 8631169011809319237}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 340
 --- !u!114 &-7502535042534277674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,7 +123,7 @@ MonoBehaviour:
   Path: ../FMOD/Audio#1/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638193657049744618
+  lastModified: 638194500927125801
   FileSizes:
   - Name: Desktop
     Value: 670
@@ -116,7 +143,7 @@ MonoBehaviour:
   Path: ../FMOD/Audio#1/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638193657049920240
+  lastModified: 638194500927326012
   FileSizes:
   - Name: Desktop
     Value: 803232
@@ -163,10 +190,10 @@ MonoBehaviour:
   Path: ../FMOD/Audio#1/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638193657049754622
+  lastModified: 638194500927135718
   FileSizes:
   - Name: Desktop
-    Value: 1158
+    Value: 1268
   Exists: 1
 --- !u!114 &-597478278919094349
 MonoBehaviour:
@@ -222,12 +249,14 @@ MonoBehaviour:
   - {fileID: -8221250656708727143}
   - {fileID: 1490780623538224058}
   - {fileID: -9091675522182160328}
+  - {fileID: -8187804342526593702}
+  - {fileID: 853558627425070148}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7502535042534277674}
   StringsBanks:
   - {fileID: -3899778856860331707}
-  cacheTime: 638193657050122409
+  cacheTime: 638194500927546825
   cacheVersion: 131601
 --- !u!114 &175148200014546022
 MonoBehaviour:
@@ -256,6 +285,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &853558627425070148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ShovingSuccessV1
+  m_EditorClassIdentifier: 
+  Path: event:/ShovingSuccessV1
+  Guid:
+    Data1: 1709803502
+    Data2: 1136925223
+    Data3: 1819956353
+    Data4: -1124573742
+  Banks:
+  - {fileID: 8631169011809319237}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1880
 --- !u!114 &1490780623538224058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,8 +435,8 @@ MonoBehaviour:
   Path: ../FMOD/Audio#1/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638193657050122409
+  lastModified: 638194500927546825
   FileSizes:
   - Name: Desktop
-    Value: 296608
+    Value: 340064
   Exists: 1
