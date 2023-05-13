@@ -75,6 +75,7 @@ public class WallGrab : NetworkBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if (!IsOwner) { return; }
         if (other.gameObject.layer == LayerMask.NameToLayer("whatIsWall"))
         {
             if (inputs.PlayerMovement.WallGrab.IsInProgress() && !exitingWall)
@@ -91,6 +92,7 @@ public class WallGrab : NetworkBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if(!IsOwner) { return; }
         if (other.gameObject.layer == LayerMask.NameToLayer("whatIsWall"))
         {
             pm.wallGrabbing = false;
