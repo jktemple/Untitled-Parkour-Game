@@ -39,11 +39,17 @@ public class PushObject : NetworkBehaviour
         //startTime = Time.time;
         rb = GetComponent<Rigidbody>();
         rb.velocity = this.transform.forward*speed;
+
+        if(id.Value != NetworkManager.LocalClientId)
+        {
+            this.gameObject.layer = 0;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!IsServer) return;
         if ((transform.position-startMarker).magnitude >= distance)
         {
             Invoke(nameof(DestroyHelper), 0.2f);
@@ -74,6 +80,7 @@ public class PushObject : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!IsServer) return;
         GameObject go = other.gameObject;
         if (collisionMask == (collisionMask | (1 << go.layer)))
         {
