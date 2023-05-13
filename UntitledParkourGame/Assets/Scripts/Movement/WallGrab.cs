@@ -42,6 +42,7 @@ public class WallGrab : NetworkBehaviour
 
     private void Update()
     {
+        if(!IsOwner) { return; }
         if(pm.grounded)
         {
             jumpsLeft = jumps;
