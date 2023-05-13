@@ -595,4 +595,9 @@ public class PlayerMovement : NetworkBehaviour
 
 
     }
+
+    public void ResetStamina()
+    {
+        currentStamina = maxStamina;
+    }
 }

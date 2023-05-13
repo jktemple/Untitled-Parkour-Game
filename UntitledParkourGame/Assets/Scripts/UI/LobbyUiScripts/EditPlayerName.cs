@@ -55,6 +55,7 @@ public class EditPlayerName : MonoBehaviour
     private void EditPlayerName_OnNameChanged(object sender, EventArgs e)
     {
         LobbyManager.Instance.UpdatePlayerName(GetPlayerName());
+        //GameObject.FindObjectOfType<InGameMenuBehaviors>().playerName = GetPlayerName();
     }
 
     public string GetPlayerName()

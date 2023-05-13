@@ -62,9 +62,7 @@ public class Shoving : NetworkBehaviour
         shoved.Value = false;
         taggedHash = Animator.StringToHash("Tagged");
         playerNumber.Value = FindObjectsOfType<Shoving>().Length;
-
-        nameText = GameObject.Find("PlayerNameText");
-        SetName(nameText.GetComponent<TextMeshProUGUI>().text);
+        SetName(EditPlayerName.Instance.GetPlayerName());
     }
 
     // Update is called once per frame
@@ -81,7 +79,9 @@ public class Shoving : NetworkBehaviour
             } else
             {
                 Instantiate<FakePushObject>(fakePush, playerObject.position + orientation.forward*camOffset, Quaternion.LookRotation(orientation.forward));
-                SpawnPushObjectServerRPC(playerObject.position + orientation.forward*0.7f, orientation.forward, infected.Value);
+                ServerRpcParams sendParams = new ServerRpcParams();
+                sendParams.Receive.SenderClientId = NetworkManager.LocalClientId;
+                SpawnPushObjectServerRPC(playerObject.position + orientation.forward*0.7f, orientation.forward, infected.Value, sendParams);
                 ableToShove = false;
                 Invoke(nameof(ResetShove), shoveCooldown);
 
@@ -100,7 +100,7 @@ public class Shoving : NetworkBehaviour
     }
 
     [ServerRpc]
-    void SpawnPushObjectServerRPC(Vector3 position, Vector3 direction, bool i, ServerRpcParams serverRpcParams = default)
+    void SpawnPushObjectServerRPC(Vector3 position, Vector3 direction, bool i, ServerRpcParams serverRpcParams)
     {
         //Debug.Log("Spawning Object Position = " + position + " Direction = " + direction);
         
@@ -111,7 +111,8 @@ public class Shoving : NetworkBehaviour
         p.isInfected.Value = i;
         p.GetComponent<NetworkObject>().Spawn();
        
-        
+
+        Debug.Log("Spawning with id value = " + p.id.Value);
     }
     
     void SetName(string name)

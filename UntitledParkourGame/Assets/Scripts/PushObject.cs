@@ -27,6 +27,7 @@ public class PushObject : NetworkBehaviour
     //private float startTime;
     //private float journeyLength;
     Rigidbody rb;
+    float startTime;
     public override void OnNetworkSpawn()
     {
 
@@ -39,22 +40,48 @@ public class PushObject : NetworkBehaviour
         //startTime = Time.time;
         rb = GetComponent<Rigidbody>();
         rb.velocity = this.transform.forward*speed;
-
-        if(id.Value != NetworkManager.LocalClientId)
+        /*
+        if (id.Value != NetworkManager.LocalClientId && IsClient)
         {
-            this.gameObject.layer = 0;
+            this.gameObject.layer = LayerMask.NameToLayer("Default");
         }
+        else if (IsClient && id.Value == )
+        {
+            this.gameObject.layer = LayerMask.NameToLayer("invisible");
+        }*/
+        startTime = Time.time;
+    }
+    private void Start()
+    {
+        /*
+        if (id.Value != NetworkManager.LocalClientId && IsClient)
+        {
+            this.gameObject.layer = LayerMask.NameToLayer("Default");
+        }
+        else if (IsClient)
+        {
+            this.gameObject.layer = LayerMask.NameToLayer("invisible");
+        }
+        */
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!IsServer) return;
+        //Debug.Log("Void Updated: Push Object ID = " + id.Value + " LocalClientId =  " + NetworkManager.LocalClientId);
+        
+        if (id.Value != NetworkManager.LocalClientId && IsClient /*&& (Time.time - startTime) > 0.05f*/)
+        {
+            this.gameObject.layer = LayerMask.NameToLayer("Default");
+        } 
+        
+        if (!IsServer) return;
         if ((transform.position-startMarker).magnitude >= distance)
         {
             Invoke(nameof(DestroyHelper), 0.2f);
             rb.velocity = Vector3.zero;
         }
+        
 
         if(rb.velocity == Vector3.zero)
         {

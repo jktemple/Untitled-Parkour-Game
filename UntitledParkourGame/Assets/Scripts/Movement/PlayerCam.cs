@@ -183,7 +183,7 @@ public class PlayerCam : NetworkBehaviour
 
     void DoQuickTurn(float time, float rotation)
     {
-        StopCoroutine("Rotate");
+        StopCoroutine(nameof(Rotate));
         StartCoroutine(Rotate(time, rotation));
     }
 
