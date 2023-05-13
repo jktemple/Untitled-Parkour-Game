@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using FMOD.Studio;
+using TMPro;
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -102,6 +103,12 @@ public class PlayerMovement : NetworkBehaviour
     public PlayerCam cam;
     public MovementState state;
 
+    // Movement state indication UI
+    private GameObject canvas;
+    private GameObject movementIcon;
+    private TextMeshProUGUI icon;
+
+
     public enum MovementState
     {
         freeze,
@@ -135,10 +142,21 @@ public class PlayerMovement : NetworkBehaviour
         {
             state = MovementState.freeze;
             rb.velocity= Vector3.zero;
+
+            if (icon != null)
+            {
+                icon.text = "<sprite=1>";
+            }
+
         } else if (boosting.Value)
         {
             state = MovementState.boosting;
             rb.velocity= Vector3.zero;
+
+            if (icon != null)
+            {
+                icon.text = "<sprite=5>";
+            }
         }
         //mode unlimited
         else if (unlimited)
@@ -153,6 +171,11 @@ public class PlayerMovement : NetworkBehaviour
             //cam.DoFov(40f);
             state = MovementState.climbing;
             moveSpeed = climbSpeed;
+
+            if (icon != null)
+            {
+                icon.text = "<sprite=2>";
+            }
 
             // sprint stamina handling
             if (currentStamina < maxStamina)
@@ -176,6 +199,11 @@ public class PlayerMovement : NetworkBehaviour
             state = MovementState.wallrunning;
             desiredMoveSpeed = wallRunSpeed;
 
+            if (icon != null)
+            {
+                icon.text = "<sprite=3>";
+            }
+
             // sprint stamina handling
             if (currentStamina < maxStamina)
             {
@@ -195,6 +223,11 @@ public class PlayerMovement : NetworkBehaviour
         //Mode Sliding
         else if (sliding)
         {
+            if (icon != null)
+            {
+                icon.text = "<sprite=4>";
+            }
+
             //cam.DoFov(40f);
             state = MovementState.sliding;
             desiredMoveSpeed = runSpeed;
@@ -208,6 +241,11 @@ public class PlayerMovement : NetworkBehaviour
             //Debug.Log("mode sprinting");
             state = MovementState.sprinting;
             desiredMoveSpeed = sprintSpeed;
+
+            if (icon != null)
+            {
+                icon.text = "<sprite=0>";
+            }
 
             // sprint stamina handling
             if (currentStamina < staminaDrainRate * Time.deltaTime)
@@ -226,6 +264,11 @@ public class PlayerMovement : NetworkBehaviour
         {
             state = MovementState.running;
             desiredMoveSpeed = runSpeed;
+
+            if (icon != null)
+            {
+                icon.text = "<sprite=1>";
+            }
 
             // sprint stamina handling
             if (currentStamina < maxStamina)
@@ -247,11 +290,21 @@ public class PlayerMovement : NetworkBehaviour
         {
             state = MovementState.wallGrabbing;
             rb.velocity = Vector3.zero;
+
+            if (icon != null)
+            {
+                icon.text = "<sprite=3>";
+            }
         }
         //Mode Air
         else
         {
             state = MovementState.air;
+
+            if (icon != null)
+            {
+                icon.text = "<sprite=6>";
+            }
 
         }
         //check if desiredMoveSpeed has changed 
@@ -303,6 +356,28 @@ public class PlayerMovement : NetworkBehaviour
 
         unpaused = true;
         groundCoyoteTimer = groundCoyoteTime;
+
+        // Movement state indication UI
+        canvas = GameObject.Find("Lobby Canvas");
+
+        if (canvas != null)
+        {
+            movementIcon = canvas.transform.Find("Movement Icon UI").gameObject;
+        }
+        else
+        {
+            Debug.Log("Couldn't find Lobby Canvas");
+        }
+
+        if (movementIcon != null)
+        {
+            icon = movementIcon.GetComponent<TextMeshProUGUI>();
+        }
+        else
+        {
+            Debug.Log("Couldn't find Movement Icon UI");
+        }
+
     }
 
 
@@ -592,7 +667,6 @@ public class PlayerMovement : NetworkBehaviour
         else{
             playerBoostingsfx.stop(STOP_MODE.ALLOWFADEOUT);
         }
-
 
     }
 }
