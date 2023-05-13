@@ -4907,6 +4907,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theMenu: {fileID: 487396570}
   scoreBoard: {fileID: 365912488}
+  reticle: {fileID: 1462711703}
 --- !u!4 &473141558
 Transform:
   m_ObjectHideFlags: 0

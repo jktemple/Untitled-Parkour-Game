@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
+using Unity.Collections;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -27,7 +28,7 @@ public class Shoving : NetworkBehaviour
     public NetworkVariable<bool> infected = new NetworkVariable<bool>();
     public NetworkVariable<int> score = new NetworkVariable<int>();
     public NetworkVariable<int> playerNumber = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    public NetworkVariable<string> playerName = new NetworkVariable<string>("Player", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<FixedString32Bytes> playerName = new NetworkVariable<FixedString32Bytes>("Player", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private bool inShoveLag = false;
 
 
@@ -105,10 +106,11 @@ public class Shoving : NetworkBehaviour
         
         PushObject p = Instantiate<PushObject>(pushObjectPrefab, position + direction, Quaternion.LookRotation(direction));
         var clientId = serverRpcParams.Receive.SenderClientId;
-        p.GetComponent<NetworkObject>().Spawn();
         p.id.Value = clientId;
         //p.distance.Value = shoveDistance;
         p.isInfected.Value = i;
+        p.GetComponent<NetworkObject>().Spawn();
+       
         
     }
     
