@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -9,15 +10,22 @@ public class InGameMenuBehaviors : MonoBehaviour
 {
     public GameObject theMenu;
     public GameObject scoreBoard;
+    public GameObject reticle;
     public static bool isPaused;
     private bool showingScore;
     void Start()
     {
-        theMenu.SetActive(true);
+        theMenu.SetActive(false);
         if(scoreBoard!=null)
         scoreBoard.SetActive(false);
 
         Application.targetFrameRate = 120;
+        LobbyManager.Instance.OnGameStarted += LobbyManager_OnGameStarted;
+    }
+
+    private void LobbyManager_OnGameStarted(object sender, EventArgs e)
+    {
+        reticle.SetActive(true);
     }
     void Update()
     {
@@ -68,6 +76,7 @@ public class InGameMenuBehaviors : MonoBehaviour
         isPaused = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        reticle.SetActive(false);
     }
 
     public void ResumeGame() {
@@ -77,6 +86,7 @@ public class InGameMenuBehaviors : MonoBehaviour
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        reticle.SetActive(true);
     }
 
     public void QuitGame()
