@@ -442,14 +442,20 @@ public class PlayerMovement : NetworkBehaviour
             }
 
             readyToJump = false;
-            if(currentStamina >= 10)
+
+            // sry for nesting it's just one layer
+            if(state == MovementState.sprinting)
             {
-                currentStamina -= 10;
+                if (currentStamina >= 10)
+                {
+                    currentStamina -= 10;
+                }
+                else
+                {
+                    currentStamina = 0;
+                }
             }
-            else
-            {
-                currentStamina = 0;
-            }
+            
 
             PLAYBACK_STATE jumpingplaybackState;
             playerJumpingsfx.getPlaybackState (out jumpingplaybackState);
