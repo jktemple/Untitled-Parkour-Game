@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -9,15 +10,24 @@ public class InGameMenuBehaviors : MonoBehaviour
 {
     public GameObject theMenu;
     public GameObject scoreBoard;
+    public GameObject reticle;
     public static bool isPaused;
+   // public string playerName = string.Empty;
     private bool showingScore;
+
     void Start()
     {
-        theMenu.SetActive(true);
+        theMenu.SetActive(false);
         if(scoreBoard!=null)
         scoreBoard.SetActive(false);
-
+        reticle.SetActive(false);
         Application.targetFrameRate = 120;
+        LobbyManager.Instance.OnGameStarted += LobbyManager_OnGameStarted;
+    }
+
+    private void LobbyManager_OnGameStarted(object sender, EventArgs e)
+    {
+        reticle.SetActive(true);
     }
     void Update()
     {
@@ -46,18 +56,22 @@ public class InGameMenuBehaviors : MonoBehaviour
         }
     }
 
-    void ShowScore()
+    public void ShowScore()
     {
         if(scoreBoard==null) return;
         scoreBoard.SetActive(true);
         showingScore= true;
     }
 
-    void HideScore()
+    public void HideScore()
     {
         if(scoreBoard==null) return;
         scoreBoard.SetActive(false);
         showingScore = false;
+        GameObject go = GameObject.Find("GameOverUI");
+        if(go != null) { go.SetActive(false); }
+        GameObject go1 = GameObject.Find("RoundOverUI");
+        if (go1 != null) { go1.SetActive(false); }
     }
 
     public void PauseGame()
@@ -68,6 +82,7 @@ public class InGameMenuBehaviors : MonoBehaviour
         isPaused = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        reticle.SetActive(false);
     }
 
     public void ResumeGame() {
@@ -77,6 +92,11 @@ public class InGameMenuBehaviors : MonoBehaviour
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        reticle.SetActive(true);
+        GameObject go = GameObject.Find("GameOverUI");
+        if (go != null) { go.SetActive(false); }
+        GameObject go1 = GameObject.Find("RoundOverUI");
+        if (go1 != null) { go1.SetActive(false); }
     }
 
     public void QuitGame()

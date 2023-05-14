@@ -4,6 +4,7 @@ using System.Xml.Serialization;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.UI;
 
 public class WallRunning : NetworkBehaviour
 {
@@ -58,6 +59,11 @@ public class WallRunning : NetworkBehaviour
     public float coyoteTime;
     private float coyoteTimer;
     private bool coyoteJumpAvailable;
+
+    [Header("QuickTurn Wall Jump")]
+    [Tooltip("How is the player's speed affected when quick turning")]
+    [Range(0f, 1f)]
+    public float quickTurnSpeedModifier;
 
     [Header("Camera Effects")]
     [Tooltip("How far the camera tilts while wall running")]
@@ -189,6 +195,7 @@ public class WallRunning : NetworkBehaviour
             if(coyoteTimer > 0 && inputs.PlayerMovement.Jump.triggered && coyoteJumpAvailable)
             {
                 Debug.Log("Coyote Time Wall Jump");
+                
                 WallJump(true);
             }
         }
@@ -197,7 +204,7 @@ public class WallRunning : NetworkBehaviour
     private void StartWallRun()
     {
         if (pm.wallGrabbing) return;
-        Debug.Log("Start Wall Run");
+        //Debug.Log("Start Wall Run");
         pm.wallrunning = true;
         wallRunTimer = maxWallRunTime;
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
@@ -249,14 +256,23 @@ public class WallRunning : NetworkBehaviour
         //Debug.Log("Wall Jump");
         if (lg.holding || lg.exitingLedge) return;
         exitingWall = true;
-        if(!isCoyote) exitWallTimer = exitWallTime;
-        Vector3 wallNormal = wallRight ? rightWallHit.normal: leftWallHit.normal;
+        if (!isCoyote) exitWallTimer = exitWallTime;
+        Vector3 wallNormal = wallRight ? rightWallHit.normal : leftWallHit.normal;
 
-        Vector3 forceToApply = transform.up * wallJumpUpForce + wallNormal*wallJumpSideForce;
+        Vector3 forceToApply = transform.up * wallJumpUpForce + wallNormal * wallJumpSideForce;
         //add force
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+
+        if (pm.quickTurned) {
+            rb.velocity *= quickTurnSpeedModifier;
+            Debug.Log("Quick Turn Wall Jump");
+        }
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); 
+        
         rb.AddForce(forceToApply, ForceMode.Impulse);
 
         coyoteJumpAvailable = false;
+
+
     }
 }

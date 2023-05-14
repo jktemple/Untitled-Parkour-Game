@@ -65,7 +65,7 @@ public class PlayerCam : NetworkBehaviour
         {
             return;
         }
-        Debug.Log("Current layer: " + obj.layer);
+        //Debug.Log("Current layer: " + obj.layer);
         obj.layer = newLayer;
 
         foreach (Transform child in obj.transform)
@@ -138,7 +138,7 @@ public class PlayerCam : NetworkBehaviour
             yRotation += 90f;
             DoQuickTurn(quickTurnTime*0.75f, 90f);
         }
-        
+        pm.quickTurned = true;
     }
 
     public void DoFov(float endValue)
@@ -183,7 +183,7 @@ public class PlayerCam : NetworkBehaviour
 
     void DoQuickTurn(float time, float rotation)
     {
-        StopCoroutine("Rotate");
+        StopCoroutine(nameof(Rotate));
         StartCoroutine(Rotate(time, rotation));
     }
 
