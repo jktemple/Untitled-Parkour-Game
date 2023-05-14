@@ -10,9 +10,12 @@ public class Boosting : NetworkBehaviour
     [Header("Refrences")]
     public PlayerMovement pm;
     public Transform playerObj;
+    public Transform orientation;
     public Transform cam;
+    public Transform playerObject;
     public Rigidbody rb;
     public LayerMask whatIsPlayer;
+    public SphereCastVisual sphereCastVisual;
 
     public float adjustAmount;
 
@@ -27,6 +30,7 @@ public class Boosting : NetworkBehaviour
     //private float boostJumpTimer;
     private bool boosting;
     private bool readyToBoostJump;
+    public bool hitBoxVisuals;
 
     RaycastHit boostHit;
 
@@ -53,6 +57,32 @@ public class Boosting : NetworkBehaviour
         Vector3 adjustment = transform.position;
         adjustment.y += adjustAmount;
         Physics.SphereCast(adjustment, boostSphereCastRadius, Vector3.down, out boostHit, boostSphereCastDistance, whatIsPlayer);
+
+        if (hitBoxVisuals && inputs.PlayerMovement.WallGrab.IsPressed())
+        {
+            // Vector3 position = playerObject.position + orientation.forward * 0.7f;
+            Vector3 position = adjustment;
+            Vector3 direction = -orientation.up;
+
+            float diam = boostSphereCastRadius * 2;
+            SphereCastVisual st = Instantiate<SphereCastVisual>(sphereCastVisual);
+
+            st.transform.position = position;
+            st.diameter = diam;
+            SphereCastVisual m = Instantiate<SphereCastVisual>(sphereCastVisual);
+
+            m.transform.position = position + direction.normalized * (boostSphereCastDistance / 2);
+            m.diameter = diam;
+            SphereCastVisual l = Instantiate<SphereCastVisual>(sphereCastVisual);
+
+            l.transform.position = position + direction.normalized * boostSphereCastDistance;
+            l.diameter = diam;
+            st.GetComponent<NetworkObject>().Spawn();
+            m.GetComponent<NetworkObject>().Spawn();
+            l.GetComponent<NetworkObject>().Spawn();
+
+        }
+
         //Debug.Log(boostHit.transform);
         if (pm.grounded && inputs.PlayerMovement.Boost.IsPressed() && !pm.sliding)
         {

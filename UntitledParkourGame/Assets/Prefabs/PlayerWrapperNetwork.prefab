@@ -462,18 +462,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pm: {fileID: 4194629557659296672}
   playerObj: {fileID: 4194629557247760180}
+  orientation: {fileID: 4194629556480869669}
   cam: {fileID: 1719467378662260150}
+  playerObject: {fileID: 4194629557247760180}
   rb: {fileID: 4194629557659296679}
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
-  adjustAmount: -1
-  boostSphereCastDistance: 3
-  boostSphereCastRadius: 2
+  sphereCastVisual: {fileID: 1622880343235674311, guid: ed55b521e17e71b4cbed7952c4449721, type: 3}
+  adjustAmount: 1
+  boostSphereCastDistance: 2
+  boostSphereCastRadius: 5
   boostYScale: 0.5
-  boostForwardForce: 20
+  boostForwardForce: 10
   boostUpwardForce: 20
   boostJumpCooldown: 0.5
+  hitBoxVisuals: 0
 --- !u!114 &4194629557659296677
 MonoBehaviour:
   m_ObjectHideFlags: 0
