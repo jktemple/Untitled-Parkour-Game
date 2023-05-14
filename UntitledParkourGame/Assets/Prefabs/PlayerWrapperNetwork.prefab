@@ -316,6 +316,7 @@ MonoBehaviour:
   freeze: 0
   unlimited: 0
   wallGrabbing: 0
+  quickTurned: 0
   boosting:
     m_InternalValue: 0
   restricted: 0
@@ -375,6 +376,7 @@ MonoBehaviour:
   useGravity: 0
   gravityCounterForce: 3.57
   coyoteTime: 0.3
+  quickTurnSpeedModifier: 0.5
   tiltValue: 7
   orientation: {fileID: 4194629556480869669}
   cam: {fileID: 7304055498322609760}

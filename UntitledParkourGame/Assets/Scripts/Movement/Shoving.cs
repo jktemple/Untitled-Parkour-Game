@@ -112,7 +112,7 @@ public class Shoving : NetworkBehaviour
         p.GetComponent<NetworkObject>().Spawn();
        
 
-        Debug.Log("Spawning with id value = " + p.id.Value);
+        //Debug.Log("Spawning with id value = " + p.id.Value);
     }
     
     void SetName(string name)

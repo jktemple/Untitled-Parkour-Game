@@ -128,6 +128,7 @@ public class PlayerMovement : NetworkBehaviour
     public bool freeze;
     public bool unlimited;
     public bool wallGrabbing;
+    public bool quickTurned = false;
     public NetworkVariable<bool> boosting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
@@ -401,6 +402,10 @@ public class PlayerMovement : NetworkBehaviour
         stateHandler();
         HandleDrag();
         UpdateSound();
+        if (grounded)
+        {
+            quickTurned = false;
+        }
         
     }
 
