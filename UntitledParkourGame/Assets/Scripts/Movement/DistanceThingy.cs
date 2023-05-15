@@ -14,8 +14,13 @@ public class DistanceThingy : NetworkBehaviour
     PlayerMovement pm;
     PlayerMovement.MovementState prevState;
     PlayerMovement.MovementState currentState;
+    PlayerMovement.MovementState storedState = PlayerMovement.MovementState.running;
     Vector3 startPos;
     float startTime;
+    float distStartTime;
+    int totalDist;
+    int dist;
+    bool chained;
     void Start()
     {
         if(!IsOwner) return;
@@ -33,7 +38,7 @@ public class DistanceThingy : NetworkBehaviour
     {
         if (!IsOwner) return;
         currentState= pm.state;
-        if( prevState != currentState )
+        if( prevState != currentState ) //happens when state changes
         {
             startPos= transform.position;
             if (currentState == PlayerMovement.MovementState.wallrunning || currentState == PlayerMovement.MovementState.sliding || currentState == PlayerMovement.MovementState.climbing || currentState == PlayerMovement.MovementState.air)
@@ -49,6 +54,7 @@ public class DistanceThingy : NetworkBehaviour
                 StopAllCoroutines();
                 if (currentState == PlayerMovement.MovementState.air) {
                     startTime = Time.time;
+                    StartCoroutine(FadeOutDistanceLabel(0.25f));
                 }
                 else
                 {
@@ -61,13 +67,14 @@ public class DistanceThingy : NetworkBehaviour
             {
                 //StopAllCoroutines();
                 StartCoroutine(FadeOutDistanceLabel(0.25f));
-            }   
+            }  
         }
 
         if (currentState == PlayerMovement.MovementState.wallrunning || currentState == PlayerMovement.MovementState.sliding || currentState == PlayerMovement.MovementState.climbing)
         { 
-            int dist = (int) Mathf.Abs((transform.position - startPos).magnitude);
-            distanceValue.SetText(dist.ToString() + "m");
+            dist = (int) Mathf.Abs((transform.position - startPos).magnitude);
+            int temp = dist;
+            distanceValue.SetText(temp.ToString() + "m");
         } else if(currentState == PlayerMovement.MovementState.air)
         {
             float t = (Time.time - startTime);
@@ -77,11 +84,10 @@ public class DistanceThingy : NetworkBehaviour
                 distanceLabel.gameObject.SetActive(true);
                 distanceValue.gameObject.SetActive(true);
                 distanceValue.SetText(t.ToString("F2") + "s");
-            } else
-            {
-                distanceValue.SetText("");
-            }
+            } 
         }
+
+
         prevState = currentState;
     }
 
