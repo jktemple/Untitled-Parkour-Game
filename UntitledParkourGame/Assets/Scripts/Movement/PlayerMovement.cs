@@ -330,6 +330,8 @@ public class PlayerMovement : NetworkBehaviour
     // Start is called before the first frame update
 
     public bool boostTest;
+
+    PlayerAnimatorController animatorController;
     void Start()
     {
         if (!IsOwner) return;
@@ -379,6 +381,7 @@ public class PlayerMovement : NetworkBehaviour
             Debug.Log("Couldn't find Movement Icon UI");
         }
 
+        animatorController = GetComponent<PlayerAnimatorController>();
     }
 
 
@@ -559,6 +562,8 @@ public class PlayerMovement : NetworkBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+
+        animatorController.SetGroundJumpTrigger();
         // FMODUnity.RuntimeManager.PlayOneShot("event:/Jumping", GetComponent<Transform>().position);
     }
 
