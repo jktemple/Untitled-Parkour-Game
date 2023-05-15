@@ -58,7 +58,7 @@ public class Boosting : NetworkBehaviour
         adjustment.y += adjustAmount;
         Physics.SphereCast(adjustment, boostSphereCastRadius, Vector3.down, out boostHit, boostSphereCastDistance, whatIsPlayer);
 
-        if (hitBoxVisuals && inputs.PlayerMovement.WallGrab.IsPressed())
+        if (hitBoxVisuals && inputs.PlayerMovement.WallGrab.WasPressedThisFrame())
         {
             // Vector3 position = playerObject.position + orientation.forward * 0.7f;
             Vector3 position = adjustment;
