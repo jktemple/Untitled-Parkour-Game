@@ -94,8 +94,9 @@ public class VirusTagGameModeManager : NetworkBehaviour
 
     private bool AllInfected()
     {
+        Shoving[] listOfPlayers = GameObject.FindObjectsOfType<Shoving>();
         bool r = true;
-        foreach(Shoving s in shoveList)
+        foreach(Shoving s in listOfPlayers)
         {
             if (!s.infected.Value) 
             {
