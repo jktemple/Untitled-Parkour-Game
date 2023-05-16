@@ -382,6 +382,10 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         animatorController = GetComponent<PlayerAnimatorController>();
+        if(animatorController == null)
+        {
+            Debug.Log("Animator Controller is null");
+        }
     }
 
 
@@ -563,6 +567,7 @@ public class PlayerMovement : NetworkBehaviour
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
+        if(animatorController!= null)
         animatorController.SetGroundJumpTrigger();
         // FMODUnity.RuntimeManager.PlayOneShot("event:/Jumping", GetComponent<Transform>().position);
     }

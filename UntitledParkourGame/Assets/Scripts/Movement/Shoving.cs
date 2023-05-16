@@ -62,6 +62,7 @@ public class Shoving : NetworkBehaviour
         shoved.Value = false;
         taggedHash = Animator.StringToHash("Tagged");
         playerNumber.Value = FindObjectsOfType<Shoving>().Length;
+        if(EditPlayerName.Instance != null)
         SetName(EditPlayerName.Instance.GetPlayerName());
     }
 
