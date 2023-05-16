@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
+using Unity.Collections;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -26,6 +28,7 @@ public class Shoving : NetworkBehaviour
     public NetworkVariable<bool> infected = new NetworkVariable<bool>();
     public NetworkVariable<int> score = new NetworkVariable<int>();
     public NetworkVariable<int> playerNumber = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<FixedString32Bytes> playerName = new NetworkVariable<FixedString32Bytes>("Player", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private bool inShoveLag = false;
 
 
@@ -37,6 +40,7 @@ public class Shoving : NetworkBehaviour
     public PushObject pushObjectPrefab;
     public FakePushObject fakePush;
 
+    private GameObject nameText;
 
     public float camOffset;
     public bool hitBoxVisuals;
@@ -58,7 +62,7 @@ public class Shoving : NetworkBehaviour
         shoved.Value = false;
         taggedHash = Animator.StringToHash("Tagged");
         playerNumber.Value = FindObjectsOfType<Shoving>().Length;
-
+        SetName(EditPlayerName.Instance.GetPlayerName());
     }
 
     // Update is called once per frame
@@ -75,7 +79,9 @@ public class Shoving : NetworkBehaviour
             } else
             {
                 Instantiate<FakePushObject>(fakePush, playerObject.position + orientation.forward*camOffset, Quaternion.LookRotation(orientation.forward));
-                SpawnPushObjectServerRPC(playerObject.position + orientation.forward*0.7f, orientation.forward, infected.Value);
+                ServerRpcParams sendParams = new ServerRpcParams();
+                sendParams.Receive.SenderClientId = NetworkManager.LocalClientId;
+                SpawnPushObjectServerRPC(playerObject.position + orientation.forward*0.7f, orientation.forward, infected.Value, sendParams);
                 ableToShove = false;
                 Invoke(nameof(ResetShove), shoveCooldown);
 
@@ -94,20 +100,25 @@ public class Shoving : NetworkBehaviour
     }
 
     [ServerRpc]
-    void SpawnPushObjectServerRPC(Vector3 position, Vector3 direction, bool i, ServerRpcParams serverRpcParams = default)
+    void SpawnPushObjectServerRPC(Vector3 position, Vector3 direction, bool i, ServerRpcParams serverRpcParams)
     {
         //Debug.Log("Spawning Object Position = " + position + " Direction = " + direction);
         
         PushObject p = Instantiate<PushObject>(pushObjectPrefab, position + direction, Quaternion.LookRotation(direction));
         var clientId = serverRpcParams.Receive.SenderClientId;
-        p.GetComponent<NetworkObject>().Spawn();
         p.id.Value = clientId;
         //p.distance.Value = shoveDistance;
         p.isInfected.Value = i;
-        
+        p.GetComponent<NetworkObject>().Spawn();
+       
+
+        //Debug.Log("Spawning with id value = " + p.id.Value);
     }
     
-
+    void SetName(string name)
+    {
+        playerName.Value = name;
+    }
 
     [ServerRpc]
     public void ShoveServerRPC(Vector3 position, Vector3 direction, bool infected)

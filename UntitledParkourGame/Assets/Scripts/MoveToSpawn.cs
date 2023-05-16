@@ -29,7 +29,7 @@ public class MoveToSpawn : NetworkBehaviour
             ableToMove= false;
             MovetoSpawnPoint();
             ResetMoveToSpawnServerRPC();
-            Invoke(nameof(ResetAbleToMove), 3f);
+            Invoke(nameof(ResetAbleToMove), 5f);
         }
     }
 
@@ -37,7 +37,7 @@ public class MoveToSpawn : NetworkBehaviour
     {
         if (!IsOwner) return;
         transform.position = spawnPointTransfrom.Value;
-        
+        GetComponent<PlayerMovement>().ResetStamina();
     }
 
     [ServerRpc]
