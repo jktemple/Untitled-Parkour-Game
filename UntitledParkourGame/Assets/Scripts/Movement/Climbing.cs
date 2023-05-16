@@ -120,8 +120,8 @@ public class Climbing : NetworkBehaviour
         if(((wallFront||wallBack) && inputs.PlayerMovement.Jump.triggered && climbJumpsLeft > 0 && !pm.wallrunning && !wr.exitingWall && minClimbTimer<=0) && !pm.wallGrabbing)
         {
             Debug.Log("Normal Clmb Jump");
-            
-            ClimbJump(wallBack);
+            Debug.Log("WallBack = " + wallBack);
+            ClimbJump(!wallFront);
         }
         /*
         if (coyoteTimer > 0 && coyoteJumpAvailable && inputs.PlayerMovement.Jump.triggered && climbJumpsLeft > 0 && !pm.wallrunning)
@@ -136,7 +136,7 @@ public class Climbing : NetworkBehaviour
     private void WallCheck()
     {
         wallFront = Physics.SphereCast(transform.position, sphereCastRadius, orientation.forward, out frontWallHit, detectionLength, whatIsWall);
-        wallBack = Physics.SphereCast(transform.position, sphereCastRadius, -orientation.forward, out backWallHit, detectionLength*0.5f, whatIsWall);
+        wallBack = Physics.SphereCast(transform.position, sphereCastRadius, -orientation.forward, out backWallHit, detectionLength, whatIsWall);
         wallLookAngle = Vector3.Angle(orientation.forward, -frontWallHit.normal);
         if (wallBack) Debug.Log("wallBack = true");
 

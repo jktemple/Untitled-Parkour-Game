@@ -349,32 +349,24 @@ public class PlayerMovement : NetworkBehaviour
         // sprintDelayTime = 1; // in seconds // for if these are implemented later
         // delayTimeLeft = sprintDelayTime; 
 
-        playerFootsteps = AudioManager.instance.CreateInstance(FMODEvents.instance.playerFootsteps);
-        playerSlidingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerSlidingsfx);
-        playerWallrunningsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerWallrunningsfx);
-        playerWallclimbingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerWallclimbingsfx);
-        playerBoostingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerBoostingsfx);
-        playerJumpingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerJumpingsfx);
+        
 
 
         unpaused = true;
         groundCoyoteTimer = groundCoyoteTime;
 
         // Movement state indication UI
-        canvas = GameObject.Find("Lobby Canvas");
-
-        if (canvas != null)
+        movementIcon = GameObject.Find("Movement Icon UI").gameObject;
+        
+        if(movementIcon == null ) 
         {
-            movementIcon = canvas.transform.Find("Movement Icon UI").gameObject;
-        }
-        else
-        {
-            Debug.Log("Couldn't find Lobby Canvas");
+            Debug.Log("Couldn't find Movement Icon");
         }
 
         if (movementIcon != null)
         {
             icon = movementIcon.GetComponent<TextMeshProUGUI>();
+            Debug.Log("Icon == " + icon.ToString());
         }
         else
         {
@@ -386,6 +378,13 @@ public class PlayerMovement : NetworkBehaviour
         {
             Debug.Log("Animator Controller is null");
         }
+
+        playerFootsteps = AudioManager.instance.CreateInstance(FMODEvents.instance.playerFootsteps);
+        playerSlidingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerSlidingsfx);
+        playerWallrunningsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerWallrunningsfx);
+        playerWallclimbingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerWallclimbingsfx);
+        playerBoostingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerBoostingsfx);
+        playerJumpingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerJumpingsfx);
     }
 
 
