@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using FMOD.Studio;
 
 public class PushObject : NetworkBehaviour
 {
@@ -27,6 +28,10 @@ public class PushObject : NetworkBehaviour
     //private float startTime;
     //private float journeyLength;
     Rigidbody rb;
+
+    private EventInstance playerShovingFailedsfx;
+
+
     public override void OnNetworkSpawn()
     {
 
@@ -39,6 +44,10 @@ public class PushObject : NetworkBehaviour
         //startTime = Time.time;
         rb = GetComponent<Rigidbody>();
         rb.velocity = this.transform.forward*speed;
+    }
+
+    void start(){
+        playerShovingFailedsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerShovingFailedsfx);
     }
 
     // Update is called once per frame
@@ -98,4 +107,20 @@ public class PushObject : NetworkBehaviour
         rb.position = Vector3.Lerp(startMarker, endMarker, fractionOfJourney);
     }
     */
+    private void updateFailedSound(){
+        // Debug.Log("testsound");
+        if(isInfected.Value == false){
+            PLAYBACK_STATE shovingFailedplaybackState;
+            playerShovingFailedsfx.getPlaybackState (out shovingFailedplaybackState);
+
+            if(shovingFailedplaybackState.Equals(PLAYBACK_STATE.STOPPED)){
+                playerShovingFailedsfx.start();
+            }
+        }
+        else{
+            playerShovingFailedsfx.stop(STOP_MODE.ALLOWFADEOUT);
+        }
+    }
+
+
 }

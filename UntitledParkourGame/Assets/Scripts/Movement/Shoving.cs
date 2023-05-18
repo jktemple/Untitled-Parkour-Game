@@ -79,7 +79,7 @@ public class Shoving : NetworkBehaviour
             {
                 Instantiate<FakePushObject>(fakePush, playerObject.position + orientation.forward*camOffset, Quaternion.LookRotation(orientation.forward));
                 SpawnPushObjectServerRPC(playerObject.position + orientation.forward*0.7f, orientation.forward, infected.Value);
-                updateFailedSound();
+                // updateFailedSound();
                 ableToShove = false;
                 Invoke(nameof(ResetShove), shoveCooldown);
 
