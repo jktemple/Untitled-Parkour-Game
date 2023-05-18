@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18154658, g: 0.22718708, b: 0.30740505, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154642, g: 0.22718683, b: 0.30740464, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -17814,7 +17814,21 @@ MonoBehaviour:
       Data3: -813922114
       Data4: -890521013
     Path: event:/JumpingV5
-  <playerShovingsfx>k__BackingField:
+  <playerShovingSuccesssfx>k__BackingField:
+    Guid:
+      Data1: 1709803502
+      Data2: 1136925223
+      Data3: 1819956353
+      Data4: -1124573742
+    Path: event:/ShovingSuccessV1
+  <playerShovingFailedsfx>k__BackingField:
+    Guid:
+      Data1: -886783712
+      Data2: 1241674537
+      Data3: -1133081215
+      Data4: 468285493
+    Path: event:/ShovingFailedV1
+  <playerGetShovedsfx>k__BackingField:
     Guid:
       Data1: 1596703088
       Data2: 1191669603
