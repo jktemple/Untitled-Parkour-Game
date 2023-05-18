@@ -625,7 +625,7 @@ public class PlayerMovement : NetworkBehaviour
             }
         }
 
-        if ((rb.velocity.x != 0 || rb.velocity.y != 0) && grounded && unpaused){
+        if((rb.velocity.x != 0 || rb.velocity.y != 0) && grounded && unpaused){
             PLAYBACK_STATE playbackState;
             playerFootsteps.getPlaybackState (out playbackState);
          

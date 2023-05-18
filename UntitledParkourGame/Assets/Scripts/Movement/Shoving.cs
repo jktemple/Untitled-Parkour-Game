@@ -7,7 +7,7 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
-// using FMOD.Studio;
+using FMOD.Studio;
 
 public class Shoving : NetworkBehaviour
 {
@@ -46,7 +46,10 @@ public class Shoving : NetworkBehaviour
     public bool hitBoxVisuals;
     public bool sphereCast;
 
-    // private EventInstance playerShovingsfx;
+    //Audio Private Instances
+    // private EventInstance playerShovingFailedsfx;
+    private EventInstance playerGetShovedsfx;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,6 +67,9 @@ public class Shoving : NetworkBehaviour
         playerNumber.Value = FindObjectsOfType<Shoving>().Length;
         if(EditPlayerName.Instance != null)
         SetName(EditPlayerName.Instance.GetPlayerName());
+
+        // playerShovingFailedsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerShovingFailedsfx);
+        playerGetShovedsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerGetShovedsfx);
     }
 
     // Update is called once per frame
@@ -88,6 +94,7 @@ public class Shoving : NetworkBehaviour
 
             }
         }
+
         if(shoved.Value && !inShoveLag)
         {
             rb.AddForce(shoveDir.Value.normalized * shoveForce, ForceMode.Impulse);
@@ -96,14 +103,14 @@ public class Shoving : NetworkBehaviour
             Invoke(nameof(ResetShoveLag), 0.5f);
         }
         animator.SetBool(taggedHash, infected.Value);
-        // updateSound();
+
 
     }
 
     [ServerRpc]
     void SpawnPushObjectServerRPC(Vector3 position, Vector3 direction, bool i, ServerRpcParams serverRpcParams)
     {
-        //Debug.Log("Spawning Object Position = " + position + " Direction = " + direction);
+        // Debug.Log("Spawning Object Position = " + position + " Direction = " + direction);
         
         PushObject p = Instantiate<PushObject>(pushObjectPrefab, position + direction, Quaternion.LookRotation(direction));
         var clientId = serverRpcParams.Receive.SenderClientId;
@@ -203,6 +210,7 @@ public class Shoving : NetworkBehaviour
                 if (p.isInfected.Value)
                 {
                     infected.Value = true;
+                    updateSound();
                 }
             }
             Destroy(other.gameObject);
@@ -212,18 +220,33 @@ public class Shoving : NetworkBehaviour
 
 
     // audio sfx for after tag the player
-    // save for later implement
-    // private void updateSound(){
-    //     if(infected.Value == true){
-    //         PLAYBACK_STATE shovingplaybackState;
-    //         playerShovingsfx.getPlaybackState (out shovingplaybackState);
+    private void updateSound(){
+        if(infected.Value == true){
+            PLAYBACK_STATE shovingplaybackState;
+            playerGetShovedsfx.getPlaybackState (out shovingplaybackState);
 
-    //         if(shovingplaybackState.Equals(PLAYBACK_STATE.STOPPED)){
-    //             playerShovingsfx.start();
+            if(shovingplaybackState.Equals(PLAYBACK_STATE.STOPPED)){
+                playerGetShovedsfx.start();
+            }
+        }
+        else{
+            playerGetShovedsfx.stop(STOP_MODE.ALLOWFADEOUT);
+        }
+    }
+
+
+    // private void updateFailedSound(){
+    //     // Debug.Log("testsound");
+    //     if(infected.Value == false){
+    //         PLAYBACK_STATE shovingFailedplaybackState;
+    //         playerShovingFailedsfx.getPlaybackState (out shovingFailedplaybackState);
+
+    //         if(shovingFailedplaybackState.Equals(PLAYBACK_STATE.STOPPED)){
+    //             playerShovingFailedsfx.start();
     //         }
     //     }
     //     else{
-    //         playerShovingsfx.stop(STOP_MODE.ALLOWFADEOUT);
+    //         playerShovingFailedsfx.stop(STOP_MODE.ALLOWFADEOUT);
     //     }
     // }
 

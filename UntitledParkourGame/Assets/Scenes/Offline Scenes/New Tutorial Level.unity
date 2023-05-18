@@ -4084,54 +4084,68 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <playerFootsteps>k__BackingField:
     Guid:
-      Data1: -1469094421
-      Data2: 1246359713
-      Data3: 1839137688
-      Data4: 137656414
-    Path: event:/WalkingV3
+      Data1: 1905533879
+      Data2: 1174152603
+      Data3: -932905307
+      Data4: -1337652830
+    Path: event:/FootstepV5
   <playerSlidingsfx>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 53178743
+      Data2: 1259208122
+      Data3: -1426245959
+      Data4: -1897982819
+    Path: event:/SlidingV2
   <playerWallrunningsfx>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -174659108
+      Data2: 1161800977
+      Data3: -813922114
+      Data4: -890521013
+    Path: event:/JumpingV5
   <playerWallclimbingsfx>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -174659108
+      Data2: 1161800977
+      Data3: -813922114
+      Data4: -890521013
+    Path: event:/JumpingV5
   <playerBoostingsfx>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -594772484
+      Data2: 1274357222
+      Data3: 1963701409
+      Data4: 576034364
+    Path: event:/BoostingV1
   <playerJumpingsfx>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
-  <playerShovingsfx>k__BackingField:
+      Data1: -174659108
+      Data2: 1161800977
+      Data3: -813922114
+      Data4: -890521013
+    Path: event:/JumpingV5
+  <playerShovingSuccesssfx>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
---- !u!1 &523247291
+      Data1: 1596703088
+      Data2: 1191669603
+      Data3: 2004206734
+      Data4: 1497414605
+    Path: event:/TaggingV1
+  <playerShovingFailedsfx>k__BackingField:
+    Guid:
+      Data1: -886783712
+      Data2: 1241674537
+      Data3: -1133081215
+      Data4: 468285493
+    Path: event:/ShovingFailedV1
+  <playerGetShovedsfx>k__BackingField:
+    Guid:
+      Data1: 1709803502
+      Data2: 1136925223
+      Data3: 1819956353
+      Data4: -1124573742
+    Path: event:/ShovingSuccessV1
+--- !u!1 &515016929
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

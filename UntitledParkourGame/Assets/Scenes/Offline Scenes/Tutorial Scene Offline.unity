@@ -2497,7 +2497,21 @@ MonoBehaviour:
       Data3: -813922114
       Data4: -890521013
     Path: event:/JumpingV5
-  <playerShovingsfx>k__BackingField:
+  <playerShovingSuccesssfx>k__BackingField:
+    Guid:
+      Data1: 1709803502
+      Data2: 1136925223
+      Data3: 1819956353
+      Data4: -1124573742
+    Path: event:/ShovingSuccessV1
+  <playerShovingFailedsfx>k__BackingField:
+    Guid:
+      Data1: -886783712
+      Data2: 1241674537
+      Data3: -1133081215
+      Data4: 468285493
+    Path: event:/ShovingFailedV1
+  <playerGetShovedsfx>k__BackingField:
     Guid:
       Data1: 1596703088
       Data2: 1191669603
@@ -5772,7 +5786,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
