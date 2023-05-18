@@ -29,7 +29,7 @@ public class FMODEvents : MonoBehaviour
     [field: Header("Shoving/Tagging Failed Sfx")]
     [field: SerializeField] public EventReference playerShovingFailedsfx { get; private set; }
 
-    [field: Header("Get Shoeved Sfx")]
+    [field: Header("Get Shoved Sfx")]
     [field: SerializeField] public EventReference playerGetShovedsfx { get; private set; }
 
     public static FMODEvents instance{ get; private set; }

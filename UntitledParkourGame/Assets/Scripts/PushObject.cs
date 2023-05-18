@@ -29,7 +29,9 @@ public class PushObject : NetworkBehaviour
     //private float journeyLength;
     Rigidbody rb;
 
+    //Audio Instances
     private EventInstance playerShovingFailedsfx;
+    private EventInstance playerShovingSuccesssfx;
 
 
     public override void OnNetworkSpawn()
@@ -44,27 +46,30 @@ public class PushObject : NetworkBehaviour
         //startTime = Time.time;
         rb = GetComponent<Rigidbody>();
         rb.velocity = this.transform.forward*speed;
+
+        //Audio Instances Create
+        playerShovingFailedsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerShovingFailedsfx);
+        playerShovingSuccesssfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerShovingSuccesssfx);
     }
 
-    void start(){
-        playerShovingFailedsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerShovingFailedsfx);
-    }
+    // void start(){
+    //     playerShovingFailedsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerShovingFailedsfx);
+    // }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("test");
         if ((transform.position-startMarker).magnitude >= distance)
         {
             Invoke(nameof(DestroyHelper), 0.2f);
             rb.velocity = Vector3.zero;
-            Debug.Log("test magnitude");
+            updateFailedSound();
         }
 
         if(rb.velocity == Vector3.zero)
         {
             Invoke(nameof(DestroyHelper), 0.2f);
-            Debug.Log("test velocity");
+            updateFailedSound();
         }
         /*
         if(activeTimer < hitboxActiveTime)
@@ -89,10 +94,19 @@ public class PushObject : NetworkBehaviour
         GameObject go = other.gameObject;
         if (collisionMask == (collisionMask | (1 << go.layer)))
         {
-            Debug.Log("Destroying");
+            // Debug.Log("Destroying");
             rb.velocity = Vector3.zero;
             Destroy(gameObject); 
         }
+
+        if (isInfected.Value == false){
+            updateFailedSound();
+        }
+        else{
+            updateSound();
+        }
+
+    
     }
     
     /*
@@ -107,8 +121,25 @@ public class PushObject : NetworkBehaviour
         rb.position = Vector3.Lerp(startMarker, endMarker, fractionOfJourney);
     }
     */
+
+
+    //Audio Updates
+
+    private void updateSound(){
+        if(isInfected.Value == true){
+            PLAYBACK_STATE shovingplaybackState;
+            playerShovingSuccesssfx.getPlaybackState (out shovingplaybackState);
+
+            if(shovingplaybackState.Equals(PLAYBACK_STATE.STOPPED)){
+                playerShovingSuccesssfx.start();
+            }
+        }
+        else{
+            playerShovingSuccesssfx.stop(STOP_MODE.ALLOWFADEOUT);
+        }
+    }
+
     private void updateFailedSound(){
-        // Debug.Log("testsound");
         if(isInfected.Value == false){
             PLAYBACK_STATE shovingFailedplaybackState;
             playerShovingFailedsfx.getPlaybackState (out shovingFailedplaybackState);

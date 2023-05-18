@@ -42,8 +42,10 @@ public class Shoving : NetworkBehaviour
     public bool hitBoxVisuals;
     public bool sphereCast;
 
-    private EventInstance playerShovingFailedsfx;
-    private EventInstance playerShovingSuccesssfx;
+    //Audio Private Instances
+    // private EventInstance playerShovingFailedsfx;
+    private EventInstance playerGetShovedsfx;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,8 +62,8 @@ public class Shoving : NetworkBehaviour
         taggedHash = Animator.StringToHash("Tagged");
         playerNumber.Value = FindObjectsOfType<Shoving>().Length;
 
-        playerShovingFailedsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerShovingFailedsfx);
-        playerShovingSuccesssfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerShovingSuccesssfx);
+        // playerShovingFailedsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerShovingFailedsfx);
+        playerGetShovedsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerGetShovedsfx);
     }
 
     // Update is called once per frame
@@ -79,7 +81,6 @@ public class Shoving : NetworkBehaviour
             {
                 Instantiate<FakePushObject>(fakePush, playerObject.position + orientation.forward*camOffset, Quaternion.LookRotation(orientation.forward));
                 SpawnPushObjectServerRPC(playerObject.position + orientation.forward*0.7f, orientation.forward, infected.Value);
-                // updateFailedSound();
                 ableToShove = false;
                 Invoke(nameof(ResetShove), shoveCooldown);
 
@@ -96,14 +97,12 @@ public class Shoving : NetworkBehaviour
         animator.SetBool(taggedHash, infected.Value);
 
 
-        // updateSound();
-
     }
 
     [ServerRpc]
     void SpawnPushObjectServerRPC(Vector3 position, Vector3 direction, bool i, ServerRpcParams serverRpcParams = default)
     {
-        Debug.Log("Spawning Object Position = " + position + " Direction = " + direction);
+        // Debug.Log("Spawning Object Position = " + position + " Direction = " + direction);
         
         PushObject p = Instantiate<PushObject>(pushObjectPrefab, position + direction, Quaternion.LookRotation(direction));
         var clientId = serverRpcParams.Receive.SenderClientId;
@@ -211,32 +210,32 @@ public class Shoving : NetworkBehaviour
     private void updateSound(){
         if(infected.Value == true){
             PLAYBACK_STATE shovingplaybackState;
-            playerShovingSuccesssfx.getPlaybackState (out shovingplaybackState);
+            playerGetShovedsfx.getPlaybackState (out shovingplaybackState);
 
             if(shovingplaybackState.Equals(PLAYBACK_STATE.STOPPED)){
-                playerShovingSuccesssfx.start();
+                playerGetShovedsfx.start();
             }
         }
         else{
-            playerShovingSuccesssfx.stop(STOP_MODE.ALLOWFADEOUT);
+            playerGetShovedsfx.stop(STOP_MODE.ALLOWFADEOUT);
         }
     }
 
 
-    private void updateFailedSound(){
-        // Debug.Log("testsound");
-        if(infected.Value == false){
-            PLAYBACK_STATE shovingFailedplaybackState;
-            playerShovingFailedsfx.getPlaybackState (out shovingFailedplaybackState);
+    // private void updateFailedSound(){
+    //     // Debug.Log("testsound");
+    //     if(infected.Value == false){
+    //         PLAYBACK_STATE shovingFailedplaybackState;
+    //         playerShovingFailedsfx.getPlaybackState (out shovingFailedplaybackState);
 
-            if(shovingFailedplaybackState.Equals(PLAYBACK_STATE.STOPPED)){
-                playerShovingFailedsfx.start();
-            }
-        }
-        else{
-            playerShovingFailedsfx.stop(STOP_MODE.ALLOWFADEOUT);
-        }
-    }
+    //         if(shovingFailedplaybackState.Equals(PLAYBACK_STATE.STOPPED)){
+    //             playerShovingFailedsfx.start();
+    //         }
+    //     }
+    //     else{
+    //         playerShovingFailedsfx.stop(STOP_MODE.ALLOWFADEOUT);
+    //     }
+    // }
 
 
 }
