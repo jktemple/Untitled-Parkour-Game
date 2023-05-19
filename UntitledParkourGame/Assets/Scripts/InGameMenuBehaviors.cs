@@ -22,6 +22,7 @@ public class InGameMenuBehaviors : MonoBehaviour
         scoreBoard.SetActive(false);
         reticle.SetActive(false);
         Application.targetFrameRate = 120;
+        if (LobbyManager.Instance != null)
         LobbyManager.Instance.OnGameStarted += LobbyManager_OnGameStarted;
     }
 
