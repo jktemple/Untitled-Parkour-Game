@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 4194629557394367931}
   - component: {fileID: 6474022069339930156}
   m_Layer: 0
-  m_Name: PlayerWrapperNetwork
+  m_Name: PlayerWrapperNetwork NoRespawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -233,7 +233,6 @@ GameObject:
   - component: {fileID: 3909188716020916071}
   - component: {fileID: 3495815631204614950}
   - component: {fileID: 9102033577000056747}
-  - component: {fileID: 5081828097144259182}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -693,20 +692,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4580aff7f637f8b49bb809ff44ef593d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5081828097144259182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4194629557659296703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 987af5c3a6798ed4d9d945fc1b7212ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 4194629557659296679}
-  threshhold: -35
 --- !u!1 &4194629557836493343
 GameObject:
   m_ObjectHideFlags: 0

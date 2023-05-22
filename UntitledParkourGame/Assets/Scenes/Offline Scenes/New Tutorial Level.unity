@@ -4167,7 +4167,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523247291}
+  m_GameObject: {fileID: 515016929}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -5749,10 +5749,10 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 715202809}
-    PlayerPrefab: {fileID: 4194629557394367924, guid: 93baea8b67961f142a8b62f1313af68b, type: 3}
+    PlayerPrefab: {fileID: 4194629557394367924, guid: 2a25b3084a021ba44986d794a7107e89, type: 3}
     NetworkPrefabs:
     - Override: 0
-      Prefab: {fileID: 4194629557394367924, guid: 93baea8b67961f142a8b62f1313af68b, type: 3}
+      Prefab: {fileID: 4194629557394367924, guid: 2a25b3084a021ba44986d794a7107e89, type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
