@@ -74,7 +74,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""HorizontalLook"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""ea2b65fb-ca47-470c-a7dd-2d4a0ce39270"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
@@ -83,7 +83,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""VerticalLook"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""74ac6766-d5d7-490e-a9db-7a99004f6ad3"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
@@ -296,7 +296,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""2D Vector"",
                     ""id"": ""29d52066-17d7-47a8-bc56-49e74a8f8339"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": ""StickDeadzone"",
                     ""groups"": """",
@@ -305,7 +305,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
+                    ""name"": ""Up"",
                     ""id"": ""fb1c8eba-2c11-4f35-ae3a-188476871182"",
                     ""path"": ""<Gamepad>/leftStick/up"",
                     ""interactions"": """",
@@ -316,7 +316,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""down"",
+                    ""name"": ""Down"",
                     ""id"": ""36d466dd-72f5-4a71-9a7f-336bf6499898"",
                     ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
@@ -327,7 +327,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""left"",
+                    ""name"": ""Left"",
                     ""id"": ""abe11d75-c5d8-41b1-a2bc-51073260bf53"",
                     ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
@@ -338,8 +338,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""right"",
-                    ""id"": ""1e295d70-cad0-442a-921f-27fec5a19efe"",
+                    ""name"": ""Right"",
+                    ""id"": ""5aa5ff0d-0654-4bf9-bb1f-01b2bbce0dba"",
                     ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -364,7 +364,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""id"": ""41243b07-05d2-443e-8e8c-9fc8c6c909b0"",
                     ""path"": ""<Gamepad>/rightStick/x"",
                     ""interactions"": """",
-                    ""processors"": ""AxisDeadzone"",
+                    ""processors"": ""AxisDeadzone,Normalize(min=-1,max=1)"",
                     ""groups"": ""Gamepad"",
                     ""action"": ""HorizontalLook"",
                     ""isComposite"": false,
@@ -386,7 +386,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""id"": ""317b9b89-0404-4a27-9aef-647cee183130"",
                     ""path"": ""<Gamepad>/rightStick/y"",
                     ""interactions"": """",
-                    ""processors"": ""AxisDeadzone"",
+                    ""processors"": ""AxisDeadzone,Normalize(min=-1,max=1)"",
                     ""groups"": ""Gamepad"",
                     ""action"": ""VerticalLook"",
                     ""isComposite"": false,
