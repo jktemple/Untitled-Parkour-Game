@@ -307,6 +307,9 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 199680
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 199680
   grounded: 0
   maxSlopeAngle: 40
   climpingScript: {fileID: 4194629557659296675}

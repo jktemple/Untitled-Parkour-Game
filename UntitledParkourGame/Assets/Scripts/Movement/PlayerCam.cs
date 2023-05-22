@@ -177,6 +177,7 @@ public class PlayerCam : NetworkBehaviour
             t += Time.deltaTime;
             startRotation = Mathf.LerpAngle(startRotation, endAngle, t / time);
             camHolder.eulerAngles = new Vector3(camHolder.eulerAngles.x, camHolder.eulerAngles.y, startRotation);
+            Debug.Log("camHolder.eulerAngles.z = " + camHolder.eulerAngles.z);
             yield return null;
         }
     }
