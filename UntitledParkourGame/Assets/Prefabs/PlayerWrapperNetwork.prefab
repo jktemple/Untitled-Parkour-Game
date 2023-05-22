@@ -307,9 +307,6 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 199680
-  collisionMask:
-    serializedVersion: 2
-    m_Bits: 199680
   grounded: 0
   maxSlopeAngle: 40
   climpingScript: {fileID: 4194629557659296675}
@@ -382,7 +379,7 @@ MonoBehaviour:
   gravityCounterForce: 3.57
   coyoteTime: 0.3
   quickTurnSpeedModifier: 0.5
-  tiltValue: 7
+  tiltValue: 9
   orientation: {fileID: 4194629556480869669}
   cam: {fileID: 7304055498322609760}
 --- !u!114 &4194629557659296675
@@ -843,7 +840,7 @@ MonoBehaviour:
   gamepadSensY: 200
   quickTurnTime: 0.2
   fov: 80
-  tiltTime: 0.35
+  tiltTime: 0.3
   orientation: {fileID: 4194629556480869669}
   camHolder: {fileID: 1719467378662260150}
 --- !u!1001 &4194629557624704211
