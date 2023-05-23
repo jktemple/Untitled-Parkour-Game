@@ -30,7 +30,6 @@ public class Boosting : NetworkBehaviour
     //private float boostJumpTimer;
     private bool boosting;
     private bool readyToBoostJump;
-    public bool hitBoxVisuals;
 
     RaycastHit boostHit;
 
@@ -58,30 +57,7 @@ public class Boosting : NetworkBehaviour
         adjustment.y += adjustAmount;
         Physics.SphereCast(adjustment, boostSphereCastRadius, Vector3.down, out boostHit, boostSphereCastDistance, whatIsPlayer);
 
-        if (hitBoxVisuals && inputs.PlayerMovement.WallGrab.WasPressedThisFrame())
-        {
-            // Vector3 position = playerObject.position + orientation.forward * 0.7f;
-            Vector3 position = adjustment;
-            Vector3 direction = -orientation.up;
 
-            float diam = boostSphereCastRadius * 2;
-            SphereCastVisual st = Instantiate<SphereCastVisual>(sphereCastVisual);
-
-            st.transform.position = position;
-            st.diameter = diam;
-            SphereCastVisual m = Instantiate<SphereCastVisual>(sphereCastVisual);
-
-            m.transform.position = position + direction.normalized * (boostSphereCastDistance / 2);
-            m.diameter = diam;
-            SphereCastVisual l = Instantiate<SphereCastVisual>(sphereCastVisual);
-
-            l.transform.position = position + direction.normalized * boostSphereCastDistance;
-            l.diameter = diam;
-            st.GetComponent<NetworkObject>().Spawn();
-            m.GetComponent<NetworkObject>().Spawn();
-            l.GetComponent<NetworkObject>().Spawn();
-
-        }
 
         //Debug.Log(boostHit.transform);
         if (pm.grounded && inputs.PlayerMovement.Boost.IsPressed() && !pm.sliding)
@@ -91,7 +67,8 @@ public class Boosting : NetworkBehaviour
         }
         else if(!pm.grounded && inputs.PlayerMovement.Jump.triggered && readyToBoostJump)
         {
-            
+            // the spot where canBoost will go
+
             if (boostHit.transform != null)
             {
                 if (boostHit.transform.GetComponent<PlayerMovement>().boosting.Value)
