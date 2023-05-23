@@ -1,14 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class BoostingHitbox : MonoBehaviour
+public class BoostingHitbox : NetworkBehaviour
 {
     public bool canBoost;
 
+    private void Start()
+    {
+        canBoost = false;
+    }
+
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.GetComponentInChildren<PlayerMovement>() != null && other.gameObject.GetComponentInChildren<PlayerMovement>().boosting.Value)
+        if (!IsOwner) return;
+        if (other.gameObject.GetComponentInChildren<PlayerMovement>() != null && other.gameObject.GetComponentInChildren<PlayerMovement>().boosting.Value)
         {
             canBoost = true;
             Debug.Log("canBoost true");
@@ -17,7 +24,8 @@ public class BoostingHitbox : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.GetComponentInChildren<PlayerMovement>() != null && other.gameObject.GetComponentInChildren<PlayerMovement>().boosting.Value)
+        if (!IsOwner) return;
+        if (other.gameObject.GetComponentInChildren<PlayerMovement>() != null)
         {
             canBoost = false;
             Debug.Log("canBoost false");
