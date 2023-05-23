@@ -119,7 +119,7 @@ public class PlayerCam : NetworkBehaviour
             mouseX = inputs.PlayerMovement.HorizontalLook.ReadValue<float>() * Time.deltaTime * gamepadSensX;
             mouseY = inputs.PlayerMovement.VerticalLook.ReadValue<float>() * Time.deltaTime * gamepadSensY;
         }
-        Debug.Log("current control scheme = " + playerInput.currentControlScheme);
+        //Debug.Log("current control scheme = " + playerInput.currentControlScheme);
         //Debug.Log("Quick Turning = " + quickTurning);
         //Debug.Log("X input: " + inputs.PlayerMovement.HorizontalLook.ReadValue<float>() + " Y Input: " + inputs.PlayerMovement.VerticalLook.ReadValue<float>());
         // updating the cam rotation idk whats rly happening here
