@@ -479,7 +479,7 @@ MonoBehaviour:
   boostSphereCastRadius: 5
   boostYScale: 0.5
   boostForwardForce: 10
-  boostUpwardForce: 20
+  boostUpwardForce: 10
   boostJumpCooldown: 0.5
 --- !u!114 &4194629557659296677
 MonoBehaviour:
