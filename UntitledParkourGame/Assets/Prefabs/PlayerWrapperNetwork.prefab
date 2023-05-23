@@ -795,7 +795,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2557099365663045436}
   - component: {fileID: 1612474774585305470}
-  - component: {fileID: 5139698096695869480}
+  - component: {fileID: 7339404971158219549}
   - component: {fileID: 8186424384942625175}
   m_Layer: 0
   m_Name: BoostingHitbox
@@ -835,8 +835,8 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!135 &5139698096695869480
-SphereCollider:
+--- !u!65 &7339404971158219549
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -846,7 +846,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1.5, y: 1, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8186424384942625175
 MonoBehaviour:
