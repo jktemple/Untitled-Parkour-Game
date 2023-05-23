@@ -473,6 +473,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   sphereCastVisual: {fileID: 1622880343235674311, guid: ed55b521e17e71b4cbed7952c4449721, type: 3}
+  boostingHitbox: {fileID: 8186424384942625175}
   adjustAmount: 1
   boostSphereCastDistance: 2
   boostSphereCastRadius: 5
@@ -826,14 +827,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8040873809837877948}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.0000001
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!135 &5139698096695869480
 SphereCollider:
   m_ObjectHideFlags: 0

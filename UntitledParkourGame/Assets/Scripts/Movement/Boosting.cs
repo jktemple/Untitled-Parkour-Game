@@ -16,6 +16,8 @@ public class Boosting : NetworkBehaviour
     public Rigidbody rb;
     public LayerMask whatIsPlayer;
     public SphereCastVisual sphereCastVisual;
+    [Tooltip("A reference to the gameobject holding the boosting sphere collider")]
+    public BoostingHitbox boostingHitbox;
 
     public float adjustAmount;
 
@@ -30,8 +32,6 @@ public class Boosting : NetworkBehaviour
     //private float boostJumpTimer;
     private bool boosting;
     private bool readyToBoostJump;
-
-    RaycastHit boostHit;
 
     private PlayerControls inputs;
     // Start is called before the first frame update
@@ -53,11 +53,6 @@ public class Boosting : NetworkBehaviour
 
     void StateMachine()
     {
-        Vector3 adjustment = transform.position;
-        adjustment.y += adjustAmount;
-        Physics.SphereCast(adjustment, boostSphereCastRadius, Vector3.down, out boostHit, boostSphereCastDistance, whatIsPlayer);
-
-
 
         //Debug.Log(boostHit.transform);
         if (pm.grounded && inputs.PlayerMovement.Boost.IsPressed() && !pm.sliding)
@@ -65,20 +60,12 @@ public class Boosting : NetworkBehaviour
             Debug.Log("Starting Boost");
             StartBoosting();
         }
-        else if(!pm.grounded && inputs.PlayerMovement.Jump.triggered && readyToBoostJump)
+        else if(!pm.grounded && inputs.PlayerMovement.Jump.triggered && readyToBoostJump && boostingHitbox.canBoost)
         {
-            // the spot where canBoost will go
-
-            if (boostHit.transform != null)
-            {
-                if (boostHit.transform.GetComponent<PlayerMovement>().boosting.Value)
-                {
-                    //Debug.Log("Boost Jump");
-                    BoostJump();
-                    Invoke(nameof(ResetBoostJump), boostJumpCooldown);
-                }
-            }
-        } else if(pm.boosting.Value)
+            BoostJump();
+            Invoke(nameof(ResetBoostJump), boostJumpCooldown);
+        } 
+        else if(pm.boosting.Value)
         {
             StopBoosting();
         }
