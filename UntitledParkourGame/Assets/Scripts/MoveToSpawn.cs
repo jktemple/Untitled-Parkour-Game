@@ -38,6 +38,7 @@ public class MoveToSpawn : NetworkBehaviour
         if (!IsOwner) return;
         transform.position = spawnPointTransfrom.Value;
         GetComponent<PlayerMovement>().ResetStamina();
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 
     [ServerRpc]

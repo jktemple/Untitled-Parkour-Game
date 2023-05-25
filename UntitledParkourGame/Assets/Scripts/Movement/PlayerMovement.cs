@@ -520,7 +520,7 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         // in air
-        else if(!grounded)
+        else if(!grounded && !collidingWithWall)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
         }
@@ -693,5 +693,23 @@ public class PlayerMovement : NetworkBehaviour
     public void ResetStamina()
     {
         currentStamina = maxStamina;
+    }
+
+    bool collidingWithWall = false;
+    private void OnCollisionStay(Collision collision)
+    {
+        
+        if(whatIsGround == (whatIsGround | (1 << collision.gameObject.layer)))
+        {
+            collidingWithWall = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (whatIsGround == (whatIsGround | (1 << collision.gameObject.layer)))
+        {
+            collidingWithWall = false;
+        }
     }
 }
