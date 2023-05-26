@@ -17,8 +17,8 @@ public class RumbleTestUI : MonoBehaviour
     [SerializeField] Slider highSliderEnd;
     [SerializeField] Dropdown modeDropdown;
     [SerializeField] ControllerRumbleManager rumbler;
-    private int[] timeDropdown = new int[] { 3, 5, 10 };
-    private RumblePattern[] rumbleMode = new RumblePattern[] { RumblePattern.Constant, RumblePattern.Pulse, RumblePattern.Linear };
+    private float[] timeDropdown = new float[] { 0.25f, 3f, 5f, 10f};
+    private RumblePattern[] rumbleMode = new RumblePattern[] { RumblePattern.Constant, RumblePattern.Pulse, RumblePattern.Linear, RumblePattern.Burst};
     public void SetDurration(int selectedValue)
     {
         rumbleTime = timeDropdown[selectedValue];
@@ -41,6 +41,9 @@ public class RumbleTestUI : MonoBehaviour
                 break;
             case RumblePattern.Linear:
                 rumbler.RumbleLinear(lowSlider.value, lowSliderEnd.value, highSlider.value, highSliderEnd.value, rumbleTime);
+                break;
+            case RumblePattern.Burst:
+                rumbler.RumbleBurst(lowSlider.value, highSlider.value, PulseFrequency);
                 break;
             default:
                 break;

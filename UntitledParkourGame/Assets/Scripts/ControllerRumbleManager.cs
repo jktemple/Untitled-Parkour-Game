@@ -8,9 +8,12 @@ public class ControllerRumbleManager : MonoBehaviour
 {
     [SerializeField]
     PlayerInput _playerInput;
+    [SerializeField]
+    bool controllerTest;
     private RumblePattern activeRumblePattern;
     private float rumbleDurration;
     private float pulseDurration;
+    //private float burstDurration;
     private float lowA;
     private float lowStep;
     private float highA;
@@ -23,9 +26,10 @@ public class ControllerRumbleManager : MonoBehaviour
     {
         Constant,
         Pulse,
-        Linear
+        Linear,
+        Burst
     }
-
+    
     // Public Methods
     public void RumbleConstant(float low, float high, float durration)
     {
@@ -58,6 +62,14 @@ public class ControllerRumbleManager : MonoBehaviour
         rumbleDurration = Time.time + durration;
     }
 
+    public void RumbleBurst(float low, float high, float burstTime)
+    {
+        activeRumblePattern = RumblePattern.Burst;
+        lowA = low;
+        highA = high;
+        rumbleDurration = Time.time + burstTime;
+    }
+
     public void StopRumble()
     {
         //Debug.Log("Stopping Rumble");
@@ -77,6 +89,10 @@ public class ControllerRumbleManager : MonoBehaviour
             return;
         }
 
+        if(_playerInput.currentControlScheme != "Gamepad" && !controllerTest)
+        {
+            return;
+        }
         var gamepad = GetGamepad();
         if (gamepad == null)
             return;
@@ -108,6 +124,9 @@ public class ControllerRumbleManager : MonoBehaviour
                 gamepad.SetMotorSpeeds(lowA, highA);
                 lowA += (lowStep * Time.deltaTime);
                 highA += (highStep * Time.deltaTime);
+                break;
+            case RumblePattern.Burst:
+                gamepad.SetMotorSpeeds(lowA,highA); 
                 break;
             default:
                 break;

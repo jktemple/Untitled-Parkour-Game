@@ -50,6 +50,7 @@ public class Shoving : NetworkBehaviour
     // private EventInstance playerShovingFailedsfx;
     private EventInstance playerGetShovedsfx;
 
+    private ControllerRumbleManager rumble;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,6 +71,7 @@ public class Shoving : NetworkBehaviour
 
         // playerShovingFailedsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerShovingFailedsfx);
         playerGetShovedsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerGetShovedsfx);
+        rumble = GameObject.FindObjectOfType<ControllerRumbleManager>();
     }
 
     // Update is called once per frame
@@ -101,10 +103,9 @@ public class Shoving : NetworkBehaviour
             ResetShoveServerRPC();
             inShoveLag = true;
             Invoke(nameof(ResetShoveLag), 0.5f);
+            rumble.RumbleBurst(0.75f, 0.75f, 0.25f);
         }
         animator.SetBool(taggedHash, infected.Value);
-
-
     }
 
     [ServerRpc]

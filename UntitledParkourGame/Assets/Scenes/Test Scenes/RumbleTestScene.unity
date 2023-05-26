@@ -3184,7 +3184,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3 Seconds
+  m_Text: 0.25 Seconds
 --- !u!222 &1408997781
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3530,6 +3530,8 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: Linear
       m_Image: {fileID: 0}
+    - m_Text: Burst
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3675,6 +3677,8 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
+    - m_Text: 0.25 Seconds
+      m_Image: {fileID: 0}
     - m_Text: 3 Seconds
       m_Image: {fileID: 0}
     - m_Text: 5 Seconds
@@ -4610,6 +4614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerInput: {fileID: 319538865}
+  controllerTest: 0
 --- !u!4 &1859953764
 Transform:
   m_ObjectHideFlags: 0
