@@ -214,7 +214,7 @@ public class Shoving : NetworkBehaviour
                     updateSound();
 
                     // add to tagged player's base speed here
-                    other.gameObject.GetComponent<PlayerMovement>().runSpeed.Value = 12;
+                    //other.gameObject.GetComponent<PlayerMovement>().runSpeed.Value = 12;
                 }
             }
             Destroy(other.gameObject);

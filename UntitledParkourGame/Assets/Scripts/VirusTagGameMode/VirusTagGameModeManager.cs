@@ -17,8 +17,8 @@ public class VirusTagGameModeManager : NetworkBehaviour
     public float betweenRoundTime;
     public int maxScore;
 
-    public float defaultRunSpeed;
-    public float infectedRunSpeed;
+    //public float defaultRunSpeed;
+    //public float infectedRunSpeed;
     private float roundLengthTimer;
     private bool roundOngoing;
     private bool gameOngoing;
@@ -413,7 +413,7 @@ public class VirusTagGameModeManager : NetworkBehaviour
         {
             sho.infected.Value = false;
             idList.Add(sho.OwnerClientId);
-            sho.pm.runSpeed.Value = defaultRunSpeed;
+            //sho.pm.runSpeed.Value = defaultRunSpeed;
         }
         if (orderStack.Count > 0)
         {
@@ -425,7 +425,7 @@ public class VirusTagGameModeManager : NetworkBehaviour
 
             //add to first infected's base speed here
             // don't += here bc it get's called every new round and could double up on someone
-            s.pm.runSpeed.Value = infectedRunSpeed;
+            //s.pm.runSpeed.Value = infectedRunSpeed;
 
             idList.Remove(s.OwnerClientId);
             Debug.Log("Sending Untagged UI Clients #" + idList.ToString());

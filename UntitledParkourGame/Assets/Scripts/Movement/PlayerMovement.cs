@@ -13,8 +13,8 @@ public class PlayerMovement : NetworkBehaviour
     [Header("Movement")]
     private float moveSpeed;
     [Tooltip("The player�s default movement speed when not sprinting, sliding, etc. Higher number = faster movement")]
-    public const float startRunSpeed = 11f;
-    public NetworkVariable<float> runSpeed = new NetworkVariable<float>();
+    public float runSpeed;
+    public float infectedRunSpeed;
     [Tooltip("the player�s movement speed when in the sprinting state. Higher number = faster movement")]
     public float sprintSpeed;
     [Tooltip("The modifier applier the player when moving backwards. Between 0 and 1")]
@@ -40,8 +40,8 @@ public class PlayerMovement : NetworkBehaviour
     private float WallrunningStaminaRechargeRate;
     [Tooltip("fine at 30")]
 
-    
 
+    private Shoving shoving;
     private float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
     public float currentStamina;
@@ -134,15 +134,6 @@ public class PlayerMovement : NetworkBehaviour
 
 
     public bool restricted;
-
-
-
-    public override void OnNetworkSpawn()
-    {
-        if(!IsServer) { return; }
-        runSpeed.Value = startRunSpeed;
-        base.OnNetworkSpawn();
-    }
 
     //public bool notControllable;
     private PlayerControls inputs;
@@ -241,7 +232,7 @@ public class PlayerMovement : NetworkBehaviour
 
             //cam.DoFov(40f);
             state = MovementState.sliding;
-            desiredMoveSpeed = runSpeed.Value;
+            desiredMoveSpeed = shoving.infected.Value ? infectedRunSpeed : runSpeed;
         }
         // Mode - sprinting
         // else if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f) && currentStamina > 0)
@@ -275,8 +266,8 @@ public class PlayerMovement : NetworkBehaviour
         {
             state = MovementState.running;
            // Debug.Log("RunSpeed.value = " + runSpeed.Value);
-            desiredMoveSpeed = runSpeed.Value;
-
+            desiredMoveSpeed = shoving.infected.Value ? infectedRunSpeed : runSpeed;
+            Debug.Log("desiredMoveSpeed = " + desiredMoveSpeed);
             if (icon != null)
             {
                 icon.text = "<sprite=1>";
@@ -346,6 +337,7 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!IsOwner) return;
         rb = GetComponent<Rigidbody>();
+        shoving = GetComponent<Shoving>();
         rb.freezeRotation = true;
 
         inputs = new PlayerControls();

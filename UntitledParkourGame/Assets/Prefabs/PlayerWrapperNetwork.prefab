@@ -288,9 +288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207beaf57405b424d8c58e86828c4514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startRunSpeed: 11
-  runSpeed:
-    m_InternalValue: 0
+  runSpeed: 11
+  infectedRunSpeed: 12
   sprintSpeed: 15
   backwardsModifier: 0.7
   wallRunSpeed: 15
@@ -582,6 +581,7 @@ MonoBehaviour:
     m_Bits: 64
   orientation: {fileID: 1762469498428457210}
   playerObject: {fileID: 4194629557247760180}
+  pm: {fileID: 0}
   rb: {fileID: 4194629557659296679}
   shoveDistance: 3
   shoveSpherecastRadius: 2
