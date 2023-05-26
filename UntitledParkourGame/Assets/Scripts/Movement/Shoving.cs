@@ -15,7 +15,7 @@ public class Shoving : NetworkBehaviour
     public LayerMask playersMask;
     public Transform orientation;
     public Transform playerObject;
-    private PlayerMovement pm;
+    public PlayerMovement pm;
     private PlayerControls inputs;
     public Rigidbody rb;
     public float shoveDistance;
@@ -214,7 +214,7 @@ public class Shoving : NetworkBehaviour
                     updateSound();
 
                     // add to tagged player's base speed here
-                    other.gameObject.GetComponent<PlayerMovement>().runSpeed = 12;
+                    other.gameObject.GetComponent<PlayerMovement>().runSpeed.Value = 12;
                 }
             }
             Destroy(other.gameObject);

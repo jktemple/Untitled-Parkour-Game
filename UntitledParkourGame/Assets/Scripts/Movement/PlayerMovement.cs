@@ -13,7 +13,8 @@ public class PlayerMovement : NetworkBehaviour
     [Header("Movement")]
     private float moveSpeed;
     [Tooltip("The player�s default movement speed when not sprinting, sliding, etc. Higher number = faster movement")]
-    public float runSpeed;
+    public const float startRunSpeed = 11f;
+    public NetworkVariable<float> runSpeed = new NetworkVariable<float>();
     [Tooltip("the player�s movement speed when in the sprinting state. Higher number = faster movement")]
     public float sprintSpeed;
     [Tooltip("The modifier applier the player when moving backwards. Between 0 and 1")]
@@ -134,6 +135,15 @@ public class PlayerMovement : NetworkBehaviour
 
     public bool restricted;
 
+
+
+    public override void OnNetworkSpawn()
+    {
+        if(!IsServer) { return; }
+        runSpeed.Value = startRunSpeed;
+        base.OnNetworkSpawn();
+    }
+
     //public bool notControllable;
     private PlayerControls inputs;
     private void stateHandler()
@@ -231,7 +241,7 @@ public class PlayerMovement : NetworkBehaviour
 
             //cam.DoFov(40f);
             state = MovementState.sliding;
-            desiredMoveSpeed = runSpeed;
+            desiredMoveSpeed = runSpeed.Value;
         }
         // Mode - sprinting
         // else if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f) && currentStamina > 0)
@@ -264,7 +274,8 @@ public class PlayerMovement : NetworkBehaviour
         else if (grounded)
         {
             state = MovementState.running;
-            desiredMoveSpeed = runSpeed;
+           // Debug.Log("RunSpeed.value = " + runSpeed.Value);
+            desiredMoveSpeed = runSpeed.Value;
 
             if (icon != null)
             {
@@ -324,7 +335,6 @@ public class PlayerMovement : NetworkBehaviour
             cam.ResetFov();
         }
     }
-    
 
     public bool wallrunning;
     // Start is called before the first frame update

@@ -288,7 +288,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207beaf57405b424d8c58e86828c4514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 11
+  startRunSpeed: 11
+  runSpeed:
+    m_InternalValue: 0
   sprintSpeed: 15
   backwardsModifier: 0.7
   wallRunSpeed: 15

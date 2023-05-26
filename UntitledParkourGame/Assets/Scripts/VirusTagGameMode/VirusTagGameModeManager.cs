@@ -11,11 +11,14 @@ using UnityEngine.UI;
 public class VirusTagGameModeManager : NetworkBehaviour
 {
     // used to set the first infected's base speed
-    private PlayerMovement pm;
+    //private PlayerMovement pm;
 
     public float roundLength;
     public float betweenRoundTime;
     public int maxScore;
+
+    public float defaultRunSpeed;
+    public float infectedRunSpeed;
     private float roundLengthTimer;
     private bool roundOngoing;
     private bool gameOngoing;
@@ -50,16 +53,17 @@ public class VirusTagGameModeManager : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       
         //spawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
         if (startRoundButton!=null)
         startRoundButton.onClick.AddListener(() => {
-            if (!gameOngoing) StartGame();
+            if (!gameOngoing) Invoke(nameof(StartGame), 5f);
             FindObjectOfType<InGameMenuBehaviors>().ResumeGame();
             startRoundButton.gameObject.SetActive(false);
             //else if (!roundOngoing) StartRound();
         });
 
-        pm = GetComponent<PlayerMovement>();
+        
     }
 
     bool betweenRounds;
@@ -172,6 +176,7 @@ public class VirusTagGameModeManager : NetworkBehaviour
     private void StartGame()
     {
         shoveList = FindObjectsOfType<Shoving>();
+        Debug.Log("shoveList size = " + shoveList.Length);
         Shuffle(shoveList);
         orderStack = new Stack<Shoving>(shoveList);
         foreach (Shoving s in shoveList)
@@ -179,6 +184,7 @@ public class VirusTagGameModeManager : NetworkBehaviour
             s.score.Value = 0;
         }
         gameOngoing = true;
+        Debug.Log("Starting game Num Players = " + orderStack.Count);
         StartBetwenRounds();
     }
 
@@ -407,19 +413,22 @@ public class VirusTagGameModeManager : NetworkBehaviour
         {
             sho.infected.Value = false;
             idList.Add(sho.OwnerClientId);
+            sho.pm.runSpeed.Value = defaultRunSpeed;
         }
         if (orderStack.Count > 0)
         {
             Shoving s = orderStack.Pop();
             s.infected.Value = true;
             scoreQueue.Enqueue(s);
+            Debug.Log("Sending Tagged UI Client #" + s.OwnerClientId);
             SendTaggedUI(s.OwnerClientId);
 
             //add to first infected's base speed here
             // don't += here bc it get's called every new round and could double up on someone
-            pm.runSpeed = 12;
+            s.pm.runSpeed.Value = infectedRunSpeed;
 
             idList.Remove(s.OwnerClientId);
+            Debug.Log("Sending Untagged UI Clients #" + idList.ToString());
             SendUntaggedUI(idList.ToArray());
         }
     }
