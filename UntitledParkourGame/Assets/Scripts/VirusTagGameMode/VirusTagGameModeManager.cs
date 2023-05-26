@@ -10,6 +10,9 @@ using UnityEngine.UI;
 
 public class VirusTagGameModeManager : NetworkBehaviour
 {
+    // used to set the first infected's base speed
+    private PlayerMovement pm;
+
     public float roundLength;
     public float betweenRoundTime;
     public int maxScore;
@@ -52,6 +55,8 @@ public class VirusTagGameModeManager : NetworkBehaviour
             startRoundButton.gameObject.SetActive(false);
             //else if (!roundOngoing) StartRound();
         });
+
+        pm = GetComponent<PlayerMovement>();
     }
 
     bool betweenRounds;
@@ -376,6 +381,10 @@ public class VirusTagGameModeManager : NetworkBehaviour
             s.infected.Value = true;
             scoreQueue.Enqueue(s);
             SendTaggedUI(s.OwnerClientId);
+
+            //add to first infected's base speed here
+            // don't += here bc it get's called every new round and could double up on someone
+            pm.runSpeed = 12;
         }
     }
 }

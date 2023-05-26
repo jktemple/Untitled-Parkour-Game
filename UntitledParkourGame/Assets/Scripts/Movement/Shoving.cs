@@ -212,6 +212,9 @@ public class Shoving : NetworkBehaviour
                 {
                     infected.Value = true;
                     updateSound();
+
+                    // add to tagged player's base speed here
+                    other.gameObject.GetComponent<PlayerMovement>().runSpeed = 12;
                 }
             }
             Destroy(other.gameObject);
