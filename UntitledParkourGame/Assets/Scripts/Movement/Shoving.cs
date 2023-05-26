@@ -103,7 +103,7 @@ public class Shoving : NetworkBehaviour
             ResetShoveServerRPC();
             inShoveLag = true;
             Invoke(nameof(ResetShoveLag), 0.5f);
-            rumble.RumbleBurst(0.75f, 0.75f, 0.25f);
+            if (rumble != null) { rumble.RumbleBurst(0.75f, 0.75f, 0.25f); }
         }
         animator.SetBool(taggedHash, infected.Value);
     }
