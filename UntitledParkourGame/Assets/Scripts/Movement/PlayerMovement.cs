@@ -267,7 +267,7 @@ public class PlayerMovement : NetworkBehaviour
             state = MovementState.running;
            // Debug.Log("RunSpeed.value = " + runSpeed.Value);
             desiredMoveSpeed = shoving.infected.Value ? infectedRunSpeed : runSpeed;
-            Debug.Log("desiredMoveSpeed = " + desiredMoveSpeed);
+            //Debug.Log("desiredMoveSpeed = " + desiredMoveSpeed);
             if (icon != null)
             {
                 icon.text = "<sprite=1>";
