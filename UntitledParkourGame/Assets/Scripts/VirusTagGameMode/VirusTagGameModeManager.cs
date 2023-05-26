@@ -1,3 +1,4 @@
+using Autodesk.Fbx;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -21,6 +22,7 @@ public class VirusTagGameModeManager : NetworkBehaviour
     private GameObject roundOverUI;
     private GameObject roundStartUI;
     private GameObject infectedUI;
+    private GameObject runUI;
     public NetworkVariable<float> currentTime = new NetworkVariable<float>();
     [SerializeField] private Button startRoundButton;
 
@@ -40,6 +42,8 @@ public class VirusTagGameModeManager : NetworkBehaviour
         roundStartUI.SetActive(false);
         infectedUI = GameObject.Find("You'reItUI");
         infectedUI.SetActive(false);
+        runUI = GameObject.Find("RunUI");
+        runUI.SetActive(false); 
     }
     // Start is called before the first frame update
     void Start()
@@ -278,6 +282,27 @@ public class VirusTagGameModeManager : NetworkBehaviour
          */
     }
 
+    void SendUntaggedUI(ulong[] ids)
+    {
+        if (!IsServer) { return; }
+        ClientRpcParams clientRpcParams = new ClientRpcParams
+        {
+            Send = new ClientRpcSendParams
+            {
+                TargetClientIds = ids 
+            }
+        };
+
+        UntaggedUIClientRPC(clientRpcParams);
+    }
+
+    [ClientRpc]
+    public void UntaggedUIClientRPC(ClientRpcParams clientRpcParams = default)
+    {
+        runUI.SetActive(true);
+        Invoke(nameof(HideRun), 2f);
+    } 
+
     void SendTaggedUI(ulong targetID)
     {
         if(!IsServer) { return; }
@@ -297,6 +322,11 @@ public class VirusTagGameModeManager : NetworkBehaviour
     {
         infectedUI.SetActive(true);
         Invoke(nameof(HideTagged), 2f);
+    }
+
+    private void HideRun()
+    {
+        runUI.SetActive(false);
     }
 
     private void HideTagged()
@@ -366,9 +396,13 @@ public class VirusTagGameModeManager : NetworkBehaviour
         if (!IsServer) return;
         //search for all the players in the current scene
         //randomly chose one to make infected
+
+       
+        List<ulong> idList = new List<ulong>();
         foreach (Shoving sho in shoveList)
         {
             sho.infected.Value = false;
+            idList.Add(sho.OwnerClientId);
         }
         if (orderStack.Count > 0)
         {
@@ -376,6 +410,8 @@ public class VirusTagGameModeManager : NetworkBehaviour
             s.infected.Value = true;
             scoreQueue.Enqueue(s);
             SendTaggedUI(s.OwnerClientId);
+            idList.Remove(s.OwnerClientId);
+            SendUntaggedUI(idList.ToArray());
         }
     }
 }
