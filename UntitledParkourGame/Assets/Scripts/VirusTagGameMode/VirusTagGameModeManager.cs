@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -19,6 +20,7 @@ public class VirusTagGameModeManager : NetworkBehaviour
     private GameObject gameOverUI;
     private GameObject roundOverUI;
     private GameObject roundStartUI;
+    private GameObject infectedUI;
     public NetworkVariable<float> currentTime = new NetworkVariable<float>();
     [SerializeField] private Button startRoundButton;
 
@@ -27,8 +29,8 @@ public class VirusTagGameModeManager : NetworkBehaviour
     Queue<Shoving> scoreQueue = new Queue<Shoving>();
     Stack<Shoving> orderStack;
     public TextMeshProUGUI buttonText;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         gameOverUI = GameObject.Find("GameOverUI");
         gameOverUI.SetActive(false);
@@ -36,6 +38,12 @@ public class VirusTagGameModeManager : NetworkBehaviour
         roundOverUI.SetActive(false);
         roundStartUI = GameObject.Find("RoundStartUI");
         roundStartUI.SetActive(false);
+        infectedUI = GameObject.Find("You'reItUI");
+        infectedUI.SetActive(false);
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
         //spawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
         if (startRoundButton!=null)
         startRoundButton.onClick.AddListener(() => {
@@ -105,6 +113,7 @@ public class VirusTagGameModeManager : NetworkBehaviour
             else if(s.infected.Value && !scoreQueue.Contains(s))
             {
                 scoreQueue.Enqueue(s);
+                SendTaggedUI(s.OwnerClientId);
             }
         }
         return r;
@@ -269,6 +278,31 @@ public class VirusTagGameModeManager : NetworkBehaviour
          */
     }
 
+    void SendTaggedUI(ulong targetID)
+    {
+        if(!IsServer) { return; }
+        ClientRpcParams clientRpcParams = new ClientRpcParams
+        {
+            Send = new ClientRpcSendParams
+            {
+                TargetClientIds = new ulong[] { targetID }
+            }
+        };
+
+        TaggedUIClientRPC(clientRpcParams);
+    }
+
+    [ClientRpc]
+    public void TaggedUIClientRPC(ClientRpcParams clientRpcParams = default)
+    {
+        infectedUI.SetActive(true);
+        Invoke(nameof(HideTagged), 2f);
+    }
+
+    private void HideTagged()
+    {
+        infectedUI.SetActive(false);
+    }
     private void HideGameOver()
     {
         gameOverUI.SetActive(false);
@@ -341,6 +375,7 @@ public class VirusTagGameModeManager : NetworkBehaviour
             Shoving s = orderStack.Pop();
             s.infected.Value = true;
             scoreQueue.Enqueue(s);
+            SendTaggedUI(s.OwnerClientId);
         }
     }
 }
