@@ -15,7 +15,7 @@ public class BoostingHitbox : NetworkBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (!IsOwner) return;
-        if (other.gameObject.GetComponentInChildren<PlayerMovement>() != null && other.gameObject.GetComponentInChildren<PlayerMovement>().boosting.Value)
+        if (other.gameObject.GetComponentInChildren<PlayerMovement>() != null)
         {
             canBoost = true;
             Debug.Log("canBoost true");
