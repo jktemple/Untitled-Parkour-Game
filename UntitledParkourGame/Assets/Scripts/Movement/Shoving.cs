@@ -31,7 +31,7 @@ public class Shoving : NetworkBehaviour
     public NetworkVariable<FixedString32Bytes> playerName = new NetworkVariable<FixedString32Bytes>("Player", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private bool inShoveLag = false;
 
-
+    
     public bool pushObject;
 
     public Animator animator;
@@ -39,8 +39,6 @@ public class Shoving : NetworkBehaviour
     public SphereCastVisual sphereCastVisual;
     public PushObject pushObjectPrefab;
     public FakePushObject fakePush;
-
-    private GameObject nameText;
 
     public float camOffset;
     public bool hitBoxVisuals;
@@ -51,10 +49,23 @@ public class Shoving : NetworkBehaviour
     private EventInstance playerGetShovedsfx;
 
     private ControllerRumbleManager rumble;
+
+    [SerializeField]
+    NameTag nameTag;
     // Start is called before the first frame update
+
+    public override void OnNetworkSpawn()
+    {
+        playerName.OnValueChanged += OnNameChanged;
+        base.OnNetworkSpawn();
+    }
+
+    public void OnNameChanged(FixedString32Bytes previous, FixedString32Bytes current)
+    {
+        nameTag.SetNameTagText(current);
+    }
     void Start()
     {
-
 
         pm = GetComponent<PlayerMovement>();
         rb = GetComponent<Rigidbody>();

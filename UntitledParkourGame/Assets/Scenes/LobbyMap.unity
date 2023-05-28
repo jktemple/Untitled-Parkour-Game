@@ -18082,8 +18082,6 @@ MonoBehaviour:
   roundLength: 120
   betweenRoundTime: 20
   maxScore: 100
-  defaultRunSpeed: 11
-  infectedRunSpeed: 12
   currentTime:
     m_InternalValue: 0
   startRoundButton: {fileID: 1635539942}
