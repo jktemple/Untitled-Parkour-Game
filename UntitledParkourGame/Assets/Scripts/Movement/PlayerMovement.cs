@@ -703,7 +703,7 @@ public class PlayerMovement : NetworkBehaviour
         
         if(whatIsGround == (whatIsGround | (1 << collision.gameObject.layer)))
         {
-            collidingWithWall = true;
+            collidingWithWall = !climpingScript.wallBack;
         }
     }
 

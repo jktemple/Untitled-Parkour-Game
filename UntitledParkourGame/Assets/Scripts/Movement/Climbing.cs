@@ -39,7 +39,7 @@ public class Climbing : NetworkBehaviour
     private RaycastHit frontWallHit;
     private bool wallFront;
     private RaycastHit backWallHit;
-    private bool wallBack;
+    public bool wallBack;
 
     private Transform lastWall;
     private Vector3 lastWallNormal;
