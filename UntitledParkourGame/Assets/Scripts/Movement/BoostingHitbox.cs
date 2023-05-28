@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class BoostingHitbox : NetworkBehaviour
 {
-    public bool canBoost;
+    public bool playerInHitbox;
 
     private void Start()
     {
-        canBoost = false;
+        playerInHitbox = false;
     }
 
     private void OnTriggerStay(Collider other)
@@ -17,8 +17,8 @@ public class BoostingHitbox : NetworkBehaviour
         if (!IsOwner) return;
         if (other.gameObject.GetComponentInChildren<PlayerMovement>() != null)
         {
-            canBoost = true;
-            Debug.Log("canBoost true");
+            playerInHitbox = true;
+            Debug.Log("playerInHitbox true");
         }
     }
 
@@ -27,8 +27,8 @@ public class BoostingHitbox : NetworkBehaviour
         if (!IsOwner) return;
         if (other.gameObject.GetComponentInChildren<PlayerMovement>() != null)
         {
-            canBoost = false;
-            Debug.Log("canBoost false");
+            playerInHitbox = false;
+            Debug.Log("playerInHitbox false");
         }
     }
 }
