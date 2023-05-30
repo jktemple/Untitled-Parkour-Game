@@ -14,6 +14,7 @@ public class PlayerMovement : NetworkBehaviour
     private float moveSpeed;
     [Tooltip("The player�s default movement speed when not sprinting, sliding, etc. Higher number = faster movement")]
     public float runSpeed;
+    public float infectedRunSpeed;
     [Tooltip("the player�s movement speed when in the sprinting state. Higher number = faster movement")]
     public float sprintSpeed;
     [Tooltip("The modifier applier the player when moving backwards. Between 0 and 1")]
@@ -39,8 +40,8 @@ public class PlayerMovement : NetworkBehaviour
     private float WallrunningStaminaRechargeRate;
     [Tooltip("fine at 30")]
 
-    
 
+    private Shoving shoving;
     private float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
     public float currentStamina;
@@ -231,7 +232,7 @@ public class PlayerMovement : NetworkBehaviour
 
             //cam.DoFov(40f);
             state = MovementState.sliding;
-            desiredMoveSpeed = runSpeed;
+            desiredMoveSpeed = shoving.infected.Value ? infectedRunSpeed : runSpeed;
         }
         // Mode - sprinting
         // else if (grounded && (inputs.PlayerMovement.Sprint.ReadValue<float>() > 0.1f) && currentStamina > 0)
@@ -264,8 +265,9 @@ public class PlayerMovement : NetworkBehaviour
         else if (grounded)
         {
             state = MovementState.running;
-            desiredMoveSpeed = runSpeed;
-
+           // Debug.Log("RunSpeed.value = " + runSpeed.Value);
+            desiredMoveSpeed = shoving.infected.Value ? infectedRunSpeed : runSpeed;
+            //Debug.Log("desiredMoveSpeed = " + desiredMoveSpeed);
             if (icon != null)
             {
                 icon.text = "<sprite=1>";
@@ -324,7 +326,6 @@ public class PlayerMovement : NetworkBehaviour
             cam.ResetFov();
         }
     }
-    
 
     public bool wallrunning;
     // Start is called before the first frame update
@@ -336,6 +337,7 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!IsOwner) return;
         rb = GetComponent<Rigidbody>();
+        shoving = GetComponent<Shoving>();
         rb.freezeRotation = true;
 
         inputs = new PlayerControls();
@@ -701,7 +703,7 @@ public class PlayerMovement : NetworkBehaviour
         
         if(whatIsGround == (whatIsGround | (1 << collision.gameObject.layer)))
         {
-            collidingWithWall = true;
+            collidingWithWall = !climpingScript.wallBack;
         }
     }
 

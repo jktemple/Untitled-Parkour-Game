@@ -60,7 +60,7 @@ public class Boosting : NetworkBehaviour
             Debug.Log("Starting Boost");
             StartBoosting();
         }
-        else if(!pm.grounded && inputs.PlayerMovement.Jump.triggered && readyToBoostJump && boostingHitbox.canBoost)
+        else if(!pm.grounded && inputs.PlayerMovement.Jump.triggered && readyToBoostJump && boostingHitbox.playerInHitbox)
         {
             BoostJump();
             Invoke(nameof(ResetBoostJump), boostJumpCooldown);

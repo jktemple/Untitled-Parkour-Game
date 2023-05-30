@@ -12,10 +12,15 @@ public class SensHolder : MonoBehaviour
     public float padSense;
     Slider mouseSlider;
     Slider gamepadSlider;
-    void Start()
+
+    private void Awake()
     {
         mouseSlider = GameObject.Find("Mouse Sensitivity").GetComponent<Slider>();
         gamepadSlider = GameObject.Find("Controller Sensitivity").GetComponent<Slider>();
+    }
+    void Start()
+    {
+        
         if (mouseSlider != null)
         {
             mouseSlider.value = mouseSense;

@@ -15,7 +15,7 @@ public class Shoving : NetworkBehaviour
     public LayerMask playersMask;
     public Transform orientation;
     public Transform playerObject;
-    private PlayerMovement pm;
+    public PlayerMovement pm;
     private PlayerControls inputs;
     public Rigidbody rb;
     public float shoveDistance;
@@ -31,7 +31,7 @@ public class Shoving : NetworkBehaviour
     public NetworkVariable<FixedString32Bytes> playerName = new NetworkVariable<FixedString32Bytes>("Player", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private bool inShoveLag = false;
 
-
+    
     public bool pushObject;
 
     public Animator animator;
@@ -39,8 +39,6 @@ public class Shoving : NetworkBehaviour
     public SphereCastVisual sphereCastVisual;
     public PushObject pushObjectPrefab;
     public FakePushObject fakePush;
-
-    private GameObject nameText;
 
     public float camOffset;
     public bool hitBoxVisuals;
@@ -50,10 +48,24 @@ public class Shoving : NetworkBehaviour
     // private EventInstance playerShovingFailedsfx;
     private EventInstance playerGetShovedsfx;
 
+    private ControllerRumbleManager rumble;
+
+    [SerializeField]
+    NameTag nameTag;
     // Start is called before the first frame update
+
+    public override void OnNetworkSpawn()
+    {
+        playerName.OnValueChanged += OnNameChanged;
+        base.OnNetworkSpawn();
+    }
+
+    public void OnNameChanged(FixedString32Bytes previous, FixedString32Bytes current)
+    {
+        nameTag.SetNameTagText(current);
+    }
     void Start()
     {
-
 
         pm = GetComponent<PlayerMovement>();
         rb = GetComponent<Rigidbody>();
@@ -70,6 +82,7 @@ public class Shoving : NetworkBehaviour
 
         // playerShovingFailedsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerShovingFailedsfx);
         playerGetShovedsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerGetShovedsfx);
+        rumble = GameObject.FindObjectOfType<ControllerRumbleManager>();
     }
 
     // Update is called once per frame
@@ -101,10 +114,9 @@ public class Shoving : NetworkBehaviour
             ResetShoveServerRPC();
             inShoveLag = true;
             Invoke(nameof(ResetShoveLag), 0.5f);
+            if (rumble != null) { rumble.RumbleBurst(0.75f, 0.75f, 0.25f); }
         }
         animator.SetBool(taggedHash, infected.Value);
-
-
     }
 
     [ServerRpc]
@@ -211,6 +223,9 @@ public class Shoving : NetworkBehaviour
                 {
                     infected.Value = true;
                     updateSound();
+
+                    // add to tagged player's base speed here
+                    //other.gameObject.GetComponent<PlayerMovement>().runSpeed.Value = 12;
                 }
             }
             Destroy(other.gameObject);
