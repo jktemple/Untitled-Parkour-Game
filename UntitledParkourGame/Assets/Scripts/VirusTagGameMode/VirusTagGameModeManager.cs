@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,9 +10,15 @@ using UnityEngine.UI;
 
 public class VirusTagGameModeManager : NetworkBehaviour
 {
+    // used to set the first infected's base speed
+    //private PlayerMovement pm;
+
     public float roundLength;
     public float betweenRoundTime;
     public int maxScore;
+
+    //public float defaultRunSpeed;
+    //public float infectedRunSpeed;
     private float roundLengthTimer;
     private bool roundOngoing;
     private bool gameOngoing;
@@ -19,6 +26,8 @@ public class VirusTagGameModeManager : NetworkBehaviour
     private GameObject gameOverUI;
     private GameObject roundOverUI;
     private GameObject roundStartUI;
+    private GameObject infectedUI;
+    private GameObject runUI;
     public NetworkVariable<float> currentTime = new NetworkVariable<float>();
     [SerializeField] private Button startRoundButton;
 
@@ -27,8 +36,8 @@ public class VirusTagGameModeManager : NetworkBehaviour
     Queue<Shoving> scoreQueue = new Queue<Shoving>();
     Stack<Shoving> orderStack;
     public TextMeshProUGUI buttonText;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         gameOverUI = GameObject.Find("GameOverUI");
         gameOverUI.SetActive(false);
@@ -36,14 +45,25 @@ public class VirusTagGameModeManager : NetworkBehaviour
         roundOverUI.SetActive(false);
         roundStartUI = GameObject.Find("RoundStartUI");
         roundStartUI.SetActive(false);
+        infectedUI = GameObject.Find("You'reItUI");
+        infectedUI.SetActive(false);
+        runUI = GameObject.Find("RunUI");
+        runUI.SetActive(false); 
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+       
         //spawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
         if (startRoundButton!=null)
         startRoundButton.onClick.AddListener(() => {
-            if (!gameOngoing) StartGame();
+            if (!gameOngoing) Invoke(nameof(StartGame), 5f);
             FindObjectOfType<InGameMenuBehaviors>().ResumeGame();
             startRoundButton.gameObject.SetActive(false);
             //else if (!roundOngoing) StartRound();
         });
+
+        
     }
 
     bool betweenRounds;
@@ -105,6 +125,7 @@ public class VirusTagGameModeManager : NetworkBehaviour
             else if(s.infected.Value && !scoreQueue.Contains(s))
             {
                 scoreQueue.Enqueue(s);
+                SendTaggedUI(s.OwnerClientId);
             }
         }
         return r;
@@ -155,6 +176,7 @@ public class VirusTagGameModeManager : NetworkBehaviour
     private void StartGame()
     {
         shoveList = FindObjectsOfType<Shoving>();
+        Debug.Log("shoveList size = " + shoveList.Length);
         Shuffle(shoveList);
         orderStack = new Stack<Shoving>(shoveList);
         foreach (Shoving s in shoveList)
@@ -162,6 +184,7 @@ public class VirusTagGameModeManager : NetworkBehaviour
             s.score.Value = 0;
         }
         gameOngoing = true;
+        Debug.Log("Starting game Num Players = " + orderStack.Count);
         StartBetwenRounds();
     }
 
@@ -269,6 +292,57 @@ public class VirusTagGameModeManager : NetworkBehaviour
          */
     }
 
+    void SendUntaggedUI(ulong[] ids)
+    {
+        if (!IsServer) { return; }
+        ClientRpcParams clientRpcParams = new ClientRpcParams
+        {
+            Send = new ClientRpcSendParams
+            {
+                TargetClientIds = ids 
+            }
+        };
+
+        UntaggedUIClientRPC(clientRpcParams);
+    }
+
+    [ClientRpc]
+    public void UntaggedUIClientRPC(ClientRpcParams clientRpcParams = default)
+    {
+        runUI.SetActive(true);
+        Invoke(nameof(HideRun), 2f);
+    } 
+
+    void SendTaggedUI(ulong targetID)
+    {
+        if(!IsServer) { return; }
+        ClientRpcParams clientRpcParams = new ClientRpcParams
+        {
+            Send = new ClientRpcSendParams
+            {
+                TargetClientIds = new ulong[] { targetID }
+            }
+        };
+
+        TaggedUIClientRPC(clientRpcParams);
+    }
+
+    [ClientRpc]
+    public void TaggedUIClientRPC(ClientRpcParams clientRpcParams = default)
+    {
+        infectedUI.SetActive(true);
+        Invoke(nameof(HideTagged), 2f);
+    }
+
+    private void HideRun()
+    {
+        runUI.SetActive(false);
+    }
+
+    private void HideTagged()
+    {
+        infectedUI.SetActive(false);
+    }
     private void HideGameOver()
     {
         gameOverUI.SetActive(false);
@@ -332,15 +406,30 @@ public class VirusTagGameModeManager : NetworkBehaviour
         if (!IsServer) return;
         //search for all the players in the current scene
         //randomly chose one to make infected
+
+       
+        List<ulong> idList = new List<ulong>();
         foreach (Shoving sho in shoveList)
         {
             sho.infected.Value = false;
+            idList.Add(sho.OwnerClientId);
+            //sho.pm.runSpeed.Value = defaultRunSpeed;
         }
         if (orderStack.Count > 0)
         {
             Shoving s = orderStack.Pop();
             s.infected.Value = true;
             scoreQueue.Enqueue(s);
+            Debug.Log("Sending Tagged UI Client #" + s.OwnerClientId);
+            SendTaggedUI(s.OwnerClientId);
+
+            //add to first infected's base speed here
+            // don't += here bc it get's called every new round and could double up on someone
+            //s.pm.runSpeed.Value = infectedRunSpeed;
+
+            idList.Remove(s.OwnerClientId);
+            Debug.Log("Sending Untagged UI Clients #" + idList.ToString());
+            SendUntaggedUI(idList.ToArray());
         }
     }
 }

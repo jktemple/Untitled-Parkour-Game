@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using System.Xml;
 using Unity.Netcode;
 using Cinemachine;
+using UnityEngine.UI;
 
 public class PlayerCam : NetworkBehaviour
 {
@@ -28,8 +29,9 @@ public class PlayerCam : NetworkBehaviour
     public Transform orientation;
     public Transform camHolder;
 
+    //inputs
     private PlayerControls inputs;
-
+    private PlayerInput playerInput;
     // camera rotation
     float xRotation;
     float yRotation;
@@ -38,6 +40,9 @@ public class PlayerCam : NetworkBehaviour
 
     bool quickTurning = false;
     // Start is called before the first frame update
+
+    //Sensitivity Sliders
+    private SensHolder sensHolder;
     void Start()
     {
         if (!IsOwner) return;
@@ -56,7 +61,30 @@ public class PlayerCam : NetworkBehaviour
         var mouse = Mouse.current;
         Debug.Log("current gamepad " + gamepad);
         Debug.Log("current mouse " + mouse);
+        playerInput = GameObject.Find("Main Camera").GetComponent<PlayerInput>();
+        sensHolder = FindObjectOfType<SensHolder>();
+        if(sensHolder != null )
+        {
+            mouseSensX = sensHolder.mouseSense;
+            mouseSensY = sensHolder.mouseSense;
+            gamepadSensY= sensHolder.padSense;
+            gamepadSensX = sensHolder.padSense;
+        }
 
+        inputs.PlayerMovement.LookBehind.performed += LookBehind_performed;
+        inputs.PlayerMovement.LookBehind.canceled += LookBehind_canceled;
+    }
+    private bool lookingBehind = false;
+    private void LookBehind_canceled(InputAction.CallbackContext obj)
+    {
+        Debug.Log("LookBehind Canceled");
+        lookingBehind = false;
+    }
+
+    private void LookBehind_performed(InputAction.CallbackContext obj)
+    {
+        Debug.Log("LookBehind Preformed");
+        lookingBehind= true;
     }
 
     void SetLayerRecursively(GameObject obj, int newLayer)
@@ -82,13 +110,20 @@ public class PlayerCam : NetworkBehaviour
     void Update()
     {
         if (!IsOwner) return;
-        var gamepad = Gamepad.current;
+
+        if (sensHolder != null)
+        {
+            mouseSensX = sensHolder.mouseSense;
+            mouseSensY = sensHolder.mouseSense;
+            gamepadSensY = sensHolder.padSense;
+            gamepadSensX = sensHolder.padSense;
+        }
 
         // get mouse input
 
         float mouseX;
         float mouseY; 
-        if (null == gamepad)
+        if (playerInput.currentControlScheme == "Keyboard")
         {
            mouseX = inputs.PlayerMovement.HorizontalLook.ReadValue<float>() * Time.deltaTime * mouseSensX;
            mouseY = inputs.PlayerMovement.VerticalLook.ReadValue<float>() * Time.deltaTime * mouseSensY;
@@ -97,6 +132,7 @@ public class PlayerCam : NetworkBehaviour
             mouseX = inputs.PlayerMovement.HorizontalLook.ReadValue<float>() * Time.deltaTime * gamepadSensX;
             mouseY = inputs.PlayerMovement.VerticalLook.ReadValue<float>() * Time.deltaTime * gamepadSensY;
         }
+        //Debug.Log("current control scheme = " + playerInput.currentControlScheme);
         //Debug.Log("Quick Turning = " + quickTurning);
         //Debug.Log("X input: " + inputs.PlayerMovement.HorizontalLook.ReadValue<float>() + " Y Input: " + inputs.PlayerMovement.VerticalLook.ReadValue<float>());
         // updating the cam rotation idk whats rly happening here
@@ -110,14 +146,19 @@ public class PlayerCam : NetworkBehaviour
         {
             HandleQuickTurn();
         }
+        else if (lookingBehind)
+        {
+            camHolder.rotation = Quaternion.Euler(xRotation, 180+orientation.eulerAngles.y, camHolder.eulerAngles.z);
+        }
         else if (!quickTurning)
         {
             // rotate cam and orientation
             
             camHolder.rotation = Quaternion.Euler(xRotation, yRotation, camHolder.eulerAngles.z);
             orientation.rotation = Quaternion.Euler(0, yRotation, 0);
-        }
+        } 
 
+        
         
     }
 
@@ -175,8 +216,9 @@ public class PlayerCam : NetworkBehaviour
         while(t<time)
         {
             t += Time.deltaTime;
-            startRotation = Mathf.LerpAngle(startRotation, endAngle, t / time);
-            camHolder.eulerAngles = new Vector3(camHolder.eulerAngles.x, camHolder.eulerAngles.y, startRotation);
+            float tempRotation = Mathf.LerpAngle(startRotation, endAngle, t / time);
+            camHolder.Rotate(0, 0, tempRotation-camHolder.eulerAngles.z);
+            //Debug.Log("camHolder.eulerAngles.z = " + camHolder.eulerAngles.z);
             yield return null;
         }
     }
