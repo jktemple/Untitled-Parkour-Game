@@ -1,296 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9091675522182160328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TaggingV1
-  m_EditorClassIdentifier: 
-  Path: event:/TaggingV1
-  Guid:
-    Data1: 1596703088
-    Data2: 1191669603
-    Data3: 2004206734
-    Data4: 1497414605
-  Banks:
-  - {fileID: 8631169011809319237}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1100
---- !u!114 &-8883427194918728522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/BGM
-  m_EditorClassIdentifier: 
-  Path: event:/BGM
-  Guid:
-    Data1: 943134391
-    Data2: 1287528226
-    Data3: 1041060521
-    Data4: 2151314
-  Banks:
-  - {fileID: -7093925380150019906}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 56741
---- !u!114 &-8221250656708727143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/JumpingV5
-  m_EditorClassIdentifier: 
-  Path: event:/JumpingV5
-  Guid:
-    Data1: -174659108
-    Data2: 1161800977
-    Data3: -813922114
-    Data4: -890521013
-  Banks:
-  - {fileID: 8631169011809319237}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 230
---- !u!114 &-8187804342526593702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/ShovingFailedV1
-  m_EditorClassIdentifier: 
-  Path: event:/ShovingFailedV1
-  Guid:
-    Data1: -886783712
-    Data2: 1241674537
-    Data3: -1133081215
-    Data4: 468285493
-  Banks:
-  - {fileID: 8631169011809319237}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 340
---- !u!114 &-7502535042534277674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: ../FMOD/Audio#1/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-
-  lastModified: 638209991444130034
-
-  - Name: Desktop
-    Value: 670
-  Exists: 1
---- !u!114 &-7093925380150019906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Music.bank
-  m_EditorClassIdentifier: 
-  Path: ../FMOD/Audio#1/Build/Desktop/Music.bank
-  Name: Music
-  StudioPath: bank:/Music
-  lastModified: 638209989123843374
-  FileSizes:
-  - Name: Desktop
-    Value: 803232
-  Exists: 1
---- !u!114 &-4662247952508666960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/FootstepV5
-  m_EditorClassIdentifier: 
-  Path: event:/FootstepV5
-  Guid:
-    Data1: 1905533879
-    Data2: 1174152603
-    Data3: -932905307
-    Data4: -1337652830
-  Banks:
-  - {fileID: 8631169011809319237}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 450
---- !u!114 &-3899778856860331707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: ../FMOD/Audio#1/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-
-  lastModified: 638209991444140033
-
-  FileSizes:
-  - Name: Desktop
-    Value: 1268
-  Exists: 1
---- !u!114 &-597478278919094349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/TaggingV1
-  m_EditorClassIdentifier: 
-  Path: event:/TaggingV1
-  Guid:
-    Data1: 1596703088
-    Data2: 1191669603
-    Data3: 2004206734
-    Data4: 1497414605
-  Banks:
-  - {fileID: 8631169011809319237}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1500
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
-  m_Name: FMODStudioCache
-  m_EditorClassIdentifier: 
-  EditorBanks:
-  - {fileID: -3899778856860331707}
-  - {fileID: -7502535042534277674}
-  - {fileID: 8631169011809319237}
-  - {fileID: -7093925380150019906}
-  EditorEvents:
-  - {fileID: 175148200014546022}
-  - {fileID: 4568516349560649987}
-  - {fileID: 8342953487041021285}
-  - {fileID: 3969824276390240407}
-  - {fileID: -8883427194918728522}
-  - {fileID: -4662247952508666960}
-  - {fileID: -8221250656708727143}
-  - {fileID: 1490780623538224058}
-  - {fileID: -9091675522182160328}
-  - {fileID: -8187804342526593702}
-  - {fileID: 853558627425070148}
-  EditorParameters: []
-  MasterBanks:
-  - {fileID: -7502535042534277674}
-  StringsBanks:
-  - {fileID: -3899778856860331707}
-
-  cacheTime: 638209991444140033
-
-  cacheVersion: 131601
---- !u!114 &175148200014546022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/UISelect
-  m_EditorClassIdentifier: 
-  Path: event:/UISelect
-  Guid:
-    Data1: 1282387075
-    Data2: 1125749048
-    Data3: -807104625
-    Data4: -736885102
-  Banks:
-  - {fileID: 8631169011809319237}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &853558627425070148
+--- !u!114 &-9018192611552241080
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -309,7 +19,7 @@ MonoBehaviour:
     Data3: 1819956353
     Data4: -1124573742
   Banks:
-  - {fileID: 8631169011809319237}
+  - {fileID: 4255210319653533764}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -317,7 +27,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1880
---- !u!114 &1490780623538224058
+--- !u!114 &-7849871619586583763
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -327,78 +37,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SlidingV2
+  m_Name: event:/JumpingV5
   m_EditorClassIdentifier: 
-  Path: event:/SlidingV2
+  Path: event:/JumpingV5
   Guid:
-    Data1: 53178743
-    Data2: 1259208122
-    Data3: -1426245959
-    Data4: -1897982819
+    Data1: -174659108
+    Data2: 1161800977
+    Data3: -813922114
+    Data4: -890521013
   Banks:
-  - {fileID: 8631169011809319237}
+  - {fileID: 4255210319653533764}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 2000
---- !u!114 &3969824276390240407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/BoostingV1
-  m_EditorClassIdentifier: 
-  Path: event:/BoostingV1
-  Guid:
-    Data1: -594772484
-    Data2: 1274357222
-    Data3: 1963701409
-    Data4: 576034364
-  Banks:
-  - {fileID: 8631169011809319237}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1460
---- !u!114 &4568516349560649987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/WallrunningV1
-  m_EditorClassIdentifier: 
-  Path: event:/WallrunningV1
-  Guid:
-    Data1: 1421281157
-    Data2: 1075080530
-    Data3: -377851505
-    Data4: -1583922881
-  Banks:
-  - {fileID: 8631169011809319237}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 262
---- !u!114 &8342953487041021285
+  Length: 230
+--- !u!114 &-6521171468213547255
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -417,7 +73,7 @@ MonoBehaviour:
     Data3: -1847950938
     Data4: -385006151
   Banks:
-  - {fileID: 8631169011809319237}
+  - {fileID: 4255210319653533764}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -425,7 +81,238 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 7000
---- !u!114 &8631169011809319237
+--- !u!114 &-6138860676947099218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: ../FMOD/Audio#1/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638200421733493768
+  FileSizes:
+  - Name: Desktop
+    Value: 1268
+  Exists: 1
+--- !u!114 &-5039851199831441803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/WallrunningV1
+  m_EditorClassIdentifier: 
+  Path: event:/WallrunningV1
+  Guid:
+    Data1: 1421281157
+    Data2: 1075080530
+    Data3: -377851505
+    Data4: -1583922881
+  Banks:
+  - {fileID: 4255210319653533764}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 262
+--- !u!114 &-4917827982580305059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BoostingV1
+  m_EditorClassIdentifier: 
+  Path: event:/BoostingV1
+  Guid:
+    Data1: -594772484
+    Data2: 1274357222
+    Data3: 1963701409
+    Data4: 576034364
+  Banks:
+  - {fileID: 4255210319653533764}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1460
+--- !u!114 &-4612991679898789520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UISelect
+  m_EditorClassIdentifier: 
+  Path: event:/UISelect
+  Guid:
+    Data1: 1282387075
+    Data2: 1125749048
+    Data3: -807104625
+    Data4: -736885102
+  Banks:
+  - {fileID: 4255210319653533764}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3394669135452462746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../FMOD/Audio#1/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638140488934642407
+  FileSizes:
+  - Name: Desktop
+    Value: 670
+  Exists: 1
+--- !u!114 &-1897985540100921372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ShovingFailedV1
+  m_EditorClassIdentifier: 
+  Path: event:/ShovingFailedV1
+  Guid:
+    Data1: -886783712
+    Data2: 1241674537
+    Data3: -1133081215
+    Data4: 468285493
+  Banks:
+  - {fileID: 4255210319653533764}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 340
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: -6138860676947099218}
+  - {fileID: -3394669135452462746}
+  - {fileID: 2317163383532468802}
+  - {fileID: 4255210319653533764}
+  EditorEvents:
+  - {fileID: 6029732807853475719}
+  - {fileID: -1897985540100921372}
+  - {fileID: 9107282650630501972}
+  - {fileID: 1175806398971868543}
+  - {fileID: -4612991679898789520}
+  - {fileID: -5039851199831441803}
+  - {fileID: 4677693451976161896}
+  - {fileID: -6521171468213547255}
+  - {fileID: -7849871619586583763}
+  - {fileID: -9018192611552241080}
+  - {fileID: -4917827982580305059}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: -3394669135452462746}
+  StringsBanks:
+  - {fileID: -6138860676947099218}
+  cacheTime: 638210838351413926
+  cacheVersion: 131601
+--- !u!114 &1175806398971868543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SlidingV2
+  m_EditorClassIdentifier: 
+  Path: event:/SlidingV2
+  Guid:
+    Data1: 53178743
+    Data2: 1259208122
+    Data3: -1426245959
+    Data4: -1897982819
+  Banks:
+  - {fileID: 4255210319653533764}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
+--- !u!114 &2317163383532468802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: ../FMOD/Audio#1/Build/Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 638176861248022249
+  FileSizes:
+  - Name: Desktop
+    Value: 803232
+  Exists: 1
+--- !u!114 &4255210319653533764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -440,9 +327,89 @@ MonoBehaviour:
   Path: ../FMOD/Audio#1/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638209989957991230
-
+  lastModified: 638210838351413926
   FileSizes:
   - Name: Desktop
     Value: 329056
   Exists: 1
+--- !u!114 &4677693451976161896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/FootstepV5
+  m_EditorClassIdentifier: 
+  Path: event:/FootstepV5
+  Guid:
+    Data1: 1905533879
+    Data2: 1174152603
+    Data3: -932905307
+    Data4: -1337652830
+  Banks:
+  - {fileID: 4255210319653533764}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 450
+--- !u!114 &6029732807853475719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BGM
+  m_EditorClassIdentifier: 
+  Path: event:/BGM
+  Guid:
+    Data1: 943134391
+    Data2: 1287528226
+    Data3: 1041060521
+    Data4: 2151314
+  Banks:
+  - {fileID: 2317163383532468802}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 56741
+--- !u!114 &9107282650630501972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/TaggingV1
+  m_EditorClassIdentifier: 
+  Path: event:/TaggingV1
+  Guid:
+    Data1: 1596703088
+    Data2: 1191669603
+    Data3: 2004206734
+    Data4: 1497414605
+  Banks:
+  - {fileID: 4255210319653533764}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1100
