@@ -70,9 +70,22 @@ public class PlayerCam : NetworkBehaviour
             gamepadSensY= sensHolder.padSense;
             gamepadSensX = sensHolder.padSense;
         }
+
+        inputs.PlayerMovement.LookBehind.performed += LookBehind_performed;
+        inputs.PlayerMovement.LookBehind.canceled += LookBehind_canceled;
+    }
+    private bool lookingBehind = false;
+    private void LookBehind_canceled(InputAction.CallbackContext obj)
+    {
+        Debug.Log("LookBehind Canceled");
+        lookingBehind = false;
     }
 
-    
+    private void LookBehind_performed(InputAction.CallbackContext obj)
+    {
+        Debug.Log("LookBehind Preformed");
+        lookingBehind= true;
+    }
 
     void SetLayerRecursively(GameObject obj, int newLayer)
     {
@@ -133,14 +146,19 @@ public class PlayerCam : NetworkBehaviour
         {
             HandleQuickTurn();
         }
+        else if (lookingBehind)
+        {
+            camHolder.rotation = Quaternion.Euler(xRotation, 180+orientation.eulerAngles.y, camHolder.eulerAngles.z);
+        }
         else if (!quickTurning)
         {
             // rotate cam and orientation
             
             camHolder.rotation = Quaternion.Euler(xRotation, yRotation, camHolder.eulerAngles.z);
             orientation.rotation = Quaternion.Euler(0, yRotation, 0);
-        }
+        } 
 
+        
         
     }
 

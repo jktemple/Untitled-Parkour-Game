@@ -21132,11 +21132,11 @@ MonoBehaviour:
     Path: event:/SlidingV2
   <playerWallrunningsfx>k__BackingField:
     Guid:
-      Data1: -174659108
-      Data2: 1161800977
-      Data3: -813922114
-      Data4: -890521013
-    Path: event:/JumpingV5
+      Data1: 1421281157
+      Data2: 1075080530
+      Data3: -377851505
+      Data4: -1583922881
+    Path: event:/WallrunningV1
   <playerWallclimbingsfx>k__BackingField:
     Guid:
       Data1: -174659108

@@ -105,7 +105,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""id"": ""9f35b343-00f9-4b99-983f-c68759c2da4f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -124,6 +124,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LookBehind"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8abf76d-a3d2-453d-9ed1-fe80b48a2ad8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -501,6 +510,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""WallGrab"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aea3a0e1-2e56-4e18-8e03-611139e1d57b"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""LookBehind"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ceaeff6e-d17d-4466-88c7-d4a1a2e396c1"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""LookBehind"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9f15717-0199-4108-aaaf-af97c8f0abf9"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""LookBehind"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -548,6 +590,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerMovement_QuickTurn = m_PlayerMovement.FindAction("QuickTurn", throwIfNotFound: true);
         m_PlayerMovement_Shove = m_PlayerMovement.FindAction("Shove", throwIfNotFound: true);
         m_PlayerMovement_WallGrab = m_PlayerMovement.FindAction("WallGrab", throwIfNotFound: true);
+        m_PlayerMovement_LookBehind = m_PlayerMovement.FindAction("LookBehind", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -618,6 +661,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_QuickTurn;
     private readonly InputAction m_PlayerMovement_Shove;
     private readonly InputAction m_PlayerMovement_WallGrab;
+    private readonly InputAction m_PlayerMovement_LookBehind;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -633,6 +677,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @QuickTurn => m_Wrapper.m_PlayerMovement_QuickTurn;
         public InputAction @Shove => m_Wrapper.m_PlayerMovement_Shove;
         public InputAction @WallGrab => m_Wrapper.m_PlayerMovement_WallGrab;
+        public InputAction @LookBehind => m_Wrapper.m_PlayerMovement_LookBehind;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -675,6 +720,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @WallGrab.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnWallGrab;
                 @WallGrab.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnWallGrab;
                 @WallGrab.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnWallGrab;
+                @LookBehind.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnLookBehind;
+                @LookBehind.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnLookBehind;
+                @LookBehind.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnLookBehind;
             }
             m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -712,6 +760,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @WallGrab.started += instance.OnWallGrab;
                 @WallGrab.performed += instance.OnWallGrab;
                 @WallGrab.canceled += instance.OnWallGrab;
+                @LookBehind.started += instance.OnLookBehind;
+                @LookBehind.performed += instance.OnLookBehind;
+                @LookBehind.canceled += instance.OnLookBehind;
             }
         }
     }
@@ -747,5 +798,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnQuickTurn(InputAction.CallbackContext context);
         void OnShove(InputAction.CallbackContext context);
         void OnWallGrab(InputAction.CallbackContext context);
+        void OnLookBehind(InputAction.CallbackContext context);
     }
 }
