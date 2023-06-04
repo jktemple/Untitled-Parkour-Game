@@ -12,8 +12,10 @@ using UnityEngine.UI;
 public class PlayerCam : NetworkBehaviour
 {
     public GameObject thirdPersonMesh;
+    public GameObject outlineMesh;
     public WallRunning wr;
     public PlayerMovement pm;
+    public Shoving sh;
     public LayerMask invisible;
     // camera sensitivity
     public float mouseSensX;
@@ -37,7 +39,7 @@ public class PlayerCam : NetworkBehaviour
     float yRotation;
 
     int LayerInvisible;
-
+    int xrayHash;
     bool quickTurning = false;
     // Start is called before the first frame update
 
@@ -45,7 +47,11 @@ public class PlayerCam : NetworkBehaviour
     private SensHolder sensHolder;
     void Start()
     {
-        if (!IsOwner) return;
+        xrayHash = LayerMask.NameToLayer("XRay");
+        if (!IsOwner) 
+        {
+            return; 
+        }
         // curser locked to center of screen
         Cursor.lockState = CursorLockMode.Locked;
         // curser invisible
@@ -106,10 +112,34 @@ public class PlayerCam : NetworkBehaviour
         }
     }
 
+    public void SetXRay(bool xray)
+    {
+        if (IsOwner) return;
+        if(xray) 
+        { 
+            SetLayerRecursively(outlineMesh, LayerMask.NameToLayer("XRay")); 
+        }
+        else
+        {
+            SetLayerRecursively(outlineMesh, LayerMask.NameToLayer("Default"));
+        }
+        
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (!IsOwner) return;
+        if (!IsOwner)
+        {
+            if (sh.infected.Value == true && outlineMesh.layer == xrayHash) 
+            {
+                SetLayerRecursively(outlineMesh, LayerMask.NameToLayer("Default"));
+            } else if(sh.infected.Value == false && outlineMesh.layer != xrayHash)
+            {
+                SetLayerRecursively(outlineMesh, LayerMask.NameToLayer("XRay"));
+            }
+            return; 
+        }
 
         if (sensHolder != null)
         {

@@ -36,7 +36,14 @@ public class MoveToSpawn : NetworkBehaviour
     public void MovetoSpawnPoint()
     {
         if (!IsOwner) return;
-        transform.position = spawnPointTransfrom.Value;
+        if (spawnPointTransfrom.Value == Vector3.zero)
+        {
+            transform.position = GameObject.Find("Spawn Point").transform.position;
+        }
+        else
+        {
+            transform.position = spawnPointTransfrom.Value;
+        }
         GetComponent<PlayerMovement>().ResetStamina();
         GetComponent<Rigidbody>().velocity = Vector3.zero;
     }

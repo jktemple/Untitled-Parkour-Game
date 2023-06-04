@@ -432,4 +432,15 @@ public class VirusTagGameModeManager : NetworkBehaviour
             SendUntaggedUI(idList.ToArray());
         }
     }
+
+    void SendXray(bool xray, ulong id)
+    {
+
+    }
+
+    [ClientRpc]
+    void XRayClientRPC(bool xray, ClientRpcParams clientRpcParams = default)
+    {
+        
+    }
 }

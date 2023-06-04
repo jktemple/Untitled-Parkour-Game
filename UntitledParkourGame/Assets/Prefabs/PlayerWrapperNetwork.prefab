@@ -1387,8 +1387,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thirdPersonMesh: {fileID: 4194629556480869670}
+  outlineMesh: {fileID: 3363099548092123380}
   wr: {fileID: 4194629557659296674}
   pm: {fileID: 4194629557659296672}
+  sh: {fileID: 3333380843094471661}
   invisible:
     serializedVersion: 2
     m_Bits: 16384
