@@ -1,18 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioVolumeSlider : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private enum VolumeType{
+        SFX,
+
+        BGM
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    [Header ("Type")]
+    [SerializeField] private VolumeType volumeType;
+
+    private Slider volumeSlider;
+
+    private void Awake(){
+        volumeSlider = this.GetComponentInChildren<Slider>();
     }
+
+    private void Update(){
+        switch (volumeType){
+            case VolumeType.SFX:
+                volumeSlider.value = AudioManager.instance.SFXVolume;
+                break;
+            case VolumeType.BGM:
+                volumeSlider.value = AudioManager.instance.BGMVolume;
+                break;
+            default:
+                Debug.LogWarning("Volume Type not supported: " + volumeType);
+                break;
+            }
+
+    }
+
+    public void OnSliderChange(){
+        switch (volumeType){
+            case VolumeType.SFX:
+                AudioManager.instance.SFXVolume = volumeSlider.value;
+                break;
+            case VolumeType.BGM:
+                AudioManager.instance.BGMVolume = volumeSlider.value;
+                break;
+            default:
+                Debug.LogWarning("Volume Type not supported: " + volumeType);
+                break;
+            }
+
+    }
+
+
 }
