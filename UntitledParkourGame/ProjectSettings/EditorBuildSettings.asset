@@ -21,10 +21,10 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuScenes/Map Select.unity
     guid: ed6154056d7f0bb4396237b659905aa8
   - enabled: 0
-    path: Assets/Scenes/Offline Scenes/Tutorial Scene Offline.unity
+    path: Assets/Scenes/Offline Scenes/old/Tutorial Scene Offline.unity
     guid: d6452b161f5adee41b0ce26da42e1494
   - enabled: 1
-    path: Assets/Scenes/Offline Scenes/Virus Tag Multiplayer Map Offline.unity
+    path: Assets/Scenes/Offline Scenes/old/Virus Tag Multiplayer Map Offline.unity
     guid: 6b7aa585c66a84344bcd591297591fd0
   - enabled: 0
     path: Assets/Scenes/Virus Tag Multiplayer Map.unity
