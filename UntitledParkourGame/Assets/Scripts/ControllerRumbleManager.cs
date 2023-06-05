@@ -83,19 +83,30 @@ public class ControllerRumbleManager : MonoBehaviour
 
     private void Update()
     {
+        var gamepad = GetGamepad();
+        if (gamepad == null)
+        {
+            return;
+        }
+        else
+        {
+            //Debug.Log("current gamepad =" + gamepad?.name + " Display name = " + gamepad?.deviceId);
+        }
+
         if (Time.time > rumbleDurration)
         {
             StopRumble();
             return;
         }
-
+        
+        
         if(_playerInput.currentControlScheme != "Gamepad" && !controllerTest)
         {
             return;
         }
-        var gamepad = GetGamepad();
-        if (gamepad == null)
-            return;
+
+       
+
 
         switch (activeRumblePattern)
         {
