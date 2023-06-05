@@ -19,6 +19,7 @@ public class LobbyUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerCountText;
     [SerializeField] private Button leaveLobbyButton;
     [SerializeField] private Button startGameButton;
+    [SerializeField] private GameObject hud;
 
 
     private void Awake()
@@ -32,6 +33,7 @@ public class LobbyUI : MonoBehaviour
         });
 
         startGameButton.onClick.AddListener(() =>{
+            hud.SetActive(true);
             LobbyManager.Instance.StartGame();
         });
 

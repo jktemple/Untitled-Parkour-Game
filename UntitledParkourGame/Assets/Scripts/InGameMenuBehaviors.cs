@@ -11,6 +11,7 @@ public class InGameMenuBehaviors : MonoBehaviour
     public GameObject theMenu;
     public GameObject scoreBoard;
     public GameObject reticle;
+    public GameObject hud;
     public static bool isPaused;
    // public string playerName = string.Empty;
     private bool showingScore;
@@ -21,6 +22,7 @@ public class InGameMenuBehaviors : MonoBehaviour
         if(scoreBoard!=null)
         scoreBoard.SetActive(false);
         reticle.SetActive(false);
+        hud.SetActive(false);
         Application.targetFrameRate = 120;
         if (LobbyManager.Instance != null)
         LobbyManager.Instance.OnGameStarted += LobbyManager_OnGameStarted;
@@ -29,6 +31,7 @@ public class InGameMenuBehaviors : MonoBehaviour
     private void LobbyManager_OnGameStarted(object sender, EventArgs e)
     {
         reticle.SetActive(true);
+       // hud.SetActive(true);
     }
     void Update()
     {

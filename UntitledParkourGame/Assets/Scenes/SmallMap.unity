@@ -3588,6 +3588,7 @@ MonoBehaviour:
   theMenu: {fileID: 487396570}
   scoreBoard: {fileID: 1286327231}
   reticle: {fileID: 1462711703}
+  hud: {fileID: 1532577941}
 --- !u!4 &473141558
 Transform:
   m_ObjectHideFlags: 0
@@ -12704,6 +12705,7 @@ MonoBehaviour:
   playerCountText: {fileID: 37554654}
   leaveLobbyButton: {fileID: 624686555}
   startGameButton: {fileID: 369482928}
+  hud: {fileID: 1532577941}
 --- !u!1 &1500797576
 GameObject:
   m_ObjectHideFlags: 0
