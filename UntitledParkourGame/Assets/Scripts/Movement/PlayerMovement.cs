@@ -298,6 +298,18 @@ public class PlayerMovement : NetworkBehaviour
             {
                 icon.text = "<sprite=3>";
             }
+
+            // stamina handling
+            if (currentStamina < staminaDrainRate/2 * Time.deltaTime)
+            {
+                currentStamina = 0;
+                // Debug.Log("Current Stamina Sprinting depleted: " + currentStamina);
+            }
+            else
+            {
+                currentStamina -= staminaDrainRate/2 * Time.deltaTime;
+                // Debug.Log("Current Stamina Sprinting: " + currentStamina);
+            }
         }
         //Mode Air
         else

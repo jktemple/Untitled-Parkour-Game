@@ -11,14 +11,12 @@ public class WallGrab : NetworkBehaviour
     public Transform orientation;
     
     [Header("Jump parameters")]
-    public float jumps;
     public float ForwardForce;
     public float UpwardForce;
 
     private bool exitingWall;
     private float exitWallTime;
     private float exitWallTimer;
-    private float jumpsLeft;
 
     private Rigidbody rb;
     public PlayerMovement pm;
@@ -36,25 +34,28 @@ public class WallGrab : NetworkBehaviour
         exitingWall = false;
         exitWallTime = 0.35f;
         exitWallTimer = exitWallTime;
-        jumps = 1;
-        jumpsLeft = jumps;
     }
 
     private void Update()
     {
         if(!IsOwner) { return; }
-        if(pm.grounded)
-        {
-            jumpsLeft = jumps;
-        }
-        if(pm.wallGrabbing && inputs.PlayerMovement.Jump.IsPressed() && jumpsLeft > 0)
+
+        if(pm.wallGrabbing && inputs.PlayerMovement.Jump.IsPressed() && pm.currentStamina > 1)
         {
             pm.wallGrabbing = false;
             exitingWall = true;
-            jumpsLeft--;
             Vector3 forceToApply = (cam.forward * ForwardForce) + (orientation.up * UpwardForce);
             rb.velocity = Vector3.zero;
             rb.AddForce(forceToApply, ForceMode.Impulse);
+
+            if(pm.currentStamina > 10)
+            {
+                pm.currentStamina -= 10;
+            }
+            else
+            {
+                pm.currentStamina = 0;
+            }
         }
         if(exitingWall)
         {
