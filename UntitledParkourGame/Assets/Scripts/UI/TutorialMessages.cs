@@ -2,22 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TutorialMessages : MonoBehaviour
 {
-    public GameObject backgroundImage;
-    private TextMeshProUGUI message;
+    public Image backgroundImage;
+    public TextMeshProUGUI message;
+    private string whatMessage;
 
     // Start is called before the first frame update
     void Start()
     {
-            message = backgroundImage.GetComponent<TextMeshProUGUI>();
-            Debug.Log("Icon == " + message.ToString());
+        backgroundImage.enabled = false;
+        message.enabled = false;
+        whatMessage = "default";
     }
 
-    // Update is called once per frame
-    void Update()
+    public void changeMessage(string newMessage)
     {
-        
+        message.text = newMessage;
+    }
+    public void showMessage()
+    {
+        backgroundImage.enabled = true;
+        message.enabled = true;
+    }
+
+    public void hideMessage()
+    {
+        backgroundImage.enabled = false;
+        message.enabled = false;
     }
 }
