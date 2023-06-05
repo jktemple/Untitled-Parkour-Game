@@ -3064,7 +3064,7 @@ GameObject:
   - component: {fileID: 244047831}
   - component: {fileID: 244047833}
   - component: {fileID: 244047832}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: Movement Icon UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3340,7 +3340,7 @@ GameObject:
   - component: {fileID: 266898674}
   - component: {fileID: 266898673}
   - component: {fileID: 266898675}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5272,7 +5272,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 457679291}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: DistanceThingy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5506,6 +5506,7 @@ MonoBehaviour:
   theMenu: {fileID: 487396570}
   scoreBoard: {fileID: 1286327231}
   reticle: {fileID: 1462711703}
+  hud: {fileID: 1532577941}
 --- !u!4 &473141558
 Transform:
   m_ObjectHideFlags: 0
@@ -7554,7 +7555,7 @@ GameObject:
   - component: {fileID: 631994221}
   - component: {fileID: 631994223}
   - component: {fileID: 631994222}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: Distance Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14259,7 +14260,7 @@ GameObject:
   - component: {fileID: 1101255449}
   - component: {fileID: 1101255451}
   - component: {fileID: 1101255450}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: Distance Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20293,6 +20294,7 @@ MonoBehaviour:
   playerCountText: {fileID: 37554654}
   leaveLobbyButton: {fileID: 624686555}
   startGameButton: {fileID: 369482928}
+  hud: {fileID: 1532577941}
 --- !u!1 &1500797576
 GameObject:
   m_ObjectHideFlags: 0
@@ -20731,7 +20733,7 @@ GameObject:
   - component: {fileID: 1532577944}
   - component: {fileID: 1532577943}
   - component: {fileID: 1532577942}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: Hud Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23661,7 +23663,7 @@ GameObject:
   - component: {fileID: 1789730897}
   - component: {fileID: 1789730896}
   - component: {fileID: 1789730895}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: Round Clock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25764,7 +25766,7 @@ GameObject:
   - component: {fileID: 2016647778}
   - component: {fileID: 2016647780}
   - component: {fileID: 2016647779}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: Round Timer Lable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
