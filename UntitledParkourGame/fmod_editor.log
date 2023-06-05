@@ -19,3 +19,49 @@
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 000001CB49D91E28, queue head = 000001CED39FDE68, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001CB49D91E28
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001CB49D91E28
+[LOG] SoundI::release                          : UPG_BGM1 (000001CB49D8EEE8)
+[LOG] SoundI::release                          :     UPG_BGM1 (000001CE5C21F7D8)
+[LOG] SoundI::release                          :     UPG_BGM1 (000001CB49D91E28)
+[LOG] SoundI::release                          :  (000001CB4A2A8358)
+[LOG] SoundI::release                          :     Tagging#2 (000001CED2E22838)
+[LOG] SoundI::release                          :  (000001CB4A2A8638)
+[LOG] SoundI::release                          :     Wallrunning#7 (000001CED2E20AF8)
+[LOG] SoundI::release                          :  (000001CB4A2A8078)
+[LOG] SoundI::release                          :     Boosting#3 (000001CED2E1E8D8)
+[LOG] SoundI::release                          :  (000001CB4A2A8918)
+[LOG] SoundI::release                          :     Jumping#9 (000001CED2E21318)
+[LOG] SoundI::release                          :  (000001CB4A2A7AB8)
+[LOG] SoundI::release                          :     Sliding#2 (000001CDC542CD88)
+[LOG] SoundI::release                          :  (000001CB4A2A87A8)
+[LOG] SoundI::release                          :     TaggingSuccess#1 (000001CECDC33D68)
+[LOG] SoundI::release                          :  (000001CB4A2A70A8)
+[LOG] SoundI::release                          :     Footstep#10 (000001CED2E1DF18)
+[LOG] SoundI::release                          :  (000001CB4A2A84C8)
+[LOG] SoundI::release                          :     TaggingFailed#1 (000001CECDC33BC8)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
+[LOG] Thread::callback                         : FMOD file thread finished.
