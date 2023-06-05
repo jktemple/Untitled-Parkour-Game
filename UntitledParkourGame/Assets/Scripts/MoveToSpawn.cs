@@ -29,7 +29,7 @@ public class MoveToSpawn : NetworkBehaviour
             ableToMove= false;
             MovetoSpawnPoint();
             ResetMoveToSpawnServerRPC();
-            Invoke(nameof(ResetAbleToMove), 5f);
+            Invoke(nameof(ResetAbleToMove), 30);
         }
     }
 
