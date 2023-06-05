@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+
+/* This Script Modified from a Youtube Video
+ * https://www.youtube.com/watch?v=rcBHIOjZDpk
+ * 
+ */ 
+
+
 public class AudioVolumeSlider : MonoBehaviour
 {
     private enum VolumeType{
