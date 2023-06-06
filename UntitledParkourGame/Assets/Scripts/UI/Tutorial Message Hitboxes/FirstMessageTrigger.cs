@@ -32,14 +32,14 @@ public class FirstMessageTrigger : MonoBehaviour
         if (this.gameObject.name == "Message")
         {
             if (controlType == "Keyboard")
-                newMessage = "Welcome!\nUse <sprite=0><sprite=1><sprite=2><sprite=3> to move and the mosue to look";
+                newMessage = "Welcome! Use the mouse to look and <sprite=0><sprite=1><sprite=2><sprite=3> to move. Hold <sprite=8> to look behind you or tap it to quickturn";
             else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
             {
-                newMessage = "Welcome!\nUse the left stick to move and the right stick to look";
+                newMessage = "Welcome! Use the left stick to move and the right stick to look. Hold <sprite=11>/<sprite=18> to look behind you or tap to quickturn";
             }
             else
             {
-                newMessage = "Welcome!\nUse the left stick to move and the right stick to look";
+                newMessage = "Welcome! Use the left stick to move and the right stick to look. Hold <sprite=21>/<sprite=28> to look behind you or tap to quickturn";
             }
 
         }
