@@ -32,41 +32,41 @@ public class FirstMessageTrigger : MonoBehaviour
         if (this.gameObject.name == "Message")
         {
             if (controlType == "Keyboard")
-                newMessage = "Welcome!\nTo move, use <sprite=0><sprite=1><sprite=2><sprite=3>";
+                newMessage = "Welcome!\nUse <sprite=0><sprite=1><sprite=2><sprite=3> to move and the mosue to look";
             else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
             {
-                newMessage = "ps4";
+                newMessage = "Welcome!\nUse the left stick to move and the right stick to look";
             }
             else
             {
-                newMessage = "xbox";
+                newMessage = "Welcome!\nUse the left stick to move and the right stick to look";
             }
 
         }
         else if (this.gameObject.name == "Message (1)")
         {
             if (controlType == "Keyboard")
-                newMessage = "Oh boy, a gap!\nJump over it with\n<sprite=9> !";
+                newMessage = "Oh boy, a gap!\nJump over it with\n<sprite=9>!";
             else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
             {
-                newMessage = "ps4";
+                newMessage = "Oh boy, a gap!\nJump over it with\n<sprite=10>/<sprite=14>!";
             }
             else
             {
-                newMessage = "xbox";
+                newMessage = "Oh boy, a gap!\nJump over it with\n<sprite=20>/<sprite=24>!";
             }
         }
         else if (this.gameObject.name == "Message (2)")
         {
             if (controlType == "Keyboard")
-                newMessage = "A bigger Gap means you need more Speed!\nSprint with <sprite=4>!";
+                newMessage = "A bigger Gap means you need more Speed!\nSprint with <sprite=4>! (Drains stamina)";
             else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
             {
-                newMessage = "ps4";
+                newMessage = "A bigger Gap means you need more Speed!\nSprint with <sprite=17>/<sprite=19>! (Drains stamina)";
             }
             else
             {
-                newMessage = "xbox";
+                newMessage = "A bigger Gap means you need more Speed!\nSprint with <sprite=27>/<sprite=29>! (Drains stamina)";
             }
         }
         else if (this.gameObject.name == "Message (3)")
@@ -75,11 +75,11 @@ public class FirstMessageTrigger : MonoBehaviour
                 newMessage = "Watch Your Head!\nDon't worry, you can just walk under this one.";
             else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
             {
-                newMessage = "ps4";
+                newMessage = "Watch Your Head!\nDon't worry, you can just walk under this one.";
             }
             else
             {
-                newMessage = "xbox";
+                newMessage = "Watch Your Head!\nDon't worry, you can just walk under this one.";
             }
         }
         else if (this.gameObject.name == "Message (4)")
@@ -88,50 +88,50 @@ public class FirstMessageTrigger : MonoBehaviour
                 newMessage = "Rather small, huh?\nJust slide with\n<sprite=5> when moving!";
             else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
             {
-                newMessage = "ps4";
+                newMessage = "Rather small, huh?\nJust slide with\n<sprite=15> when moving!";
             }
             else
             {
-                newMessage = "xbox";
+                newMessage = "Rather small, huh?\nJust slide with\n<sprite=25> when moving!";
             }
         }
         else if (this.gameObject.name == "Message (5)")
         {
             if (controlType == "Keyboard")
-                newMessage = "Jump towards the wall at an angle to wallrun!";
+                newMessage = "Jump towards the wall at an angle to wallrun! (Wallrunning recharges your stamina faster!)";
             else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
             {
-                newMessage = "ps4";
+                newMessage = "Jump towards the wall at an angle to wallrun! (Wallrunning recharges your stamina faster!)";
             }
             else
             {
-                newMessage = "xbox";
+                newMessage = "Jump towards the wall at an angle to wallrun! (Wallrunning recharges your stamina faster!)";
             }
         }
         else if (this.gameObject.name == "Message (6)")
         {
             if (controlType == "Keyboard")
-                newMessage = "You can chain wallruns into each other by jumping across!";
+                newMessage = "You can chain wallruns into each other by jumping between them!";
             else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
             {
-                newMessage = "ps4";
+                newMessage = "You can chain wallruns into each other by jumping between them!";
             }
             else
             {
-                newMessage = "xbox";
+                newMessage = "You can chain wallruns into each other by jumping between them!";
             }
         }
         else if (this.gameObject.name == "Message (7)")
         {
             if (controlType == "Keyboard")
-                newMessage = "Hold forward into a wall to start climbing up it!";
+                newMessage = "Hold forward into a wall to start climbing up it! (Also recharges stamina)";
             else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
             {
-                newMessage = "ps4";
+                newMessage = "Hold forward into a wall to start climbing up it! (Also recharges stamina)";
             }
             else
             {
-                newMessage = "xbox";
+                newMessage = "Hold forward into a wall to start climbing up it! (Also recharges stamina)";
             }
         }
         else if (this.gameObject.name == "Message (8)")
@@ -140,11 +140,11 @@ public class FirstMessageTrigger : MonoBehaviour
                 newMessage = "Do a Quickturn with <sprite=8> while climbing up a wall and then jump! (don't move when turning or jumping)";
             else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
             {
-                newMessage = "ps4";
+                newMessage = "Do a Quickturn with <sprite=11>/<sprite=18> while climbing up a wall and then jump! (don't move when turning or jumping)";
             }
             else
             {
-                newMessage = "xbox";
+                newMessage = "Do a Quickturn with <sprite=21>/<sprite=28> while climbing up a wall and then jump! (don't move when turning or jumping)";
             }
         }
         else if (this.gameObject.name == "Message (9)")
@@ -153,11 +153,11 @@ public class FirstMessageTrigger : MonoBehaviour
                 newMessage = "You can even Quickturn then jump during a wallrun\nto jump away from the wall!";
             else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
             {
-                newMessage = "ps4";
+                newMessage = "You can even Quickturn then jump during a wallrun\nto jump away from the wall!";
             }
             else
             {
-                newMessage = "xbox";
+                newMessage = "You can even Quickturn then jump during a wallrun\nto jump away from the wall!";
             }
         }
         else if (this.gameObject.name == "Message (10)")
@@ -166,11 +166,11 @@ public class FirstMessageTrigger : MonoBehaviour
                 newMessage = "Congrats on finishing the tutorial course!";
             else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
             {
-                newMessage = "ps4";
+                newMessage = "Congrats on finishing the tutorial course!";
             }
             else
             {
-                newMessage = "xbox";
+                newMessage = "Congrats on finishing the tutorial course!";
             }
         }
         else
