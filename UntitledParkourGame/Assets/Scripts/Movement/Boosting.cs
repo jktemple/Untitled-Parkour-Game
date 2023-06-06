@@ -18,6 +18,7 @@ public class Boosting : NetworkBehaviour
     public SphereCastVisual sphereCastVisual;
     [Tooltip("A reference to the gameobject holding the boosting sphere collider")]
     public BoostingHitbox boostingHitbox;
+    private TutorialBoostingHitbox tutorialBoostingHitbox;
 
     public float adjustAmount;
 
@@ -42,6 +43,11 @@ public class Boosting : NetworkBehaviour
         inputs.PlayerMovement.Enable();
         startYScale = playerObj.localScale.y;
         readyToBoostJump = true;
+
+        if(GameObject.Find("Boosting Hitbox") != null)
+        {
+            tutorialBoostingHitbox = GameObject.Find("Boosting Hitbox").GetComponent<TutorialBoostingHitbox>();
+        } 
     }
 
     // Update is called once per frame
@@ -53,22 +59,43 @@ public class Boosting : NetworkBehaviour
 
     void StateMachine()
     {
-
-        //Debug.Log(boostHit.transform);
-        if (pm.grounded && inputs.PlayerMovement.Boost.IsPressed() && !pm.sliding)
+        if(tutorialBoostingHitbox != null)
         {
-            Debug.Log("Starting Boost");
-            StartBoosting();
+            //Debug.Log(boostHit.transform);
+            if (pm.grounded && inputs.PlayerMovement.Boost.IsPressed() && !pm.sliding)
+            {
+                Debug.Log("Starting Boost");
+                StartBoosting();
+            }
+            else if (!pm.grounded && inputs.PlayerMovement.Jump.triggered && readyToBoostJump && (boostingHitbox.playerInHitbox || tutorialBoostingHitbox.playerInHitbox))
+            {
+                BoostJump();
+                Invoke(nameof(ResetBoostJump), boostJumpCooldown);
+            }
+            else if (pm.boosting.Value)
+            {
+                StopBoosting();
+            }
         }
-        else if(!pm.grounded && inputs.PlayerMovement.Jump.triggered && readyToBoostJump && boostingHitbox.playerInHitbox)
+        else
         {
-            BoostJump();
-            Invoke(nameof(ResetBoostJump), boostJumpCooldown);
-        } 
-        else if(pm.boosting.Value)
-        {
-            StopBoosting();
+            //Debug.Log(boostHit.transform);
+            if (pm.grounded && inputs.PlayerMovement.Boost.IsPressed() && !pm.sliding)
+            {
+                Debug.Log("Starting Boost");
+                StartBoosting();
+            }
+            else if (!pm.grounded && inputs.PlayerMovement.Jump.triggered && readyToBoostJump && boostingHitbox.playerInHitbox)
+            {
+                BoostJump();
+                Invoke(nameof(ResetBoostJump), boostJumpCooldown);
+            }
+            else if (pm.boosting.Value)
+            {
+                StopBoosting();
+            }
         }
+        
     }
 
     void StartBoosting()
