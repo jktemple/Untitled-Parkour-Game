@@ -173,21 +173,40 @@ public class FirstMessageTrigger : MonoBehaviour
                 newMessage = "Congrats on finishing the tutorial course!";
             }
         }
+        else if (this.gameObject.name == "Message (11)")
+        {
+            if (controlType == "Keyboard")
+                newMessage = "Hold <sprite=7> while touching a wall to wallgrab. You can use this to precisely aim and then jump (Drains stamina)";
+            else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
+            {
+                newMessage = "Hold <sprite=17> while touching a wall to wallgrab. You can use this to precisely aim and then jump (Drains stamina)";
+            }
+            else
+            {
+                newMessage = "Hold <sprite=27> while touching a wall to wallgrab. You can use this to precisely aim and then jump (Drains stamina)";
+            }
+        }
         else
         {
             newMessage = "...";
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        TutorialMessage.changeMessage(newMessage);
-        TutorialMessage.showMessage();
+        if (other.gameObject.GetComponentInChildren<PlayerMovement>() != null)
+        {
+            TutorialMessage.changeMessage(newMessage);
+            TutorialMessage.showMessage();
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        TutorialMessage.hideMessage();
+        if (other.gameObject.GetComponentInChildren<PlayerMovement>() != null)
+        {
+            TutorialMessage.hideMessage();
+        }
     }
 
 }
