@@ -13,15 +13,15 @@ public class FirstMessageTrigger : MonoBehaviour
         newMessage = "unset";
         if(this.gameObject.name == "Message")
         {
-            newMessage = "Welcome!\nTo move, use the left stick / WASD keys";
+            newMessage = "Welcome!\nTo move, use <sprite=0><sprite=1><sprite=2><sprite=3>";
         }
         else if(this.gameObject.name == "Message (1)")
         {
-            newMessage = "Oh boy, a gap!\nJump over it!\n(RB / R1 / R / Spacebar)";
+            newMessage = "Oh boy, a gap!\nJump over it with\n<sprite=9> !";
         }
         else if (this.gameObject.name == "Message (2)")
         {
-            newMessage = "Bigger Gap means More Speed!\nSprint!(LT / L2 / ZL / LeftShift)";
+            newMessage = "A bigger Gap means you need more Speed!\nSprint with <sprite=4>!";
         }
         else if (this.gameObject.name == "Message (3)")
         {
@@ -29,11 +29,11 @@ public class FirstMessageTrigger : MonoBehaviour
         }
         else if (this.gameObject.name == "Message (4)")
         {
-            newMessage = "Rather small, huh?\nJust slide!\n(LB / L1 / L / LeftCtrl while moving) ";
+            newMessage = "Rather small, huh?\nJust slide with\n<sprite=5> when moving!";
         }
         else if (this.gameObject.name == "Message (5)")
         {
-            newMessage = "To run across a wall, just move into it after a jump.";
+            newMessage = "Jump towards the wall at an angle to wallrun!";
         }
         else if (this.gameObject.name == "Message (6)")
         {
@@ -41,15 +41,15 @@ public class FirstMessageTrigger : MonoBehaviour
         }
         else if (this.gameObject.name == "Message (7)")
         {
-            newMessage = "Climbing up the wall is simple: just move/jump into the wall and move ahead.";
+            newMessage = "Hold forward into a wall to start climbing up it!.";
         }
         else if (this.gameObject.name == "Message (8)")
         {
-            newMessage = "You can do a Quickturn!\n(Click Right Stick or Q)\nCareful, though: for best results, don't move when jumping off walls!";
+            newMessage = "Do a Quickturn with <sprite=8> while climbing up a wall and then jump! (don't move when turning or jumping)";
         }
         else if (this.gameObject.name == "Message (9)")
         {
-            newMessage = "You can even use the Quickturn to chain a wallrun into a wallclimb!";
+            newMessage = "You can even Quickturn then jump during a wallrun\nto jump away from the wall!";
         }
         else if (this.gameObject.name == "Message (10)")
         {
