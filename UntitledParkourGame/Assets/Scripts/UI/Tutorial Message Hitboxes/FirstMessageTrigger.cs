@@ -41,7 +41,7 @@ public class FirstMessageTrigger : MonoBehaviour
         }
         else if (this.gameObject.name == "Message (7)")
         {
-            newMessage = "Hold forward into a wall to start climbing up it!.";
+            newMessage = "Hold forward into a wall to start climbing up it!";
         }
         else if (this.gameObject.name == "Message (8)")
         {
@@ -59,11 +59,6 @@ public class FirstMessageTrigger : MonoBehaviour
         {
             newMessage = "...";
         }
-    }
-
-    private void Update()
-    {
-        
     }
 
     private void OnTriggerEnter(Collider other)
