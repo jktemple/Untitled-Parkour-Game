@@ -7,14 +7,14 @@ public class FirstMessageTrigger : MonoBehaviour
 {
 
     public TutorialMessages TutorialMessage;
-    public Camera camera;
+    public Camera cam;
     private string controlType;
     private string controller;
     private string newMessage;
 
     private void Start()
     {
-        controlType = camera.GetComponent<PlayerInput>().currentControlScheme;
+        controlType = cam.GetComponent<PlayerInput>().currentControlScheme;
         controller = "nothin";
         newMessage = "unset";
         
@@ -27,7 +27,7 @@ public class FirstMessageTrigger : MonoBehaviour
             controller = Gamepad.current.name;
         }
         
-        controlType = camera.GetComponent<PlayerInput>().currentControlScheme;
+        controlType = cam.GetComponent<PlayerInput>().currentControlScheme;
 
         if (this.gameObject.name == "Message")
         {
@@ -170,7 +170,7 @@ public class FirstMessageTrigger : MonoBehaviour
             }
             else
             {
-                newMessage = "Congrats on finishing the tutorial course!";
+                newMessage = "Congrats on finishing the tutorial course! Go into the room ahead for an extra challenge to test your new skills";
             }
         }
         else if (this.gameObject.name == "Message (11)")
@@ -202,6 +202,9 @@ public class FirstMessageTrigger : MonoBehaviour
         else if (this.gameObject.name == "Message (13)")
         {
             newMessage = "press f1 to respawn.";
+        } else if(this.gameObject.name == "Message (14)")
+        {
+            newMessage = "Try to reach the yellow platform";
         }
         else
         {
