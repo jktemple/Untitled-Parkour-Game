@@ -186,6 +186,23 @@ public class FirstMessageTrigger : MonoBehaviour
                 newMessage = "Hold <sprite=27> while touching a wall to wallgrab. You can use this to precisely aim and then jump (Drains stamina)";
             }
         }
+        else if (this.gameObject.name == "Message (12)")
+        {
+            if (controlType == "Keyboard")
+                newMessage = "Jump on top of another player's head to boost jump off of them! (Aim up to get more height)";
+            else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
+            {
+                newMessage = "Jump on top of another player's head to boost jump off of them! (Aim up to get more height)";
+            }
+            else
+            {
+                newMessage = "Jump on top of another player's head to boost jump off of them! (Aim up to get more height)";
+            }
+        }
+        else if (this.gameObject.name == "Message (13)")
+        {
+            newMessage = "press f1 to respawn.";
+        }
         else
         {
             newMessage = "...";
