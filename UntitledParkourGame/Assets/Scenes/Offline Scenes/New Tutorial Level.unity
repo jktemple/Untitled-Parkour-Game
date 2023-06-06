@@ -6152,6 +6152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TutorialMessage: {fileID: 1328666139}
+  camera: {fileID: 1111486419}
 --- !u!54 &592750221
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6325,6 +6326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TutorialMessage: {fileID: 1328666139}
+  camera: {fileID: 1111486419}
 --- !u!54 &612499886
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6826,6 +6828,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TutorialMessage: {fileID: 1328666139}
+  camera: {fileID: 1111486419}
 --- !u!54 &663242941
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11513,6 +11516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TutorialMessage: {fileID: 1328666139}
+  camera: {fileID: 1111486419}
 --- !u!54 &1217766785
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12938,6 +12942,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TutorialMessage: {fileID: 1328666139}
+  camera: {fileID: 1111486419}
 --- !u!54 &1322868304
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13927,6 +13932,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TutorialMessage: {fileID: 1328666139}
+  camera: {fileID: 1111486419}
 --- !u!54 &1374327932
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14817,6 +14823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TutorialMessage: {fileID: 1328666139}
+  camera: {fileID: 1111486419}
 --- !u!54 &1469389105
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15715,6 +15722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TutorialMessage: {fileID: 1328666139}
+  camera: {fileID: 1111486419}
 --- !u!1 &1536589011
 GameObject:
   m_ObjectHideFlags: 0
@@ -16053,6 +16061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TutorialMessage: {fileID: 1328666139}
+  camera: {fileID: 1111486419}
 --- !u!54 &1552459368
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18828,6 +18837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TutorialMessage: {fileID: 1328666139}
+  camera: {fileID: 1111486419}
 --- !u!54 &1748204297
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22220,6 +22230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TutorialMessage: {fileID: 1328666139}
+  camera: {fileID: 1111486419}
 --- !u!54 &2093771371
 Rigidbody:
   m_ObjectHideFlags: 0
