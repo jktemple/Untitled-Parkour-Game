@@ -18,11 +18,14 @@ public class InGameMenuBehaviors : MonoBehaviour
 
     void Start()
     {
-        theMenu.SetActive(false);
+        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("New Tutorial Level"))
+        {
+            theMenu.SetActive(false);
+        }
         if(scoreBoard!=null)
         scoreBoard.SetActive(false);
         reticle.SetActive(false);
-        hud.SetActive(false);
+        if(hud!=null) hud.SetActive(false);
         Application.targetFrameRate = 120;
         if (LobbyManager.Instance != null)
         LobbyManager.Instance.OnGameStarted += LobbyManager_OnGameStarted;
