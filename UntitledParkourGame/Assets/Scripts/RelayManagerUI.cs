@@ -27,6 +27,7 @@ public class RelayManagerUI : MonoBehaviour
         hostButton.onClick.AddListener(() => {
             CreateRelay();
             menu = FindObjectOfType<InGameMenuBehaviors>();
+            hostButton.gameObject.SetActive(false);
             menu.ResumeGame();
         });
 
