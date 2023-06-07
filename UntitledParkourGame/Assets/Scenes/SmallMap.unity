@@ -12982,10 +12982,10 @@ MonoBehaviour:
     m_InternalValue: 0
   startRoundButton: {fileID: 253103860}
   spawnPoints:
-  - {fileID: 644628953}
-  - {fileID: 1667098732}
   - {fileID: 2013959410}
   - {fileID: 184998369}
+  - {fileID: 644628953}
+  - {fileID: 1667098732}
   buttonText: {fileID: 852714041}
 --- !u!4 &1435378258
 Transform:
