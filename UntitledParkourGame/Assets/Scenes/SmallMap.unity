@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18154658, g: 0.22718708, b: 0.30740505, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154658, g: 0.22718711, b: 0.30740505, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12948,7 +12948,7 @@ MonoBehaviour:
   maxScore: 100
   currentTime:
     m_InternalValue: 0
-  startRoundButton: {fileID: 0}
+  startRoundButton: {fileID: 253103860}
   spawnPoints:
   - {fileID: 644628953}
   - {fileID: 1667098732}

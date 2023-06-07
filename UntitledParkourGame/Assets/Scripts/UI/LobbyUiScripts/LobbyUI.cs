@@ -64,6 +64,7 @@ public class LobbyUI : MonoBehaviour
     }
     private void LobbyManager_OnGameStarted(object sender, System.EventArgs e)
     {
+        hud.SetActive(true);
         Hide();
     }
 
