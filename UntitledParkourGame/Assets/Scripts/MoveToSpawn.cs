@@ -30,6 +30,7 @@ public class MoveToSpawn : NetworkBehaviour
             MovetoSpawnPoint();
             ResetMoveToSpawnServerRPC();
             Invoke(nameof(ResetAbleToMove), 10f);
+            Debug.Log("Moving to spawn");
         }
     }
 

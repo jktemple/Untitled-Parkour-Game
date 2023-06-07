@@ -47,7 +47,10 @@ public class RelayManagerUI : MonoBehaviour
             Debug.Log("Signed in " + AuthenticationService.Instance.PlayerId);
         };
 
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        if (!AuthenticationService.Instance.IsSignedIn)
+        {
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        }
     }
 
     private async void CreateRelay()
