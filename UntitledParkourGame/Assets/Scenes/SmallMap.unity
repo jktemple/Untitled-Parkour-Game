@@ -1897,6 +1897,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180545840}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &184998369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 184998370}
+  m_Layer: 0
+  m_Name: Spawn Point (1)
+  m_TagString: Respawn
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &184998370
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184998369}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.5, y: 0.612, z: 225.38}
+  m_LocalScale: {x: 6.373464, y: 3.944238, z: 6.0273104}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 870140114}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &202724846
 GameObject:
   m_ObjectHideFlags: 0
@@ -7794,6 +7825,7 @@ Transform:
   - {fileID: 644628954}
   - {fileID: 1667098733}
   - {fileID: 2013959411}
+  - {fileID: 184998370}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12953,6 +12985,7 @@ MonoBehaviour:
   - {fileID: 644628953}
   - {fileID: 1667098732}
   - {fileID: 2013959410}
+  - {fileID: 184998369}
   buttonText: {fileID: 852714041}
 --- !u!4 &1435378258
 Transform:
