@@ -17,7 +17,7 @@ public class StaminaBar : NetworkBehaviour
         if (!IsOwner) return;
         script= GetComponent<PlayerMovement>();
         currentStamina = script.currentStamina;
-        bar = FindObjectOfType<Slider>();
+        bar = GameObject.FindGameObjectWithTag("StaminaSlider").GetComponent<Slider>();
         shoveScript = GetComponent<Shoving>();
     }
 
