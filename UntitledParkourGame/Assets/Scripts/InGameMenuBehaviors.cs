@@ -12,6 +12,7 @@ public class InGameMenuBehaviors : MonoBehaviour
     public GameObject scoreBoard;
     public GameObject reticle;
     public GameObject hud;
+    public GameObject networkManagerObject;
     public static bool isPaused;
    // public string playerName = string.Empty;
     private bool showingScore;
@@ -34,7 +35,7 @@ public class InGameMenuBehaviors : MonoBehaviour
     private void LobbyManager_OnGameStarted(object sender, EventArgs e)
     {
         reticle.SetActive(true);
-       // hud.SetActive(true);
+        hud.SetActive(true);
     }
     void Update()
     {
@@ -108,6 +109,7 @@ public class InGameMenuBehaviors : MonoBehaviour
 
     public void QuitGame()
     {
+        Destroy(networkManagerObject);
         NetworkManager.Singleton.Shutdown();
         SceneManager.LoadScene("Main Menu");
         Debug.Log("Quit");

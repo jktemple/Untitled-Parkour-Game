@@ -5507,6 +5507,7 @@ MonoBehaviour:
   scoreBoard: {fileID: 1286327231}
   reticle: {fileID: 1462711703}
   hud: {fileID: 1532577941}
+  networkManagerObject: {fileID: 2028078099}
 --- !u!4 &473141558
 Transform:
   m_ObjectHideFlags: 0
