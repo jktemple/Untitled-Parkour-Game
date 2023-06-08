@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using FMOD.Studio;
 using TMPro;
+using System.Xml;
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -401,15 +402,19 @@ public class PlayerMovement : NetworkBehaviour
         playerWallclimbingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerWallclimbingsfx);
         playerBoostingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerBoostingsfx);
         playerJumpingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerJumpingsfx);
+
+        menuScript = FindObjectOfType<InGameMenuBehaviors>();
     }
 
 
     public float groundCoyoteTime;
     private float groundCoyoteTimer;
+    private InGameMenuBehaviors menuScript;
     // Update is called once per frame
     void Update()
     {
         if (!IsOwner) return;
+        
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
         if (!grounded && groundCoyoteTimer > 0)
@@ -418,6 +423,15 @@ public class PlayerMovement : NetworkBehaviour
         } else if(grounded)
         {
             groundCoyoteTimer = groundCoyoteTime;
+        }
+
+        if (menuScript.isPaused)
+        {
+            if (grounded)
+            {
+                rb.velocity= Vector3.zero;
+            }
+            return;
         }
         MyInput();
         SpeedControl();

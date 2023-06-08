@@ -5,6 +5,9 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.Windows;
 
 public class InGameMenuBehaviors : MonoBehaviour
 {
@@ -13,7 +16,9 @@ public class InGameMenuBehaviors : MonoBehaviour
     public GameObject reticle;
     public GameObject hud;
     public GameObject networkManagerObject;
-    public static bool isPaused;
+    public Button startGameButton;
+    public Button mainMenuButton;
+    public bool isPaused;
    // public string playerName = string.Empty;
     private bool showingScore;
 
@@ -30,6 +35,7 @@ public class InGameMenuBehaviors : MonoBehaviour
         Application.targetFrameRate = 120;
         if (LobbyManager.Instance != null)
         LobbyManager.Instance.OnGameStarted += LobbyManager_OnGameStarted;
+        
     }
 
     private void LobbyManager_OnGameStarted(object sender, EventArgs e)
@@ -84,13 +90,21 @@ public class InGameMenuBehaviors : MonoBehaviour
 
     public void PauseGame()
     {
-        if(isPaused) { return; }
+        if (isPaused) { return; }
         theMenu.SetActive(true);
         //Time.timeScale = 0f;
         isPaused = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         reticle.SetActive(false);
+        if(startGameButton!= null && startGameButton.gameObject.activeInHierarchy)
+        {
+            EventSystem.current.SetSelectedGameObject(startGameButton.gameObject);
+        } else if (mainMenuButton != null)
+        {
+            EventSystem.current.SetSelectedGameObject(mainMenuButton.gameObject);
+        }
+       
     }
 
     public void ResumeGame() {
@@ -106,6 +120,7 @@ public class InGameMenuBehaviors : MonoBehaviour
         if (go != null) { go.SetActive(false); }
         GameObject go1 = GameObject.Find("RoundOverUI");
         if (go1 != null) { go1.SetActive(false); }
+        
     }
 
     public void QuitGame()

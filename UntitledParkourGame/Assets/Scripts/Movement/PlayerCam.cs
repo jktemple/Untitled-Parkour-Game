@@ -296,7 +296,7 @@ public class PlayerCam : NetworkBehaviour
     IEnumerator Rotate(float duration, float rotation)
     {
         quickTurning= true;
-        //inputs.PlayerMovement.Disable();
+        inputs.PlayerMovement.Disable();
         float startRotation = camHolder.eulerAngles.y;
         float endRotation = startRotation + rotation;
         float t = 0.0f;
@@ -308,7 +308,7 @@ public class PlayerCam : NetworkBehaviour
             orientation.eulerAngles = new Vector3(orientation.eulerAngles.x, yRotation, orientation.eulerAngles.z);
             yield return null;
         }
-        //inputs.PlayerMovement.Enable();
+        inputs.PlayerMovement.Enable();
         quickTurning = false;
     }
 
