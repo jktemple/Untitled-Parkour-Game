@@ -29,6 +29,7 @@ public class RelayManagerUI : MonoBehaviour
             CreateRelay();
             menu = FindObjectOfType<InGameMenuBehaviors>();
             hostButton.gameObject.SetActive(false);
+            menu.PauseGame();
             menu.ResumeGame();
         });
 

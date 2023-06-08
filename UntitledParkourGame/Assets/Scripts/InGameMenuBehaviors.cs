@@ -94,8 +94,9 @@ public class InGameMenuBehaviors : MonoBehaviour
     }
 
     public void ResumeGame() {
-        theMenu.SetActive(false);
         if (!isPaused) { return; }
+        theMenu.SetActive(false);
+        
         //Time.timeScale = 1f;
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
