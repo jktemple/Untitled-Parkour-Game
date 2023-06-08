@@ -89,12 +89,17 @@ public class Climbing : NetworkBehaviour
         }
 
         //state 1 - climbing
-        else if (wallFront && inputs.PlayerMovement.Movement.ReadValue<Vector2>().y > 0.5f && wallLookAngle < maxWallLookAngle && !exitingWall)
+        else if (wallFront && inputs.PlayerMovement.Movement.ReadValue<Vector2>().y > 0.5f && wallLookAngle < maxWallLookAngle && !exitingWall && !wallgrabScript.exitingWall)
         {
-            if (!climbing && climbTimer > 0 && !wallgrabScript.exitingWall)
+            if (!climbing && climbTimer > 0)
             {
                // Debug.Log("staring a climb");
                 StartClimbing();
+            }
+
+            if (pm.wallGrabbing)
+            {
+                StopClimbing();
             }
 
             if (climbTimer > 0) { climbTimer -= Time.deltaTime; }
