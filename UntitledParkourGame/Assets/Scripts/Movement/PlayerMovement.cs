@@ -166,7 +166,29 @@ public class PlayerMovement : NetworkBehaviour
            state = MovementState.unlimited;
             moveSpeed = 999f;
             return;
-        } 
+        }
+        else if (wallGrabbing)
+        {
+            state = MovementState.wallGrabbing;
+            rb.velocity = Vector3.zero;
+
+            if (icon != null)
+            {
+                icon.text = "<sprite=3>";
+            }
+
+            // stamina handling
+            if (currentStamina < staminaDrainRate / 2 * Time.deltaTime)
+            {
+                currentStamina = 0;
+                // Debug.Log("Current Stamina Sprinting depleted: " + currentStamina);
+            }
+            else
+            {
+                currentStamina -= staminaDrainRate / 2 * Time.deltaTime;
+                // Debug.Log("Current Stamina Sprinting: " + currentStamina);
+            }
+        }
         //Mode Climbing
         else if(climbing)
         {
@@ -289,28 +311,7 @@ public class PlayerMovement : NetworkBehaviour
                 // Debug.Log("Current Stamina running: " + currentStamina);
             }
         }
-        else if (wallGrabbing)
-        {
-            state = MovementState.wallGrabbing;
-            rb.velocity = Vector3.zero;
-
-            if (icon != null)
-            {
-                icon.text = "<sprite=3>";
-            }
-
-            // stamina handling
-            if (currentStamina < staminaDrainRate/2 * Time.deltaTime)
-            {
-                currentStamina = 0;
-                // Debug.Log("Current Stamina Sprinting depleted: " + currentStamina);
-            }
-            else
-            {
-                currentStamina -= staminaDrainRate/2 * Time.deltaTime;
-                // Debug.Log("Current Stamina Sprinting: " + currentStamina);
-            }
-        }
+        
         //Mode Air
         else
         {
