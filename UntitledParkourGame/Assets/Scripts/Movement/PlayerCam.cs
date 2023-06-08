@@ -267,12 +267,14 @@ public class PlayerCam : NetworkBehaviour
     void DoQuickTurn(float time, float rotation)
     {
         StopCoroutine(nameof(Rotate));
+        StopCoroutine(nameof(RotatePlayerToTarget));
         StartCoroutine(Rotate(time, rotation));
     }
 
     void DoTargetQuickTurn(float time, float targetRoation)
     {
         StopCoroutine(nameof(RotatePlayerToTarget));
+        StopCoroutine(nameof(Rotate));
         StartCoroutine(RotatePlayerToTarget(time, targetRoation));
     }
 
@@ -294,7 +296,7 @@ public class PlayerCam : NetworkBehaviour
     IEnumerator Rotate(float duration, float rotation)
     {
         quickTurning= true;
-        inputs.PlayerMovement.Disable();
+        //inputs.PlayerMovement.Disable();
         float startRotation = camHolder.eulerAngles.y;
         float endRotation = startRotation + rotation;
         float t = 0.0f;
@@ -306,7 +308,7 @@ public class PlayerCam : NetworkBehaviour
             orientation.eulerAngles = new Vector3(orientation.eulerAngles.x, yRotation, orientation.eulerAngles.z);
             yield return null;
         }
-        inputs.PlayerMovement.Enable();
+        //inputs.PlayerMovement.Enable();
         quickTurning = false;
     }
 

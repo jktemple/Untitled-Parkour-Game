@@ -1,11 +1,8 @@
 fileFormatVersion: 2
-guid: cbb2044a327df19479312474589566b8
+guid: fd5d4511bf516e34ab98e58917d73d87
 ModelImporter:
   serializedVersion: 21300
-  internalIDToNameTable:
-  - first:
-      74: -203655887218126122
-    second: mixamo.com
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -78,18 +75,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - 2ecef7acb7e3a8d4d8738ab567c90c44
-  - fd5d4511bf516e34ab98e58917d73d87
-  - c2f27509d17b4e5488026c73f2df6c74
-  - a642c478054c9024da0c7e3b35e30024
-  - 8a2c0a55bf6888042a958186d44c2096
-  - 910873e858fb3d34e9f6dd348a85e8a6
-  - 3be7f932eed44824a8bc90df99cd05d0
-  - 7ec0d7a02935ab74fa09201f2e419862
-  - 4117666679db7664cb84e4eec768f3db
-  - 575d643b942ea124fb62968ad5aaf6e8
-  - 557b7beeef68d6642975f37a2a7d10bb
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
@@ -863,11 +849,11 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: cbb2044a327df19479312474589566b8, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
