@@ -179,7 +179,7 @@ public class PlayerCam : NetworkBehaviour
         }
         else if (lookingBehind)
         {
-            camHolder.rotation = Quaternion.Euler(xRotation, 180+orientation.eulerAngles.y, camHolder.eulerAngles.z);
+            camHolder.rotation = Quaternion.Euler(camHolder.eulerAngles.z, 180+orientation.eulerAngles.y, camHolder.eulerAngles.z);
         }
         else if (!quickTurning)
         {
