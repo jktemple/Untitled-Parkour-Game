@@ -21,6 +21,7 @@ public class PlayerAnimatorController : NetworkBehaviour
     int ClimbHash;
     int WallRunLeftHash;
     int WallRunRightHash;
+    int CrouchHash;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +34,7 @@ public class PlayerAnimatorController : NetworkBehaviour
         AirHash = Animator.StringToHash("InAir");
         WallRunLeftHash = Animator.StringToHash("WallRunLeft");
         WallRunRightHash = Animator.StringToHash("WallRunRight");
+        CrouchHash = Animator.StringToHash("Crouching");
         wallRunning = GetComponent<WallRunning>();
     }
 
@@ -50,6 +52,7 @@ public class PlayerAnimatorController : NetworkBehaviour
         animator.SetBool(AirHash, pm.state == PlayerMovement.MovementState.air);
         animator.SetBool(WallRunLeftHash, pm.state == PlayerMovement.MovementState.wallrunning && wallRunning.wallLeft);
         animator.SetBool(WallRunRightHash, pm.state == PlayerMovement.MovementState.wallrunning && wallRunning.wallRight);
+        animator.SetBool(CrouchHash, pm.state == PlayerMovement.MovementState.boosting);
     }
 
     public void SetGroundJumpTrigger()

@@ -33,10 +33,10 @@ EditorBuildSettings:
     path: Assets/Scenes/NewMapTest.unity
     guid: 57242215ea2e71c49a543e9be5c8e0b1
   - enabled: 1
-    path: Assets/Scenes/SmallMap.unity
+    path: Assets/Scenes/Current Multiplayer Maps/SmallMap.unity
     guid: 7b643d0c38596604984c1694d621cb86
   - enabled: 1
-    path: Assets/Scenes/LobbyMap.unity
+    path: Assets/Scenes/Current Multiplayer Maps/LobbyMap.unity
     guid: 17f52fe0d55b56842ac7875c15be6e4f
   - enabled: 1
     path: Assets/Scenes/Offline Scenes/New Tutorial Level.unity

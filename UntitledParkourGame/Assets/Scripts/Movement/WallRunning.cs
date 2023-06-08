@@ -78,6 +78,7 @@ public class WallRunning : NetworkBehaviour
     private Rigidbody rb;
     private LedgeGrabbing lg;
     private PlayerControls inputs;
+    private WallGrab wallgrabScript;
 
 
     // Start is called before the first frame update
@@ -85,8 +86,9 @@ public class WallRunning : NetworkBehaviour
     {
         if (!IsOwner) return;
         rb = GetComponent<Rigidbody>();
-       pm = GetComponent<PlayerMovement>();
+        pm = GetComponent<PlayerMovement>();
         lg = GetComponent<LedgeGrabbing>();
+        wallgrabScript = GetComponent<WallGrab>();
         inputs = new PlayerControls();
         inputs.PlayerMovement.Enable();
     }
@@ -134,7 +136,7 @@ public class WallRunning : NetworkBehaviour
              //Start Wallrun here
              if(!pm.wallrunning)
             {
-                if(!cam.isQuickTurning())
+                if(!cam.isQuickTurning() && !wallgrabScript.exitingWall)
                 {
                     StartWallRun();
                 }
@@ -274,5 +276,19 @@ public class WallRunning : NetworkBehaviour
         coyoteJumpAvailable = false;
 
 
+    }
+
+    public Vector3 GetWallNormal()
+    {
+        if (wallLeft)
+        {
+            return leftWallHit.normal;
+        } else if (wallRight)
+        {
+            return rightWallHit.normal;
+        } else
+        {
+            return Vector3.zero;
+        }
     }
 }

@@ -61,7 +61,7 @@ public class Sliding : NetworkBehaviour
         //Input.GetAxisRaw("Horizontal");
         verticalInput = inputs.PlayerMovement.Movement.ReadValue<Vector2>().y;
         //Debug.Log("Horizontal Input = " + horizontalInput + " , Verticle Input = " + verticalInput);
-        if (inputs.PlayerMovement.Slide.triggered && (horizontalInput !=0 || verticalInput != 0) && pm.grounded)
+        if (inputs.PlayerMovement.Slide.triggered && (horizontalInput !=0 || verticalInput != 0))
         {
             StartSlide();
         }

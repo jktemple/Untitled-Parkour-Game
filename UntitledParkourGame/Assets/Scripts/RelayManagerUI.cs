@@ -8,6 +8,7 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,6 +29,7 @@ public class RelayManagerUI : MonoBehaviour
             CreateRelay();
             menu = FindObjectOfType<InGameMenuBehaviors>();
             hostButton.gameObject.SetActive(false);
+            menu.PauseGame();
             menu.ResumeGame();
         });
 
@@ -47,7 +49,10 @@ public class RelayManagerUI : MonoBehaviour
             Debug.Log("Signed in " + AuthenticationService.Instance.PlayerId);
         };
 
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        if (!AuthenticationService.Instance.IsSignedIn)
+        {
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        }
     }
 
     private async void CreateRelay()

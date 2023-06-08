@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using FMOD.Studio;
 using TMPro;
+using System.Xml;
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -89,7 +90,7 @@ public class PlayerMovement : NetworkBehaviour
 
     [Header("References")]
     [Tooltip("A reference to the Climbing Script attached to the player")]
-    public Climbing climpingScript;
+    public Climbing climbingScript;
     [Tooltip("A reference to a GameObject that holds the player�s orientation")]
     public Transform orientation;
 
@@ -166,7 +167,29 @@ public class PlayerMovement : NetworkBehaviour
            state = MovementState.unlimited;
             moveSpeed = 999f;
             return;
-        } 
+        }
+        else if (wallGrabbing)
+        {
+            state = MovementState.wallGrabbing;
+            rb.velocity = Vector3.zero;
+
+            if (icon != null)
+            {
+                icon.text = "<sprite=3>";
+            }
+
+            // stamina handling
+            if (currentStamina < staminaDrainRate / 2 * Time.deltaTime)
+            {
+                currentStamina = 0;
+                // Debug.Log("Current Stamina Sprinting depleted: " + currentStamina);
+            }
+            else
+            {
+                currentStamina -= staminaDrainRate / 2 * Time.deltaTime;
+                // Debug.Log("Current Stamina Sprinting: " + currentStamina);
+            }
+        }
         //Mode Climbing
         else if(climbing)
         {
@@ -289,28 +312,7 @@ public class PlayerMovement : NetworkBehaviour
                 // Debug.Log("Current Stamina running: " + currentStamina);
             }
         }
-        else if (wallGrabbing)
-        {
-            state = MovementState.wallGrabbing;
-            rb.velocity = Vector3.zero;
-
-            if (icon != null)
-            {
-                icon.text = "<sprite=3>";
-            }
-
-            // stamina handling
-            if (currentStamina < staminaDrainRate/2 * Time.deltaTime)
-            {
-                currentStamina = 0;
-                // Debug.Log("Current Stamina Sprinting depleted: " + currentStamina);
-            }
-            else
-            {
-                currentStamina -= staminaDrainRate/2 * Time.deltaTime;
-                // Debug.Log("Current Stamina Sprinting: " + currentStamina);
-            }
-        }
+        
         //Mode Air
         else
         {
@@ -350,6 +352,7 @@ public class PlayerMovement : NetworkBehaviour
         if (!IsOwner) return;
         rb = GetComponent<Rigidbody>();
         shoving = GetComponent<Shoving>();
+        climbingScript = GetComponent<Climbing>();
         rb.freezeRotation = true;
 
         inputs = new PlayerControls();
@@ -399,15 +402,19 @@ public class PlayerMovement : NetworkBehaviour
         playerWallclimbingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerWallclimbingsfx);
         playerBoostingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerBoostingsfx);
         playerJumpingsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerJumpingsfx);
+
+        menuScript = FindObjectOfType<InGameMenuBehaviors>();
     }
 
 
     public float groundCoyoteTime;
     private float groundCoyoteTimer;
+    private InGameMenuBehaviors menuScript;
     // Update is called once per frame
     void Update()
     {
         if (!IsOwner) return;
+        
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
         if (!grounded && groundCoyoteTimer > 0)
@@ -416,6 +423,15 @@ public class PlayerMovement : NetworkBehaviour
         } else if(grounded)
         {
             groundCoyoteTimer = groundCoyoteTime;
+        }
+
+        if (menuScript.isPaused)
+        {
+            if (grounded)
+            {
+                rb.velocity= Vector3.zero;
+            }
+            return;
         }
         MyInput();
         SpeedControl();
@@ -507,7 +523,7 @@ public class PlayerMovement : NetworkBehaviour
             return;
         }
 
-        if(climpingScript.exitingWall) { return; }
+        if(climbingScript.exitingWall) { return; }
         // calc movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         float targetSpeed = moveSpeed;
@@ -715,7 +731,7 @@ public class PlayerMovement : NetworkBehaviour
         
         if(whatIsGround == (whatIsGround | (1 << collision.gameObject.layer)))
         {
-            collidingWithWall = !climpingScript.wallBack;
+            collidingWithWall = !climbingScript.wallBack;
         }
     }
 

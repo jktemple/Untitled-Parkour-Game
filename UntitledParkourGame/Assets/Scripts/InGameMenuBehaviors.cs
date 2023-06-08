@@ -5,6 +5,9 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.Windows;
 
 public class InGameMenuBehaviors : MonoBehaviour
 {
@@ -12,7 +15,10 @@ public class InGameMenuBehaviors : MonoBehaviour
     public GameObject scoreBoard;
     public GameObject reticle;
     public GameObject hud;
-    public static bool isPaused;
+    public GameObject networkManagerObject;
+    public Button startGameButton;
+    public Button mainMenuButton;
+    public bool isPaused;
    // public string playerName = string.Empty;
     private bool showingScore;
 
@@ -29,12 +35,13 @@ public class InGameMenuBehaviors : MonoBehaviour
         Application.targetFrameRate = 120;
         if (LobbyManager.Instance != null)
         LobbyManager.Instance.OnGameStarted += LobbyManager_OnGameStarted;
+        
     }
 
     private void LobbyManager_OnGameStarted(object sender, EventArgs e)
     {
         reticle.SetActive(true);
-       // hud.SetActive(true);
+        hud.SetActive(true);
     }
     void Update()
     {
@@ -83,18 +90,27 @@ public class InGameMenuBehaviors : MonoBehaviour
 
     public void PauseGame()
     {
-        if(isPaused) { return; }
+        if (isPaused) { return; }
         theMenu.SetActive(true);
         //Time.timeScale = 0f;
         isPaused = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         reticle.SetActive(false);
+        if(startGameButton!= null && startGameButton.gameObject.activeInHierarchy)
+        {
+            EventSystem.current.SetSelectedGameObject(startGameButton.gameObject);
+        } else if (mainMenuButton != null)
+        {
+            EventSystem.current.SetSelectedGameObject(mainMenuButton.gameObject);
+        }
+       
     }
 
     public void ResumeGame() {
-        if(!isPaused) { return; }
+        if (!isPaused) { return; }
         theMenu.SetActive(false);
+        
         //Time.timeScale = 1f;
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -104,10 +120,12 @@ public class InGameMenuBehaviors : MonoBehaviour
         if (go != null) { go.SetActive(false); }
         GameObject go1 = GameObject.Find("RoundOverUI");
         if (go1 != null) { go1.SetActive(false); }
+        
     }
 
     public void QuitGame()
     {
+        Destroy(networkManagerObject);
         NetworkManager.Singleton.Shutdown();
         SceneManager.LoadScene("Main Menu");
         Debug.Log("Quit");

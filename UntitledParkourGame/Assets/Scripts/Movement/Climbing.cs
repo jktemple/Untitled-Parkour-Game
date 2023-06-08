@@ -51,6 +51,7 @@ public class Climbing : NetworkBehaviour
     private float exitWallTimer;
 
     private PlayerControls inputs;
+    private WallGrab wallgrabScript;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +61,7 @@ public class Climbing : NetworkBehaviour
         inputs.PlayerMovement.Enable();
         lg = GetComponent<LedgeGrabbing>();
         wr = GetComponent<WallRunning>();
+        wallgrabScript = GetComponent<WallGrab>();
     }
 
     // Update is called once per frame
@@ -87,12 +89,17 @@ public class Climbing : NetworkBehaviour
         }
 
         //state 1 - climbing
-        else if (wallFront && inputs.PlayerMovement.Movement.ReadValue<Vector2>().y > 0.5f && wallLookAngle < maxWallLookAngle && !exitingWall)
+        else if (wallFront && inputs.PlayerMovement.Movement.ReadValue<Vector2>().y > 0.5f && wallLookAngle < maxWallLookAngle && !exitingWall && !wallgrabScript.exitingWall)
         {
             if (!climbing && climbTimer > 0)
             {
                // Debug.Log("staring a climb");
                 StartClimbing();
+            }
+
+            if (pm.wallGrabbing)
+            {
+                StopClimbing();
             }
 
             if (climbTimer > 0) { climbTimer -= Time.deltaTime; }
@@ -136,7 +143,7 @@ public class Climbing : NetworkBehaviour
     private void WallCheck()
     {
         wallFront = Physics.SphereCast(transform.position, sphereCastRadius, orientation.forward, out frontWallHit, detectionLength, whatIsWall);
-        wallBack = Physics.SphereCast(transform.position, sphereCastRadius, -orientation.forward, out backWallHit, detectionLength, whatIsWall);
+        wallBack = Physics.SphereCast(transform.position, sphereCastRadius, -orientation.forward, out backWallHit, detectionLength*1.5f, whatIsWall);
         wallLookAngle = Vector3.Angle(orientation.forward, -frontWallHit.normal);
         if (wallBack) Debug.Log("wallBack = true");
 
