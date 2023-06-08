@@ -14,7 +14,7 @@ public class WallGrab : NetworkBehaviour
     public float ForwardForce;
     public float UpwardForce;
 
-    private bool exitingWall;
+    public bool exitingWall;
     private float exitWallTime;
     private float exitWallTimer;
 
@@ -32,7 +32,7 @@ public class WallGrab : NetworkBehaviour
         inputs = new PlayerControls();
         inputs.PlayerMovement.Enable();
         exitingWall = false;
-        exitWallTime = 0.35f;
+        exitWallTime = 0.5f;
         exitWallTimer = exitWallTime;
     }
 

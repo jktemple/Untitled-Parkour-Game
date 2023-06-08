@@ -51,6 +51,7 @@ public class Climbing : NetworkBehaviour
     private float exitWallTimer;
 
     private PlayerControls inputs;
+    private WallGrab wallgrabScript;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +61,7 @@ public class Climbing : NetworkBehaviour
         inputs.PlayerMovement.Enable();
         lg = GetComponent<LedgeGrabbing>();
         wr = GetComponent<WallRunning>();
+        wallgrabScript = GetComponent<WallGrab>();
     }
 
     // Update is called once per frame
@@ -89,7 +91,7 @@ public class Climbing : NetworkBehaviour
         //state 1 - climbing
         else if (wallFront && inputs.PlayerMovement.Movement.ReadValue<Vector2>().y > 0.5f && wallLookAngle < maxWallLookAngle && !exitingWall)
         {
-            if (!climbing && climbTimer > 0)
+            if (!climbing && climbTimer > 0 && !wallgrabScript.exitingWall)
             {
                // Debug.Log("staring a climb");
                 StartClimbing();
