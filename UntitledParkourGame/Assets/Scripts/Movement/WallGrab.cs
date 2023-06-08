@@ -32,7 +32,7 @@ public class WallGrab : NetworkBehaviour
         inputs = new PlayerControls();
         inputs.PlayerMovement.Enable();
         exitingWall = false;
-        exitWallTime = 0.5f;
+        exitWallTime = 0.3f;
         exitWallTimer = exitWallTime;
     }
 
