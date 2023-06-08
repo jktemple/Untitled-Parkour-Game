@@ -88,11 +88,11 @@ public class FirstMessageTrigger : MonoBehaviour
                 newMessage = "Rather small, huh?\nJust slide with\n<sprite=5> when moving!";
             else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
             {
-                newMessage = "Rather small, huh?\nJust slide with\n<sprite=15> when moving!";
+                newMessage = "Rather small, huh?\nJust slide with\n<sprite=12> when moving!";
             }
             else
             {
-                newMessage = "Rather small, huh?\nJust slide with\n<sprite=25> when moving!";
+                newMessage = "Rather small, huh?\nJust slide with\n<sprite=22> when moving!";
             }
         }
         else if (this.gameObject.name == "Message (5)")
@@ -137,14 +137,14 @@ public class FirstMessageTrigger : MonoBehaviour
         else if (this.gameObject.name == "Message (8)")
         {
             if (controlType == "Keyboard")
-                newMessage = "While climbing up a wall, let go of forward then Quickturn by tapping <sprite=8>, and then jump while your back is touching the wall!";
+                newMessage = "While climbing up a wall, Quickturn by tapping <sprite=8> and then jump!";
             else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
             {
-                newMessage = "While climbing up a wall, let go of forward then Quickturn by tapping <sprite=11>/<sprite=18>, and then jump while your back is touching the wall!";
+                newMessage = "While climbing up a wall, Quickturn by tapping <sprite=11>/<sprite=18> and then jump!";
             }
             else
             {
-                newMessage = "While climbing up a wall, let go of forward then Quickturn by tapping <sprite=21>/<sprite=28>, and then jump while your back is touching the wall!";
+                newMessage = "While climbing up a wall, Quickturn by tapping <sprite=21>/<sprite=28> and then jump!";
             }
         }
         else if (this.gameObject.name == "Message (9)")
@@ -179,11 +179,11 @@ public class FirstMessageTrigger : MonoBehaviour
                 newMessage = "Hold <sprite=7> while touching a wall to wallgrab. Keep holding <sprite=7> and jump off the wall to wallgrab jump. Aim up when you jump for more hight! (Drains stamina)";
             else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
             {
-                newMessage = "Hold <sprite=17> while touching a wall to wallgrab. Keep holding <sprite=17> and jump off the wall to wallgrab jump. Aim up when you jump for more hight! (Drains stamina)";
+                newMessage = "Hold <sprite=15> while touching a wall to wallgrab. Keep holding <sprite=15> and jump off the wall to wallgrab jump. Aim up when you jump for more hight! (Drains stamina)";
             }
             else
             {
-                newMessage = "Hold <sprite=27> while touching a wall to wallgrab. Keep holding <sprite=27> and jump off the wall to wallgrab jump. Aim up when you jump for more hight! (Drains stamina)";
+                newMessage = "Hold <sprite=25> while touching a wall to wallgrab. Keep holding <sprite=25> and jump off the wall to wallgrab jump. Aim up when you jump for more hight! (Drains stamina)";
             }
         }
         else if (this.gameObject.name == "Message (12)" || this.gameObject.name == "Message (15)")
