@@ -89,7 +89,7 @@ public class PlayerMovement : NetworkBehaviour
 
     [Header("References")]
     [Tooltip("A reference to the Climbing Script attached to the player")]
-    public Climbing climpingScript;
+    public Climbing climbingScript;
     [Tooltip("A reference to a GameObject that holds the player�s orientation")]
     public Transform orientation;
 
@@ -350,6 +350,7 @@ public class PlayerMovement : NetworkBehaviour
         if (!IsOwner) return;
         rb = GetComponent<Rigidbody>();
         shoving = GetComponent<Shoving>();
+        climbingScript = GetComponent<Climbing>();
         rb.freezeRotation = true;
 
         inputs = new PlayerControls();
@@ -507,7 +508,7 @@ public class PlayerMovement : NetworkBehaviour
             return;
         }
 
-        if(climpingScript.exitingWall) { return; }
+        if(climbingScript.exitingWall) { return; }
         // calc movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         float targetSpeed = moveSpeed;
@@ -534,7 +535,7 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         // in air
-        else if(!grounded && !collidingWithWall)
+        else if(!grounded && !collidingWithWall && !climbingScript.exitingWall)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
         }
@@ -715,7 +716,7 @@ public class PlayerMovement : NetworkBehaviour
         
         if(whatIsGround == (whatIsGround | (1 << collision.gameObject.layer)))
         {
-            collidingWithWall = !climpingScript.wallBack;
+            collidingWithWall = !climbingScript.wallBack;
         }
     }
 
