@@ -535,7 +535,7 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         // in air
-        else if(!grounded && !collidingWithWall && !climbingScript.exitingWall)
+        else if(!grounded && !collidingWithWall)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
         }

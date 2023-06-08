@@ -108,7 +108,7 @@ public class Climbing : NetworkBehaviour
             if(climbing) { StopClimbing(); }
 
             if(exitWallTimer > 0) { exitWallTimer -= Time.deltaTime; }
-            if(exitWallTimer < 0) { exitingWall = false; exitWallTimer = exitWallTime; }
+            if(exitWallTimer < 0) { exitingWall = false; }
             
         }
         //State 3 - None

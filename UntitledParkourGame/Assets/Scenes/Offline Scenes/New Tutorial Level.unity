@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2754,7 +2754,7 @@ MonoBehaviour:
     m_Bits: 199680
   grounded: 0
   maxSlopeAngle: 40
-  climpingScript: {fileID: 238279309}
+  climbingScript: {fileID: 0}
   orientation: {fileID: 1261589461}
   cam: {fileID: 2130342686}
   state: 0
@@ -9523,7 +9523,7 @@ Transform:
   m_GameObject: {fileID: 811007879}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 6.190001, y: 1.848, z: 3.988}
-  m_LocalScale: {x: 0.064430304, y: 0.9601398, z: 0.9664543}
+  m_LocalScale: {x: 0.064430304, y: 1.0309981, z: 1.3156165}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 533585764}
@@ -15054,7 +15054,7 @@ Transform:
   m_GameObject: {fileID: 1299891032}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 6.19, y: 0.828, z: 6.127}
-  m_LocalScale: {x: 0.064430304, y: 0.9601398, z: 0.9664543}
+  m_LocalScale: {x: 0.064430304, y: 1.0309981, z: 1.3156165}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 533585764}
@@ -15442,7 +15442,7 @@ Transform:
   m_GameObject: {fileID: 1305951768}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 7.571999, y: 2.95, z: 2.788}
-  m_LocalScale: {x: 0.064430304, y: 1.3429476, z: 1.628247}
+  m_LocalScale: {x: 0.064430304, y: 1.4420571, z: 2.2165027}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 533585764}
@@ -17264,7 +17264,7 @@ Transform:
   m_GameObject: {fileID: 1412141541}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 7.549, y: 1.29, z: 5.09}
-  m_LocalScale: {x: 0.064430304, y: 0.9601398, z: 0.9664543}
+  m_LocalScale: {x: 0.064430304, y: 1.0309981, z: 1.3156165}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 533585764}
