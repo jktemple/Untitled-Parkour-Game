@@ -137,14 +137,14 @@ public class FirstMessageTrigger : MonoBehaviour
         else if (this.gameObject.name == "Message (8)")
         {
             if (controlType == "Keyboard")
-                newMessage = "Do a Quickturn with <sprite=8> while climbing up a wall and then jump! (don't move when turning or jumping)";
+                newMessage = "While climbing up a wall, let go of forward then Quickturn by tapping <sprite=8>, and then jump while your back is touching the wall!";
             else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
             {
-                newMessage = "Do a Quickturn with <sprite=11>/<sprite=18> while climbing up a wall and then jump! (don't move when turning or jumping)";
+                newMessage = "While climbing up a wall, let go of forward then Quickturn by tapping <sprite=11>/<sprite=18>, and then jump while your back is touching the wall!";
             }
             else
             {
-                newMessage = "Do a Quickturn with <sprite=21>/<sprite=28> while climbing up a wall and then jump! (don't move when turning or jumping)";
+                newMessage = "While climbing up a wall, let go of forward then Quickturn by tapping <sprite=21>/<sprite=28>, and then jump while your back is touching the wall!";
             }
         }
         else if (this.gameObject.name == "Message (9)")
@@ -163,10 +163,10 @@ public class FirstMessageTrigger : MonoBehaviour
         else if (this.gameObject.name == "Message (10)")
         {
             if (controlType == "Keyboard")
-                newMessage = "Congrats on finishing the tutorial course!";
+                newMessage = "Congrats on finishing the tutorial course! Go into the room ahead for an extra challenge to test your new skills";
             else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
             {
-                newMessage = "Congrats on finishing the tutorial course!";
+                newMessage = "Congrats on finishing the tutorial course! Go into the room ahead for an extra challenge to test your new skills";
             }
             else
             {
@@ -176,27 +176,27 @@ public class FirstMessageTrigger : MonoBehaviour
         else if (this.gameObject.name == "Message (11)")
         {
             if (controlType == "Keyboard")
-                newMessage = "Hold <sprite=7> while touching a wall to wallgrab. You can use this to precisely aim and then jump (Drains stamina)";
+                newMessage = "Hold <sprite=7> while touching a wall to wallgrab. Keep holding <sprite=7> and jump off the wall to wallgrab jump. Aim up when you jump for more hight! (Drains stamina)";
             else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
             {
-                newMessage = "Hold <sprite=17> while touching a wall to wallgrab. You can use this to precisely aim and then jump (Drains stamina)";
+                newMessage = "Hold <sprite=17> while touching a wall to wallgrab. Keep holding <sprite=17> and jump off the wall to wallgrab jump. Aim up when you jump for more hight! (Drains stamina)";
             }
             else
             {
-                newMessage = "Hold <sprite=27> while touching a wall to wallgrab. You can use this to precisely aim and then jump (Drains stamina)";
+                newMessage = "Hold <sprite=27> while touching a wall to wallgrab. Keep holding <sprite=27> and jump off the wall to wallgrab jump. Aim up when you jump for more hight! (Drains stamina)";
             }
         }
-        else if (this.gameObject.name == "Message (12)")
+        else if (this.gameObject.name == "Message (12)" || this.gameObject.name == "Message (15)")
         {
             if (controlType == "Keyboard")
-                newMessage = "Jump on top of another player's head to boost jump off of them! (Aim up to get more height)";
+                newMessage = "Jump while above another player's head to boost jump off of them (jump to get above them, then jump again)! look up when you jump to get more height!";
             else if (controller == "DualSenseGamepadHID" || controller == "DualShock4GamepadHID")
             {
-                newMessage = "Jump on top of another player's head to boost jump off of them! (Aim up to get more height)";
+                newMessage = "Jump while above another player's head to boost jump off of them (jump to get above them, then jump again)! look up when you jump to get more height!";
             }
             else
             {
-                newMessage = "Jump on top of another player's head to boost jump off of them! (Aim up to get more height)";
+                newMessage = "Jump while above another player's head to boost jump off of them (jump to get above them, then jump again)! look up when you jump to get more height!";
             }
         }
         else if (this.gameObject.name == "Message (13)")
