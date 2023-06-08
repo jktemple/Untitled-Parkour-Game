@@ -275,4 +275,18 @@ public class WallRunning : NetworkBehaviour
 
 
     }
+
+    public Vector3 GetWallNormal()
+    {
+        if (wallLeft)
+        {
+            return leftWallHit.normal;
+        } else if (wallRight)
+        {
+            return rightWallHit.normal;
+        } else
+        {
+            return Vector3.zero;
+        }
+    }
 }

@@ -136,7 +136,7 @@ public class Climbing : NetworkBehaviour
     private void WallCheck()
     {
         wallFront = Physics.SphereCast(transform.position, sphereCastRadius, orientation.forward, out frontWallHit, detectionLength, whatIsWall);
-        wallBack = Physics.SphereCast(transform.position, sphereCastRadius, -orientation.forward, out backWallHit, detectionLength, whatIsWall);
+        wallBack = Physics.SphereCast(transform.position, sphereCastRadius, -orientation.forward, out backWallHit, detectionLength*1.5f, whatIsWall);
         wallLookAngle = Vector3.Angle(orientation.forward, -frontWallHit.normal);
         if (wallBack) Debug.Log("wallBack = true");
 

@@ -171,6 +171,7 @@ public class PlayerCam : NetworkBehaviour
         xRotation -= mouseY;
         // can't look up or down more than 90 degrees
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        
 
         if (inputs.PlayerMovement.QuickTurn.triggered)
         {
@@ -186,9 +187,13 @@ public class PlayerCam : NetworkBehaviour
             
             camHolder.rotation = Quaternion.Euler(xRotation, yRotation, camHolder.eulerAngles.z);
             orientation.rotation = Quaternion.Euler(0, yRotation, 0);
-        } 
+        }
 
-        
+        if (pm.wallrunning)
+        {
+            float temp = Quaternion.LookRotation(wr.GetWallNormal()).eulerAngles.y;
+            Debug.Log("temp = " + temp);
+        }
         
     }
 
@@ -203,11 +208,17 @@ public class PlayerCam : NetworkBehaviour
         } else if (pm.wallrunning && wr.wallRight)
         {
             yRotation -= 90f;
-            DoQuickTurn(quickTurnTime*0.75f, -90f);
+            //DoQuickTurn(quickTurnTime*0.75f, -90f);
+            float temp = Quaternion.LookRotation(wr.GetWallNormal()).eulerAngles.y;
+            Debug.Log("temp = " + temp);
+            DoTargetQuickTurn(quickTurnTime * 0.75f, temp);
         } else if(pm.wallrunning && wr.wallLeft)
         {
             yRotation += 90f;
-            DoQuickTurn(quickTurnTime*0.75f, 90f);
+            float temp = Quaternion.LookRotation(wr.GetWallNormal()).eulerAngles.y;
+            Debug.Log("temp = " + temp);
+            DoTargetQuickTurn(quickTurnTime * 0.75f, temp);
+            //DoQuickTurn(quickTurnTime*0.75f, 90f);
         }
         pm.quickTurned = true;
     }
@@ -259,6 +270,12 @@ public class PlayerCam : NetworkBehaviour
         StartCoroutine(Rotate(time, rotation));
     }
 
+    void DoTargetQuickTurn(float time, float targetRoation)
+    {
+        StopCoroutine(nameof(RotatePlayerToTarget));
+        StartCoroutine(RotatePlayerToTarget(time, targetRoation));
+    }
+
     IEnumerator FOVChange(CinemachineVirtualCamera cam, float endValue, float time)
     {
         // to access the class field 'fov' use 'this.fov'
@@ -282,6 +299,25 @@ public class PlayerCam : NetworkBehaviour
         float endRotation = startRotation + rotation;
         float t = 0.0f;
         while(t < duration)
+        {
+            t += Time.deltaTime;
+            float yRotation = Mathf.LerpAngle(startRotation, endRotation, t / duration) % 360.0f;
+            camHolder.eulerAngles = new Vector3(transform.eulerAngles.x, yRotation, camHolder.eulerAngles.z);
+            orientation.eulerAngles = new Vector3(orientation.eulerAngles.x, yRotation, orientation.eulerAngles.z);
+            yield return null;
+        }
+        inputs.PlayerMovement.Enable();
+        quickTurning = false;
+    }
+
+    IEnumerator RotatePlayerToTarget(float duration, float targetRotation)
+    {
+        quickTurning = true;
+        inputs.PlayerMovement.Disable();
+        float startRotation = orientation.eulerAngles.y;
+        float endRotation = targetRotation;
+        float t = 0.0f;
+        while (t < duration)
         {
             t += Time.deltaTime;
             float yRotation = Mathf.LerpAngle(startRotation, endRotation, t / duration) % 360.0f;
