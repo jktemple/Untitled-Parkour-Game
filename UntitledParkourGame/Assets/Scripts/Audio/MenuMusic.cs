@@ -20,7 +20,18 @@ public class MenuMusic : MonoBehaviour
     
     void Start()
     {
+        MenuMusic[] menuMusics = FindObjectsOfType<MenuMusic>();
+        if (menuMusics.Length > 1)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        Debug.Log(menuMusics.Length);
         DontDestroyOnLoad(this.gameObject);
+        MenuMusic.Instance.menuMusic.getPlaybackState(out PLAYBACK_STATE pLAYBACK_STATE);
+        Debug.Log("Playback state = " + pLAYBACK_STATE);
+        
+        
         menuMusic = RuntimeManager.CreateInstance(musicEvent);
         menuMusic.start();
     }
@@ -29,6 +40,12 @@ public class MenuMusic : MonoBehaviour
     {
         menuMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
+
+    public void StartMusic()
+    {
+        menuMusic.start();
+    }
+
 
     // Update is called once per frame
 

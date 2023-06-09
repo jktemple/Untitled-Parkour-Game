@@ -43,6 +43,6 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        MenuMusic.Instance.Stop();
+        GameObject.FindObjectOfType<MenuMusic>()?.Stop();
     }
 }

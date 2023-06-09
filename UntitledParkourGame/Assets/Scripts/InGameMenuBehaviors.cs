@@ -127,6 +127,11 @@ public class InGameMenuBehaviors : MonoBehaviour
     {
         Destroy(networkManagerObject);
         NetworkManager.Singleton.Shutdown();
+        MenuMusic m = FindObjectOfType<MenuMusic>();
+        if(m!= null)
+        {
+            m.StartMusic();
+        }
         SceneManager.LoadScene("Main Menu");
         Debug.Log("Quit");
     }
