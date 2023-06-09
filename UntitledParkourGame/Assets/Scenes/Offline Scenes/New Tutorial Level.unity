@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13426,11 +13426,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 943134391
-      Data2: 1287528226
-      Data3: 1041060521
-      Data4: 2151314
-    Path: event:/BGM
+      Data1: -1845697376
+      Data2: 1264229140
+      Data3: -458722159
+      Data4: -1279623312
+    Path: event:/TutorialBGM
   Event: 
   PlayEvent: 1
   StopEvent: 12
