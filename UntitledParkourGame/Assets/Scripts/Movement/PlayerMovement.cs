@@ -424,7 +424,7 @@ public class PlayerMovement : NetworkBehaviour
         {
             groundCoyoteTimer = groundCoyoteTime;
         }
-
+        UpdateSound();
         if (menuScript.isPaused)
         {
             if (grounded)
@@ -437,7 +437,7 @@ public class PlayerMovement : NetworkBehaviour
         SpeedControl();
         stateHandler();
         HandleDrag();
-        UpdateSound();
+        
         if (grounded)
         {
             quickTurned = false;
