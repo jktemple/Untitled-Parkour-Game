@@ -79,7 +79,7 @@ public class WallGrab : NetworkBehaviour
         if (!IsOwner) { return; }
         if (other.gameObject.layer == LayerMask.NameToLayer("whatIsWall"))
         {
-            if (inputs.PlayerMovement.WallGrab.IsInProgress() && !exitingWall)
+            if (inputs.PlayerMovement.WallGrab.IsInProgress() && !exitingWall && !pm.boosting.Value)
             {
                 pm.wallGrabbing = true;
             }
