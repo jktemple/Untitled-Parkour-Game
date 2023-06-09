@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 13689970}
   - component: {fileID: 13689969}
   m_Layer: 0
-  m_Name: RawImage
+  m_Name: tutorial clip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -245,17 +245,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13689967}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 62.61}
-  m_LocalScale: {x: 0.0077364333, y: 0.0077364333, z: 0.0077364333}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 25.39}
+  m_LocalScale: {x: 0.0023328508, y: 0.0023328508, z: 0.0023328508}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1481793774}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1058.87, y: -578}
+  m_AnchoredPosition: {x: -1054.1, y: -580.49963}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &13689969
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 4496297193e0b4b49babc3b996015be6, type: 2}
+  m_Texture: {fileID: 8400000, guid: d887c0d74bf78314ebee67f943b0ad90, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -15134,16 +15134,16 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254251799}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 0520f82c2f6cf1c4cb0ba4ba9bb56b92, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 11501dc636c5d264aa4cbeba5d752215, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 8400000, guid: 4496297193e0b4b49babc3b996015be6, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: d887c0d74bf78314ebee67f943b0ad90, type: 2}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 2
-  m_AspectRatio: 2
+  m_AspectRatio: 0
   m_DataSource: 0
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
