@@ -41,4 +41,8 @@ public class AudioManager : MonoBehaviour
         BGMBus.setVolume(BGMVolume);
     }
 
+    private void Start()
+    {
+        Destroy(FindObjectOfType<MenuMusic>());
+    }
 }
