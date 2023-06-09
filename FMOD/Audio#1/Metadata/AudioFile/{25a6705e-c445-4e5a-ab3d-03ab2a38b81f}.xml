@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{25a6705e-c445-4e5a-ab3d-03ab2a38b81f}">
+		<property name="assetPath">
+			<value>BGM/UPG_Menu.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>25.600000000000001</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{49b71043-b28b-47b4-a144-0fd6df5599fb}</destination>
+		</relationship>
+	</object>
+</objects>
