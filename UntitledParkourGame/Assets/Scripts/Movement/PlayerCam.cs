@@ -166,9 +166,6 @@ public class PlayerCam : NetworkBehaviour
         //Debug.Log("Quick Turning = " + quickTurning);
         //Debug.Log("X input: " + inputs.PlayerMovement.HorizontalLook.ReadValue<float>() + " Y Input: " + inputs.PlayerMovement.VerticalLook.ReadValue<float>());
         // updating the cam rotation idk whats rly happening here
-        yRotation += mouseX;
-
-        xRotation -= mouseY;
         // can't look up or down more than 90 degrees
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
         
@@ -184,7 +181,9 @@ public class PlayerCam : NetworkBehaviour
         else if (!quickTurning)
         {
             // rotate cam and orientation
-            
+            yRotation += mouseX;
+
+            xRotation -= mouseY;
             camHolder.rotation = Quaternion.Euler(xRotation, yRotation, camHolder.eulerAngles.z);
             orientation.rotation = Quaternion.Euler(0, yRotation, 0);
         }
