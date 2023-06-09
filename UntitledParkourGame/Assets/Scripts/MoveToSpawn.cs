@@ -18,6 +18,10 @@ public class MoveToSpawn : NetworkBehaviour
         
         //spawnPoints = GameObject.FindGameObjectsWithTag("Respawn");
         ableToMove = true;
+        if (IsServer)
+        {
+            moveToSpawn.Value = false;
+        }
     }
 
     // Update is called once per frame

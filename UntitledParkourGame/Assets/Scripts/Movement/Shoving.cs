@@ -83,6 +83,11 @@ public class Shoving : NetworkBehaviour
         // playerShovingFailedsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerShovingFailedsfx);
         playerGetShovedsfx = AudioManager.instance.CreateInstance(FMODEvents.instance.playerGetShovedsfx);
         rumble = GameObject.FindObjectOfType<ControllerRumbleManager>();
+        if (IsServer)
+        {
+            infected.Value = false;
+            
+        }
     }
 
     // Update is called once per frame
