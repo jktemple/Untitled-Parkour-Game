@@ -2,28 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using FMODUnity;
+using FMOD.Studio;
+using UnityEngine.UI;
 
 public class MenuMusic : MonoBehaviour
 {
+    public static MenuMusic Instance { get; private set; }
+    private void Awake()
+    {
+        Instance = this;
+    }
     // Start is called before the first frame update
-    Scene tutorial;
-    Scene bigmap;
-    Scene smallmap;
-    Scene texturedBigMap;
-    Scene texturedSmallMap;
+
+    public EventReference musicEvent;
+    public EventInstance menuMusic;
+    
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
-        tutorial = SceneManager.GetSceneByName("New Tutorial Level");
-        bigmap = SceneManager.GetSceneByName("LobbyMap");
-        smallmap = SceneManager.GetSceneByName("SmallMap");
-        texturedBigMap = SceneManager.GetSceneByName("BigConTextured");
-        texturedSmallMap = SceneManager.GetSceneByName("SmallConTextured");
+        menuMusic = RuntimeManager.CreateInstance(musicEvent);
+        menuMusic.start();
+    }
 
-        
+    public void Stop()
+    {
+        menuMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
     // Update is called once per frame
 
-    
+
 }

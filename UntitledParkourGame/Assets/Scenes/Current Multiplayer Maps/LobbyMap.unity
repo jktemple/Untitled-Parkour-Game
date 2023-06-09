@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18154685, g: 0.22718762, b: 0.3074059, a: 1}
+  m_IndirectSpecularColor: {r: 0.18154658, g: 0.22718708, b: 0.30740505, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4150,11 +4150,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 943134391
-      Data2: 1287528226
-      Data3: 1041060521
-      Data4: 2151314
-    Path: event:/BGM
+      Data1: 1574082066
+      Data2: 1219439297
+      Data3: 1954184612
+      Data4: -1164420590
+    Path: event:/VirusTagBGM
   Event: 
   PlayEvent: 1
   StopEvent: 12
@@ -19280,7 +19280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2459569421
+  GlobalObjectIdHash: 2479131074
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1

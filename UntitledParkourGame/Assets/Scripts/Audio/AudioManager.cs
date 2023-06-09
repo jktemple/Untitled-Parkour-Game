@@ -43,6 +43,6 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        Destroy(FindObjectOfType<MenuMusic>());
+        MenuMusic.Instance.Stop();
     }
 }
